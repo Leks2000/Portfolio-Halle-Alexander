@@ -596,6 +596,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Service Worker registration for PWA (optional)
+// Uncomment and create sw.js file if you want PWA functionality
+/*
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
@@ -607,3 +609,4 @@ if ('serviceWorker' in navigator) {
             });
     });
 }
+*/
