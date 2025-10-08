@@ -1,0 +1,230 @@
+/* Unity WebGL Template Styles */
+
+.webgl-content * {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.webgl-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.webgl-content .logo, .progress {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.webgl-content .logo {
+    background: url('progressLogo.Light.png') no-repeat center / contain;
+    width: 154px;
+    height: 130px;
+}
+
+.webgl-content .progress {
+    height: 18px;
+    width: 141px;
+    margin-top: 90px;
+}
+
+.webgl-content .progress .empty {
+    background: url('progressEmpty.Light.png') no-repeat right / cover;
+    float: right;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
+.webgl-content .progress .full {
+    background: url('progressFull.Light.png') no-repeat left / cover;
+    float: left;
+    width: 0%;
+    height: 100%;
+    display: inline-block;
+}
+
+.webgl-content .logo.Dark {
+    background-image: url('progressLogo.Dark.png');
+}
+
+.webgl-content .progress.Dark .empty {
+    background-image: url('progressEmpty.Dark.png');
+}
+
+.webgl-content .progress.Dark .full {
+    background-image: url('progressFull.Dark.png');
+}
+
+.webgl-content .footer {
+    margin-top: 5px;
+    height: 38px;
+    line-height: 38px;
+    font-family: Helvetica, Verdana, Arial, sans-serif;
+    font-size: 18px;
+}
+
+.webgl-content .footer .webgl-logo, .title, .fullscreen {
+    height: 38px;
+    display: inline-block;
+    background: transparent center no-repeat;
+}
+
+.webgl-content .footer .webgl-logo {
+    background-image: url('webgl-logo.png');
+    width: 204px;
+    float: left;
+}
+
+.webgl-content .footer .title {
+    margin-right: 10px;
+    float: right;
+}
+
+.webgl-content .footer .fullscreen {
+    background-image: url('fullscreen.png');
+    width: 38px;
+    float: right;
+    cursor: pointer;
+}
+
+/* Unity Canvas Styles */
+#unity-container {
+    position: relative;
+}
+
+#unity-container.unity-desktop {
+    width: 960px;
+    height: 600px;
+}
+
+#unity-container.unity-mobile {
+    width: 100%;
+    height: 100%;
+}
+
+#unity-canvas {
+    background: #231F20;
+    width: 100%;
+    height: 100%;
+}
+
+#unity-loading-bar {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+#unity-logo {
+    width: 154px;
+    height: 130px;
+    background: url('unity-logo-dark.png') no-repeat center / contain;
+    margin: 0 auto;
+}
+
+#unity-progress-bar-empty {
+    width: 141px;
+    height: 18px;
+    margin: 20px auto;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 9px;
+    overflow: hidden;
+}
+
+#unity-progress-bar-full {
+    width: 0%;
+    height: 18px;
+    background: linear-gradient(90deg, #00d4ff, #6c5ce7);
+    border-radius: 9px;
+    transition: width 0.3s ease;
+}
+
+#unity-footer {
+    position: relative;
+    height: 38px;
+    margin-top: 10px;
+}
+
+#unity-webgl-logo {
+    float: left;
+    width: 204px;
+    height: 38px;
+    background: url('webgl-logo.png') no-repeat left center / contain;
+}
+
+#unity-build-title {
+    float: right;
+    line-height: 38px;
+    font-family: arial;
+    font-size: 18px;
+    color: #00d4ff;
+}
+
+#unity-fullscreen-button {
+    float: right;
+    width: 38px;
+    height: 38px;
+    background: url('fullscreen-button.png') no-repeat center / contain;
+    cursor: pointer;
+    margin-left: 10px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+#unity-fullscreen-button:hover {
+    opacity: 1;
+}
+
+#unity-warning {
+    position: absolute;
+    left: 50%;
+    top: 5%;
+    transform: translate(-50%, 0);
+    background: rgba(255, 0, 0, 0.8);
+    color: white;
+    max-width: 600px;
+    padding: 15px;
+    border-radius: 5px;
+    display: none;
+    z-index: 1000;
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 960px) {
+    #unity-container.unity-desktop {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16/10;
+        max-width: 960px;
+        max-height: 600px;
+    }
+    
+    #unity-canvas {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* Dark theme adjustments */
+body.dark-theme #unity-logo {
+    background-image: url('unity-logo-light.png');
+}
+
+/* Loading animation */
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+#unity-loading-bar {
+    animation: pulse 2s infinite;
+}

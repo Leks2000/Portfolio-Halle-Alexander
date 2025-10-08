@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Unity WebGL Game - Александр Халле</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="TemplateData/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/style.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            color: white;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 2px solid #00d4ff;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #00d4ff;
+            font-size: 2rem;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .game-info {
+            background: rgba(42, 42, 42, 0.8);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .game-controls {
+            background: rgba(26, 26, 26, 0.9);
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+
+        .unity-container {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid #00d4ff;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .loading-text {
+            color: #00d4ff;
+            font-size: 1.2rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .link-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .link-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(240, 147, 251, 0.4);
+        }
+
+        .link-btn.github {
+            background: #333;
+        }
+
+        .link-btn.itch {
+            background: #fa5c5c;
+        }
+
+        @media (max-width: 768px) {
+            .back-button {
+                position: static;
+                display: block;
+                margin: 1rem auto;
+                width: fit-content;
+            }
+            
+            .header {
+                padding-top: 0;
+            }
+            
+            .game-container {
+                padding: 1rem;
+            }
+            
+            .links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <a href="../../index.html" class="back-button">← Назад к портфолио</a>
+        <h1>Unity WebGL Game</h1>
+    </div>
+
+    <div class="game-container">
+        <div class="game-info">
+            <h2>Название вашей игры</h2>
+            <p>
+                Описание игры: механики, жанр, особенности.<br>
+                Здесь можно рассказать о процессе разработки, используемых технологиях и интересных решениях.
+            </p>
+            
+            <div class="game-controls">
+                <h3>🎮 Управление:</h3>
+                <p>
+                    <strong>WASD</strong> - движение<br>
+                    <strong>Пробел</strong> - прыжок<br>
+                    <strong>Мышь</strong> - взаимодействие<br>
+                    <strong>ESC</strong> - меню
+                </p>
+            </div>
+        </div>
+
+        <div class="unity-container">
+            <div id="unity-container" class="unity-desktop">
+                <canvas id="unity-canvas" width="960" height="600" 
+                        style="width: 960px; height: 600px; background: #231F20"></canvas>
+                <div id="unity-loading-bar">
+                    <div id="unity-logo"></div>
+                    <div id="unity-progress-bar-empty">
+                        <div id="unity-progress-bar-full"></div>
+                    </div>
+                </div>
+                <div id="unity-warning"> </div>
+                <div id="unity-footer">
+                    <div id="unity-webgl-logo"></div>
+                    <div id="unity-fullscreen-button"></div>
+                    <div id="unity-build-title">Game Title</div>
+                </div>
+            </div>
+            
+            <div class="loading-text" id="loading-text">
+                Загрузка игры... Пожалуйста, подождите.
+            </div>
+        </div>
+
+        <div class="links">
+            <a href="#" class="link-btn github" target="_blank">
+                🔗 Исходный код на GitHub
+            </a>
+            <a href="#" class="link-btn itch" target="_blank">
+                🎮 Играть на Itch.io
+            </a>
+            <a href="../../index.html" class="link-btn">
+                🏠 Вернуться к портфолио
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Замените этот блок на реальный код загрузки Unity WebGL
+        // Пример базовой структуры:
+        
+        var container = document.querySelector("#unity-container");
+        var canvas = document.querySelector("#unity-canvas");
+        var loadingBar = document.querySelector("#unity-loading-bar");
+        var progressBarFull = document.querySelector("#unity-progress-bar-full");
+        var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+        var warningBanner = document.querySelector("#unity-warning");
+        var loadingText = document.querySelector("#loading-text");
+
+        // Функция для показа баннера с предупреждением
+        function unityShowBanner(msg, type) {
+            function updateBannerVisibility() {
+                warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
+            }
+            var div = document.createElement('div');
+            div.innerHTML = msg;
+            warningBanner.appendChild(div);
+            if (type == 'error') div.style = 'background: red; padding: 10px;';
+            else {
+                if (type == 'warning') div.style = 'background: yellow; color: black; padding: 10px;';
+                setTimeout(function() {
+                    warningBanner.removeChild(div);
+                    updateBannerVisibility();
+                }, 5000);
+            }
+            updateBannerVisibility();
+        }
+
+        // Конфигурация сборки - замените на ваши значения
+        var buildUrl = "Build";
+        var loaderUrl = buildUrl + "/WebGL Build.loader.js";
+        var config = {
+            dataUrl: buildUrl + "/WebGL Build.data",
+            frameworkUrl: buildUrl + "/WebGL Build.framework.js",
+            codeUrl: buildUrl + "/WebGL Build.wasm",
+            streamingAssetsUrl: "StreamingAssets",
+            companyName: "Александр Халле",
+            productName: "Unity Game",
+            productVersion: "1.0",
+            showBanner: unityShowBanner,
+        };
+
+        // Настройка canvas
+        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+            // Mobile device style
+            container.className = "unity-mobile";
+            canvas.className = "unity-mobile";
+        } else {
+            // Desktop style
+            canvas.style.width = "960px";
+            canvas.style.height = "600px";
+        }
+
+        // Индикатор загрузки
+        loadingBar.style.display = "block";
+
+        var script = document.createElement("script");
+        script.src = loaderUrl;
+        script.onload = () => {
+            createUnityInstance(canvas, config, (progress) => {
+                progressBarFull.style.width = 100 * progress + "%";
+                loadingText.textContent = `Загрузка... ${Math.round(progress * 100)}%`;
+            }).then((unityInstance) => {
+                loadingBar.style.display = "none";
+                loadingText.style.display = "none";
+                fullscreenButton.onclick = () => {
+                    unityInstance.SetFullscreen(1);
+                };
+            }).catch((message) => {
+                alert(message);
+                loadingText.textContent = "Ошибка загрузки игры!";
+            });
+        };
+
+        // Если нет реальной сборки Unity, показываем заглушку
+        script.onerror = () => {
+            loadingBar.style.display = "none";
+            loadingText.innerHTML = `
+                <div style="background: rgba(255, 107, 53, 0.2); padding: 2rem; border-radius: 10px; border: 1px solid #ff6b35;">
+                    <h3>🎮 Демо игры</h3>
+                    <p>Здесь будет размещена ваша Unity WebGL игра после экспорта.</p>
+                    <p><strong>Инструкция:</strong></p>
+                    <ol style="text-align: left;">
+                        <li>Экспортируйте игру из Unity в WebGL формате</li>
+                        <li>Скопируйте файлы в папку webgl-games/game1/</li>
+                        <li>Обновите пути к файлам в этом HTML</li>
+                    </ol>
+                </div>
+            `;
+        };
+
+        document.head.appendChild(script);
+    </script>
+</body>
+</html>
