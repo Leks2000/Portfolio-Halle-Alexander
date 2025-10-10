@@ -1,19 +1,265 @@
-// Utility Functions
-class PortfolioAnimations {
+// Multilingual Portfolio System
+class PortfolioManager {
     constructor() {
+        this.currentLang = 'ru';
+        this.translations = {
+            ru: {
+                // Navigation
+                'nav-home': 'Главная',
+                'nav-projects': 'Проекты',
+                'nav-skills': 'Навыки',
+                'nav-about': 'О себе',
+                'nav-content': 'Контент',
+                'nav-contact': 'Контакты',
+                
+                // Hero Section
+                'hero-subtitle': 'Unity Developer & C# Programmer',
+                'hero-description': 'Создаю увлекательные игры и приложения с акцентом на backend разработку. Специализируюсь на Unity, C# и работе с базами данных.',
+                'stat-experience': 'Года опыта',
+                'stat-projects': 'Проектов',
+                'stat-platforms': 'Платформ',
+                'btn-projects': 'Мои проекты',
+                'btn-contact': 'Связаться',
+                
+                // Projects Section
+                'projects-title': 'Мои проекты',
+                'filter-all': 'Все',
+                'filter-games': '🎮 Игры',
+                'filter-mobile': '📱 Мобильные',
+                'filter-web': '🌐 Сайты',
+                'filter-extensions': '⚙️ Расширения',
+                'filter-bots': '🤖 Telegram-боты',
+                'btn-code': 'Код',
+                'btn-demo': 'Сайт',
+                'status-released': 'Релиз',
+                'status-development': 'В разработке',
+                'status-concept': 'Концепт',
+                
+                // Project Descriptions
+                'dark-memorial-desc': 'Первый полноценный релиз игры на Unity. 2D проект с интересной механикой.',
+                'decks-desc': 'Игра с карточными пошаговыми боями в подземельях. Unity, C#, 2.5D.',
+                'blockmerge-desc': '2048 в майнкрафт-стиле. Unity, C#, 2D.',
+                'wolf-runner-desc': 'Раннер в майнкрафт-стиле. Unity, C#, 3D.',
+                'galactic-desc': 'Приключение про бананчика. Unity, C#, 2D.',
+                'witcher-desc': 'Генерация гексагональной карты (вода, земля, лес). Unity, C#, 2D.',
+                'flappy-desc': 'Мобильная аркада про сбор монеток. Unity, C#, Android.',
+                'chefpro-desc': 'Приложение-повар: вводишь продукты из холодильника — получаешь рецепт с пошаговой инструкцией от ИИ.',
+                'todis-desc': 'Приложение, показывающее, какой сегодня день.',
+                'notes-desc': 'Приложение для заметок с локальным и удалённым входом.',
+                'klepet-desc': 'Мобильный чат, аналог Telegram.',
+                'profinder-desc': 'Сайт поиска работы.',
+                'terminal-desc': 'Альтернативная версия сайта-портфолио в виде терминала.',
+                'promtly-desc': 'Chrome Extension для улучшения промптов и анализа изображений (создание описаний по фото).',
+                'newsbot-desc': 'Telegram-бот, публикующий ИИ-новости с мемами и шутками.',
+                'meme-bot-desc': 'Присылает случайные мемы пользователю.',
+                
+                // Skills Section
+                'skills-title': 'Навыки',
+                
+                // About Section
+                'about-title': 'О себе',
+                'about-role': 'Разработчик игр на Unity',
+                'about-exp-label': 'Опыт:',
+                'about-exp-value': '3 года 4 месяца',
+                'about-location-label': 'Местоположение:',
+                'about-location-value': 'Санкт-Петербург, Россия',
+                'about-status-label': 'Статус:',
+                'about-status-value': 'Готов к переезду',
+                'about-description': 'Разработчик с акцентом на backend разработку на C#. Специализируюсь на создании приложений и игр на Unity, работе с базами данных и API. Имею опыт публикации игр на платформах Яндекс.Игры и Google Play Market.',
+                'about-timeline-title': 'Опыт работы',
+                'timeline-current': '2023 - настоящее время',
+                'timeline-unity-title': 'Unity Developer (Фриланс)',
+                'timeline-unity-1': 'Разработка и запуск игр на Unity с использованием C#',
+                'timeline-unity-2': 'Публикация на платформах Яндекс.Игры, Google Play Market',
+                'timeline-unity-3': 'Использование анимаций, 2D/3D-графики, оптимизация производительности',
+                'timeline-unity-4': 'Монетизация через внутриигровую рекламу и покупки',
+                'timeline-unity-5': 'Поддержка и обновление проектов',
+                'timeline-intern-date': 'Май - Август 2023',
+                'timeline-intern-title': 'Стажер-программист',
+                'timeline-intern-company': 'СПб информационно-аналитический центр',
+                'timeline-intern-1': 'Настройка баз данных PostgreSQL и MySQL',
+                'timeline-intern-2': 'Оптимизация SQL-запросов',
+                'timeline-intern-3': 'Разработка внутренних веб-приложений на .NET Core',
+                
+                // Content Section
+                'content-title': 'Контент',
+                'content-video-title': '🎵 Видео-проекты',
+                'content-music-title': '🎧 Music (Spotify)',
+                'views': 'просмотров',
+                'ai-photo-title': 'AI оживление фотографий',
+                'daggerstyle-title': 'Daggerstyle game video',
+                
+                // Contact Section
+                'contact-title': 'Связаться со мной',
+                'contact-info-title': 'Контактная информация',
+                'contact-phone': 'Телефон',
+                'contact-location': 'Местоположение',
+                'contact-location-value': 'Санкт-Петербург, Россия',
+                
+                // Footer
+                'footer-copyright': '© 2025 Александр Халле. Все права защищены.'
+            },
+            en: {
+                // Navigation
+                'nav-home': 'Home',
+                'nav-projects': 'Projects',
+                'nav-skills': 'Skills',
+                'nav-about': 'About',
+                'nav-content': 'Content',
+                'nav-contact': 'Contact',
+                
+                // Hero Section
+                'hero-subtitle': 'Unity Developer & C# Programmer',
+                'hero-description': 'I create engaging games and applications with a focus on backend development. Specializing in Unity, C#, and database work.',
+                'stat-experience': 'Years Experience',
+                'stat-projects': 'Projects',
+                'stat-platforms': 'Platforms',
+                'btn-projects': 'My Projects',
+                'btn-contact': 'Contact Me',
+                
+                // Projects Section
+                'projects-title': 'My Projects',
+                'filter-all': 'All',
+                'filter-games': '🎮 Games',
+                'filter-mobile': '📱 Mobile',
+                'filter-web': '🌐 Websites',
+                'filter-extensions': '⚙️ Extensions',
+                'filter-bots': '🤖 Telegram Bots',
+                'btn-code': 'Code',
+                'btn-demo': 'Website',
+                'status-released': 'Released',
+                'status-development': 'In Development',
+                'status-concept': 'Concept',
+                
+                // Project Descriptions
+                'dark-memorial-desc': 'First full Unity game release. 2D project with interesting mechanics.',
+                'decks-desc': 'Card-based turn combat game in dungeons. Unity, C#, 2.5D.',
+                'blockmerge-desc': '2048 in Minecraft style. Unity, C#, 2D.',
+                'wolf-runner-desc': 'Runner in Minecraft style. Unity, C#, 3D.',
+                'galactic-desc': 'Adventure about a little banana. Unity, C#, 2D.',
+                'witcher-desc': 'Hexagonal map generation (water, land, forest). Unity, C#, 2D.',
+                'flappy-desc': 'Mobile arcade about collecting coins. Unity, C#, Android.',
+                'chefpro-desc': 'Chef app: enter fridge ingredients — get recipe with step-by-step AI instructions.',
+                'todis-desc': 'App that shows what day it is today.',
+                'notes-desc': 'Notes app with local and remote login.',
+                'klepet-desc': 'Mobile chat, Telegram analogue.',
+                'profinder-desc': 'Job search website.',
+                'terminal-desc': 'Alternative portfolio website in terminal style.',
+                'promtly-desc': 'Chrome Extension for prompt enhancement and image analysis (photo description generation).',
+                'newsbot-desc': 'Telegram bot publishing AI news with memes and jokes.',
+                'meme-bot-desc': 'Sends random memes to users.',
+                
+                // Skills Section
+                'skills-title': 'Skills',
+                
+                // About Section
+                'about-title': 'About Me',
+                'about-role': 'Unity Game Developer',
+                'about-exp-label': 'Experience:',
+                'about-exp-value': '3 years 4 months',
+                'about-location-label': 'Location:',
+                'about-location-value': 'Saint Petersburg, Russia',
+                'about-status-label': 'Status:',
+                'about-status-value': 'Ready to relocate',
+                'about-description': 'Developer with focus on C# backend development. Specialize in creating Unity apps and games, database and API work. Have experience publishing games on Yandex.Games and Google Play Market platforms.',
+                'about-timeline-title': 'Work Experience',
+                'timeline-current': '2023 - present',
+                'timeline-unity-title': 'Unity Developer (Freelance)',
+                'timeline-unity-1': 'Development and launch of Unity games using C#',
+                'timeline-unity-2': 'Publishing on Yandex.Games, Google Play Market platforms',
+                'timeline-unity-3': 'Using animations, 2D/3D graphics, performance optimization',
+                'timeline-unity-4': 'Monetization through in-game advertising and purchases',
+                'timeline-unity-5': 'Project support and updates',
+                'timeline-intern-date': 'May - August 2023',
+                'timeline-intern-title': 'Software Engineer Intern',
+                'timeline-intern-company': 'SPb Information Analytics Center',
+                'timeline-intern-1': 'PostgreSQL and MySQL database configuration',
+                'timeline-intern-2': 'SQL query optimization',
+                'timeline-intern-3': 'Internal web application development on .NET Core',
+                
+                // Content Section
+                'content-title': 'Content',
+                'content-video-title': '🎵 Video Projects',
+                'content-music-title': '🎧 Music (Spotify)',
+                'views': 'views',
+                'ai-photo-title': 'AI photo animation',
+                'daggerstyle-title': 'Daggerstyle game video',
+                
+                // Contact Section
+                'contact-title': 'Contact Me',
+                'contact-info-title': 'Contact Information',
+                'contact-phone': 'Phone',
+                'contact-location': 'Location',
+                'contact-location-value': 'Saint Petersburg, Russia',
+                
+                // Footer
+                'footer-copyright': '© 2025 Alexander Halle. All rights reserved.'
+            }
+        };
         this.init();
     }
 
     init() {
+        this.detectLanguage();
         this.initNavbar();
         this.initMobileMenu();
         this.initScrollAnimations();
-        this.initSkillBars();
-        this.initTypewriter();
-        this.initParticles();
+        this.initProjectFilters();
+        this.initLanguageSwitcher();
         this.initContactForm();
         this.initSmoothScroll();
-        this.initThemeEffects();
+        this.initProgressRings();
+        this.applyTranslations();
+    }
+
+    // Language Detection and Management
+    detectLanguage() {
+        const savedLang = localStorage.getItem('portfolio-lang');
+        if (savedLang) {
+            this.currentLang = savedLang;
+        } else {
+            const browserLang = navigator.language.toLowerCase();
+            this.currentLang = browserLang.startsWith('ru') ? 'ru' : 'en';
+            localStorage.setItem('portfolio-lang', this.currentLang);
+        }
+    }
+
+    initLanguageSwitcher() {
+        const langButtons = document.querySelectorAll('.lang-btn');
+        
+        langButtons.forEach(btn => {
+            if (btn.dataset.lang === this.currentLang) {
+                btn.classList.add('active');
+            }
+            
+            btn.addEventListener('click', () => {
+                const newLang = btn.dataset.lang;
+                if (newLang !== this.currentLang) {
+                    this.switchLanguage(newLang);
+                    
+                    // Update active button
+                    langButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                }
+            });
+        });
+    }
+
+    switchLanguage(lang) {
+        this.currentLang = lang;
+        localStorage.setItem('portfolio-lang', lang);
+        document.documentElement.lang = lang;
+        this.applyTranslations();
+    }
+
+    applyTranslations() {
+        const elements = document.querySelectorAll('[data-translate]');
+        elements.forEach(element => {
+            const key = element.dataset.translate;
+            if (this.translations[this.currentLang][key]) {
+                element.textContent = this.translations[this.currentLang][key];
+            }
+        });
     }
 
     // Navigation functionality
@@ -82,7 +328,7 @@ class PortfolioAnimations {
         });
     }
 
-    // Intersection Observer for animations
+    // Scroll animations with fade-in
     initScrollAnimations() {
         const observerOptions = {
             threshold: 0.1,
@@ -92,521 +338,270 @@ class PortfolioAnimations {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('animate-in');
-                    
-                    // Special handling for skill bars
-                    if (entry.target.classList.contains('skills')) {
-                        this.animateSkillBars();
-                    }
-                    
-                    // Special handling for stats
-                    if (entry.target.classList.contains('hero-stats')) {
-                        this.animateStats();
-                    }
+                    entry.target.classList.add('visible');
                 }
             });
         }, observerOptions);
 
-        // Observe sections for animations
-        document.querySelectorAll('section, .project-card, .skill-category, .contact-card').forEach(el => {
+        // Add fade-in class to all major sections
+        document.querySelectorAll('section, .project-card, .skill-icon-item, .video-card').forEach(el => {
+            el.classList.add('fade-in');
             observer.observe(el);
         });
     }
 
-    // Skill bars animation
-    initSkillBars() {
-        // Will be triggered by scroll animation
-    }
+    // Project Filtering System
+    initProjectFilters() {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
 
-    animateSkillBars() {
-        const skillBars = document.querySelectorAll('.skill-bar');
-        skillBars.forEach((bar, index) => {
-            const level = bar.getAttribute('data-level');
-            setTimeout(() => {
-                bar.style.width = level + '%';
-            }, index * 100);
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const filter = button.dataset.filter;
+                this.filterProjects(filter, projectCards);
+            });
         });
     }
 
-    // Stats counter animation
-    animateStats() {
-        const stats = document.querySelectorAll('.stat-number');
-        stats.forEach(stat => {
-            const target = parseInt(stat.textContent.replace('+', ''));
-            let current = 0;
-            const increment = target / 30; // 30 frames
+    filterProjects(filter, cards) {
+        cards.forEach(card => {
+            const category = card.dataset.category;
             
-            const updateCounter = () => {
-                if (current < target) {
-                    current += increment;
-                    stat.textContent = Math.ceil(current) + (stat.textContent.includes('+') ? '+' : '');
-                    requestAnimationFrame(updateCounter);
-                } else {
-                    stat.textContent = target + (stat.textContent.includes('+') ? '+' : '');
-                }
-            };
-            
-            updateCounter();
-        });
-    }
-
-    // Typewriter effect for hero subtitle
-    initTypewriter() {
-        const subtitle = document.querySelector('.hero-subtitle');
-        if (!subtitle) return;
-
-        const originalText = subtitle.textContent;
-        const texts = [
-            'Unity Developer & C# Programmer',
-            'Game Developer & Backend Specialist',
-            'Creative Problem Solver',
-            'Unity Developer & C# Programmer'
-        ];
-        
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-
-        const typeWriter = () => {
-            const currentText = texts[textIndex];
-            
-            if (isDeleting) {
-                subtitle.textContent = currentText.substring(0, charIndex - 1);
-                charIndex--;
+            if (filter === 'all' || category === filter) {
+                card.classList.remove('hidden');
+                card.classList.add('visible');
             } else {
-                subtitle.textContent = currentText.substring(0, charIndex + 1);
-                charIndex++;
+                card.classList.remove('visible');
+                card.classList.add('hidden');
             }
-
-            let typeSpeed = isDeleting ? 50 : 100;
-
-            if (!isDeleting && charIndex === currentText.length) {
-                typeSpeed = 2000; // Pause at end
-                isDeleting = true;
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                textIndex = (textIndex + 1) % texts.length;
-                typeSpeed = 500;
-            }
-
-            setTimeout(typeWriter, typeSpeed);
-        };
-
-        // Start typewriter after a delay
-        setTimeout(typeWriter, 1000);
+        });
     }
 
-    // Dynamic particles effect
-    initParticles() {
-        const createParticle = () => {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.cssText = `
-                position: fixed;
-                width: 2px;
-                height: 2px;
-                background: rgba(0, 212, 255, 0.6);
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: -1;
-                animation: float-particle 6s linear forwards;
-            `;
+    // Progress Ring Animations
+    initProgressRings() {
+        const rings = document.querySelectorAll('.progress-ring__circle');
+        
+        rings.forEach(ring => {
+            const status = ring.closest('.status-ring').dataset.status;
+            let progress;
             
-            particle.style.left = Math.random() * window.innerWidth + 'px';
-            particle.style.top = window.innerHeight + 'px';
+            switch(status) {
+                case 'released':
+                    progress = 100;
+                    break;
+                case 'development':
+                    progress = 50;
+                    break;
+                case 'concept':
+                    progress = 20;
+                    break;
+                default:
+                    progress = 0;
+            }
             
-            document.body.appendChild(particle);
+            const circumference = 2 * Math.PI * 27; // radius = 27
+            const offset = circumference - (progress / 100 * circumference);
             
-            setTimeout(() => {
-                particle.remove();
-            }, 6000);
-        };
+            ring.style.strokeDashoffset = offset;
+        });
 
-        // Add particle animation CSS
-        if (!document.querySelector('#particle-styles')) {
-            const style = document.createElement('style');
-            style.id = 'particle-styles';
-            style.textContent = `
-                @keyframes float-particle {
-                    to {
-                        transform: translateY(-${window.innerHeight + 100}px) translateX(${Math.random() * 200 - 100}px);
-                        opacity: 0;
-                    }
+        // Add tooltips
+        document.querySelectorAll('.status-ring').forEach(ring => {
+            ring.addEventListener('mouseenter', () => {
+                const tooltip = document.createElement('div');
+                tooltip.className = 'status-tooltip';
+                const status = ring.dataset.status;
+                
+                let text;
+                switch(status) {
+                    case 'released':
+                        text = this.currentLang === 'ru' ? 'Проект завершен и выпущен' : 'Project completed and released';
+                        break;
+                    case 'development':
+                        text = this.currentLang === 'ru' ? 'Проект в активной разработке' : 'Project in active development';
+                        break;
+                    case 'concept':
+                        text = this.currentLang === 'ru' ? 'Концепт или прототип' : 'Concept or prototype';
+                        break;
                 }
-            `;
-            document.head.appendChild(style);
-        }
-
-        // Create particles periodically
-        setInterval(createParticle, 3000);
+                
+                tooltip.textContent = text;
+                tooltip.style.cssText = `
+                    position: absolute;
+                    top: -40px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: var(--bg-tertiary);
+                    color: var(--text-primary);
+                    padding: 0.5rem 1rem;
+                    border-radius: 5px;
+                    font-size: 0.8rem;
+                    white-space: nowrap;
+                    z-index: 1000;
+                    box-shadow: var(--shadow-card);
+                `;
+                
+                ring.appendChild(tooltip);
+            });
+            
+            ring.addEventListener('mouseleave', () => {
+                const tooltip = ring.querySelector('.status-tooltip');
+                if (tooltip) {
+                    tooltip.remove();
+                }
+            });
+        });
     }
 
-    // Contact form handling
+    // Contact form (placeholder for future implementation)
     initContactForm() {
         const form = document.querySelector('.message-form');
-        if (!form) return;
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData);
-            
-            // Simple form validation
-            if (!data.name || !data.email || !data.message) {
-                this.showNotification('Пожалуйста, заполните все поля', 'error');
-                return;
-            }
-            
-            // Simulate form submission
-            this.showNotification('Сообщение отправлено! Спасибо за обращение.', 'success');
-            form.reset();
-        });
-    }
-
-    // Notification system
-    showNotification(message, type = 'info') {
-        const notification = document.createElement('div');
-        notification.className = `notification notification-${type}`;
-        notification.textContent = message;
-        notification.style.cssText = `
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 1rem 2rem;
-            background: ${type === 'success' ? '#4CAF50' : type === 'error' ? '#f44336' : '#2196F3'};
-            color: white;
-            border-radius: 8px;
-            z-index: 9999;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-        `;
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-            notification.style.transform = 'translateX(0)';
-        }, 100);
-        
-        setTimeout(() => {
-            notification.style.transform = 'translateX(400px)';
-            setTimeout(() => notification.remove(), 300);
-        }, 3000);
-    }
-
-    // Theme effects
-    initThemeEffects() {
-        // Mouse follow effect
-        this.initMouseFollower();
-        
-        // Parallax effect
-        this.initParallax();
-        
-        // Unity logo rotation on scroll
-        this.initUnityLogoEffects();
-    }
-
-    initMouseFollower() {
-        const cursor = document.createElement('div');
-        cursor.className = 'custom-cursor';
-        cursor.style.cssText = `
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(0, 212, 255, 0.5);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: all 0.1s ease;
-            backdrop-filter: blur(2px);
-        `;
-        document.body.appendChild(cursor);
-
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX - 10 + 'px';
-            cursor.style.top = e.clientY - 10 + 'px';
-        });
-
-        // Hover effects for interactive elements
-        document.querySelectorAll('a, button, .btn, .project-card').forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'scale(1.5)';
-                cursor.style.background = 'rgba(0, 212, 255, 0.1)';
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Add your form submission logic here
+                alert(this.currentLang === 'ru' ? 
+                    'Форма отправки пока не настроена' : 
+                    'Form submission not yet configured');
             });
-            
-            el.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'scale(1)';
-                cursor.style.background = 'transparent';
-            });
-        });
-    }
-
-    initParallax() {
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.unity-logo, .stars-background');
-            
-            parallaxElements.forEach(el => {
-                const speed = 0.5;
-                el.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-        });
-    }
-
-    initUnityLogoEffects() {
-        const unityCube = document.querySelector('.unity-cube');
-        if (!unityCube) return;
-
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const rotation = scrolled * 0.5;
-            unityCube.style.transform = `rotateX(${rotation}deg) rotateY(${rotation}deg)`;
-        });
-    }
-}
-
-// Project interaction handlers
-class ProjectManager {
-    constructor() {
-        this.initProjectCards();
-    }
-
-    initProjectCards() {
-        const projectCards = document.querySelectorAll('.project-card');
-        
-        projectCards.forEach(card => {
-            card.addEventListener('mouseenter', this.handleProjectHover);
-            card.addEventListener('mouseleave', this.handleProjectLeave);
-        });
-    }
-
-    handleProjectHover(e) {
-        const card = e.currentTarget;
-        card.style.transform = 'translateY(-10px) scale(1.02)';
-        
-        // Add glow effect
-        const glowOverlay = document.createElement('div');
-        glowOverlay.className = 'project-glow';
-        glowOverlay.style.cssText = `
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(0, 212, 255, 0.1), rgba(108, 92, 231, 0.1));
-            border-radius: 15px;
-            pointer-events: none;
-        `;
-        
-        card.style.position = 'relative';
-        card.appendChild(glowOverlay);
-    }
-
-    handleProjectLeave(e) {
-        const card = e.currentTarget;
-        card.style.transform = 'translateY(0) scale(1)';
-        
-        const glow = card.querySelector('.project-glow');
-        if (glow) {
-            glow.remove();
         }
     }
 }
 
-// Performance optimization
-class PerformanceOptimizer {
+// Particle System (optional enhancement)
+class ParticleSystem {
     constructor() {
-        this.throttleScrollEvents();
-        this.lazyLoadImages();
+        this.particles = [];
+        this.canvas = this.createCanvas();
+        this.ctx = this.canvas.getContext('2d');
+        this.init();
     }
 
-    throttleScrollEvents() {
-        let ticking = false;
-        
-        const handleScroll = () => {
-            if (!ticking) {
-                requestAnimationFrame(() => {
-                    // Scroll-dependent functions here
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        };
-        
-        window.addEventListener('scroll', handleScroll, { passive: true });
+    createCanvas() {
+        const canvas = document.createElement('canvas');
+        canvas.style.position = 'fixed';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.pointerEvents = 'none';
+        canvas.style.zIndex = '-1';
+        document.body.appendChild(canvas);
+        return canvas;
     }
 
-    lazyLoadImages() {
-        const images = document.querySelectorAll('img[data-src]');
+    init() {
+        this.resize();
+        this.createParticles();
+        this.animate();
         
-        const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.classList.add('loaded');
-                    imageObserver.unobserve(img);
-                }
+        window.addEventListener('resize', () => this.resize());
+    }
+
+    resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+    }
+
+    createParticles() {
+        for (let i = 0; i < 50; i++) {
+            this.particles.push({
+                x: Math.random() * this.canvas.width,
+                y: Math.random() * this.canvas.height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                size: Math.random() * 2 + 1,
+                opacity: Math.random() * 0.5 + 0.2
             });
+        }
+    }
+
+    animate() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+        this.particles.forEach(particle => {
+            particle.x += particle.vx;
+            particle.y += particle.vy;
+            
+            if (particle.x < 0 || particle.x > this.canvas.width) particle.vx *= -1;
+            if (particle.y < 0 || particle.y > this.canvas.height) particle.vy *= -1;
+            
+            this.ctx.beginPath();
+            this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+            this.ctx.fillStyle = `rgba(0, 212, 255, ${particle.opacity})`;
+            this.ctx.fill();
         });
         
-        images.forEach(img => imageObserver.observe(img));
+        requestAnimationFrame(() => this.animate());
     }
 }
 
-// Easter eggs and fun interactions
-class EasterEggs {
+// Easter Egg - Konami Code
+class EasterEgg {
     constructor() {
-        this.initKonamiCode();
-        this.initClickEffects();
+        this.konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+        this.userInput = [];
+        this.init();
     }
 
-    initKonamiCode() {
-        const konamiCode = [
-            'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
-            'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight',
-            'KeyB', 'KeyA'
-        ];
-        
-        let konamiIndex = 0;
-        
+    init() {
         document.addEventListener('keydown', (e) => {
-            if (e.code === konamiCode[konamiIndex]) {
-                konamiIndex++;
-                if (konamiIndex === konamiCode.length) {
-                    this.activateUnityMode();
-                    konamiIndex = 0;
-                }
-            } else {
-                konamiIndex = 0;
+            this.userInput.push(e.keyCode);
+            
+            if (this.userInput.length > this.konamiCode.length) {
+                this.userInput.shift();
+            }
+            
+            if (this.userInput.length === this.konamiCode.length && 
+                this.userInput.every((code, index) => code === this.konamiCode[index])) {
+                this.activateEasterEgg();
             }
         });
     }
 
-    activateUnityMode() {
+    activateEasterEgg() {
+        // Add special effects
         document.body.style.filter = 'hue-rotate(180deg)';
         
-        // Create floating Unity logos
-        for (let i = 0; i < 10; i++) {
-            setTimeout(() => {
-                const logo = document.createElement('div');
-                logo.innerHTML = '🎮';
-                logo.style.cssText = `
-                    position: fixed;
-                    font-size: 2rem;
-                    z-index: 9999;
-                    pointer-events: none;
-                    animation: float-away 3s ease-out forwards;
-                `;
-                logo.style.left = Math.random() * window.innerWidth + 'px';
-                logo.style.top = Math.random() * window.innerHeight + 'px';
-                
-                document.body.appendChild(logo);
-                
-                setTimeout(() => logo.remove(), 3000);
-            }, i * 200);
-        }
-        
-        // Reset after 5 seconds
         setTimeout(() => {
-            document.body.style.filter = 'none';
-        }, 5000);
-    }
-
-    initClickEffects() {
-        document.addEventListener('click', (e) => {
-            const ripple = document.createElement('div');
-            ripple.style.cssText = `
-                position: fixed;
-                width: 20px;
-                height: 20px;
-                border: 2px solid rgba(0, 212, 255, 0.6);
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 9998;
-                animation: ripple-effect 0.6s ease-out forwards;
-            `;
-            
-            ripple.style.left = (e.clientX - 10) + 'px';
-            ripple.style.top = (e.clientY - 10) + 'px';
-            
-            document.body.appendChild(ripple);
-            
-            setTimeout(() => ripple.remove(), 600);
-        });
+            document.body.style.filter = '';
+            alert('🎮 Unity Developer Mode Activated! 🎮');
+        }, 2000);
     }
 }
-
-// Add additional CSS animations
-const additionalStyles = `
-    @keyframes ripple-effect {
-        to {
-            transform: scale(4);
-            opacity: 0;
-        }
-    }
-    
-    @keyframes float-away {
-        to {
-            transform: translateY(-200px) rotate(360deg);
-            opacity: 0;
-        }
-    }
-    
-    .animate-in {
-        animation: slideInUp 0.6s ease-out forwards;
-    }
-    
-    @keyframes slideInUp {
-        from {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-    
-    .nav-link.active {
-        color: var(--unity-blue);
-        text-shadow: var(--glow-primary);
-    }
-    
-    .nav-link.active::after {
-        width: 100%;
-    }
-`;
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Add additional styles
-    const styleSheet = document.createElement('style');
-    styleSheet.textContent = additionalStyles;
-    document.head.appendChild(styleSheet);
+    new PortfolioManager();
     
-    // Initialize all modules
-    new PortfolioAnimations();
-    new ProjectManager();
-    new PerformanceOptimizer();
-    new EasterEggs();
+    // Optional enhancements
+    if (window.innerWidth > 768) { // Only on desktop
+        new ParticleSystem();
+    }
     
-    console.log('🎮 Portfolio loaded successfully! Try the Konami code for a surprise!');
+    new EasterEgg();
 });
 
-// Service Worker registration for PWA (optional)
-// Uncomment and create sw.js file if you want PWA functionality
-/*
+// Performance optimization for mobile
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
-            .then(registration => {
+            .then((registration) => {
                 console.log('SW registered: ', registration);
             })
-            .catch(registrationError => {
+            .catch((registrationError) => {
                 console.log('SW registration failed: ', registrationError);
             });
     });
 }
-*/
+
+// Smooth scroll polyfill for older browsers
+if (!('scrollBehavior' in document.documentElement.style)) {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/gh/iamdustan/smoothscroll@master/src/smoothscroll.js';
+    document.head.appendChild(script);
+}
