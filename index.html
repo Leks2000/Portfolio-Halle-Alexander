@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- GSAP for advanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
 <body>
     <div class="stars-background">
@@ -40,6 +43,7 @@
                 <li class="nav-item"><a href="#skills" class="nav-link" data-translate="nav-skills">Навыки</a></li>
                 <li class="nav-item"><a href="#about" class="nav-link" data-translate="nav-about">О себе</a></li>
                 <li class="nav-item"><a href="#content" class="nav-link" data-translate="nav-content">Контент</a></li>
+                <li class="nav-item"><a href="#github-activity" class="nav-link" data-translate="nav-github">GitHub</a></li>
                 <li class="nav-item"><a href="#contact" class="nav-link" data-translate="nav-contact">Контакты</a></li>
             </ul>
             <div class="hamburger">
@@ -58,7 +62,10 @@
                     <h1 class="hero-title">
                         <span class="glitch" data-text="Александр Халле">Александр Халле</span>
                     </h1>
-                    <p class="hero-subtitle" data-translate="hero-subtitle">Unity Developer & C# Programmer</p>
+                    <p class="hero-subtitle">
+                        <span class="typewriter" id="typewriter-text"></span>
+                        <span class="typewriter-cursor">|</span>
+                    </p>
                     <p class="hero-description" data-translate="hero-description">
                         Создаю увлекательные игры и приложения с акцентом на backend разработку. 
                         Специализируюсь на Unity, C# и работе с базами данных.
@@ -117,7 +124,7 @@
 
             <div class="projects-grid">
                 <!-- Games -->
-                <div class="project-card" data-category="games" data-top="true">
+                <div class="project-card" data-category="games" data-top="false">
                     <div class="project-status">
                         <div class="status-ring" data-status="released">
                             <svg class="progress-ring" width="60" height="60">
@@ -146,7 +153,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" data-category="games">
+                <div class="project-card" data-category="games" data-top="true">
                     <div class="project-status">
                         <div class="status-ring" data-status="development">
                             <svg class="progress-ring" width="60" height="60">
@@ -157,7 +164,7 @@
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3>Decks and Dungeon</h3>
+                        <h3>Deck's & Dungeon</h3>
                         <p data-translate="decks-desc">Игра с карточными пошаговыми боями в подземельях. Unity, C#, 2.5D.</p>
                         <div class="project-tags">
                             <span class="tag">Unity</span>
@@ -512,6 +519,173 @@
                     </div>
                 </div>
 
+                <!-- Mobile Applications -->
+                <div class="project-card" data-category="mobile" data-top="true">
+                    <div class="project-status">
+                        <div class="status-ring" data-status="released">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>ChefPro</h3>
+                        <p data-translate="chefpro-desc">Мобильное приложение для шеф-поваров с рецептами и планированием меню.</p>
+                        <div class="project-tags">
+                            <span class="tag">Kotlin</span>
+                            <span class="tag">Android</span>
+                            <span class="tag">MVVM</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="#" class="btn btn-code" target="_blank">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
+                            <a href="#" class="btn btn-play" target="_blank">
+                                <i class="fab fa-google-play"></i> Google Play
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="mobile">
+                    <div class="project-status">
+                        <div class="status-ring" data-status="released">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>ToDis</h3>
+                        <p data-translate="todis-desc">Приложение для управления задачами с современным интерфейсом.</p>
+                        <div class="project-tags">
+                            <span class="tag">Kotlin</span>
+                            <span class="tag">Android</span>
+                            <span class="tag">Material Design</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="#" class="btn btn-code" target="_blank">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="mobile">
+                    <div class="project-status">
+                        <div class="status-ring" data-status="released">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>NotesMVVM</h3>
+                        <p data-translate="notesmvvm-desc">Приложение для заметок с архитектурой MVVM.</p>
+                        <div class="project-tags">
+                            <span class="tag">C#</span>
+                            <span class="tag">WPF</span>
+                            <span class="tag">MVVM</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="#" class="btn btn-code" target="_blank">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="mobile">
+                    <div class="project-status">
+                        <div class="status-ring" data-status="development">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-orange)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="84.825"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-development">🟡 В разработке</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>KlepetChat</h3>
+                        <p data-translate="klepetchat-desc">Мессенджер с поддержкой групповых чатов и медиафайлов.</p>
+                        <div class="project-tags">
+                            <span class="tag">Kotlin</span>
+                            <span class="tag">Android</span>
+                            <span class="tag">Firebase</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="#" class="btn btn-code" target="_blank">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Web Sites -->
+                <div class="project-card" data-category="web">
+                    <div class="project-status">
+                        <div class="status-ring" data-status="released">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Portfolio Terminal</h3>
+                        <p data-translate="portfolio-terminal-desc">Интерактивное терминальное портфолио с командной строкой.</p>
+                        <div class="project-tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">HTML/CSS</span>
+                            <span class="tag">Terminal UI</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="#" class="btn btn-code" target="_blank">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
+                            <a href="#" class="btn btn-demo" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Демо
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="web" data-top="true">
+                    <div class="project-status">
+                        <div class="status-ring" data-status="released">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>ProFinder</h3>
+                        <p data-translate="profinder-desc">Платформа для поиска профессионалов и фрилансеров.</p>
+                        <div class="project-tags">
+                            <span class="tag">ASP.NET</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">PostgreSQL</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="#" class="btn btn-code" target="_blank">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
+                            <a href="#" class="btn btn-demo" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Демо
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Telegram Bots -->
                 <div class="project-card" data-category="bots">
                     <div class="project-status">
@@ -573,197 +747,292 @@
     <section id="skills" class="skills">
         <div class="container">
             <h2 class="section-title" data-translate="skills-title">Навыки</h2>
-            <div class="skills-grid">
-                <!-- Row 1 -->
-                <div class="skill-icon-item" data-skill="csharp">
-                    <div class="custom-icon csharp-icon">C#</div>
-                </div>
-                <div class="skill-icon-item" data-skill="android">
-                    <i class="fab fa-android"></i>
-                </div>
-                <div class="skill-icon-item" data-skill="unity">
-                    <i class="fab fa-unity"></i>
-                </div>
-                <div class="skill-icon-item" data-skill="php">
-                    <i class="fab fa-php"></i>
-                </div>
-                <div class="skill-icon-item" data-skill="symfony">
-                    <i class="fab fa-symfony"></i>
-                </div>
-                
-                <!-- Row 2 -->
-                <div class="skill-icon-item" data-skill="python">
-                    <i class="fab fa-python"></i>
-                </div>
-                <div class="skill-icon-item" data-skill="ae">
-                    <div class="custom-icon ae-icon">Ae</div>
-                </div>
-                <div class="skill-icon-item" data-skill="premiere">
-                    <div class="custom-icon pr-icon">Pr</div>
-                </div>
-                <div class="skill-icon-item" data-skill="blender">
-                    <i class="fas fa-cube"></i>
-                </div>
-                <div class="skill-icon-item" data-skill="groovy">
-                    <i class="fab fa-jenkins"></i>
-                </div>
-                
-                <!-- Row 3 -->
-                <div class="skill-icon-item" data-skill="confluence">
-                    <i class="fab fa-confluence"></i>
-                </div>
-                <div class="skill-icon-item" data-skill="jira">
-                    <i class="fab fa-jira"></i>
-                </div>
-                <div class="skill-icon-item" data-skill="maya">
-                    <div class="custom-icon maya-icon">M</div>
-                </div>
-                <div class="skill-icon-item" data-skill="docker">
-                    <i class="fab fa-docker"></i>
-                </div>
-                <div class="skill-icon-item" data-skill="gpt">
-                    <i class="fas fa-robot"></i>
-                </div>
-            </div>
-
-            <!-- Technical Skills Section -->
-            <div class="technical-skills">
-                <h3 class="section-subtitle" data-translate="technical-skills-title">Технические навыки</h3>
-                
-                <div class="tech-skills-grid">
-                    <div class="tech-category">
-                        <h4 data-translate="tech-programming">Языки программирования</h4>
-                        <div class="tech-skills-row">
-                            <div class="tech-skill-item">
-                                <div class="tech-icon csharp-tech-icon">C#</div>
-                                <span>C#</span>
-                                <div class="skill-progress"><div class="progress-fill" style="width: 90%"></div></div>
-                            </div>
-                            <div class="tech-skill-item">
-                                <div class="tech-icon kotlin-tech-icon">
-                                    <svg viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M1.3 24l11.3-11.5L24 24H1.3zM0 0h12L0 12.5V0z"/>
-                                        <path d="M12.1 0L0 12.5L0 24L12.1 12.4L24 0H12.1z"/>
-                                    </svg>
-                                </div>
-                                <span>Kotlin</span>
-                                <div class="skill-progress"><div class="progress-fill" style="width: 85%"></div></div>
-                            </div>
-                            <div class="tech-skill-item">
-                                <div class="tech-icon sql-tech-icon">
-                                    <i class="fas fa-database"></i>
-                                </div>
-                                <span>SQL</span>
-                                <div class="skill-progress"><div class="progress-fill" style="width: 80%"></div></div>
+            
+            <!-- Animated Technology Icons -->
+            <div class="animated-skills-grid">
+                <!-- Unity Icon -->
+                <div class="animated-skill-item" data-skill="unity">
+                    <div class="skill-icon-container">
+                        <div class="unity-icon-animated">
+                            <div class="unity-logo">
+                                <div class="unity-cube-3d"></div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="tech-category">
-                        <h4 data-translate="tech-dotnet">Технологии .NET</h4>
-                        <div class="tech-skills-row">
-                            <div class="tech-skill-item">
-                                <div class="tech-icon dotnet-tech-icon">
-                                    <i class="fab fa-microsoft"></i>
-                                </div>
-                                <span>.NET Core</span>
-                                <div class="skill-progress"><div class="progress-fill" style="width: 85%"></div></div>
-                            </div>
-                            <div class="tech-skill-item">
-                                <div class="tech-icon aspnet-tech-icon">
-                                    <i class="fab fa-microsoft"></i>
-                                </div>
-                                <span>ASP.NET</span>
-                                <div class="skill-progress"><div class="progress-fill" style="width: 80%"></div></div>
-                            </div>
-                            <div class="tech-skill-item">
-                                <div class="tech-icon wpf-tech-icon">
-                                    <i class="fab fa-windows"></i>
-                                </div>
-                                <span>WPF</span>
-                                <div class="skill-progress"><div class="progress-fill" style="width: 75%"></div></div>
-                            </div>
+                        <div class="skill-tooltip">
+                            <h4>Unity</h4>
+                            <p>Game Engine</p>
+                            <div class="skill-level">Эксперт • 95%</div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="tech-category">
-                        <h4 data-translate="tech-gamedev">Разработка игр</h4>
-                        <div class="tech-skills-row">
-                            <div class="tech-skill-item">
-                                <div class="tech-icon unity-tech-icon">
-                                    <i class="fab fa-unity"></i>
-                                </div>
-                                <span>Unity</span>
-                                <div class="skill-progress"><div class="progress-fill" style="width: 95%"></div></div>
-                            </div>
-                            <div class="tech-skill-item">
-                                <div class="tech-icon dotween-tech-icon">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                                <span>DOTween</span>
-                                <div class="skill-progress"><div class="progress-fill" style="width: 85%"></div></div>
-                            </div>
-                            <div class="tech-skill-item">
-                                <div class="tech-icon blender-tech-icon">
-                                    <i class="fas fa-cube"></i>
-                                </div>
-                                <span>Blender</span>
-                                <div class="skill-progress"><div class="progress-fill" style="width: 70%"></div></div>
-                            </div>
+                <!-- C# Icon -->
+                <div class="animated-skill-item" data-skill="csharp">
+                    <div class="skill-icon-container">
+                        <div class="csharp-icon-animated">
+                            <div class="csharp-logo">C#</div>
+                            <div class="energy-circle"></div>
+                            <div class="spark"></div>
+                        </div>
+                        <div class="skill-tooltip">
+                            <h4>C#</h4>
+                            <p>Programming Language</p>
+                            <div class="skill-level">Эксперт • 90%</div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="tech-category">
-                        <h4 data-translate="tech-databases">Базы данных</h4>
-                        <div class="tech-skills-row">
-                            <div class="tech-skill-item">
-                                <div class="tech-icon postgres-tech-icon">
-                                    <i class="fas fa-database"></i>
-                                </div>
-                                <span>PostgreSQL</span>
-                                <div class="skill-progress"><div class="progress-fill" style="width: 85%"></div></div>
-                            </div>
-                            <div class="tech-skill-item">
-                                <div class="tech-icon mysql-tech-icon">
-                                    <i class="fas fa-database"></i>
-                                </div>
-                                <span>MySQL</span>
-                                <div class="skill-progress"><div class="progress-fill" style="width: 80%"></div></div>
-                            </div>
-                            <div class="tech-skill-item">
-                                <div class="tech-icon linq-tech-icon">
-                                    <i class="fas fa-code"></i>
-                                </div>
-                                <span>LINQ</span>
-                                <div class="skill-progress"><div class="progress-fill" style="width: 90%"></div></div>
-                            </div>
+                <!-- Kotlin Icon -->
+                <div class="animated-skill-item" data-skill="kotlin">
+                    <div class="skill-icon-container">
+                        <div class="kotlin-icon-animated">
+                            <div class="kotlin-part part1"></div>
+                            <div class="kotlin-part part2"></div>
+                            <div class="kotlin-part part3"></div>
+                        </div>
+                        <div class="skill-tooltip">
+                            <h4>Kotlin</h4>
+                            <p>Programming Language</p>
+                            <div class="skill-level">Продвинутый • 85%</div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="tech-category">
-                        <h4 data-translate="tech-tools">Инструменты</h4>
-                        <div class="tech-skills-row">
-                            <div class="tech-skill-item">
-                                <div class="tech-icon git-tech-icon">
-                                    <i class="fab fa-git-alt"></i>
-                                </div>
-                                <span>Git</span>
-                                <div class="skill-progress"><div class="progress-fill" style="width: 90%"></div></div>
+                <!-- .NET Icon -->
+                <div class="animated-skill-item" data-skill="dotnet">
+                    <div class="skill-icon-container">
+                        <div class="dotnet-icon-animated">
+                            <div class="dotnet-logo">.NET</div>
+                            <div class="energy-circle"></div>
+                        </div>
+                        <div class="skill-tooltip">
+                            <h4>.NET</h4>
+                            <p>Framework</p>
+                            <div class="skill-level">Продвинутый • 85%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SQL Icon -->
+                <div class="animated-skill-item" data-skill="sql">
+                    <div class="skill-icon-container">
+                        <div class="sql-icon-animated">
+                            <div class="database-icon">
+                                <i class="fas fa-database"></i>
                             </div>
-                            <div class="tech-skill-item">
-                                <div class="tech-icon vs-tech-icon">
-                                    <i class="fas fa-code"></i>
-                                </div>
-                                <span>Visual Studio</span>
-                                <div class="skill-progress"><div class="progress-fill" style="width: 90%"></div></div>
+                            <div class="data-float">0</div>
+                            <div class="data-float">1</div>
+                            <div class="data-float">∑</div>
+                        </div>
+                        <div class="skill-tooltip">
+                            <h4>SQL</h4>
+                            <p>Database Language</p>
+                            <div class="skill-level">Продвинутый • 80%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ASP.NET Icon -->
+                <div class="animated-skill-item" data-skill="aspnet">
+                    <div class="skill-icon-container">
+                        <div class="aspnet-icon-animated">
+                            <div class="aspnet-logo">ASP.NET</div>
+                            <div class="scan-line"></div>
+                        </div>
+                        <div class="skill-tooltip">
+                            <h4>ASP.NET</h4>
+                            <p>Web Framework</p>
+                            <div class="skill-level">Продвинутый • 80%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WPF Icon -->
+                <div class="animated-skill-item" data-skill="wpf">
+                    <div class="skill-icon-container">
+                        <div class="wpf-icon-animated">
+                            <div class="wpf-logo">WPF</div>
+                            <div class="grid-overlay"></div>
+                        </div>
+                        <div class="skill-tooltip">
+                            <h4>WPF</h4>
+                            <p>Desktop Framework</p>
+                            <div class="skill-level">Средний • 75%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PostgreSQL Icon -->
+                <div class="animated-skill-item" data-skill="postgresql">
+                    <div class="skill-icon-container">
+                        <div class="postgresql-icon-animated">
+                            <div class="postgres-logo">
+                                <i class="fas fa-database"></i>
                             </div>
-                            <div class="tech-skill-item">
-                                <div class="tech-icon figma-tech-icon">
-                                    <i class="fab fa-figma"></i>
-                                </div>
-                                <span>Figma</span>
-                                <div class="skill-progress"><div class="progress-fill" style="width: 75%"></div></div>
+                            <div class="data-flow"></div>
+                        </div>
+                        <div class="skill-tooltip">
+                            <h4>PostgreSQL</h4>
+                            <p>Database</p>
+                            <div class="skill-level">Продвинутый • 85%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MySQL Icon -->
+                <div class="animated-skill-item" data-skill="mysql">
+                    <div class="skill-icon-container">
+                        <div class="mysql-icon-animated">
+                            <div class="mysql-logo">MySQL</div>
+                            <div class="data-pulse"></div>
+                        </div>
+                        <div class="skill-tooltip">
+                            <h4>MySQL</h4>
+                            <p>Database</p>
+                            <div class="skill-level">Продвинутый • 80%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Git Icon -->
+                <div class="animated-skill-item" data-skill="git">
+                    <div class="skill-icon-container">
+                        <div class="git-icon-animated">
+                            <div class="git-logo">
+                                <i class="fab fa-git-alt"></i>
                             </div>
+                            <div class="branch-line line1"></div>
+                            <div class="branch-line line2"></div>
+                            <div class="merge-point"></div>
+                        </div>
+                        <div class="skill-tooltip">
+                            <h4>Git</h4>
+                            <p>Version Control</p>
+                            <div class="skill-level">Эксперт • 90%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Blender Icon -->
+                <div class="animated-skill-item" data-skill="blender">
+                    <div class="skill-icon-container">
+                        <div class="blender-icon-animated">
+                            <div class="blender-cube">
+                                <div class="cube-face front"></div>
+                                <div class="cube-face back"></div>
+                                <div class="cube-face right"></div>
+                                <div class="cube-face left"></div>
+                                <div class="cube-face top"></div>
+                                <div class="cube-face bottom"></div>
+                            </div>
+                        </div>
+                        <div class="skill-tooltip">
+                            <h4>Blender</h4>
+                            <p>3D Modeling</p>
+                            <div class="skill-level">Средний • 70%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Figma Icon -->
+                <div class="animated-skill-item" data-skill="figma">
+                    <div class="skill-icon-container">
+                        <div class="figma-icon-animated">
+                            <div class="figma-logo">
+                                <i class="fab fa-figma"></i>
+                            </div>
+                            <div class="design-element element1"></div>
+                            <div class="design-element element2"></div>
+                            <div class="design-element element3"></div>
+                        </div>
+                        <div class="skill-tooltip">
+                            <h4>Figma</h4>
+                            <p>UI/UX Design</p>
+                            <div class="skill-level">Средний • 75%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visual Studio Icon -->
+                <div class="animated-skill-item" data-skill="visualstudio">
+                    <div class="skill-icon-container">
+                        <div class="vs-icon-animated">
+                            <div class="vs-logo">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="code-line line1"></div>
+                            <div class="code-line line2"></div>
+                            <div class="code-line line3"></div>
+                        </div>
+                        <div class="skill-tooltip">
+                            <h4>Visual Studio</h4>
+                            <p>IDE</p>
+                            <div class="skill-level">Эксперт • 90%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DOTween Icon -->
+                <div class="animated-skill-item" data-skill="dotween">
+                    <div class="skill-icon-container">
+                        <div class="dotween-icon-animated">
+                            <div class="dotween-logo">DOTween</div>
+                            <div class="tween-ball"></div>
+                        </div>
+                        <div class="skill-tooltip">
+                            <h4>DOTween</h4>
+                            <p>Animation Library</p>
+                            <div class="skill-level">Продвинутый • 85%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PHP Icon -->
+                <div class="animated-skill-item" data-skill="php">
+                    <div class="skill-icon-container">
+                        <div class="php-icon-animated">
+                            <div class="php-logo">
+                                <i class="fab fa-php"></i>
+                            </div>
+                            <div class="code-wave"></div>
+                        </div>
+                        <div class="skill-tooltip">
+                            <h4>PHP</h4>
+                            <p>Server Language</p>
+                            <div class="skill-level">Базовый • 60%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- After Effects Icon -->
+                <div class="animated-skill-item" data-skill="aftereffects">
+                    <div class="skill-icon-container">
+                        <div class="ae-icon-animated">
+                            <div class="ae-logo">Ae</div>
+                            <div class="flash-effect"></div>
+                            <div class="motion-wave"></div>
+                        </div>
+                        <div class="skill-tooltip">
+                            <h4>After Effects</h4>
+                            <p>Motion Graphics</p>
+                            <div class="skill-level">Средний • 70%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Premiere Pro Icon -->
+                <div class="animated-skill-item" data-skill="premiere">
+                    <div class="skill-icon-container">
+                        <div class="premiere-icon-animated">
+                            <div class="premiere-logo">Pr</div>
+                            <div class="timeline-frame frame1"></div>
+                            <div class="timeline-frame frame2"></div>
+                            <div class="timeline-frame frame3"></div>
+                        </div>
+                        <div class="skill-tooltip">
+                            <h4>Premiere Pro</h4>
+                            <p>Video Editing</p>
+                            <div class="skill-level">Средний • 65%</div>
                         </div>
                     </div>
                 </div>
@@ -929,7 +1198,7 @@
                     <div class="video-card">
                         <a href="https://www.youtube.com/watch?v=MVMWH5Mve5c" target="_blank" class="video-link">
                             <div class="video-thumbnail">
-                                <img src="https://img.youtube.com/vi/MVMWH5Mve5c/maxresdefault.jpg" alt="Metal Parody Video">
+                                <img src="https://i.ytimg.com/vi/MVMWH5Mve5c/hqdefault.jpg" alt="Metal Parody Video" onerror="this.src='https://img.youtube.com/vi/MVMWH5Mve5c/maxresdefault.jpg'">
                                 <div class="play-overlay">
                                     <i class="fab fa-youtube"></i>
                                 </div>
@@ -959,7 +1228,8 @@
                     <div class="video-card">
                         <a href="https://www.tiktok.com/@darkys_vigil/video/7534036115284593942" target="_blank" class="video-link">
                             <div class="video-thumbnail">
-                                <div class="tiktok-placeholder">
+                                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjE4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJsaW5lYXItZ3JhZGllbnQoNDVkZWcsICNmZjAwNTAgMCUsICMwMGYyZWEgMTAwJSkiLz4KICA8dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI0IiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkRhZ2dlcnN0eWxlPC90ZXh0Pgo8L3N2Zz4=" alt="Daggerstyle Game Video">
+                                <div class="play-overlay">
                                     <i class="fab fa-tiktok"></i>
                                 </div>
                             </div>

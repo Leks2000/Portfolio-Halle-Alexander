@@ -1350,3 +1350,1082 @@ body {
         width: 200px;
     }
 }
+
+/* ===============================
+   TYPEWRITER EFFECT STYLES
+   =============================== */
+.typewriter {
+    color: var(--unity-blue);
+    font-weight: 600;
+    min-height: 1.5em;
+    display: inline-block;
+}
+
+.typewriter-cursor {
+    color: var(--unity-blue);
+    animation: blink 1s infinite;
+    font-weight: 100;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* ===============================
+   ANIMATED SKILLS GRID STYLES
+   =============================== */
+.animated-skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.animated-skill-item {
+    position: relative;
+    cursor: pointer;
+}
+
+.skill-icon-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    background: rgba(42, 42, 42, 0.6);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.animated-skill-item:hover .skill-icon-container {
+    transform: translateY(-10px);
+    border-color: var(--unity-blue);
+    box-shadow: var(--glow-primary);
+    background: rgba(0, 212, 255, 0.05);
+}
+
+.skill-tooltip {
+    position: absolute;
+    bottom: -80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 100;
+    min-width: 150px;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--unity-blue);
+}
+
+.animated-skill-item:hover .skill-tooltip {
+    opacity: 1;
+    visibility: visible;
+    bottom: -90px;
+}
+
+.skill-tooltip h4 {
+    color: var(--unity-blue);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.skill-tooltip p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.skill-level {
+    color: var(--unity-orange);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Unity Icon Animation */
+.unity-icon-animated {
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.unity-logo {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.unity-cube-3d {
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-unity);
+    border-radius: 10px;
+    animation: unity3d 4s ease-in-out infinite;
+    box-shadow: var(--glow-primary);
+    position: relative;
+}
+
+@keyframes unity3d {
+    0%, 100% { 
+        transform: rotateX(0deg) rotateY(0deg);
+        box-shadow: var(--glow-primary);
+    }
+    25% { 
+        transform: rotateX(15deg) rotateY(90deg);
+        box-shadow: 0 0 30px rgba(0, 212, 255, 0.8);
+    }
+    50% { 
+        transform: rotateX(0deg) rotateY(180deg);
+        box-shadow: var(--glow-primary);
+    }
+    75% { 
+        transform: rotateX(-15deg) rotateY(270deg);
+        box-shadow: 0 0 30px rgba(0, 212, 255, 0.8);
+    }
+}
+
+/* C# Icon Animation */
+.csharp-icon-animated {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.csharp-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--unity-blue);
+    z-index: 2;
+    position: relative;
+}
+
+.energy-circle {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--unity-blue);
+    border-radius: 50%;
+    animation: energyPulse 2s ease-in-out infinite;
+}
+
+.spark {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--unity-orange);
+    border-radius: 50%;
+    animation: sparkMove 1.5s linear infinite;
+    box-shadow: 0 0 10px var(--unity-orange);
+}
+
+@keyframes energyPulse {
+    0%, 100% { 
+        transform: scale(1);
+        opacity: 0.6;
+        box-shadow: 0 0 10px var(--unity-blue);
+    }
+    50% { 
+        transform: scale(1.2);
+        opacity: 1;
+        box-shadow: 0 0 20px var(--unity-blue);
+    }
+}
+
+@keyframes sparkMove {
+    0% { 
+        transform: rotate(0deg) translateX(35px) rotate(0deg);
+        opacity: 1;
+    }
+    100% { 
+        transform: rotate(360deg) translateX(35px) rotate(-360deg);
+        opacity: 0.3;
+    }
+}
+
+/* Kotlin Icon Animation */
+.kotlin-icon-animated {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kotlin-part {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--gradient-primary);
+    animation: kotlinSplit 3s ease-in-out infinite;
+}
+
+.kotlin-part.part1 {
+    top: 10px;
+    left: 10px;
+    animation-delay: 0s;
+}
+
+.kotlin-part.part2 {
+    top: 10px;
+    right: 10px;
+    animation-delay: 0.3s;
+}
+
+.kotlin-part.part3 {
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 0.6s;
+}
+
+@keyframes kotlinSplit {
+    0%, 100% { 
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    50% { 
+        transform: translate(var(--dx, 20px), var(--dy, -20px)) scale(0.8);
+        opacity: 0.7;
+    }
+}
+
+/* .NET Icon Animation */
+.dotnet-icon-animated {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dotnet-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--unity-blue);
+    z-index: 2;
+    position: relative;
+}
+
+/* SQL Icon Animation */
+.sql-icon-animated {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.database-icon {
+    font-size: 3rem;
+    color: var(--unity-blue);
+    z-index: 2;
+}
+
+.data-float {
+    position: absolute;
+    font-family: 'Orbitron', monospace;
+    font-size: 1.2rem;
+    color: var(--unity-orange);
+    animation: dataFloat 2s ease-in-out infinite;
+    opacity: 0;
+}
+
+.data-float:nth-child(2) { animation-delay: 0s; }
+.data-float:nth-child(3) { animation-delay: 0.7s; }
+.data-float:nth-child(4) { animation-delay: 1.4s; }
+
+@keyframes dataFloat {
+    0%, 90%, 100% { 
+        opacity: 0;
+        transform: translateY(0px);
+    }
+    10%, 80% { 
+        opacity: 1;
+        transform: translateY(-20px);
+    }
+}
+
+/* ASP.NET & WPF Animation */
+.aspnet-icon-animated, .wpf-icon-animated {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.aspnet-logo, .wpf-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--unity-blue);
+    z-index: 2;
+}
+
+.scan-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--unity-blue), transparent);
+    animation: scanMove 2s ease-in-out infinite;
+}
+
+.grid-overlay {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background-image: 
+        linear-gradient(rgba(0, 212, 255, 0.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.3) 1px, transparent 1px);
+    background-size: 10px 10px;
+    animation: gridPulse 3s ease-in-out infinite;
+}
+
+@keyframes scanMove {
+    0%, 100% { 
+        top: -2px;
+        opacity: 0;
+    }
+    50% { 
+        top: 50%;
+        opacity: 1;
+    }
+}
+
+@keyframes gridPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.8; }
+}
+
+/* Git Icon Animation */
+.git-icon-animated {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.git-logo {
+    font-size: 3rem;
+    color: var(--unity-blue);
+    z-index: 3;
+}
+
+.branch-line {
+    position: absolute;
+    width: 2px;
+    height: 30px;
+    background: var(--unity-orange);
+    animation: branchGrow 4s ease-in-out infinite;
+}
+
+.branch-line.line1 {
+    top: 10px;
+    left: 20px;
+    animation-delay: 0s;
+}
+
+.branch-line.line2 {
+    top: 10px;
+    right: 20px;
+    animation-delay: 1s;
+}
+
+.merge-point {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: var(--unity-green);
+    border-radius: 50%;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: mergePoint 4s ease-in-out infinite;
+}
+
+@keyframes branchGrow {
+    0%, 30%, 100% { 
+        height: 0;
+        opacity: 0;
+    }
+    40%, 90% { 
+        height: 30px;
+        opacity: 1;
+    }
+}
+
+@keyframes mergePoint {
+    0%, 70% { 
+        opacity: 0;
+        transform: translateX(-50%) scale(0);
+    }
+    80%, 100% { 
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+}
+
+/* Blender Icon Animation */
+.blender-icon-animated {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    perspective: 1000px;
+}
+
+.blender-cube {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    margin: 15px auto;
+    transform-style: preserve-3d;
+    animation: blenderRotate 4s ease-in-out infinite;
+}
+
+.cube-face {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border: 2px solid var(--unity-blue);
+    background: rgba(0, 212, 255, 0.1);
+}
+
+.cube-face.front { transform: rotateY(0deg) translateZ(25px); }
+.cube-face.back { transform: rotateY(180deg) translateZ(25px); }
+.cube-face.right { transform: rotateY(90deg) translateZ(25px); }
+.cube-face.left { transform: rotateY(-90deg) translateZ(25px); }
+.cube-face.top { transform: rotateX(90deg) translateZ(25px); }
+.cube-face.bottom { transform: rotateX(-90deg) translateZ(25px); }
+
+@keyframes blenderRotate {
+    0% { 
+        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    }
+    33% { 
+        transform: rotateX(120deg) rotateY(120deg) rotateZ(0deg);
+    }
+    66% { 
+        transform: rotateX(240deg) rotateY(240deg) rotateZ(120deg);
+    }
+    100% { 
+        transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    }
+}
+
+/* Figma Icon Animation */
+.figma-icon-animated {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.figma-logo {
+    font-size: 3rem;
+    color: var(--unity-blue);
+    z-index: 3;
+}
+
+.design-element {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    animation: designFloat 3s ease-in-out infinite;
+}
+
+.design-element.element1 {
+    background: #ff6b35;
+    top: 10px;
+    left: 10px;
+    animation-delay: 0s;
+}
+
+.design-element.element2 {
+    background: #4CAF50;
+    top: 10px;
+    right: 10px;
+    animation-delay: 1s;
+}
+
+.design-element.element3 {
+    background: #00d4ff;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation-delay: 2s;
+}
+
+@keyframes designFloat {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.6;
+    }
+    50% { 
+        transform: translateY(-15px) rotate(180deg);
+        opacity: 1;
+    }
+}
+
+/* Visual Studio Icon Animation */
+.vs-icon-animated {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vs-logo {
+    font-size: 3rem;
+    color: var(--unity-blue);
+    z-index: 3;
+}
+
+.code-line {
+    position: absolute;
+    height: 2px;
+    background: var(--unity-orange);
+    animation: codeDraw 3s ease-in-out infinite;
+    opacity: 0;
+}
+
+.code-line.line1 {
+    top: 20px;
+    left: 10px;
+    width: 30px;
+    animation-delay: 0s;
+}
+
+.code-line.line2 {
+    top: 40px;
+    left: 15px;
+    width: 25px;
+    animation-delay: 0.5s;
+}
+
+.code-line.line3 {
+    top: 60px;
+    left: 20px;
+    width: 20px;
+    animation-delay: 1s;
+}
+
+@keyframes codeDraw {
+    0%, 20% { 
+        width: 0;
+        opacity: 0;
+    }
+    30%, 70% { 
+        width: var(--target-width, 30px);
+        opacity: 1;
+    }
+    80%, 100% { 
+        opacity: 0;
+    }
+}
+
+/* DOTween Animation */
+.dotween-icon-animated {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dotween-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--unity-blue);
+    z-index: 2;
+}
+
+.tween-ball {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--unity-orange);
+    border-radius: 50%;
+    animation: tweenMove 2s ease-in-out infinite;
+    box-shadow: 0 0 10px var(--unity-orange);
+}
+
+@keyframes tweenMove {
+    0% { 
+        left: 10px;
+        transform: scale(1);
+    }
+    25% { 
+        left: calc(100% - 18px);
+        transform: scale(1.5);
+    }
+    50% { 
+        left: calc(100% - 18px);
+        top: calc(100% - 18px);
+        transform: scale(1);
+    }
+    75% { 
+        left: 10px;
+        top: calc(100% - 18px);
+        transform: scale(0.8);
+    }
+    100% { 
+        left: 10px;
+        top: 10px;
+        transform: scale(1);
+    }
+}
+
+/* PHP Icon Animation */
+.php-icon-animated {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.php-logo {
+    font-size: 3rem;
+    color: var(--unity-blue);
+    z-index: 2;
+}
+
+.code-wave {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: waveExpand 2s ease-in-out infinite;
+}
+
+@keyframes waveExpand {
+    0%, 100% { 
+        transform: scale(0.8);
+        opacity: 0.3;
+    }
+    50% { 
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+/* After Effects Animation */
+.ae-icon-animated {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ae-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: linear-gradient(45deg, #00005B, #9A4CFF);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    z-index: 3;
+}
+
+.flash-effect {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 50%);
+    border-radius: 50%;
+    animation: flashPulse 3s ease-in-out infinite;
+    opacity: 0;
+}
+
+.motion-wave {
+    position: absolute;
+    width: 120%;
+    height: 120%;
+    border: 2px solid rgba(154, 76, 255, 0.5);
+    border-radius: 50%;
+    animation: motionExpand 3s ease-in-out infinite;
+}
+
+@keyframes flashPulse {
+    0%, 90%, 100% { 
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    5%, 15% { 
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes motionExpand {
+    0%, 100% { 
+        transform: scale(0.8);
+        opacity: 0.6;
+    }
+    50% { 
+        transform: scale(1.1);
+        opacity: 0.2;
+    }
+}
+
+/* Premiere Pro Animation */
+.premiere-icon-animated {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.premiere-logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: linear-gradient(45deg, #00005B, #EA77FF);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    z-index: 3;
+}
+
+.timeline-frame {
+    position: absolute;
+    width: 15px;
+    height: 8px;
+    background: var(--unity-orange);
+    animation: frameSequence 2s linear infinite;
+    opacity: 0;
+}
+
+.timeline-frame.frame1 {
+    top: 20px;
+    left: 10px;
+    animation-delay: 0s;
+}
+
+.timeline-frame.frame2 {
+    top: 20px;
+    left: 32px;
+    animation-delay: 0.2s;
+}
+
+.timeline-frame.frame3 {
+    top: 20px;
+    right: 10px;
+    animation-delay: 0.4s;
+}
+
+@keyframes frameSequence {
+    0%, 80%, 100% { opacity: 0; }
+    10%, 70% { opacity: 1; }
+}
+
+/* Database Animations (PostgreSQL, MySQL) */
+.postgresql-icon-animated, .mysql-icon-animated {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.postgres-logo, .mysql-logo {
+    font-size: 2rem;
+    color: var(--unity-blue);
+    z-index: 2;
+}
+
+.mysql-logo {
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+}
+
+.data-flow {
+    position: absolute;
+    width: 2px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--unity-blue), transparent);
+    animation: dataStream 2s linear infinite;
+    left: 20%;
+}
+
+.data-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--unity-orange);
+    border-radius: 10px;
+    animation: dataPulse 2s ease-in-out infinite;
+}
+
+@keyframes dataStream {
+    0% { 
+        top: -20px;
+        opacity: 0;
+    }
+    50% { 
+        opacity: 1;
+    }
+    100% { 
+        top: 100%;
+        opacity: 0;
+    }
+}
+
+@keyframes dataPulse {
+    0%, 100% { 
+        transform: scale(0.9);
+        opacity: 0.5;
+    }
+    50% { 
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+/* ===============================
+   GITHUB ACTIVITY STYLES
+   =============================== */
+.github-activity {
+    padding: 6rem 0;
+    background: var(--bg-secondary);
+}
+
+.github-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.github-icon {
+    margin-right: 1rem;
+    color: var(--unity-blue);
+}
+
+.github-content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.github-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.stat-card {
+    background: rgba(42, 42, 42, 0.6);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-card);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--unity-blue);
+    box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-unity);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.stat-info {
+    flex: 1;
+}
+
+.stat-number {
+    font-family: 'Orbitron', monospace;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--unity-blue);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    text-shadow: var(--glow-primary);
+}
+
+.stat-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.github-chart {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.github-chart h3 {
+    color: var(--unity-blue);
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.github-stats-img,
+.github-streak-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin: 1rem 0;
+    background: transparent !important;
+    box-shadow: var(--shadow-card);
+}
+
+.github-button {
+    text-align: center;
+}
+
+.btn-github {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 2px solid var(--unity-blue);
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+}
+
+.btn-github:hover {
+    background: var(--unity-blue);
+    color: var(--bg-primary);
+    box-shadow: var(--glow-primary);
+    transform: translateY(-2px);
+}
+
+/* Make GitHub stats transparent */
+.github-stats-img {
+    filter: opacity(0.9);
+    backdrop-filter: blur(10px);
+}
+
+.github-streak-img {
+    filter: opacity(0.9);
+    backdrop-filter: blur(10px);
+}
+
+/* Enhanced project card animations */
+.project-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0, 212, 255, 0.3);
+}
+
+.project-card:hover .project-content h3 {
+    color: var(--unity-orange);
+    text-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+}
+
+/* Active navigation link styles */
+.nav-link.active {
+    color: var(--unity-blue) !important;
+    text-shadow: var(--glow-primary);
+}
+
+.nav-link.active::after {
+    width: 100%;
+    background: var(--unity-blue);
+    box-shadow: var(--glow-primary);
+}
+
+/* Responsive Design for Animated Skills */
+@media (max-width: 768px) {
+    .animated-skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 2rem;
+    }
+    
+    .skill-icon-container {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .skill-tooltip {
+        min-width: 120px;
+        padding: 0.8rem;
+    }
+    
+    .unity-cube-3d {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    .animated-skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .skill-icon-container {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .unity-cube-3d {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .csharp-logo, .dotnet-logo, .ae-logo, .premiere-logo {
+        font-size: 1.8rem;
+    }
+    
+    .database-icon, .git-logo, .vs-logo, .php-logo, .figma-logo {
+        font-size: 2.2rem;
+    }
+}

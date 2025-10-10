@@ -243,6 +243,7 @@ class PortfolioManager {
         this.initProgressRings();
         this.initCustomCursor();
         this.initTypingAnimation();
+        this.initAnimatedSkills();
         this.initGSAPAnimations();
         this.initGitHubActivity();
         this.applyTranslations();
@@ -299,21 +300,58 @@ class PortfolioManager {
             }
         });
 
-        // Active link highlighting
+        // Enhanced active link highlighting
         const updateActiveLink = () => {
             const scrollPos = window.scrollY + 100;
+            let activeFound = false;
+            
             navLinks.forEach(link => {
                 const section = document.querySelector(link.getAttribute('href'));
                 if (section && 
                     section.offsetTop <= scrollPos && 
                     section.offsetTop + section.offsetHeight > scrollPos) {
-                    navLinks.forEach(l => l.classList.remove('active'));
-                    link.classList.add('active');
+                    
+                    if (!activeFound) {
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        link.classList.add('active');
+                        activeFound = true;
+                        
+                        // Add smooth animation to active link
+                        if (typeof gsap !== 'undefined') {
+                            gsap.to(link, {
+                                scale: 1.05,
+                                duration: 0.2,
+                                ease: 'power2.out'
+                            });
+                            
+                            gsap.to(link, {
+                                scale: 1,
+                                duration: 0.2,
+                                delay: 0.2,
+                                ease: 'power2.out'
+                            });
+                        }
+                    }
                 }
             });
+            
+            // Add parallax effect to navbar
+            if (typeof gsap !== 'undefined') {
+                const scrollSpeed = window.scrollY * 0.5;
+                gsap.set('.navbar', {
+                    y: Math.min(scrollSpeed, 10)
+                });
+            }
         };
 
-        window.addEventListener('scroll', updateActiveLink);
+        // Throttle scroll event for better performance
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            if (scrollTimeout) {
+                clearTimeout(scrollTimeout);
+            }
+            scrollTimeout = setTimeout(updateActiveLink, 10);
+        });
     }
 
     // Mobile menu toggle
@@ -447,10 +485,17 @@ class PortfolioManager {
             ring.style.strokeDashoffset = offset;
         });
 
-        // Add tooltips
+        // Add tooltips with better event handling
         document.querySelectorAll('.status-ring').forEach(ring => {
-            ring.addEventListener('mouseenter', () => {
-                const tooltip = document.createElement('div');
+            let tooltip = null;
+            
+            const showTooltip = () => {
+                // Remove existing tooltip to prevent duplicates
+                if (tooltip) {
+                    tooltip.remove();
+                }
+                
+                tooltip = document.createElement('div');
                 tooltip.className = 'status-tooltip';
                 const status = ring.dataset.status;
                 
@@ -470,28 +515,45 @@ class PortfolioManager {
                 tooltip.textContent = text;
                 tooltip.style.cssText = `
                     position: absolute;
-                    top: -40px;
+                    top: -45px;
                     left: 50%;
                     transform: translateX(-50%);
-                    background: var(--bg-tertiary);
+                    background: rgba(0, 0, 0, 0.9);
                     color: var(--text-primary);
                     padding: 0.5rem 1rem;
-                    border-radius: 5px;
+                    border-radius: 8px;
                     font-size: 0.8rem;
                     white-space: nowrap;
                     z-index: 1000;
-                    box-shadow: var(--shadow-card);
+                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+                    border: 1px solid var(--unity-blue);
+                    pointer-events: none;
+                    opacity: 0;
+                    transition: opacity 0.2s ease;
                 `;
                 
                 ring.appendChild(tooltip);
-            });
+                
+                // Animate in
+                requestAnimationFrame(() => {
+                    tooltip.style.opacity = '1';
+                });
+            };
             
-            ring.addEventListener('mouseleave', () => {
-                const tooltip = ring.querySelector('.status-tooltip');
+            const hideTooltip = () => {
                 if (tooltip) {
-                    tooltip.remove();
+                    tooltip.style.opacity = '0';
+                    setTimeout(() => {
+                        if (tooltip && tooltip.parentNode) {
+                            tooltip.remove();
+                        }
+                        tooltip = null;
+                    }, 200);
                 }
-            });
+            };
+            
+            ring.addEventListener('mouseenter', showTooltip);
+            ring.addEventListener('mouseleave', hideTooltip);
         });
     }
 
@@ -553,13 +615,13 @@ class PortfolioManager {
     
     // Typing Animation for Hero Section
     initTypingAnimation() {
-        const typingElement = document.getElementById('typing-animation');
+        const typingElement = document.getElementById('typewriter-text');
         if (!typingElement) return;
         
-        const jobs = this.translations[this.currentLang]['typing-jobs'] || [
+        const jobs = [
             'Unity Developer & C# Programmer',
-            'Game Developer & Backend Specialist', 
-            'Creative Solver'
+            'Backend & Game Developer',
+            'Specialist Creative Solver'
         ];
         
         let currentJobIndex = 0;
@@ -579,7 +641,7 @@ class PortfolioManager {
                     setTimeout(typeWriter, 500);
                     return;
                 }
-                setTimeout(typeWriter, 50);
+                setTimeout(typeWriter, 80);
             } else {
                 typingElement.textContent = currentJob.substring(0, currentCharIndex + 1);
                 currentCharIndex++;
@@ -589,12 +651,52 @@ class PortfolioManager {
                     setTimeout(typeWriter, 2000);
                     return;
                 }
-                setTimeout(typeWriter, 100);
+                setTimeout(typeWriter, 120);
             }
         }
         
         // Start typing animation
         setTimeout(typeWriter, 1000);
+    }
+
+    // Animated Skills Initialization
+    initAnimatedSkills() {
+        const skillItems = document.querySelectorAll('.animated-skill-item');
+        
+        skillItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                const skillType = item.dataset.skill;
+                this.triggerSkillAnimation(skillType);
+            });
+        });
+
+        // Initialize skill tooltips
+        this.initSkillTooltips();
+    }
+
+    triggerSkillAnimation(skillType) {
+        // This function can trigger specific animations based on skill type
+        // Currently animations are handled via CSS, but we can add JS effects here
+        console.log(`Triggering animation for ${skillType}`);
+    }
+
+    initSkillTooltips() {
+        const skillItems = document.querySelectorAll('.animated-skill-item');
+        
+        skillItems.forEach(item => {
+            const tooltip = item.querySelector('.skill-tooltip');
+            if (!tooltip) return;
+
+            item.addEventListener('mouseenter', () => {
+                tooltip.style.opacity = '1';
+                tooltip.style.visibility = 'visible';
+            });
+
+            item.addEventListener('mouseleave', () => {
+                tooltip.style.opacity = '0';
+                tooltip.style.visibility = 'hidden';
+            });
+        });
     }
     
     // GSAP Animations
@@ -644,15 +746,16 @@ class PortfolioManager {
             });
         });
         
-        // Skills grid animation
-        gsap.from('.skill-icon-item', {
+        // Animated Skills grid animation
+        gsap.from('.animated-skill-item', {
             scrollTrigger: {
-                trigger: '.skills-grid',
+                trigger: '.animated-skills-grid',
                 start: 'top 80%'
             },
-            duration: 0.6,
+            duration: 0.8,
             y: 50,
             opacity: 0,
+            scale: 0.8,
             stagger: 0.1,
             ease: 'back.out(1.7)'
         });
@@ -682,6 +785,54 @@ class PortfolioManager {
             scale: 0.8,
             stagger: 0.1,
             ease: 'back.out(1.7)'
+        });
+
+        // Parallax background effect
+        gsap.to('.stars-background', {
+            scrollTrigger: {
+                trigger: 'body',
+                start: 'top top',
+                end: 'bottom bottom',
+                scrub: 1
+            },
+            y: -100,
+            ease: 'none'
+        });
+
+        // Smooth section transitions
+        gsap.utils.toArray('section').forEach((section, index) => {
+            gsap.fromTo(section, 
+                {
+                    opacity: 0.8,
+                    y: 50
+                },
+                {
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 90%',
+                        end: 'bottom 10%',
+                        scrub: 1,
+                        toggleActions: 'play none none reverse'
+                    },
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: 'power2.out'
+                }
+            );
+        });
+
+        // GitHub section animation
+        gsap.from('.github-stats .stat-card', {
+            scrollTrigger: {
+                trigger: '.github-activity',
+                start: 'top 80%'
+            },
+            duration: 0.8,
+            y: 50,
+            opacity: 0,
+            stagger: 0.2,
+            ease: 'power3.out'
         });
     }
     
