@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Александр Халле - Unity Developer Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="stars-background">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">AH</span>
+                <div class="logo-glow"></div>
+            </div>
+            <!-- Language Switcher -->
+            <div class="language-switcher">
+                <button class="lang-btn" data-lang="ru">RU</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="#home" class="nav-link" data-translate="nav-home">Главная</a></li>
+                <li class="nav-item"><a href="#projects" class="nav-link" data-translate="nav-projects">Проекты</a></li>
+                <li class="nav-item"><a href="#skills" class="nav-link" data-translate="nav-skills">Навыки</a></li>
+                <li class="nav-item"><a href="#about" class="nav-link" data-translate="nav-about">О себе</a></li>
+                <li class="nav-item"><a href="#content" class="nav-link" data-translate="nav-content">Контент</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link" data-translate="nav-contact">Контакты</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="glitch" data-text="Александр Халле">Александр Халле</span>
+                    </h1>
+                    <p class="hero-subtitle" data-translate="hero-subtitle">Unity Developer & C# Programmer</p>
+                    <p class="hero-description" data-translate="hero-description">
+                        Создаю увлекательные игры и приложения с акцентом на backend разработку. 
+                        Специализируюсь на Unity, C# и работе с базами данных.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">3+</span>
+                            <span class="stat-label" data-translate="stat-experience">Года опыта</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">15+</span>
+                            <span class="stat-label" data-translate="stat-projects">Проектов</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">5+</span>
+                            <span class="stat-label" data-translate="stat-platforms">Платформ</span>
+                        </div>
+                    </div>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary" data-translate="btn-projects">Мои проекты</a>
+                        <a href="#contact" class="btn btn-secondary" data-translate="btn-contact">Связаться</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="unity-logo-container">
+                        <div class="unity-logo">
+                            <div class="unity-cube"></div>
+                            <div class="orbit orbit-1"></div>
+                            <div class="orbit orbit-2"></div>
+                            <div class="orbit orbit-3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="scroll-arrow"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title" data-translate="projects-title">Мои проекты</h2>
+            
+            <!-- Project Filters -->
+            <div class="project-filters">
+                <button class="filter-btn active" data-filter="top" data-translate="filter-top">⭐ Топ</button>
+                <button class="filter-btn" data-filter="all" data-translate="filter-all">Все</button>
+                <button class="filter-btn" data-filter="games" data-translate="filter-games">🎮 Игры</button>
+                <button class="filter-btn" data-filter="mobile" data-translate="filter-mobile">📱 Мобильные</button>
+                <button class="filter-btn" data-filter="web" data-translate="filter-web">🌐 Сайты</button>
+                <button class="filter-btn" data-filter="extensions" data-translate="filter-extensions">⚙️ Расширения</button>
+                <button class="filter-btn" data-filter="bots" data-translate="filter-bots">🤖 Telegram-боты</button>
+            </div>
+
+            <div class="projects-grid">
+                <!-- Games -->
+                <div class="project-card" data-category="games" data-top="true">
+                    <div class="project-status">
+                        <div class="status-ring" data-status="released">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Dark Memorial Alpha</h3>
+                        <p data-translate="dark-memorial-desc">Первый полноценный релиз игры на Unity. 2D проект с интересной механикой.</p>
+                        <div class="project-tags">
+                            <span class="tag">Unity</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">2D</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/Leks2000/MyFirstGameFiles" class="btn btn-code" target="_blank">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
+                            <a href="#" class="btn btn-itch" target="_blank">
+                                <i class="fas fa-gamepad"></i> Itch.io
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="games">
+                    <div class="project-status">
+                        <div class="status-ring" data-status="development">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-orange)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="84.825"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-development">🟡 В разработке</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Decks and Dungeon</h3>
+                        <p data-translate="decks-desc">Игра с карточными пошаговыми боями в подземельях. Unity, C#, 2.5D.</p>
+                        <div class="project-tags">
+                            <span class="tag">Unity</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">2.5D</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/Leks2000/CardMobile-build" class="btn btn-code" target="_blank">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
+                            <a href="#" class="btn btn-itch" target="_blank">
+                                <i class="fas fa-gamepad"></i> Itch.io
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="games">
+                    <div class="project-status">
+                        <div class="status-ring" data-status="released">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>BlockMerge 2048</h3>
+                        <p data-translate="blockmerge-desc">2048 в майнкрафт-стиле. Unity, C#, 2D.</p>
+                        <div class="project-tags">
+                            <span class="tag">Unity</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">2D</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/Leks2000/BlockMerge_2048" class="btn btn-code" target="_blank">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
+                            <a href="#" class="btn btn-itch" target="_blank">
+                                <i class="fas fa-gamepad"></i> Itch.io
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="games">
+                    <div class="project-status">
+                        <div class="status-ring" data-status="released">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Wolf Runner</h3>
+                        <p data-translate="wolf-runner-desc">Раннер в майнкрафт-стиле. Unity, C#, 3D.</p>
+                        <div class="project-tags">
+                            <span class="tag">Unity</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">3D</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/Leks2000/Wolf_Runner" class="btn btn-code" target="_blank">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
+                            <a href="#" class="btn btn-itch" target="_blank">
+                                <i class="fas fa-gamepad"></i> Itch.io
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="games">
+                    <div class="project-status">
+                        <div class="status-ring" data-status="released">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Galactic SunSet 2142</h3>
+                        <p data-translate="galactic-desc">Приключение про бананчика. Unity, C#, 2D.</p>
+                        <div class="project-tags">
+                            <span class="tag">Unity</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">2D</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/Leks2000/Galactic-SunSet-2142" class="btn btn-code" target="_blank">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
+                            <a href="#" class="btn btn-itch" target="_blank">
+                                <i class="fas fa-gamepad"></i> Itch.io
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="games">
+                    <div class="project-status">
+                        <div class="status-ring" data-status="concept">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-green)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="135.72"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-concept">⚪ Концепт</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>The Witcher Forest</h3>
+                        <p data-translate="witcher-desc">Генерация гексагональной карты (вода, земля, лес). Unity, C#, 2D.</p>
+                        <div class="project-tags">
+                            <span class="tag">Unity</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">2D</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/Leks2000/TheWitcherForest" class="btn btn-code" target="_blank">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="games">
+                    <div class="project-status">
+                        <div class="status-ring" data-status="released">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Flappy on Earth</h3>
+                        <p data-translate="flappy-desc">Мобильная аркада про сбор монеток. Unity, C#, Android.</p>
+                        <div class="project-tags">
+                            <span class="tag">Unity</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">Android</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/Leks2000/Flappy-On-Earth" class="btn btn-code" target="_blank">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
+                            <a href="#" class="btn btn-itch" target="_blank">
+                                <i class="fas fa-gamepad"></i> Itch.io
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Apps -->
+                <div class="project-card" data-category="mobile" data-top="true">
+                    <div class="project-status">
+                        <div class="status-ring" data-status="concept">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-green)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="135.72"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-concept">⚪ Концепт</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>ChefPro</h3>
+                        <p data-translate="chefpro-desc">Приложение-повар: вводишь продукты из холодильника — получаешь рецепт с пошаговой инструкцией от ИИ.</p>
+                        <div class="project-tags">
+                            <span class="tag">Kotlin</span>
+                            <span class="tag">Jetpack Compose</span>
+                            <span class="tag">OpenAI API</span>
+                            <span class="tag">SQLite</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="#" class="btn btn-code disabled">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
+                            <a href="#" class="btn btn-demo disabled">
+                                <i class="fab fa-google-play"></i> Play Store
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="mobile">
+                    <div class="project-status">
+                        <div class="status-ring" data-status="development">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-orange)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="84.825"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-development">🟡 В разработке</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>ToDis</h3>
+                        <p data-translate="todis-desc">Приложение, показывающее, какой сегодня день.</p>
+                        <div class="project-tags">
+                            <span class="tag">Kotlin</span>
+                            <span class="tag">Android Studio</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/Leks2000/TodIs-build" class="btn btn-code" target="_blank">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
+                            <a href="#" class="btn btn-demo disabled">
+                                <i class="fab fa-google-play"></i> Play Store
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="mobile">
+                    <div class="project-status">
+                        <div class="status-ring" data-status="released">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>NotesMVVM</h3>
+                        <p data-translate="notes-desc">Приложение для заметок с локальным и удалённым входом.</p>
+                        <div class="project-tags">
+                            <span class="tag">Kotlin</span>
+                            <span class="tag">MVVM</span>
+                            <span class="tag">Firebase</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/Leks2000/NotesMVVM" class="btn btn-code" target="_blank">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="mobile">
+                    <div class="project-status">
+                        <div class="status-ring" data-status="released">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>KlepetChat</h3>
+                        <p data-translate="klepet-desc">Мобильный чат, аналог Telegram.</p>
+                        <div class="project-tags">
+                            <span class="tag">Kotlin</span>
+                            <span class="tag">Firebase</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/Leks2000/KlepetChat" class="btn btn-code" target="_blank">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Websites -->
+                <div class="project-card" data-category="web" data-top="true">
+                    <div class="project-status">
+                        <div class="status-ring" data-status="released">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>ProFinder</h3>
+                        <p data-translate="profinder-desc">Сайт поиска работы.</p>
+                        <div class="project-tags">
+                            <span class="tag">ASP.NET</span>
+                            <span class="tag">C#</span>
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS</span>
+                            <span class="tag">PHP</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/Leks2000/ProFinder" class="btn btn-code" target="_blank">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="web">
+                    <div class="project-status">
+                        <div class="status-ring" data-status="released">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Portfolio Terminal</h3>
+                        <p data-translate="terminal-desc">Альтернативная версия сайта-портфолио в виде терминала.</p>
+                        <div class="project-tags">
+                            <span class="tag">HTML</span>
+                            <span class="tag">JS</span>
+                            <span class="tag">Tailwind</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/Leks2000/portfolio-terminal" class="btn btn-code" target="_blank">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
+                            <a href="https://leks2000.github.io/portfolio-terminal/" class="btn btn-demo" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> <span data-translate="btn-demo">Сайт</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Extensions -->
+                <div class="project-card" data-category="extensions" data-top="true">
+                    <div class="project-status">
+                        <div class="status-ring" data-status="development">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-orange)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="84.825"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-development">🟡 В разработке</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Promtly</h3>
+                        <p data-translate="promtly-desc">Chrome Extension для улучшения промптов и анализа изображений (создание описаний по фото).</p>
+                        <div class="project-tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Chrome API</span>
+                            <span class="tag">OpenAI API</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/Leks2000/Promtly-build" class="btn btn-code" target="_blank">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Telegram Bots -->
+                <div class="project-card" data-category="bots">
+                    <div class="project-status">
+                        <div class="status-ring" data-status="released">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>NewsTGBot</h3>
+                        <p data-translate="newsbot-desc">Telegram-бот, публикующий ИИ-новости с мемами и шутками.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">aiogram</span>
+                            <span class="tag">OpenRouter API</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/Leks2000/NewsTGBot" class="btn btn-code" target="_blank">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
+                            <span class="project-icon"><i class="fab fa-telegram-plane"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-category="bots">
+                    <div class="project-status">
+                        <div class="status-ring" data-status="released">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Telegram Bot</h3>
+                        <p data-translate="meme-bot-desc">Присылает случайные мемы пользователю.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">aiogram</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/Leks2000/TelegramBot" class="btn btn-code" target="_blank">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
+                            <span class="project-icon"><i class="fab fa-telegram-plane"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title" data-translate="skills-title">Навыки</h2>
+            <div class="skills-grid">
+                <!-- Row 1 -->
+                <div class="skill-icon-item" data-skill="csharp">
+                    <div class="custom-icon csharp-icon">C#</div>
+                </div>
+                <div class="skill-icon-item" data-skill="android">
+                    <i class="fab fa-android"></i>
+                </div>
+                <div class="skill-icon-item" data-skill="unity">
+                    <i class="fab fa-unity"></i>
+                </div>
+                <div class="skill-icon-item" data-skill="php">
+                    <i class="fab fa-php"></i>
+                </div>
+                <div class="skill-icon-item" data-skill="symfony">
+                    <i class="fab fa-symfony"></i>
+                </div>
+                
+                <!-- Row 2 -->
+                <div class="skill-icon-item" data-skill="python">
+                    <i class="fab fa-python"></i>
+                </div>
+                <div class="skill-icon-item" data-skill="ae">
+                    <div class="custom-icon ae-icon">Ae</div>
+                </div>
+                <div class="skill-icon-item" data-skill="premiere">
+                    <div class="custom-icon pr-icon">Pr</div>
+                </div>
+                <div class="skill-icon-item" data-skill="blender">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <div class="skill-icon-item" data-skill="groovy">
+                    <i class="fab fa-jenkins"></i>
+                </div>
+                
+                <!-- Row 3 -->
+                <div class="skill-icon-item" data-skill="confluence">
+                    <i class="fab fa-confluence"></i>
+                </div>
+                <div class="skill-icon-item" data-skill="jira">
+                    <i class="fab fa-jira"></i>
+                </div>
+                <div class="skill-icon-item" data-skill="maya">
+                    <div class="custom-icon maya-icon">M</div>
+                </div>
+                <div class="skill-icon-item" data-skill="docker">
+                    <i class="fab fa-docker"></i>
+                </div>
+                <div class="skill-icon-item" data-skill="gpt">
+                    <i class="fas fa-robot"></i>
+                </div>
+            </div>
+
+            <!-- Technical Skills Section -->
+            <div class="technical-skills">
+                <h3 class="section-subtitle" data-translate="technical-skills-title">Технические навыки</h3>
+                
+                <div class="tech-skills-grid">
+                    <div class="tech-category">
+                        <h4 data-translate="tech-programming">Языки программирования</h4>
+                        <div class="tech-skills-row">
+                            <div class="tech-skill-item">
+                                <div class="tech-icon csharp-tech-icon">C#</div>
+                                <span>C#</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 90%"></div></div>
+                            </div>
+                            <div class="tech-skill-item">
+                                <div class="tech-icon kotlin-tech-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M1.3 24l11.3-11.5L24 24H1.3zM0 0h12L0 12.5V0z"/>
+                                        <path d="M12.1 0L0 12.5L0 24L12.1 12.4L24 0H12.1z"/>
+                                    </svg>
+                                </div>
+                                <span>Kotlin</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 85%"></div></div>
+                            </div>
+                            <div class="tech-skill-item">
+                                <div class="tech-icon sql-tech-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <span>SQL</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 80%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-category">
+                        <h4 data-translate="tech-dotnet">Технологии .NET</h4>
+                        <div class="tech-skills-row">
+                            <div class="tech-skill-item">
+                                <div class="tech-icon dotnet-tech-icon">
+                                    <i class="fab fa-microsoft"></i>
+                                </div>
+                                <span>.NET Core</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 85%"></div></div>
+                            </div>
+                            <div class="tech-skill-item">
+                                <div class="tech-icon aspnet-tech-icon">
+                                    <i class="fab fa-microsoft"></i>
+                                </div>
+                                <span>ASP.NET</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 80%"></div></div>
+                            </div>
+                            <div class="tech-skill-item">
+                                <div class="tech-icon wpf-tech-icon">
+                                    <i class="fab fa-windows"></i>
+                                </div>
+                                <span>WPF</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 75%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-category">
+                        <h4 data-translate="tech-gamedev">Разработка игр</h4>
+                        <div class="tech-skills-row">
+                            <div class="tech-skill-item">
+                                <div class="tech-icon unity-tech-icon">
+                                    <i class="fab fa-unity"></i>
+                                </div>
+                                <span>Unity</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 95%"></div></div>
+                            </div>
+                            <div class="tech-skill-item">
+                                <div class="tech-icon dotween-tech-icon">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                                <span>DOTween</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 85%"></div></div>
+                            </div>
+                            <div class="tech-skill-item">
+                                <div class="tech-icon blender-tech-icon">
+                                    <i class="fas fa-cube"></i>
+                                </div>
+                                <span>Blender</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 70%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-category">
+                        <h4 data-translate="tech-databases">Базы данных</h4>
+                        <div class="tech-skills-row">
+                            <div class="tech-skill-item">
+                                <div class="tech-icon postgres-tech-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <span>PostgreSQL</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 85%"></div></div>
+                            </div>
+                            <div class="tech-skill-item">
+                                <div class="tech-icon mysql-tech-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <span>MySQL</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 80%"></div></div>
+                            </div>
+                            <div class="tech-skill-item">
+                                <div class="tech-icon linq-tech-icon">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <span>LINQ</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 90%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-category">
+                        <h4 data-translate="tech-tools">Инструменты</h4>
+                        <div class="tech-skills-row">
+                            <div class="tech-skill-item">
+                                <div class="tech-icon git-tech-icon">
+                                    <i class="fab fa-git-alt"></i>
+                                </div>
+                                <span>Git</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 90%"></div></div>
+                            </div>
+                            <div class="tech-skill-item">
+                                <div class="tech-icon vs-tech-icon">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <span>Visual Studio</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 90%"></div></div>
+                            </div>
+                            <div class="tech-skill-item">
+                                <div class="tech-icon figma-tech-icon">
+                                    <i class="fab fa-figma"></i>
+                                </div>
+                                <span>Figma</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 75%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title" data-translate="about-title">О себе</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="about-card">
+                        <h3 data-translate="about-role">Разработчик игр на Unity</h3>
+                        <p>
+                            <strong data-translate="about-exp-label">Опыт:</strong> <span data-translate="about-exp-value">3 года 4 месяца</span><br>
+                            <strong data-translate="about-location-label">Местоположение:</strong> <span data-translate="about-location-value">Санкт-Петербург, Россия</span><br>
+                            <strong data-translate="about-status-label">Статус:</strong> <span data-translate="about-status-value">Готов к переезду</span>
+                        </p>
+                        <p data-translate="about-description">
+                            Разработчик с акцентом на backend разработку на C#. Специализируюсь на создании 
+                            приложений и игр на Unity, работе с базами данных и API. Имею опыт публикации 
+                            игр на платформах Яндекс.Игры и Google Play Market.
+                        </p>
+                    </div>
+                    
+                    <div class="experience-timeline">
+                        <h3 data-translate="about-timeline-title">Опыт работы</h3>
+                        <div class="timeline-item">
+                            <div class="timeline-date" data-translate="timeline-current">2023 - настоящее время</div>
+                            <div class="timeline-content">
+                                <h4 data-translate="timeline-unity-title">Unity Developer (Фриланс)</h4>
+                                <ul>
+                                    <li data-translate="timeline-unity-1">Разработка и запуск игр на Unity с использованием C#</li>
+                                    <li data-translate="timeline-unity-2">Публикация на платформах Яндекс.Игры, Google Play Market</li>
+                                    <li data-translate="timeline-unity-3">Использование анимаций, 2D/3D-графики, оптимизация производительности</li>
+                                    <li data-translate="timeline-unity-4">Монетизация через внутриигровую рекламу и покупки</li>
+                                    <li data-translate="timeline-unity-5">Поддержка и обновление проектов</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-date" data-translate="timeline-intern-date">Май - Август 2023</div>
+                            <div class="timeline-content">
+                                <h4 data-translate="timeline-intern-title">Стажер-программист</h4>
+                                <p data-translate="timeline-intern-company">СПб информационно-аналитический центр</p>
+                                <ul>
+                                    <li data-translate="timeline-intern-1">Настройка баз данных PostgreSQL и MySQL</li>
+                                    <li data-translate="timeline-intern-2">Оптимизация SQL-запросов</li>
+                                    <li data-translate="timeline-intern-3">Разработка внутренних веб-приложений на .NET Core</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-image">
+                    <div class="profile-card">
+                        <div class="profile-photo">
+                            <div class="photo-placeholder">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="profile-info">
+                            <h3>Александр Халле</h3>
+                            <p>Unity Developer</p>
+                            <div class="profile-links">
+                                <a href="https://github.com/Leks2000" class="profile-link" target="_blank">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="mailto:alex.halle06@list.ru" class="profile-link">
+                                    <i class="fas fa-envelope"></i>
+                                </a>
+                                <a href="https://t.me/user_Alexander" class="profile-link" target="_blank">
+                                    <i class="fab fa-telegram"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Activity Section -->
+    <section id="github-activity" class="github-activity">
+        <div class="container">
+            <div class="github-header">
+                <h2 class="section-title" data-translate="github-title">
+                    <i class="fab fa-github github-icon"></i>
+                    GitHub Activity
+                </h2>
+            </div>
+            
+            <div class="github-content">
+                <div class="github-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-code-branch"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="repo-count">-</div>
+                            <div class="stat-label" data-translate="github-repositories">Репозиториев</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="last-update">-</div>
+                            <div class="stat-label" data-translate="github-last-update">Последнее обновление</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="total-commits">-</div>
+                            <div class="stat-label" data-translate="github-commits">Коммитов</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="github-chart">
+                    <h3 data-translate="github-activity-title">📈 Активность коммитов</h3>
+                    <img 
+                        src="https://github-readme-stats.vercel.app/api?username=Leks2000&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0a0a0a&title_color=00d4ff&icon_color=4CAF50&text_color=ffffff"
+                        alt="GitHub Stats"
+                        class="github-stats-img"
+                    />
+                    <img 
+                        src="https://github-readme-streak-stats.herokuapp.com/?user=Leks2000&theme=tokyonight&hide_border=true&background=0a0a0a&stroke=00d4ff&ring=4CAF50&fire=ff6b35&currStreakNum=ffffff&sideNums=ffffff&currStreakLabel=00d4ff&sideLabels=b3b3b3&dates=b3b3b3"
+                        alt="GitHub Streak"
+                        class="github-streak-img"
+                    />
+                </div>
+                
+                <div class="github-button">
+                    <a href="https://github.com/Leks2000" target="_blank" class="btn btn-github">
+                        <i class="fab fa-github"></i>
+                        <span data-translate="github-open">Открыть мой GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section id="content" class="content">
+        <div class="container">
+            <h2 class="section-title" data-translate="content-title">Контент</h2>
+            
+            <!-- Video Content -->
+            <div class="content-section">
+                <h3 data-translate="content-video-title">🎵 Видео-проекты</h3>
+                <div class="video-grid">
+                    <div class="video-card">
+                        <a href="https://www.youtube.com/watch?v=MVMWH5Mve5c" target="_blank" class="video-link">
+                            <div class="video-thumbnail">
+                                <img src="https://img.youtube.com/vi/MVMWH5Mve5c/maxresdefault.jpg" alt="Metal Parody Video">
+                                <div class="play-overlay">
+                                    <i class="fab fa-youtube"></i>
+                                </div>
+                            </div>
+                            <div class="video-info">
+                                <h4>Metal parody</h4>
+                                <p>YouTube • 14k <span data-translate="views">просмотров</span></p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="video-card">
+                        <a href="https://www.youtube.com/shorts/gOfkXwsRW94" target="_blank" class="video-link">
+                            <div class="video-thumbnail">
+                                <img src="https://img.youtube.com/vi/gOfkXwsRW94/maxresdefault.jpg" alt="AI Photo Animation">
+                                <div class="play-overlay">
+                                    <i class="fab fa-youtube"></i>
+                                </div>
+                            </div>
+                            <div class="video-info">
+                                <h4 data-translate="ai-photo-title">AI оживление фотографий</h4>
+                                <p>YouTube Shorts • 24k <span data-translate="views">просмотров</span></p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="video-card">
+                        <a href="https://www.tiktok.com/@darkys_vigil/video/7534036115284593942" target="_blank" class="video-link">
+                            <div class="video-thumbnail">
+                                <div class="tiktok-placeholder">
+                                    <i class="fab fa-tiktok"></i>
+                                </div>
+                            </div>
+                            <div class="video-info">
+                                <h4 data-translate="daggerstyle-title">Daggerstyle game video</h4>
+                                <p>TikTok • 16k <span data-translate="views">просмотров</span></p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Music Content -->
+            <div class="content-section">
+                <h3 data-translate="content-music-title">🎧 Music (Spotify)</h3>
+                <div class="spotify-embed">
+                    <iframe src="https://open.spotify.com/embed/artist/0ZsXez86BeSEgAq1ahwK7S?utm_source=generator" 
+                            width="100%" 
+                            height="352" 
+                            frameBorder="0" 
+                            allowfullscreen="" 
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                            loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title" data-translate="contact-title">Связаться со мной</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <h3 data-translate="contact-info-title">Контактная информация</h3>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <span>Email</span>
+                                <a href="mailto:alex.halle06@list.ru">alex.halle06@list.ru</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <span data-translate="contact-phone">Телефон</span>
+                                <a href="tel:+79679675147">+7 (967) 967-51-47</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fab fa-telegram"></i>
+                            </div>
+                            <div class="contact-text">
+                                <span>Telegram</span>
+                                <a href="https://t.me/user_Alexander" target="_blank">@user_Alexander</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div class="contact-text">
+                                <span>GitHub</span>
+                                <a href="https://github.com/Leks2000" target="_blank">github.com/Leks2000</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <span data-translate="contact-location">Местоположение</span>
+                                <span data-translate="contact-location-value">Санкт-Петербург, Россия</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-text">
+                    <p data-translate="footer-copyright">&copy; 2025 Александр Халле. Все права защищены.</p>
+                </div>
+                <div class="footer-social">
+                    <a href="https://github.com/Leks2000" target="_blank" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="mailto:alex.halle06@list.ru" class="social-link">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                    <a href="https://t.me/user_Alexander" target="_blank" class="social-link">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
