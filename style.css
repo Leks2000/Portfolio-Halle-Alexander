@@ -241,6 +241,17 @@ body {
     width: 100%;
 }
 
+.nav-link.active {
+    color: var(--unity-blue);
+    text-shadow: 0 0 10px var(--unity-blue);
+}
+
+.nav-link.active::after {
+    width: 100%;
+    background: var(--unity-orange);
+    box-shadow: 0 0 10px var(--unity-orange);
+}
+
 .hamburger {
     display: none;
     flex-direction: column;
@@ -502,6 +513,50 @@ body {
     transform: translateY(-5px);
     border-color: var(--unity-blue);
     box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
+}
+
+/* Project Preview Images */
+.project-preview {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: var(--bg-secondary);
+}
+
+.project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-image {
+    transform: scale(1.05);
+}
+
+.preview-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.preview-overlay i {
+    font-size: 3rem;
+    color: var(--unity-blue);
+    text-shadow: 0 0 20px var(--unity-blue);
+}
+
+.project-card:hover .preview-overlay {
+    opacity: 1;
 }
 
 /* Progress Ring Status */
@@ -1374,94 +1429,179 @@ body {
 }
 
 /* ===============================
-   ANIMATED SKILLS GRID STYLES
+   CUSTOM CURSOR STYLES
    =============================== */
-.animated-skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 3rem;
+.custom-cursor,
+.cursor-follower {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transition: transform 0.2s ease;
+}
+
+.custom-cursor {
+    width: 20px;
+    height: 20px;
+    background: var(--unity-blue);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.cursor-follower {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--unity-blue);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.6;
+}
+
+.custom-cursor.clicked {
+    animation: cursorClick 0.3s ease-out;
+}
+
+.cursor-follower.clicked {
+    animation: cursorExpand 0.5s ease-out;
+}
+
+@keyframes cursorClick {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(0.8); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes cursorExpand {
+    0% { 
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.6;
+        box-shadow: 0 0 0 0 var(--unity-blue);
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0.8;
+        box-shadow: 0 0 20px 10px rgba(0, 212, 255, 0.3);
+    }
+    100% { 
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.6;
+        box-shadow: 0 0 0 0 var(--unity-blue);
+    }
+}
+
+/* Click Effect Animation */
+.click-effect {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.8) 0%, rgba(0, 212, 255, 0.4) 50%, transparent 100%);
+    transform: translate(-50%, -50%);
+    animation: clickExpand 0.6s ease-out forwards;
+}
+
+@keyframes clickExpand {
+    0% {
+        width: 20px;
+        height: 20px;
+        opacity: 1;
+        box-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+    }
+    100% {
+        width: 100px;
+        height: 100px;
+        opacity: 0;
+        box-shadow: 0 0 30px rgba(0, 212, 255, 0.2);
+    }
+}
+
+/* ===============================
+   NEW SKILLS GRID REDESIGN
+   =============================== */
+.new-skills-grid {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem 0;
+    padding: 3rem 0;
 }
 
-.animated-skill-item {
+.skills-category {
+    margin-bottom: 4rem;
+}
+
+.category-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--unity-blue);
+    text-align: center;
+    margin-bottom: 2rem;
     position: relative;
+}
+
+.category-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: var(--unity-orange);
+}
+
+.skills-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.skill-item {
+    text-align: center;
     cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
-.skill-icon-container {
-    position: relative;
-    width: 120px;
-    height: 120px;
+.skill-item:hover {
+    transform: translateY(-5px);
+}
+
+.skill-icon {
+    width: 100px;
+    height: 100px;
     margin: 0 auto 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 20px;
-    background: rgba(42, 42, 42, 0.6);
+    background: rgba(42, 42, 42, 0.7);
     border: 2px solid transparent;
     transition: all 0.3s ease;
     overflow: hidden;
-}
-
-.animated-skill-item:hover .skill-icon-container {
-    transform: translateY(-10px);
-    border-color: var(--unity-blue);
-    box-shadow: var(--glow-primary);
-    background: rgba(0, 212, 255, 0.05);
-}
-
-.skill-tooltip {
-    position: absolute;
-    bottom: -80px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.9);
-    padding: 1rem;
-    border-radius: 10px;
-    text-align: center;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    z-index: 100;
-    min-width: 150px;
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--unity-blue);
-}
-
-.animated-skill-item:hover .skill-tooltip {
-    opacity: 1;
-    visibility: visible;
-    bottom: -90px;
-}
-
-.skill-tooltip h4 {
-    color: var(--unity-blue);
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
-}
-
-.skill-tooltip p {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-}
-
-.skill-level {
-    color: var(--unity-orange);
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-/* Unity Icon Animation */
-.unity-icon-animated {
     position: relative;
-    width: 80px;
-    height: 80px;
 }
 
-.unity-logo {
+.skill-item:hover .skill-icon {
+    border-color: var(--unity-blue);
+    background: rgba(0, 212, 255, 0.1);
+    box-shadow: var(--glow-primary);
+}
+
+.skill-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-top: 0.5rem;
+}
+
+/* ========================
+   C# Animation - Energy & Spark
+   ======================== */
+.csharp-animated {
+    position: relative;
     width: 100%;
     height: 100%;
     display: flex;
@@ -1469,102 +1609,87 @@ body {
     justify-content: center;
 }
 
-.unity-cube-3d {
-    width: 60px;
-    height: 60px;
-    background: var(--gradient-unity);
-    border-radius: 10px;
-    animation: unity3d 4s ease-in-out infinite;
-    box-shadow: var(--glow-primary);
-    position: relative;
-}
-
-@keyframes unity3d {
-    0%, 100% { 
-        transform: rotateX(0deg) rotateY(0deg);
-        box-shadow: var(--glow-primary);
-    }
-    25% { 
-        transform: rotateX(15deg) rotateY(90deg);
-        box-shadow: 0 0 30px rgba(0, 212, 255, 0.8);
-    }
-    50% { 
-        transform: rotateX(0deg) rotateY(180deg);
-        box-shadow: var(--glow-primary);
-    }
-    75% { 
-        transform: rotateX(-15deg) rotateY(270deg);
-        box-shadow: 0 0 30px rgba(0, 212, 255, 0.8);
-    }
-}
-
-/* C# Icon Animation */
-.csharp-icon-animated {
-    position: relative;
-    width: 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.csharp-logo {
+.csharp-text {
     font-family: 'Orbitron', monospace;
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     font-weight: 900;
     color: var(--unity-blue);
-    z-index: 2;
+    z-index: 3;
     position: relative;
+}
+
+.skill-item:hover .csharp-text {
+    animation: energyGlow 0.8s ease-out;
 }
 
 .energy-circle {
     position: absolute;
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     border: 2px solid var(--unity-blue);
     border-radius: 50%;
+    opacity: 0;
     animation: energyPulse 2s ease-in-out infinite;
+}
+
+.skill-item:hover .energy-circle {
+    opacity: 1;
 }
 
 .spark {
     position: absolute;
-    width: 4px;
-    height: 4px;
+    width: 3px;
+    height: 3px;
     background: var(--unity-orange);
     border-radius: 50%;
-    animation: sparkMove 1.5s linear infinite;
-    box-shadow: 0 0 10px var(--unity-orange);
+    opacity: 0;
+    box-shadow: 0 0 8px var(--unity-orange);
+}
+
+.spark1 { top: 20px; left: 20px; }
+.spark2 { top: 20px; right: 20px; }
+.spark3 { bottom: 20px; left: 50%; transform: translateX(-50%); }
+
+.skill-item:hover .spark {
+    animation: sparkAppear 1.2s ease-out;
+}
+
+.skill-item:hover .spark1 { animation-delay: 0.1s; }
+.skill-item:hover .spark2 { animation-delay: 0.3s; }
+.skill-item:hover .spark3 { animation-delay: 0.5s; }
+
+@keyframes energyGlow {
+    0% { color: var(--unity-blue); text-shadow: none; }
+    50% { color: #ffffff; text-shadow: 0 0 20px var(--unity-blue); }
+    100% { color: var(--unity-blue); text-shadow: none; }
 }
 
 @keyframes energyPulse {
     0%, 100% { 
-        transform: scale(1);
-        opacity: 0.6;
-        box-shadow: 0 0 10px var(--unity-blue);
+        transform: scale(0.9);
+        border-color: var(--unity-blue);
     }
     50% { 
-        transform: scale(1.2);
-        opacity: 1;
+        transform: scale(1.1);
+        border-color: var(--unity-orange);
         box-shadow: 0 0 20px var(--unity-blue);
     }
 }
 
-@keyframes sparkMove {
-    0% { 
-        transform: rotate(0deg) translateX(35px) rotate(0deg);
-        opacity: 1;
-    }
-    100% { 
-        transform: rotate(360deg) translateX(35px) rotate(-360deg);
-        opacity: 0.3;
-    }
+@keyframes sparkAppear {
+    0% { opacity: 0; transform: scale(0); }
+    30% { opacity: 1; transform: scale(1.5); }
+    60% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0); }
 }
 
-/* Kotlin Icon Animation */
-.kotlin-icon-animated {
+/* ========================
+   Kotlin Animation - 3 Parts Split & Reunite
+   ======================== */
+.kotlin-animated {
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1572,239 +1697,335 @@ body {
 
 .kotlin-part {
     position: absolute;
-    width: 20px;
-    height: 20px;
-    background: var(--gradient-primary);
-    animation: kotlinSplit 3s ease-in-out infinite;
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(45deg, #7F52FF, #00D4FF);
+    border-radius: 3px;
+    transition: all 0.3s ease;
 }
 
 .kotlin-part.part1 {
-    top: 10px;
-    left: 10px;
-    animation-delay: 0s;
+    top: 25px;
+    left: 25px;
 }
 
 .kotlin-part.part2 {
-    top: 10px;
-    right: 10px;
-    animation-delay: 0.3s;
+    top: 25px;
+    right: 25px;
 }
 
 .kotlin-part.part3 {
-    bottom: 10px;
+    bottom: 25px;
     left: 50%;
     transform: translateX(-50%);
-    animation-delay: 0.6s;
 }
 
-@keyframes kotlinSplit {
-    0%, 100% { 
-        transform: translate(0, 0) scale(1);
-        opacity: 1;
-    }
-    50% { 
-        transform: translate(var(--dx, 20px), var(--dy, -20px)) scale(0.8);
-        opacity: 0.7;
-    }
-}
-
-/* .NET Icon Animation */
-.dotnet-icon-animated {
-    position: relative;
-    width: 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.dotnet-logo {
+.kotlin-text {
     font-family: 'Orbitron', monospace;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 900;
     color: var(--unity-blue);
     z-index: 2;
-    position: relative;
+    opacity: 1;
+    transition: opacity 0.3s ease;
 }
 
-/* SQL Icon Animation */
-.sql-icon-animated {
+.skill-item:hover .kotlin-part.part1 {
+    animation: kotlinSplit1 1.5s ease-in-out;
+}
+
+.skill-item:hover .kotlin-part.part2 {
+    animation: kotlinSplit2 1.5s ease-in-out;
+}
+
+.skill-item:hover .kotlin-part.part3 {
+    animation: kotlinSplit3 1.5s ease-in-out;
+}
+
+.skill-item:hover .kotlin-text {
+    opacity: 0;
+}
+
+@keyframes kotlinSplit1 {
+    0%, 100% { transform: translate(0, 0); opacity: 1; }
+    50% { transform: translate(-15px, -15px); opacity: 0.7; }
+}
+
+@keyframes kotlinSplit2 {
+    0%, 100% { transform: translate(0, 0); opacity: 1; }
+    50% { transform: translate(15px, -15px); opacity: 0.7; }
+}
+
+@keyframes kotlinSplit3 {
+    0%, 100% { transform: translate(-50%, 0); opacity: 1; }
+    50% { transform: translate(-50%, 15px); opacity: 0.7; }
+}
+
+/* ========================
+   SQL Animation - Data Digits Floating
+   ======================== */
+.sql-animated {
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.database-icon {
-    font-size: 3rem;
+.database-main {
+    font-size: 2.5rem;
     color: var(--unity-blue);
     z-index: 2;
 }
 
-.data-float {
+.data-digit {
     position: absolute;
     font-family: 'Orbitron', monospace;
     font-size: 1.2rem;
     color: var(--unity-orange);
-    animation: dataFloat 2s ease-in-out infinite;
+    font-weight: 700;
     opacity: 0;
 }
 
-.data-float:nth-child(2) { animation-delay: 0s; }
-.data-float:nth-child(3) { animation-delay: 0.7s; }
-.data-float:nth-child(4) { animation-delay: 1.4s; }
+.digit1 {
+    top: 15px;
+    left: 20px;
+}
 
-@keyframes dataFloat {
+.digit2 {
+    top: 15px;
+    right: 20px;
+}
+
+.digit3 {
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.skill-item:hover .data-digit {
+    animation: digitFloat 2s ease-in-out;
+}
+
+.skill-item:hover .digit1 { animation-delay: 0s; }
+.skill-item:hover .digit2 { animation-delay: 0.7s; }
+.skill-item:hover .digit3 { animation-delay: 1.4s; }
+
+@keyframes digitFloat {
     0%, 90%, 100% { 
         opacity: 0;
-        transform: translateY(0px);
+        transform: translateY(0px) scale(1);
     }
     10%, 80% { 
         opacity: 1;
-        transform: translateY(-20px);
+        transform: translateY(-10px) scale(1.2);
     }
 }
 
-/* ASP.NET & WPF Animation */
-.aspnet-icon-animated, .wpf-icon-animated {
+/* ========================
+   .NET Animation - Framework Lines
+   ======================== */
+.dotnet-animated {
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.aspnet-logo, .wpf-logo {
+.dotnet-text {
     font-family: 'Orbitron', monospace;
     font-size: 1.4rem;
+    font-weight: 900;
+    color: var(--unity-blue);
+    z-index: 2;
+}
+
+.framework-lines {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.framework-lines::before,
+.framework-lines::after {
+    content: '';
+    position: absolute;
+    background: var(--unity-orange);
+    opacity: 0;
+}
+
+.framework-lines::before {
+    top: 30%;
+    left: 10%;
+    right: 10%;
+    height: 2px;
+    animation: lineExpand 1.5s ease-out;
+}
+
+.framework-lines::after {
+    left: 30%;
+    right: 30%;
+    top: 10%;
+    bottom: 10%;
+    width: 2px;
+    margin: 0 auto;
+    animation: lineExpand 1.5s ease-out 0.3s;
+}
+
+.skill-item:hover .framework-lines {
+    opacity: 1;
+}
+
+.skill-item:hover .framework-lines::before,
+.skill-item:hover .framework-lines::after {
+    opacity: 1;
+}
+
+@keyframes lineExpand {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* ========================
+   ASP.NET Animation - Wave Scan
+   ======================== */
+.aspnet-animated {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.aspnet-text {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--unity-blue);
     z-index: 2;
 }
 
-.scan-line {
+.scan-wave {
     position: absolute;
-    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
     height: 2px;
     background: linear-gradient(90deg, transparent, var(--unity-blue), transparent);
-    animation: scanMove 2s ease-in-out infinite;
+    opacity: 0;
 }
 
-.grid-overlay {
+.grid-pattern {
     position: absolute;
-    width: 80px;
-    height: 80px;
+    width: 100%;
+    height: 100%;
     background-image: 
-        linear-gradient(rgba(0, 212, 255, 0.3) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 212, 255, 0.3) 1px, transparent 1px);
-    background-size: 10px 10px;
-    animation: gridPulse 3s ease-in-out infinite;
+        linear-gradient(rgba(0, 212, 255, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.2) 1px, transparent 1px);
+    background-size: 12px 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.skill-item:hover .scan-wave {
+    animation: scanMove 1.5s ease-in-out;
+}
+
+.skill-item:hover .grid-pattern {
+    opacity: 0.6;
+    animation: gridFade 1.5s ease-in-out;
 }
 
 @keyframes scanMove {
-    0%, 100% { 
-        top: -2px;
+    0% { 
+        top: 0;
         opacity: 0;
     }
-    50% { 
-        top: 50%;
+    30%, 70% {
         opacity: 1;
+    }
+    100% { 
+        top: 100%;
+        opacity: 0;
     }
 }
 
-@keyframes gridPulse {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 0.8; }
+@keyframes gridFade {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 0.6; }
 }
 
-/* Git Icon Animation */
-.git-icon-animated {
+/* ========================
+   WPF Animation - Interface Grid
+   ======================== */
+.wpf-animated {
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.git-logo {
-    font-size: 3rem;
+.wpf-text {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.3rem;
+    font-weight: 700;
     color: var(--unity-blue);
-    z-index: 3;
+    z-index: 2;
 }
 
-.branch-line {
+.interface-grid {
     position: absolute;
-    width: 2px;
-    height: 30px;
-    background: var(--unity-orange);
-    animation: branchGrow 4s ease-in-out infinite;
+    width: 80%;
+    height: 80%;
+    background-image: 
+        linear-gradient(rgba(0, 212, 255, 0.4) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.4) 1px, transparent 1px);
+    background-size: 10px 10px;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
 }
 
-.branch-line.line1 {
-    top: 10px;
-    left: 20px;
-    animation-delay: 0s;
+.skill-item:hover .interface-grid {
+    opacity: 1;
+    transform: scale(1);
+    animation: interfacePulse 1.5s ease-in-out;
 }
 
-.branch-line.line2 {
-    top: 10px;
-    right: 20px;
-    animation-delay: 1s;
+@keyframes interfacePulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
 }
 
-.merge-point {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: var(--unity-green);
-    border-radius: 50%;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: mergePoint 4s ease-in-out infinite;
-}
-
-@keyframes branchGrow {
-    0%, 30%, 100% { 
-        height: 0;
-        opacity: 0;
-    }
-    40%, 90% { 
-        height: 30px;
-        opacity: 1;
-    }
-}
-
-@keyframes mergePoint {
-    0%, 70% { 
-        opacity: 0;
-        transform: translateX(-50%) scale(0);
-    }
-    80%, 100% { 
-        opacity: 1;
-        transform: translateX(-50%) scale(1);
-    }
-}
-
-/* Blender Icon Animation */
-.blender-icon-animated {
+/* ========================
+   Unity Animation - 3D Cube Rotation
+   ======================== */
+.unity-animated {
     position: relative;
-    width: 80px;
-    height: 80px;
-    perspective: 1000px;
+    width: 100%;
+    height: 100%;
+    perspective: 200px;
 }
 
-.blender-cube {
+.unity-cube {
     position: relative;
     width: 50px;
     height: 50px;
-    margin: 15px auto;
+    margin: 25px auto;
     transform-style: preserve-3d;
-    animation: blenderRotate 4s ease-in-out infinite;
+    transition: transform 0.3s ease;
+}
+
+.skill-item:hover .unity-cube {
+    animation: unityRotate 2s ease-in-out;
 }
 
 .cube-face {
@@ -1812,7 +2033,7 @@ body {
     width: 50px;
     height: 50px;
     border: 2px solid var(--unity-blue);
-    background: rgba(0, 212, 255, 0.1);
+    background: rgba(0, 212, 255, 0.15);
 }
 
 .cube-face.front { transform: rotateY(0deg) translateZ(25px); }
@@ -1822,148 +2043,183 @@ body {
 .cube-face.top { transform: rotateX(90deg) translateZ(25px); }
 .cube-face.bottom { transform: rotateX(-90deg) translateZ(25px); }
 
-@keyframes blenderRotate {
-    0% { 
-        transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-    }
-    33% { 
-        transform: rotateX(120deg) rotateY(120deg) rotateZ(0deg);
-    }
-    66% { 
-        transform: rotateX(240deg) rotateY(240deg) rotateZ(120deg);
-    }
-    100% { 
-        transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
-    }
+@keyframes unityRotate {
+    0% { transform: rotateX(0deg) rotateY(0deg); }
+    25% { transform: rotateX(90deg) rotateY(90deg); }
+    50% { transform: rotateX(180deg) rotateY(180deg); }
+    75% { transform: rotateX(270deg) rotateY(270deg); }
+    100% { transform: rotateX(360deg) rotateY(360deg); }
 }
 
-/* Figma Icon Animation */
-.figma-icon-animated {
+/* ========================
+   Remaining Skills Animations
+   ======================== */
+
+/* DOTween */
+.dotween-animated {
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.figma-logo {
-    font-size: 3rem;
+.dotween-text {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.9rem;
+    font-weight: 700;
     color: var(--unity-blue);
     z-index: 3;
 }
 
-.design-element {
+.tween-ball {
     position: absolute;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    animation: designFloat 3s ease-in-out infinite;
-}
-
-.design-element.element1 {
-    background: #ff6b35;
-    top: 10px;
-    left: 10px;
-    animation-delay: 0s;
-}
-
-.design-element.element2 {
-    background: #4CAF50;
-    top: 10px;
-    right: 10px;
-    animation-delay: 1s;
-}
-
-.design-element.element3 {
-    background: #00d4ff;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    animation-delay: 2s;
-}
-
-@keyframes designFloat {
-    0%, 100% { 
-        transform: translateY(0px) rotate(0deg);
-        opacity: 0.6;
-    }
-    50% { 
-        transform: translateY(-15px) rotate(180deg);
-        opacity: 1;
-    }
-}
-
-/* Visual Studio Icon Animation */
-.vs-icon-animated {
-    position: relative;
-    width: 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.vs-logo {
-    font-size: 3rem;
-    color: var(--unity-blue);
-    z-index: 3;
-}
-
-.code-line {
-    position: absolute;
-    height: 2px;
+    width: 6px;
+    height: 6px;
     background: var(--unity-orange);
-    animation: codeDraw 3s ease-in-out infinite;
+    border-radius: 50%;
+    top: 20px;
+    left: 20px;
+    opacity: 0;
+    box-shadow: 0 0 8px var(--unity-orange);
+}
+
+.animation-trail {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--unity-orange), transparent);
+    top: 50%;
     opacity: 0;
 }
 
-.code-line.line1 {
-    top: 20px;
-    left: 10px;
-    width: 30px;
-    animation-delay: 0s;
+.skill-item:hover .tween-ball {
+    animation: tweenPath 2s ease-in-out;
 }
 
-.code-line.line2 {
-    top: 40px;
-    left: 15px;
-    width: 25px;
-    animation-delay: 0.5s;
+.skill-item:hover .animation-trail {
+    animation: trailFade 2s ease-in-out;
 }
 
-.code-line.line3 {
-    top: 60px;
-    left: 20px;
-    width: 20px;
-    animation-delay: 1s;
+@keyframes tweenPath {
+    0% { top: 20px; left: 20px; opacity: 1; }
+    25% { top: 20px; right: 20px; left: auto; }
+    50% { bottom: 20px; top: auto; right: 20px; }
+    75% { bottom: 20px; left: 20px; right: auto; }
+    100% { top: 20px; left: 20px; opacity: 0; }
 }
 
-@keyframes codeDraw {
-    0%, 20% { 
-        width: 0;
-        opacity: 0;
-    }
-    30%, 70% { 
-        width: var(--target-width, 30px);
-        opacity: 1;
-    }
-    80%, 100% { 
-        opacity: 0;
-    }
+@keyframes trailFade {
+    0%, 90%, 100% { opacity: 0; }
+    10%, 80% { opacity: 0.6; }
 }
 
-/* DOTween Animation */
-.dotween-icon-animated {
+/* Blender Cube Assembly */
+.blender-animated {
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.dotween-logo {
+.blender-cube-assembly {
+    position: relative;
+    width: 60px;
+    height: 60px;
+}
+
+.cube-part {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    background: var(--unity-blue);
+    border: 1px solid var(--unity-orange);
+    transition: all 0.3s ease;
+}
+
+.cube-part.part1 { top: 0; left: 0; }
+.cube-part.part2 { top: 0; right: 0; }
+.cube-part.part3 { bottom: 0; left: 0; }
+.cube-part.part4 { bottom: 0; right: 0; }
+
+.skill-item:hover .cube-part {
+    animation: cubeAssemble 2s ease-in-out;
+}
+
+.skill-item:hover .cube-part.part1 { animation-delay: 0s; }
+.skill-item:hover .cube-part.part2 { animation-delay: 0.2s; }
+.skill-item:hover .cube-part.part3 { animation-delay: 0.4s; }
+.skill-item:hover .cube-part.part4 { animation-delay: 0.6s; }
+
+@keyframes cubeAssemble {
+    0%, 100% { transform: translate(0, 0) rotateZ(0deg); }
+    50% { transform: translate(-10px, -10px) rotateZ(180deg); }
+}
+
+/* PostgreSQL Data Streams */
+.postgresql-animated {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.postgres-icon {
+    font-size: 2.5rem;
+    color: var(--unity-blue);
+    z-index: 3;
+}
+
+.data-stream {
+    position: absolute;
+    width: 2px;
+    height: 30px;
+    background: linear-gradient(to bottom, var(--unity-orange), transparent);
+    opacity: 0;
+}
+
+.stream1 { top: 10px; left: 25%; }
+.stream2 { top: 10px; left: 50%; }
+.stream3 { top: 10px; left: 75%; }
+
+.skill-item:hover .data-stream {
+    animation: dataFlow 1.5s ease-in-out;
+}
+
+.skill-item:hover .stream1 { animation-delay: 0s; }
+.skill-item:hover .stream2 { animation-delay: 0.3s; }
+.skill-item:hover .stream3 { animation-delay: 0.6s; }
+
+@keyframes dataFlow {
+    0% { 
+        top: 10px;
+        opacity: 0;
+    }
+    50% { 
+        opacity: 1;
+    }
+    100% { 
+        top: 80%;
+        opacity: 0;
+    }
+}
+
+/* MySQL Pulse */
+.mysql-animated {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mysql-text {
     font-family: 'Orbitron', monospace;
     font-size: 1.2rem;
     font-weight: 700;
@@ -1971,91 +2227,347 @@ body {
     z-index: 2;
 }
 
-.tween-ball {
+.data-pulse-ring {
     position: absolute;
-    width: 8px;
-    height: 8px;
-    background: var(--unity-orange);
-    border-radius: 50%;
-    animation: tweenMove 2s ease-in-out infinite;
-    box-shadow: 0 0 10px var(--unity-orange);
+    width: 80%;
+    height: 80%;
+    border: 2px solid var(--unity-orange);
+    border-radius: 10px;
+    opacity: 0;
 }
 
-@keyframes tweenMove {
-    0% { 
-        left: 10px;
-        transform: scale(1);
-    }
-    25% { 
-        left: calc(100% - 18px);
-        transform: scale(1.5);
+.skill-item:hover .data-pulse-ring {
+    animation: mysqlPulse 1.5s ease-in-out;
+}
+
+@keyframes mysqlPulse {
+    0%, 100% { 
+        transform: scale(0.8);
+        opacity: 0;
     }
     50% { 
-        left: calc(100% - 18px);
-        top: calc(100% - 18px);
-        transform: scale(1);
-    }
-    75% { 
-        left: 10px;
-        top: calc(100% - 18px);
-        transform: scale(0.8);
-    }
-    100% { 
-        left: 10px;
-        top: 10px;
-        transform: scale(1);
+        transform: scale(1.1);
+        opacity: 1;
     }
 }
 
-/* PHP Icon Animation */
-.php-icon-animated {
+/* LINQ Query Lines */
+.linq-animated {
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.php-logo {
-    font-size: 3rem;
+.linq-text {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.3rem;
+    font-weight: 700;
     color: var(--unity-blue);
     z-index: 2;
 }
 
-.code-wave {
+.query-lines {
     position: absolute;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
-    border-radius: 50%;
-    animation: waveExpand 2s ease-in-out infinite;
+    opacity: 0;
 }
 
-@keyframes waveExpand {
-    0%, 100% { 
-        transform: scale(0.8);
-        opacity: 0.3;
-    }
-    50% { 
-        transform: scale(1.2);
-        opacity: 0.8;
-    }
+.query-lines::before,
+.query-lines::after {
+    content: '';
+    position: absolute;
+    height: 1px;
+    background: var(--unity-orange);
+    opacity: 0;
 }
 
-/* After Effects Animation */
-.ae-icon-animated {
+.query-lines::before {
+    top: 30%;
+    left: 20%;
+    right: 20%;
+}
+
+.query-lines::after {
+    top: 70%;
+    left: 25%;
+    right: 25%;
+}
+
+.skill-item:hover .query-lines::before,
+.skill-item:hover .query-lines::after {
+    animation: queryWrite 1.2s ease-out;
+}
+
+.skill-item:hover .query-lines::after {
+    animation-delay: 0.3s;
+}
+
+@keyframes queryWrite {
+    0% { width: 0; opacity: 0; }
+    50% { width: 100%; opacity: 1; }
+    100% { width: 100%; opacity: 1; }
+}
+
+/* Git Branch Merge */
+.git-animated {
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.ae-logo {
-    font-family: 'Orbitron', monospace;
+.git-icon {
     font-size: 2.5rem;
+    color: var(--unity-blue);
+    z-index: 3;
+}
+
+.git-branch {
+    position: absolute;
+    width: 2px;
+    height: 25px;
+    background: var(--unity-orange);
+    opacity: 0;
+}
+
+.branch1 {
+    top: 15px;
+    left: 25%;
+    transform: rotate(-30deg);
+}
+
+.branch2 {
+    top: 15px;
+    right: 25%;
+    transform: rotate(30deg);
+}
+
+.merge-point {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: var(--unity-green);
+    border-radius: 50%;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+}
+
+.skill-item:hover .git-branch {
+    animation: branchGrow 2s ease-in-out;
+}
+
+.skill-item:hover .branch1 { animation-delay: 0s; }
+.skill-item:hover .branch2 { animation-delay: 0.5s; }
+
+.skill-item:hover .merge-point {
+    animation: mergeAppear 2s ease-in-out 1s;
+}
+
+@keyframes branchGrow {
+    0%, 100% { 
+        height: 0;
+        opacity: 0;
+    }
+    30%, 70% { 
+        height: 25px;
+        opacity: 1;
+    }
+}
+
+@keyframes mergeAppear {
+    0% { opacity: 0; transform: translateX(-50%) scale(0); }
+    100% { opacity: 1; transform: translateX(-50%) scale(1); }
+}
+
+/* Visual Studio Code Lines */
+.vs-animated {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vs-icon {
+    font-size: 2.5rem;
+    color: var(--unity-blue);
+    z-index: 3;
+}
+
+.code-outline {
+    position: absolute;
+    height: 2px;
+    background: var(--unity-orange);
+    opacity: 0;
+}
+
+.outline1 {
+    top: 25%;
+    left: 20%;
+    width: 35px;
+}
+
+.outline2 {
+    top: 45%;
+    left: 25%;
+    width: 25px;
+}
+
+.outline3 {
+    top: 65%;
+    left: 30%;
+    width: 20px;
+}
+
+.skill-item:hover .code-outline {
+    animation: outlineDraw 1.5s ease-out;
+}
+
+.skill-item:hover .outline1 { animation-delay: 0s; }
+.skill-item:hover .outline2 { animation-delay: 0.3s; }
+.skill-item:hover .outline3 { animation-delay: 0.6s; }
+
+@keyframes outlineDraw {
+    0% { 
+        width: 0;
+        opacity: 0;
+    }
+    50% { 
+        opacity: 1;
+    }
+    100% { 
+        opacity: 1;
+    }
+}
+
+/* Figma Design Petals */
+.figma-animated {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.figma-petals {
+    position: relative;
+    width: 60px;
+    height: 60px;
+}
+
+.petal {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50% 0;
+    transform-origin: bottom right;
+}
+
+.petal1 {
+    background: #FF7262;
+    top: 0;
+    left: 0;
+    transform: rotate(0deg);
+}
+
+.petal2 {
+    background: #1ABCFE;
+    top: 0;
+    right: 0;
+    transform: rotate(90deg);
+}
+
+.petal3 {
+    background: #0ACF83;
+    bottom: 0;
+    right: 0;
+    transform: rotate(180deg);
+}
+
+.petal4 {
+    background: #A259FF;
+    bottom: 0;
+    left: 0;
+    transform: rotate(270deg);
+}
+
+.skill-item:hover .petal {
+    animation: petalSpin 2s ease-in-out;
+}
+
+.skill-item:hover .petal1 { animation-delay: 0s; }
+.skill-item:hover .petal2 { animation-delay: 0.2s; }
+.skill-item:hover .petal3 { animation-delay: 0.4s; }
+.skill-item:hover .petal4 { animation-delay: 0.6s; }
+
+@keyframes petalSpin {
+    0%, 100% { transform: rotate(var(--initial-rotation, 0deg)) scale(1); }
+    50% { transform: rotate(calc(var(--initial-rotation, 0deg) + 180deg)) scale(1.2); }
+}
+
+/* PHP Server Wave */
+.php-animated {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.php-icon {
+    font-size: 2.5rem;
+    color: var(--unity-blue);
+    z-index: 2;
+}
+
+.server-wave {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(0, 212, 255, 0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0;
+}
+
+.skill-item:hover .server-wave {
+    animation: serverPulse 1.5s ease-in-out;
+}
+
+@keyframes serverPulse {
+    0%, 100% { 
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    50% { 
+        transform: scale(1.3);
+        opacity: 0.6;
+    }
+}
+
+/* After Effects Flash & Wave */
+.ae-animated {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ae-text {
+    font-family: 'Orbitron', monospace;
+    font-size: 2rem;
     font-weight: 900;
     background: linear-gradient(45deg, #00005B, #9A4CFF);
     background-clip: text;
@@ -2064,26 +2576,33 @@ body {
     z-index: 3;
 }
 
-.flash-effect {
+.motion-flash {
     position: absolute;
     width: 100%;
     height: 100%;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 50%);
     border-radius: 50%;
-    animation: flashPulse 3s ease-in-out infinite;
     opacity: 0;
 }
 
-.motion-wave {
+.motion-ripple {
     position: absolute;
     width: 120%;
     height: 120%;
-    border: 2px solid rgba(154, 76, 255, 0.5);
+    border: 2px solid rgba(154, 76, 255, 0.4);
     border-radius: 50%;
-    animation: motionExpand 3s ease-in-out infinite;
+    opacity: 0;
 }
 
-@keyframes flashPulse {
+.skill-item:hover .motion-flash {
+    animation: aeFlash 2s ease-in-out;
+}
+
+.skill-item:hover .motion-ripple {
+    animation: aeRipple 2s ease-in-out;
+}
+
+@keyframes aeFlash {
     0%, 90%, 100% { 
         opacity: 0;
         transform: scale(0.5);
@@ -2094,30 +2613,30 @@ body {
     }
 }
 
-@keyframes motionExpand {
-    0%, 100% { 
+@keyframes aeRipple {
+    0% { 
         transform: scale(0.8);
         opacity: 0.6;
     }
-    50% { 
-        transform: scale(1.1);
-        opacity: 0.2;
+    100% { 
+        transform: scale(1.2);
+        opacity: 0;
     }
 }
 
-/* Premiere Pro Animation */
-.premiere-icon-animated {
+/* Premiere Pro Frame Sequence */
+.premiere-animated {
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.premiere-logo {
+.premiere-text {
     font-family: 'Orbitron', monospace;
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 900;
     background: linear-gradient(45deg, #00005B, #EA77FF);
     background-clip: text;
@@ -2126,100 +2645,35 @@ body {
     z-index: 3;
 }
 
-.timeline-frame {
+.timeline-frames {
     position: absolute;
-    width: 15px;
+    width: 100%;
+    height: 20%;
+    top: 15%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15%;
+}
+
+.frame {
+    width: 12px;
     height: 8px;
     background: var(--unity-orange);
-    animation: frameSequence 2s linear infinite;
     opacity: 0;
 }
 
-.timeline-frame.frame1 {
-    top: 20px;
-    left: 10px;
-    animation-delay: 0s;
+.skill-item:hover .frame {
+    animation: frameFlash 0.8s linear infinite;
 }
 
-.timeline-frame.frame2 {
-    top: 20px;
-    left: 32px;
-    animation-delay: 0.2s;
-}
+.skill-item:hover .frame1 { animation-delay: 0s; }
+.skill-item:hover .frame2 { animation-delay: 0.1s; }
+.skill-item:hover .frame3 { animation-delay: 0.2s; }
+.skill-item:hover .frame4 { animation-delay: 0.3s; }
 
-.timeline-frame.frame3 {
-    top: 20px;
-    right: 10px;
-    animation-delay: 0.4s;
-}
-
-@keyframes frameSequence {
-    0%, 80%, 100% { opacity: 0; }
-    10%, 70% { opacity: 1; }
-}
-
-/* Database Animations (PostgreSQL, MySQL) */
-.postgresql-icon-animated, .mysql-icon-animated {
-    position: relative;
-    width: 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.postgres-logo, .mysql-logo {
-    font-size: 2rem;
-    color: var(--unity-blue);
-    z-index: 2;
-}
-
-.mysql-logo {
-    font-family: 'Orbitron', monospace;
-    font-weight: 700;
-}
-
-.data-flow {
-    position: absolute;
-    width: 2px;
-    height: 40px;
-    background: linear-gradient(to bottom, var(--unity-blue), transparent);
-    animation: dataStream 2s linear infinite;
-    left: 20%;
-}
-
-.data-pulse {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border: 2px solid var(--unity-orange);
-    border-radius: 10px;
-    animation: dataPulse 2s ease-in-out infinite;
-}
-
-@keyframes dataStream {
-    0% { 
-        top: -20px;
-        opacity: 0;
-    }
-    50% { 
-        opacity: 1;
-    }
-    100% { 
-        top: 100%;
-        opacity: 0;
-    }
-}
-
-@keyframes dataPulse {
-    0%, 100% { 
-        transform: scale(0.9);
-        opacity: 0.5;
-    }
-    50% { 
-        transform: scale(1.1);
-        opacity: 1;
-    }
+@keyframes frameFlash {
+    0%, 60%, 100% { opacity: 0; }
+    20%, 40% { opacity: 1; }
 }
 
 /* ===============================

@@ -13,7 +13,7 @@ class PortfolioManager {
                 'nav-contact': 'Контакты',
                 
                 // Hero Section
-                'typing-jobs': ['Unity Developer & C# Programmer', 'Game Developer & Backend Specialist', 'Creative Solver'],
+                'typing-jobs': ['Unity Developer & C# Programmer', 'Backend & Game Developer', 'Specialist Creative Solver'],
                 'hero-description': 'Создаю увлекательные игры и приложения с акцентом на backend разработку. Специализируюсь на Unity, C# и работе с базами данных.',
                 'stat-experience': 'Года опыта',
                 'stat-projects': 'Проектов',
@@ -26,10 +26,10 @@ class PortfolioManager {
                 'filter-top': '⭐ Топ',
                 'filter-all': 'Все',
                 'filter-games': '🎮 Игры',
-                'filter-mobile': '📱 Мобильные',
+                'filter-mobile': '📱 Приложения',
                 'filter-web': '🌐 Сайты',
                 'filter-extensions': '⚙️ Расширения',
-                'filter-bots': '🤖 Telegram-боты',
+                'filter-bots': '🤖 Боты',
                 'btn-code': 'Код',
                 'btn-demo': 'Сайт',
                 'status-released': '🟢 Релиз',
@@ -125,7 +125,7 @@ class PortfolioManager {
                 'nav-contact': 'Contact',
                 
                 // Hero Section
-                'typing-jobs': ['Unity Developer & C# Programmer', 'Game Developer & Backend Specialist', 'Creative Solver'],
+                'typing-jobs': ['Unity Developer & C# Programmer', 'Backend & Game Developer', 'Specialist Creative Solver'],
                 'hero-description': 'I create engaging games and applications with a focus on backend development. Specializing in Unity, C#, and database work.',
                 'stat-experience': 'Years Experience',
                 'stat-projects': 'Projects',
@@ -138,10 +138,10 @@ class PortfolioManager {
                 'filter-top': '⭐ Top',
                 'filter-all': 'All',
                 'filter-games': '🎮 Games',
-                'filter-mobile': '📱 Mobile',
+                'filter-mobile': '📱 Applications',
                 'filter-web': '🌐 Websites',
                 'filter-extensions': '⚙️ Extensions',
-                'filter-bots': '🤖 Telegram Bots',
+                'filter-bots': '🤖 Bots',
                 'btn-code': 'Code',
                 'btn-demo': 'Website',
                 'status-released': '🟢 Released',
@@ -571,46 +571,85 @@ class PortfolioManager {
         }
     }
 
-    // Custom Cursor Implementation
+    // Enhanced Custom Cursor Implementation
     initCustomCursor() {
         if (window.innerWidth <= 768) return; // Skip on mobile
         
         const cursor = document.querySelector('.custom-cursor');
         const follower = document.querySelector('.cursor-follower');
         
+        if (!cursor || !follower) return;
+        
         let mouseX = 0, mouseY = 0;
         let followerX = 0, followerY = 0;
+        
+        // Hide default cursor on body
+        document.body.style.cursor = 'none';
         
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
             
-            cursor.style.left = mouseX - 10 + 'px';
-            cursor.style.top = mouseY - 10 + 'px';
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
         });
         
         // Smooth follower animation
         function updateFollower() {
-            followerX += (mouseX - followerX) * 0.1;
-            followerY += (mouseY - followerY) * 0.1;
+            followerX += (mouseX - followerX) * 0.15;
+            followerY += (mouseY - followerY) * 0.15;
             
-            follower.style.left = followerX - 20 + 'px';
-            follower.style.top = followerY - 20 + 'px';
+            follower.style.left = followerX + 'px';
+            follower.style.top = followerY + 'px';
             
             requestAnimationFrame(updateFollower);
         }
         updateFollower();
         
-        // Click animation
+        // Enhanced click animation with light circle expansion
         document.addEventListener('mousedown', () => {
             cursor.classList.add('clicked');
             follower.classList.add('clicked');
+            
+            // Create expanding circle effect
+            this.createClickEffect(mouseX, mouseY);
         });
         
         document.addEventListener('mouseup', () => {
             cursor.classList.remove('clicked');
             follower.classList.remove('clicked');
         });
+        
+        // Hover effects for interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, .skill-item, .project-card, .filter-btn');
+        interactiveElements.forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                follower.style.transform = 'translate(-50%, -50%) scale(1.2)';
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                follower.style.transform = 'translate(-50%, -50%) scale(1)';
+            });
+        });
+    }
+
+    // Create click effect with expanding light circle
+    createClickEffect(x, y) {
+        const clickEffect = document.createElement('div');
+        clickEffect.className = 'click-effect';
+        clickEffect.style.left = x + 'px';
+        clickEffect.style.top = y + 'px';
+        
+        document.body.appendChild(clickEffect);
+        
+        // Remove the effect after animation completes
+        setTimeout(() => {
+            if (clickEffect.parentNode) {
+                clickEffect.parentNode.removeChild(clickEffect);
+            }
+        }, 600);
     }
     
     // Typing Animation for Hero Section
@@ -627,8 +666,11 @@ class PortfolioManager {
         let currentJobIndex = 0;
         let currentCharIndex = 0;
         let isDeleting = false;
+        let isPaused = false;
         
         function typeWriter() {
+            if (isPaused) return;
+            
             const currentJob = jobs[currentJobIndex];
             
             if (isDeleting) {
@@ -638,65 +680,85 @@ class PortfolioManager {
                 if (currentCharIndex === 0) {
                     isDeleting = false;
                     currentJobIndex = (currentJobIndex + 1) % jobs.length;
-                    setTimeout(typeWriter, 500);
+                    setTimeout(typeWriter, 800); // Pause before typing next phrase
                     return;
                 }
-                setTimeout(typeWriter, 80);
+                setTimeout(typeWriter, 50); // Faster deletion
             } else {
                 typingElement.textContent = currentJob.substring(0, currentCharIndex + 1);
                 currentCharIndex++;
                 
                 if (currentCharIndex === currentJob.length) {
                     isDeleting = true;
-                    setTimeout(typeWriter, 2000);
+                    setTimeout(typeWriter, 2500); // Longer pause to read the complete phrase
                     return;
                 }
-                setTimeout(typeWriter, 120);
+                setTimeout(typeWriter, 100); // Consistent typing speed
             }
         }
         
-        // Start typing animation
-        setTimeout(typeWriter, 1000);
+        // Start typing animation after initial delay
+        setTimeout(typeWriter, 1500);
     }
 
-    // Animated Skills Initialization
+    // New Skills Grid Initialization
     initAnimatedSkills() {
-        const skillItems = document.querySelectorAll('.animated-skill-item');
+        const skillItems = document.querySelectorAll('.skill-item');
         
         skillItems.forEach(item => {
             item.addEventListener('mouseenter', () => {
                 const skillType = item.dataset.skill;
-                this.triggerSkillAnimation(skillType);
+                this.triggerNewSkillAnimation(skillType, item);
             });
         });
-
-        // Initialize skill tooltips
-        this.initSkillTooltips();
     }
 
-    triggerSkillAnimation(skillType) {
-        // This function can trigger specific animations based on skill type
-        // Currently animations are handled via CSS, but we can add JS effects here
-        console.log(`Triggering animation for ${skillType}`);
+    triggerNewSkillAnimation(skillType, element) {
+        // Enhanced animations with custom JavaScript triggers
+        switch(skillType) {
+            case 'csharp':
+                this.triggerCSharpAnimation(element);
+                break;
+            case 'kotlin':
+                this.triggerKotlinAnimation(element);
+                break;
+            case 'unity':
+                this.triggerUnityAnimation(element);
+                break;
+            default:
+                console.log(`Animation triggered for ${skillType}`);
+        }
     }
 
-    initSkillTooltips() {
-        const skillItems = document.querySelectorAll('.animated-skill-item');
-        
-        skillItems.forEach(item => {
-            const tooltip = item.querySelector('.skill-tooltip');
-            if (!tooltip) return;
-
-            item.addEventListener('mouseenter', () => {
-                tooltip.style.opacity = '1';
-                tooltip.style.visibility = 'visible';
-            });
-
-            item.addEventListener('mouseleave', () => {
-                tooltip.style.opacity = '0';
-                tooltip.style.visibility = 'hidden';
-            });
+    triggerCSharpAnimation(element) {
+        const sparks = element.querySelectorAll('.spark');
+        sparks.forEach((spark, index) => {
+            setTimeout(() => {
+                spark.style.animation = 'none';
+                spark.offsetHeight; // Trigger reflow
+                spark.style.animation = 'sparkAppear 1.2s ease-out';
+            }, index * 200);
         });
+    }
+
+    triggerKotlinAnimation(element) {
+        const parts = element.querySelectorAll('.kotlin-part');
+        parts.forEach((part, index) => {
+            setTimeout(() => {
+                part.style.animation = 'none';
+                part.offsetHeight; // Trigger reflow
+                part.style.animation = `kotlinSplit${index + 1} 1.5s ease-in-out`;
+            }, index * 100);
+        });
+    }
+
+    triggerUnityAnimation(element) {
+        const cube = element.querySelector('.unity-cube');
+        if (cube) {
+            cube.style.animation = 'none';
+            cube.offsetHeight; // Trigger reflow
+            cube.style.animation = 'unityRotate 2s ease-in-out';
+        }
     }
     
     // GSAP Animations
@@ -746,18 +808,30 @@ class PortfolioManager {
             });
         });
         
-        // Animated Skills grid animation
-        gsap.from('.animated-skill-item', {
+        // New Skills grid animations
+        gsap.from('.skills-category', {
             scrollTrigger: {
-                trigger: '.animated-skills-grid',
+                trigger: '.new-skills-grid',
+                start: 'top 85%'
+            },
+            duration: 1,
+            y: 60,
+            opacity: 0,
+            stagger: 0.2,
+            ease: 'power3.out'
+        });
+
+        gsap.from('.skill-item', {
+            scrollTrigger: {
+                trigger: '.new-skills-grid',
                 start: 'top 80%'
             },
             duration: 0.8,
-            y: 50,
+            y: 40,
             opacity: 0,
-            scale: 0.8,
-            stagger: 0.1,
-            ease: 'back.out(1.7)'
+            scale: 0.9,
+            stagger: 0.08,
+            ease: 'back.out(1.4)'
         });
         
         // Technical skills animation
@@ -787,7 +861,7 @@ class PortfolioManager {
             ease: 'back.out(1.7)'
         });
 
-        // Parallax background effect
+        // Enhanced Parallax background effect
         gsap.to('.stars-background', {
             scrollTrigger: {
                 trigger: 'body',
@@ -795,31 +869,102 @@ class PortfolioManager {
                 end: 'bottom bottom',
                 scrub: 1
             },
-            y: -100,
+            y: -150,
+            rotation: 0.5,
             ease: 'none'
         });
 
-        // Smooth section transitions
+        // Individual star parallax effects
+        gsap.utils.toArray('.star').forEach((star, index) => {
+            gsap.to(star, {
+                scrollTrigger: {
+                    trigger: 'body',
+                    start: 'top top',
+                    end: 'bottom bottom',
+                    scrub: 1
+                },
+                y: -50 - (index * 10),
+                x: Math.sin(index) * 20,
+                rotation: index * 45,
+                ease: 'none'
+            });
+        });
+
+        // Smooth section transitions with enhanced effects
         gsap.utils.toArray('section').forEach((section, index) => {
             gsap.fromTo(section, 
                 {
-                    opacity: 0.8,
-                    y: 50
+                    opacity: 0.7,
+                    y: 80,
+                    scale: 0.95
                 },
                 {
                     scrollTrigger: {
                         trigger: section,
                         start: 'top 90%',
                         end: 'bottom 10%',
-                        scrub: 1,
+                        scrub: 2,
                         toggleActions: 'play none none reverse'
                     },
                     opacity: 1,
                     y: 0,
-                    duration: 1,
+                    scale: 1,
+                    duration: 1.5,
                     ease: 'power2.out'
                 }
             );
+        });
+
+        // Navigation active section highlighting
+        gsap.utils.toArray('section').forEach(section => {
+            ScrollTrigger.create({
+                trigger: section,
+                start: 'top 30%',
+                end: 'bottom 30%',
+                onEnter: () => this.updateActiveNavLink(section.id),
+                onEnterBack: () => this.updateActiveNavLink(section.id)
+            });
+        });
+
+        // Enhanced project cards entrance
+        gsap.utils.toArray('.project-card').forEach((card, index) => {
+            gsap.fromTo(card, 
+                {
+                    opacity: 0,
+                    y: 60,
+                    rotationX: -15,
+                    scale: 0.9
+                },
+                {
+                    scrollTrigger: {
+                        trigger: card,
+                        start: 'top 85%',
+                        toggleActions: 'play none none reverse'
+                    },
+                    opacity: 1,
+                    y: 0,
+                    rotationX: 0,
+                    scale: 1,
+                    duration: 0.8,
+                    delay: index * 0.1,
+                    ease: 'back.out(1.4)'
+                }
+            );
+        });
+
+        // Floating elements effect
+        gsap.utils.toArray('.hero-visual, .unity-logo-container').forEach(element => {
+            gsap.to(element, {
+                scrollTrigger: {
+                    trigger: element,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 1
+                },
+                y: -50,
+                rotation: 2,
+                ease: 'none'
+            });
         });
 
         // GitHub section animation
@@ -833,6 +978,17 @@ class PortfolioManager {
             opacity: 0,
             stagger: 0.2,
             ease: 'power3.out'
+        });
+    }
+
+    // Navigation active section highlighting
+    updateActiveNavLink(sectionId) {
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${sectionId}`) {
+                link.classList.add('active');
+            }
         });
     }
     
