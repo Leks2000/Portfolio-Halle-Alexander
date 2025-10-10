@@ -106,7 +106,8 @@
             
             <!-- Project Filters -->
             <div class="project-filters">
-                <button class="filter-btn active" data-filter="all" data-translate="filter-all">Все</button>
+                <button class="filter-btn active" data-filter="top" data-translate="filter-top">⭐ Топ</button>
+                <button class="filter-btn" data-filter="all" data-translate="filter-all">Все</button>
                 <button class="filter-btn" data-filter="games" data-translate="filter-games">🎮 Игры</button>
                 <button class="filter-btn" data-filter="mobile" data-translate="filter-mobile">📱 Мобильные</button>
                 <button class="filter-btn" data-filter="web" data-translate="filter-web">🌐 Сайты</button>
@@ -116,14 +117,14 @@
 
             <div class="projects-grid">
                 <!-- Games -->
-                <div class="project-card" data-category="games">
+                <div class="project-card" data-category="games" data-top="true">
                     <div class="project-status">
                         <div class="status-ring" data-status="released">
                             <svg class="progress-ring" width="60" height="60">
                                 <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
                                         fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
                             </svg>
-                            <div class="status-text" data-translate="status-released">Релиз</div>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
                         </div>
                     </div>
                     <div class="project-content">
@@ -152,11 +153,11 @@
                                 <circle class="progress-ring__circle" stroke="var(--unity-orange)" stroke-width="3" 
                                         fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="84.825"/>
                             </svg>
-                            <div class="status-text" data-translate="status-development">В разработке</div>
+                            <div class="status-text" data-translate="status-development">🟡 В разработке</div>
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3>Decks and Dungen</h3>
+                        <h3>Decks and Dungeon</h3>
                         <p data-translate="decks-desc">Игра с карточными пошаговыми боями в подземельях. Unity, C#, 2.5D.</p>
                         <div class="project-tags">
                             <span class="tag">Unity</span>
@@ -181,7 +182,7 @@
                                 <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
                                         fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
                             </svg>
-                            <div class="status-text" data-translate="status-released">Релиз</div>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
                         </div>
                     </div>
                     <div class="project-content">
@@ -210,7 +211,7 @@
                                 <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
                                         fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
                             </svg>
-                            <div class="status-text" data-translate="status-released">Релиз</div>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
                         </div>
                     </div>
                     <div class="project-content">
@@ -239,7 +240,7 @@
                                 <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
                                         fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
                             </svg>
-                            <div class="status-text" data-translate="status-released">Релиз</div>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
                         </div>
                     </div>
                     <div class="project-content">
@@ -268,7 +269,7 @@
                                 <circle class="progress-ring__circle" stroke="var(--unity-green)" stroke-width="3" 
                                         fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="135.72"/>
                             </svg>
-                            <div class="status-text" data-translate="status-concept">Концепт</div>
+                            <div class="status-text" data-translate="status-concept">⚪ Концепт</div>
                         </div>
                     </div>
                     <div class="project-content">
@@ -294,7 +295,7 @@
                                 <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
                                         fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
                             </svg>
-                            <div class="status-text" data-translate="status-released">Релиз</div>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
                         </div>
                     </div>
                     <div class="project-content">
@@ -317,14 +318,14 @@
                 </div>
 
                 <!-- Mobile Apps -->
-                <div class="project-card" data-category="mobile">
+                <div class="project-card" data-category="mobile" data-top="true">
                     <div class="project-status">
                         <div class="status-ring" data-status="concept">
                             <svg class="progress-ring" width="60" height="60">
                                 <circle class="progress-ring__circle" stroke="var(--unity-green)" stroke-width="3" 
                                         fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="135.72"/>
                             </svg>
-                            <div class="status-text" data-translate="status-concept">Концепт</div>
+                            <div class="status-text" data-translate="status-concept">⚪ Концепт</div>
                         </div>
                     </div>
                     <div class="project-content">
@@ -354,7 +355,7 @@
                                 <circle class="progress-ring__circle" stroke="var(--unity-orange)" stroke-width="3" 
                                         fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="84.825"/>
                             </svg>
-                            <div class="status-text" data-translate="status-development">В разработке</div>
+                            <div class="status-text" data-translate="status-development">🟡 В разработке</div>
                         </div>
                     </div>
                     <div class="project-content">
@@ -382,7 +383,7 @@
                                 <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
                                         fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
                             </svg>
-                            <div class="status-text" data-translate="status-released">Релиз</div>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
                         </div>
                     </div>
                     <div class="project-content">
@@ -408,7 +409,7 @@
                                 <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
                                         fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
                             </svg>
-                            <div class="status-text" data-translate="status-released">Релиз</div>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
                         </div>
                     </div>
                     <div class="project-content">
@@ -427,14 +428,14 @@
                 </div>
 
                 <!-- Websites -->
-                <div class="project-card" data-category="web">
+                <div class="project-card" data-category="web" data-top="true">
                     <div class="project-status">
                         <div class="status-ring" data-status="released">
                             <svg class="progress-ring" width="60" height="60">
                                 <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
                                         fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
                             </svg>
-                            <div class="status-text" data-translate="status-released">Релиз</div>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
                         </div>
                     </div>
                     <div class="project-content">
@@ -462,7 +463,7 @@
                                 <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
                                         fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
                             </svg>
-                            <div class="status-text" data-translate="status-released">Релиз</div>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
                         </div>
                     </div>
                     <div class="project-content">
@@ -485,14 +486,14 @@
                 </div>
 
                 <!-- Extensions -->
-                <div class="project-card" data-category="extensions">
+                <div class="project-card" data-category="extensions" data-top="true">
                     <div class="project-status">
                         <div class="status-ring" data-status="development">
                             <svg class="progress-ring" width="60" height="60">
                                 <circle class="progress-ring__circle" stroke="var(--unity-orange)" stroke-width="3" 
                                         fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="84.825"/>
                             </svg>
-                            <div class="status-text" data-translate="status-development">В разработке</div>
+                            <div class="status-text" data-translate="status-development">🟡 В разработке</div>
                         </div>
                     </div>
                     <div class="project-content">
@@ -519,7 +520,7 @@
                                 <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
                                         fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
                             </svg>
-                            <div class="status-text" data-translate="status-released">Релиз</div>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
                         </div>
                     </div>
                     <div class="project-content">
@@ -546,7 +547,7 @@
                                 <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
                                         fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
                             </svg>
-                            <div class="status-text" data-translate="status-released">Релиз</div>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
                         </div>
                     </div>
                     <div class="project-content">
@@ -574,8 +575,8 @@
             <h2 class="section-title" data-translate="skills-title">Навыки</h2>
             <div class="skills-grid">
                 <!-- Row 1 -->
-                <div class="skill-icon-item" data-skill="swift">
-                    <i class="fab fa-swift"></i>
+                <div class="skill-icon-item" data-skill="csharp">
+                    <div class="custom-icon csharp-icon">C#</div>
                 </div>
                 <div class="skill-icon-item" data-skill="android">
                     <i class="fab fa-android"></i>
@@ -622,6 +623,149 @@
                 </div>
                 <div class="skill-icon-item" data-skill="gpt">
                     <i class="fas fa-robot"></i>
+                </div>
+            </div>
+
+            <!-- Technical Skills Section -->
+            <div class="technical-skills">
+                <h3 class="section-subtitle" data-translate="technical-skills-title">Технические навыки</h3>
+                
+                <div class="tech-skills-grid">
+                    <div class="tech-category">
+                        <h4 data-translate="tech-programming">Языки программирования</h4>
+                        <div class="tech-skills-row">
+                            <div class="tech-skill-item">
+                                <div class="tech-icon csharp-tech-icon">C#</div>
+                                <span>C#</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 90%"></div></div>
+                            </div>
+                            <div class="tech-skill-item">
+                                <div class="tech-icon kotlin-tech-icon">
+                                    <svg viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M1.3 24l11.3-11.5L24 24H1.3zM0 0h12L0 12.5V0z"/>
+                                        <path d="M12.1 0L0 12.5L0 24L12.1 12.4L24 0H12.1z"/>
+                                    </svg>
+                                </div>
+                                <span>Kotlin</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 85%"></div></div>
+                            </div>
+                            <div class="tech-skill-item">
+                                <div class="tech-icon sql-tech-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <span>SQL</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 80%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-category">
+                        <h4 data-translate="tech-dotnet">Технологии .NET</h4>
+                        <div class="tech-skills-row">
+                            <div class="tech-skill-item">
+                                <div class="tech-icon dotnet-tech-icon">
+                                    <i class="fab fa-microsoft"></i>
+                                </div>
+                                <span>.NET Core</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 85%"></div></div>
+                            </div>
+                            <div class="tech-skill-item">
+                                <div class="tech-icon aspnet-tech-icon">
+                                    <i class="fab fa-microsoft"></i>
+                                </div>
+                                <span>ASP.NET</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 80%"></div></div>
+                            </div>
+                            <div class="tech-skill-item">
+                                <div class="tech-icon wpf-tech-icon">
+                                    <i class="fab fa-windows"></i>
+                                </div>
+                                <span>WPF</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 75%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-category">
+                        <h4 data-translate="tech-gamedev">Разработка игр</h4>
+                        <div class="tech-skills-row">
+                            <div class="tech-skill-item">
+                                <div class="tech-icon unity-tech-icon">
+                                    <i class="fab fa-unity"></i>
+                                </div>
+                                <span>Unity</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 95%"></div></div>
+                            </div>
+                            <div class="tech-skill-item">
+                                <div class="tech-icon dotween-tech-icon">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                                <span>DOTween</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 85%"></div></div>
+                            </div>
+                            <div class="tech-skill-item">
+                                <div class="tech-icon blender-tech-icon">
+                                    <i class="fas fa-cube"></i>
+                                </div>
+                                <span>Blender</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 70%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-category">
+                        <h4 data-translate="tech-databases">Базы данных</h4>
+                        <div class="tech-skills-row">
+                            <div class="tech-skill-item">
+                                <div class="tech-icon postgres-tech-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <span>PostgreSQL</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 85%"></div></div>
+                            </div>
+                            <div class="tech-skill-item">
+                                <div class="tech-icon mysql-tech-icon">
+                                    <i class="fas fa-database"></i>
+                                </div>
+                                <span>MySQL</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 80%"></div></div>
+                            </div>
+                            <div class="tech-skill-item">
+                                <div class="tech-icon linq-tech-icon">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <span>LINQ</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 90%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tech-category">
+                        <h4 data-translate="tech-tools">Инструменты</h4>
+                        <div class="tech-skills-row">
+                            <div class="tech-skill-item">
+                                <div class="tech-icon git-tech-icon">
+                                    <i class="fab fa-git-alt"></i>
+                                </div>
+                                <span>Git</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 90%"></div></div>
+                            </div>
+                            <div class="tech-skill-item">
+                                <div class="tech-icon vs-tech-icon">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <span>Visual Studio</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 90%"></div></div>
+                            </div>
+                            <div class="tech-skill-item">
+                                <div class="tech-icon figma-tech-icon">
+                                    <i class="fab fa-figma"></i>
+                                </div>
+                                <span>Figma</span>
+                                <div class="skill-progress"><div class="progress-fill" style="width: 75%"></div></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -701,6 +845,73 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub Activity Section -->
+    <section id="github-activity" class="github-activity">
+        <div class="container">
+            <div class="github-header">
+                <h2 class="section-title" data-translate="github-title">
+                    <i class="fab fa-github github-icon"></i>
+                    GitHub Activity
+                </h2>
+            </div>
+            
+            <div class="github-content">
+                <div class="github-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-code-branch"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="repo-count">-</div>
+                            <div class="stat-label" data-translate="github-repositories">Репозиториев</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="last-update">-</div>
+                            <div class="stat-label" data-translate="github-last-update">Последнее обновление</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number" id="total-commits">-</div>
+                            <div class="stat-label" data-translate="github-commits">Коммитов</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="github-chart">
+                    <h3 data-translate="github-activity-title">📈 Активность коммитов</h3>
+                    <img 
+                        src="https://github-readme-stats.vercel.app/api?username=Leks2000&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0a0a0a&title_color=00d4ff&icon_color=4CAF50&text_color=ffffff"
+                        alt="GitHub Stats"
+                        class="github-stats-img"
+                    />
+                    <img 
+                        src="https://github-readme-streak-stats.herokuapp.com/?user=Leks2000&theme=tokyonight&hide_border=true&background=0a0a0a&stroke=00d4ff&ring=4CAF50&fire=ff6b35&currStreakNum=ffffff&sideNums=ffffff&currStreakLabel=00d4ff&sideLabels=b3b3b3&dates=b3b3b3"
+                        alt="GitHub Streak"
+                        class="github-streak-img"
+                    />
+                </div>
+                
+                <div class="github-button">
+                    <a href="https://github.com/Leks2000" target="_blank" class="btn btn-github">
+                        <i class="fab fa-github"></i>
+                        <span data-translate="github-open">Открыть мой GitHub</span>
+                    </a>
                 </div>
             </div>
         </div>
