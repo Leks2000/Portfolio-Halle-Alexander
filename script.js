@@ -13,7 +13,7 @@ class PortfolioManager {
                 'nav-contact': 'Контакты',
                 
                 // Hero Section
-                'hero-subtitle': 'Unity Developer & C# Programmer',
+                'typing-jobs': ['Unity Developer & C# Programmer', 'Game Developer & Backend Specialist', 'Creative Solver'],
                 'hero-description': 'Создаю увлекательные игры и приложения с акцентом на backend разработку. Специализируюсь на Unity, C# и работе с базами данных.',
                 'stat-experience': 'Года опыта',
                 'stat-projects': 'Проектов',
@@ -23,6 +23,7 @@ class PortfolioManager {
                 
                 // Projects Section
                 'projects-title': 'Мои проекты',
+                'filter-top': '⭐ Топ',
                 'filter-all': 'Все',
                 'filter-games': '🎮 Игры',
                 'filter-mobile': '📱 Мобильные',
@@ -31,9 +32,9 @@ class PortfolioManager {
                 'filter-bots': '🤖 Telegram-боты',
                 'btn-code': 'Код',
                 'btn-demo': 'Сайт',
-                'status-released': 'Релиз',
-                'status-development': 'В разработке',
-                'status-concept': 'Концепт',
+                'status-released': '🟢 Релиз',
+                'status-development': '🟡 В разработке',
+                'status-concept': '⚪ Концепт',
                 
                 // Project Descriptions
                 'dark-memorial-desc': 'Первый полноценный релиз игры на Unity. 2D проект с интересной механикой.',
@@ -55,6 +56,12 @@ class PortfolioManager {
                 
                 // Skills Section
                 'skills-title': 'Навыки',
+                'technical-skills-title': 'Технические навыки',
+                'tech-programming': 'Языки программирования',
+                'tech-dotnet': 'Технологии .NET',
+                'tech-gamedev': 'Разработка игр',
+                'tech-databases': 'Базы данных',
+                'tech-tools': 'Инструменты',
                 
                 // About Section
                 'about-title': 'О себе',
@@ -80,6 +87,15 @@ class PortfolioManager {
                 'timeline-intern-1': 'Настройка баз данных PostgreSQL и MySQL',
                 'timeline-intern-2': 'Оптимизация SQL-запросов',
                 'timeline-intern-3': 'Разработка внутренних веб-приложений на .NET Core',
+                
+                // GitHub Section
+                'nav-github': 'GitHub',
+                'github-title': 'GitHub Activity',
+                'github-repositories': 'Репозиториев',
+                'github-last-update': 'Последнее обновление',
+                'github-commits': 'Коммитов',
+                'github-activity-title': '📈 Активность коммитов',
+                'github-open': 'Открыть мой GitHub',
                 
                 // Content Section
                 'content-title': 'Контент',
@@ -109,7 +125,7 @@ class PortfolioManager {
                 'nav-contact': 'Contact',
                 
                 // Hero Section
-                'hero-subtitle': 'Unity Developer & C# Programmer',
+                'typing-jobs': ['Unity Developer & C# Programmer', 'Game Developer & Backend Specialist', 'Creative Solver'],
                 'hero-description': 'I create engaging games and applications with a focus on backend development. Specializing in Unity, C#, and database work.',
                 'stat-experience': 'Years Experience',
                 'stat-projects': 'Projects',
@@ -119,6 +135,7 @@ class PortfolioManager {
                 
                 // Projects Section
                 'projects-title': 'My Projects',
+                'filter-top': '⭐ Top',
                 'filter-all': 'All',
                 'filter-games': '🎮 Games',
                 'filter-mobile': '📱 Mobile',
@@ -127,9 +144,9 @@ class PortfolioManager {
                 'filter-bots': '🤖 Telegram Bots',
                 'btn-code': 'Code',
                 'btn-demo': 'Website',
-                'status-released': 'Released',
-                'status-development': 'In Development',
-                'status-concept': 'Concept',
+                'status-released': '🟢 Released',
+                'status-development': '🟡 In Development',
+                'status-concept': '⚪ Concept',
                 
                 // Project Descriptions
                 'dark-memorial-desc': 'First full Unity game release. 2D project with interesting mechanics.',
@@ -151,6 +168,12 @@ class PortfolioManager {
                 
                 // Skills Section
                 'skills-title': 'Skills',
+                'technical-skills-title': 'Technical Skills',
+                'tech-programming': 'Programming Languages',
+                'tech-dotnet': '.NET Technologies',
+                'tech-gamedev': 'Game Development',
+                'tech-databases': 'Databases',
+                'tech-tools': 'Tools',
                 
                 // About Section
                 'about-title': 'About Me',
@@ -176,6 +199,15 @@ class PortfolioManager {
                 'timeline-intern-1': 'PostgreSQL and MySQL database configuration',
                 'timeline-intern-2': 'SQL query optimization',
                 'timeline-intern-3': 'Internal web application development on .NET Core',
+                
+                // GitHub Section
+                'nav-github': 'GitHub',
+                'github-title': 'GitHub Activity',
+                'github-repositories': 'Repositories',
+                'github-last-update': 'Last Update',
+                'github-commits': 'Commits',
+                'github-activity-title': '📈 Commit Activity',
+                'github-open': 'Open my GitHub',
                 
                 // Content Section
                 'content-title': 'Content',
@@ -209,6 +241,10 @@ class PortfolioManager {
         this.initContactForm();
         this.initSmoothScroll();
         this.initProgressRings();
+        this.initCustomCursor();
+        this.initTypingAnimation();
+        this.initGSAPAnimations();
+        this.initGitHubActivity();
         this.applyTranslations();
     }
 
@@ -228,29 +264,16 @@ class PortfolioManager {
         const langButtons = document.querySelectorAll('.lang-btn');
         
         langButtons.forEach(btn => {
-            if (btn.dataset.lang === this.currentLang) {
-                btn.classList.add('active');
-            }
-            
             btn.addEventListener('click', () => {
                 const newLang = btn.dataset.lang;
                 if (newLang !== this.currentLang) {
                     this.switchLanguage(newLang);
-                    
-                    // Update active button
-                    langButtons.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
                 }
             });
         });
     }
 
-    switchLanguage(lang) {
-        this.currentLang = lang;
-        localStorage.setItem('portfolio-lang', lang);
-        document.documentElement.lang = lang;
-        this.applyTranslations();
-    }
+
 
     applyTranslations() {
         const elements = document.querySelectorAll('[data-translate]');
@@ -355,6 +378,9 @@ class PortfolioManager {
         const filterButtons = document.querySelectorAll('.filter-btn');
         const projectCards = document.querySelectorAll('.project-card');
 
+        // Show top projects by default
+        this.filterProjects('top', projectCards);
+
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
                 // Update active button
@@ -368,15 +394,27 @@ class PortfolioManager {
     }
 
     filterProjects(filter, cards) {
-        cards.forEach(card => {
+        cards.forEach((card, index) => {
             const category = card.dataset.category;
+            const isTop = card.dataset.top === 'true';
+            let shouldShow = false;
             
-            if (filter === 'all' || category === filter) {
-                card.classList.remove('hidden');
-                card.classList.add('visible');
+            if (filter === 'all') {
+                shouldShow = true;
+            } else if (filter === 'top') {
+                shouldShow = isTop;
             } else {
+                shouldShow = category === filter;
+            }
+            
+            if (shouldShow) {
+                card.classList.remove('filtered-out', 'hidden');
+                setTimeout(() => {
+                    card.classList.add('visible');
+                }, index * 100);
+            } else {
+                card.classList.add('filtered-out', 'hidden');
                 card.classList.remove('visible');
-                card.classList.add('hidden');
             }
         });
     }
@@ -469,6 +507,265 @@ class PortfolioManager {
                     'Form submission not yet configured');
             });
         }
+    }
+
+    // Custom Cursor Implementation
+    initCustomCursor() {
+        if (window.innerWidth <= 768) return; // Skip on mobile
+        
+        const cursor = document.querySelector('.custom-cursor');
+        const follower = document.querySelector('.cursor-follower');
+        
+        let mouseX = 0, mouseY = 0;
+        let followerX = 0, followerY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            cursor.style.left = mouseX - 10 + 'px';
+            cursor.style.top = mouseY - 10 + 'px';
+        });
+        
+        // Smooth follower animation
+        function updateFollower() {
+            followerX += (mouseX - followerX) * 0.1;
+            followerY += (mouseY - followerY) * 0.1;
+            
+            follower.style.left = followerX - 20 + 'px';
+            follower.style.top = followerY - 20 + 'px';
+            
+            requestAnimationFrame(updateFollower);
+        }
+        updateFollower();
+        
+        // Click animation
+        document.addEventListener('mousedown', () => {
+            cursor.classList.add('clicked');
+            follower.classList.add('clicked');
+        });
+        
+        document.addEventListener('mouseup', () => {
+            cursor.classList.remove('clicked');
+            follower.classList.remove('clicked');
+        });
+    }
+    
+    // Typing Animation for Hero Section
+    initTypingAnimation() {
+        const typingElement = document.getElementById('typing-animation');
+        if (!typingElement) return;
+        
+        const jobs = this.translations[this.currentLang]['typing-jobs'] || [
+            'Unity Developer & C# Programmer',
+            'Game Developer & Backend Specialist', 
+            'Creative Solver'
+        ];
+        
+        let currentJobIndex = 0;
+        let currentCharIndex = 0;
+        let isDeleting = false;
+        
+        function typeWriter() {
+            const currentJob = jobs[currentJobIndex];
+            
+            if (isDeleting) {
+                typingElement.textContent = currentJob.substring(0, currentCharIndex - 1);
+                currentCharIndex--;
+                
+                if (currentCharIndex === 0) {
+                    isDeleting = false;
+                    currentJobIndex = (currentJobIndex + 1) % jobs.length;
+                    setTimeout(typeWriter, 500);
+                    return;
+                }
+                setTimeout(typeWriter, 50);
+            } else {
+                typingElement.textContent = currentJob.substring(0, currentCharIndex + 1);
+                currentCharIndex++;
+                
+                if (currentCharIndex === currentJob.length) {
+                    isDeleting = true;
+                    setTimeout(typeWriter, 2000);
+                    return;
+                }
+                setTimeout(typeWriter, 100);
+            }
+        }
+        
+        // Start typing animation
+        setTimeout(typeWriter, 1000);
+    }
+    
+    // GSAP Animations
+    initGSAPAnimations() {
+        if (typeof gsap === 'undefined') return;
+        
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Hero section animation
+        gsap.from('.hero-title', {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            ease: 'power3.out'
+        });
+        
+        gsap.from('.hero-subtitle-container', {
+            duration: 1,
+            y: 30,
+            opacity: 0,
+            delay: 0.3,
+            ease: 'power3.out'
+        });
+        
+        gsap.from('.hero-description', {
+            duration: 1,
+            y: 30,
+            opacity: 0,
+            delay: 0.6,
+            ease: 'power3.out'
+        });
+        
+        // Section animations
+        gsap.utils.toArray('section').forEach((section) => {
+            gsap.from(section.querySelectorAll('h2, h3'), {
+                scrollTrigger: {
+                    trigger: section,
+                    start: 'top 80%',
+                    end: 'bottom 20%',
+                    toggleActions: 'play none none reverse'
+                },
+                duration: 1,
+                y: 50,
+                opacity: 0,
+                stagger: 0.2,
+                ease: 'power3.out'
+            });
+        });
+        
+        // Skills grid animation
+        gsap.from('.skill-icon-item', {
+            scrollTrigger: {
+                trigger: '.skills-grid',
+                start: 'top 80%'
+            },
+            duration: 0.6,
+            y: 50,
+            opacity: 0,
+            stagger: 0.1,
+            ease: 'back.out(1.7)'
+        });
+        
+        // Technical skills animation
+        gsap.from('.tech-category', {
+            scrollTrigger: {
+                trigger: '.technical-skills',
+                start: 'top 80%'
+            },
+            duration: 0.8,
+            y: 50,
+            opacity: 0,
+            stagger: 0.2,
+            ease: 'power3.out'
+        });
+        
+        // Projects animation
+        gsap.from('.project-card', {
+            scrollTrigger: {
+                trigger: '.projects-grid',
+                start: 'top 80%'
+            },
+            duration: 0.8,
+            y: 50,
+            opacity: 0,
+            scale: 0.8,
+            stagger: 0.1,
+            ease: 'back.out(1.7)'
+        });
+    }
+    
+    // GitHub Activity Integration
+    async initGitHubActivity() {
+        try {
+            // Fetch GitHub user data
+            const userResponse = await fetch('https://api.github.com/users/Leks2000');
+            const userData = await userResponse.json();
+            
+            // Update repository count
+            document.getElementById('repo-count').textContent = userData.public_repos || '-';
+            
+            // Fetch recent events for commit count
+            const eventsResponse = await fetch('https://api.github.com/users/Leks2000/events?per_page=100');
+            const events = await eventsResponse.json();
+            
+            // Count push events (commits)
+            const pushEvents = events.filter(event => event.type === 'PushEvent');
+            const totalCommits = pushEvents.reduce((sum, event) => {
+                return sum + (event.payload.commits ? event.payload.commits.length : 0);
+            }, 0);
+            
+            document.getElementById('total-commits').textContent = totalCommits || '-';
+            
+            // Update last activity
+            if (events.length > 0) {
+                const lastUpdate = new Date(events[0].created_at);
+                const now = new Date();
+                const diffTime = Math.abs(now - lastUpdate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                
+                let updateText = '';
+                if (diffDays === 1) {
+                    updateText = this.currentLang === 'ru' ? '1 день назад' : '1 day ago';
+                } else if (diffDays < 7) {
+                    updateText = this.currentLang === 'ru' ? `${diffDays} дней назад` : `${diffDays} days ago`;
+                } else {
+                    updateText = this.currentLang === 'ru' ? 'Неделю назад' : 'A week ago';
+                }
+                
+                document.getElementById('last-update').textContent = updateText;
+            }
+        } catch (error) {
+            console.log('GitHub API error:', error);
+            // Fallback values
+            document.getElementById('repo-count').textContent = '20+';
+            document.getElementById('total-commits').textContent = '500+';
+            document.getElementById('last-update').textContent = this.currentLang === 'ru' ? 'Недавно' : 'Recently';
+        }
+    }
+
+    // Enhanced Language Switcher
+    switchLanguage(lang) {
+        this.currentLang = lang;
+        
+        // Update active button
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+        });
+        
+        // Update all translatable elements
+        document.querySelectorAll('[data-translate]').forEach(element => {
+            const key = element.getAttribute('data-translate');
+            if (this.translations[lang][key]) {
+                element.textContent = this.translations[lang][key];
+            }
+        });
+        
+        // Restart typing animation with new language
+        if (document.getElementById('typing-animation')) {
+            this.initTypingAnimation();
+        }
+        
+        // Update GitHub activity with new language
+        this.initGitHubActivity();
+        
+        // Update document title
+        document.title = lang === 'ru' 
+            ? 'Александр Халле - Unity Developer Portfolio'
+            : 'Alexander Halle - Unity Developer Portfolio';
+            
+        // Save language preference
+        localStorage.setItem('portfolio-lang', lang);
     }
 }
 
