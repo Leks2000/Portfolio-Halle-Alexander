@@ -25,6 +25,10 @@
         <div class="star"></div>
     </div>
 
+    <!-- Custom Cursor -->
+    <div class="custom-cursor"></div>
+    <div class="cursor-follower"></div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
@@ -116,15 +120,21 @@
                 <button class="filter-btn active" data-filter="top" data-translate="filter-top">⭐ Топ</button>
                 <button class="filter-btn" data-filter="all" data-translate="filter-all">Все</button>
                 <button class="filter-btn" data-filter="games" data-translate="filter-games">🎮 Игры</button>
-                <button class="filter-btn" data-filter="mobile" data-translate="filter-mobile">📱 Мобильные</button>
+                <button class="filter-btn" data-filter="mobile" data-translate="filter-mobile">📱 Приложения</button>
                 <button class="filter-btn" data-filter="web" data-translate="filter-web">🌐 Сайты</button>
                 <button class="filter-btn" data-filter="extensions" data-translate="filter-extensions">⚙️ Расширения</button>
-                <button class="filter-btn" data-filter="bots" data-translate="filter-bots">🤖 Telegram-боты</button>
+                <button class="filter-btn" data-filter="bots" data-translate="filter-bots">🤖 Боты</button>
             </div>
 
             <div class="projects-grid">
                 <!-- Games -->
                 <div class="project-card" data-category="games" data-top="false">
+                    <div class="project-preview">
+                        <img src="https://via.placeholder.com/400x250/0a0a0a/00d4ff?text=Dark+Memorial+Alpha" alt="Dark Memorial Alpha Preview" class="project-image">
+                        <div class="preview-overlay">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                    </div>
                     <div class="project-status">
                         <div class="status-ring" data-status="released">
                             <svg class="progress-ring" width="60" height="60">
@@ -154,6 +164,12 @@
                 </div>
 
                 <div class="project-card" data-category="games" data-top="true">
+                    <div class="project-preview">
+                        <img src="https://via.placeholder.com/400x250/0a0a0a/ff6b35?text=Deck%27s+%26+Dungeon" alt="Deck's & Dungeon Preview" class="project-image">
+                        <div class="preview-overlay">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                    </div>
                     <div class="project-status">
                         <div class="status-ring" data-status="development">
                             <svg class="progress-ring" width="60" height="60">
@@ -748,291 +764,273 @@
         <div class="container">
             <h2 class="section-title" data-translate="skills-title">Навыки</h2>
             
-            <!-- Animated Technology Icons -->
-            <div class="animated-skills-grid">
-                <!-- Unity Icon -->
-                <div class="animated-skill-item" data-skill="unity">
-                    <div class="skill-icon-container">
-                        <div class="unity-icon-animated">
-                            <div class="unity-logo">
-                                <div class="unity-cube-3d"></div>
+            <!-- Redesigned Animated Skills Grid -->
+            <div class="new-skills-grid">
+                <!-- Programming Languages -->
+                <div class="skills-category">
+                    <h3 class="category-title">Языки программирования</h3>
+                    <div class="skills-row">
+                        <!-- C# -->
+                        <div class="skill-item" data-skill="csharp">
+                            <div class="skill-icon">
+                                <div class="csharp-animated">
+                                    <div class="csharp-text">C#</div>
+                                    <div class="energy-circle"></div>
+                                    <div class="spark spark1"></div>
+                                    <div class="spark spark2"></div>
+                                    <div class="spark spark3"></div>
+                                </div>
                             </div>
+                            <div class="skill-name">C#</div>
                         </div>
-                        <div class="skill-tooltip">
-                            <h4>Unity</h4>
-                            <p>Game Engine</p>
-                            <div class="skill-level">Эксперт • 95%</div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- C# Icon -->
-                <div class="animated-skill-item" data-skill="csharp">
-                    <div class="skill-icon-container">
-                        <div class="csharp-icon-animated">
-                            <div class="csharp-logo">C#</div>
-                            <div class="energy-circle"></div>
-                            <div class="spark"></div>
-                        </div>
-                        <div class="skill-tooltip">
-                            <h4>C#</h4>
-                            <p>Programming Language</p>
-                            <div class="skill-level">Эксперт • 90%</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Kotlin Icon -->
-                <div class="animated-skill-item" data-skill="kotlin">
-                    <div class="skill-icon-container">
-                        <div class="kotlin-icon-animated">
-                            <div class="kotlin-part part1"></div>
-                            <div class="kotlin-part part2"></div>
-                            <div class="kotlin-part part3"></div>
-                        </div>
-                        <div class="skill-tooltip">
-                            <h4>Kotlin</h4>
-                            <p>Programming Language</p>
-                            <div class="skill-level">Продвинутый • 85%</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- .NET Icon -->
-                <div class="animated-skill-item" data-skill="dotnet">
-                    <div class="skill-icon-container">
-                        <div class="dotnet-icon-animated">
-                            <div class="dotnet-logo">.NET</div>
-                            <div class="energy-circle"></div>
-                        </div>
-                        <div class="skill-tooltip">
-                            <h4>.NET</h4>
-                            <p>Framework</p>
-                            <div class="skill-level">Продвинутый • 85%</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SQL Icon -->
-                <div class="animated-skill-item" data-skill="sql">
-                    <div class="skill-icon-container">
-                        <div class="sql-icon-animated">
-                            <div class="database-icon">
-                                <i class="fas fa-database"></i>
+                        <!-- Kotlin -->
+                        <div class="skill-item" data-skill="kotlin">
+                            <div class="skill-icon">
+                                <div class="kotlin-animated">
+                                    <div class="kotlin-part part1"></div>
+                                    <div class="kotlin-part part2"></div>
+                                    <div class="kotlin-part part3"></div>
+                                    <div class="kotlin-text">K</div>
+                                </div>
                             </div>
-                            <div class="data-float">0</div>
-                            <div class="data-float">1</div>
-                            <div class="data-float">∑</div>
+                            <div class="skill-name">Kotlin</div>
                         </div>
-                        <div class="skill-tooltip">
-                            <h4>SQL</h4>
-                            <p>Database Language</p>
-                            <div class="skill-level">Продвинутый • 80%</div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- ASP.NET Icon -->
-                <div class="animated-skill-item" data-skill="aspnet">
-                    <div class="skill-icon-container">
-                        <div class="aspnet-icon-animated">
-                            <div class="aspnet-logo">ASP.NET</div>
-                            <div class="scan-line"></div>
-                        </div>
-                        <div class="skill-tooltip">
-                            <h4>ASP.NET</h4>
-                            <p>Web Framework</p>
-                            <div class="skill-level">Продвинутый • 80%</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- WPF Icon -->
-                <div class="animated-skill-item" data-skill="wpf">
-                    <div class="skill-icon-container">
-                        <div class="wpf-icon-animated">
-                            <div class="wpf-logo">WPF</div>
-                            <div class="grid-overlay"></div>
-                        </div>
-                        <div class="skill-tooltip">
-                            <h4>WPF</h4>
-                            <p>Desktop Framework</p>
-                            <div class="skill-level">Средний • 75%</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- PostgreSQL Icon -->
-                <div class="animated-skill-item" data-skill="postgresql">
-                    <div class="skill-icon-container">
-                        <div class="postgresql-icon-animated">
-                            <div class="postgres-logo">
-                                <i class="fas fa-database"></i>
+                        <!-- SQL -->
+                        <div class="skill-item" data-skill="sql">
+                            <div class="skill-icon">
+                                <div class="sql-animated">
+                                    <i class="fas fa-database database-main"></i>
+                                    <div class="data-digit digit1">0</div>
+                                    <div class="data-digit digit2">1</div>
+                                    <div class="data-digit digit3">∑</div>
+                                </div>
                             </div>
-                            <div class="data-flow"></div>
-                        </div>
-                        <div class="skill-tooltip">
-                            <h4>PostgreSQL</h4>
-                            <p>Database</p>
-                            <div class="skill-level">Продвинутый • 85%</div>
+                            <div class="skill-name">SQL</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- MySQL Icon -->
-                <div class="animated-skill-item" data-skill="mysql">
-                    <div class="skill-icon-container">
-                        <div class="mysql-icon-animated">
-                            <div class="mysql-logo">MySQL</div>
-                            <div class="data-pulse"></div>
-                        </div>
-                        <div class="skill-tooltip">
-                            <h4>MySQL</h4>
-                            <p>Database</p>
-                            <div class="skill-level">Продвинутый • 80%</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Git Icon -->
-                <div class="animated-skill-item" data-skill="git">
-                    <div class="skill-icon-container">
-                        <div class="git-icon-animated">
-                            <div class="git-logo">
-                                <i class="fab fa-git-alt"></i>
+                <!-- .NET Technologies -->
+                <div class="skills-category">
+                    <h3 class="category-title">Технологии .NET</h3>
+                    <div class="skills-row">
+                        <!-- .NET Core -->
+                        <div class="skill-item" data-skill="dotnet">
+                            <div class="skill-icon">
+                                <div class="dotnet-animated">
+                                    <div class="dotnet-text">.NET</div>
+                                    <div class="framework-lines"></div>
+                                </div>
                             </div>
-                            <div class="branch-line line1"></div>
-                            <div class="branch-line line2"></div>
-                            <div class="merge-point"></div>
+                            <div class="skill-name">.NET Core</div>
                         </div>
-                        <div class="skill-tooltip">
-                            <h4>Git</h4>
-                            <p>Version Control</p>
-                            <div class="skill-level">Эксперт • 90%</div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Blender Icon -->
-                <div class="animated-skill-item" data-skill="blender">
-                    <div class="skill-icon-container">
-                        <div class="blender-icon-animated">
-                            <div class="blender-cube">
-                                <div class="cube-face front"></div>
-                                <div class="cube-face back"></div>
-                                <div class="cube-face right"></div>
-                                <div class="cube-face left"></div>
-                                <div class="cube-face top"></div>
-                                <div class="cube-face bottom"></div>
+                        <!-- ASP.NET -->
+                        <div class="skill-item" data-skill="aspnet">
+                            <div class="skill-icon">
+                                <div class="aspnet-animated">
+                                    <div class="aspnet-text">ASP</div>
+                                    <div class="scan-wave"></div>
+                                    <div class="grid-pattern"></div>
+                                </div>
                             </div>
+                            <div class="skill-name">ASP.NET</div>
                         </div>
-                        <div class="skill-tooltip">
-                            <h4>Blender</h4>
-                            <p>3D Modeling</p>
-                            <div class="skill-level">Средний • 70%</div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Figma Icon -->
-                <div class="animated-skill-item" data-skill="figma">
-                    <div class="skill-icon-container">
-                        <div class="figma-icon-animated">
-                            <div class="figma-logo">
-                                <i class="fab fa-figma"></i>
+                        <!-- WPF -->
+                        <div class="skill-item" data-skill="wpf">
+                            <div class="skill-icon">
+                                <div class="wpf-animated">
+                                    <div class="wpf-text">WPF</div>
+                                    <div class="interface-grid"></div>
+                                </div>
                             </div>
-                            <div class="design-element element1"></div>
-                            <div class="design-element element2"></div>
-                            <div class="design-element element3"></div>
-                        </div>
-                        <div class="skill-tooltip">
-                            <h4>Figma</h4>
-                            <p>UI/UX Design</p>
-                            <div class="skill-level">Средний • 75%</div>
+                            <div class="skill-name">WPF</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Visual Studio Icon -->
-                <div class="animated-skill-item" data-skill="visualstudio">
-                    <div class="skill-icon-container">
-                        <div class="vs-icon-animated">
-                            <div class="vs-logo">
-                                <i class="fas fa-code"></i>
+                <!-- Game Development -->
+                <div class="skills-category">
+                    <h3 class="category-title">Разработка игр</h3>
+                    <div class="skills-row">
+                        <!-- Unity -->
+                        <div class="skill-item" data-skill="unity">
+                            <div class="skill-icon">
+                                <div class="unity-animated">
+                                    <div class="unity-cube">
+                                        <div class="cube-face front"></div>
+                                        <div class="cube-face back"></div>
+                                        <div class="cube-face right"></div>
+                                        <div class="cube-face left"></div>
+                                        <div class="cube-face top"></div>
+                                        <div class="cube-face bottom"></div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="code-line line1"></div>
-                            <div class="code-line line2"></div>
-                            <div class="code-line line3"></div>
+                            <div class="skill-name">Unity</div>
                         </div>
-                        <div class="skill-tooltip">
-                            <h4>Visual Studio</h4>
-                            <p>IDE</p>
-                            <div class="skill-level">Эксперт • 90%</div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- DOTween Icon -->
-                <div class="animated-skill-item" data-skill="dotween">
-                    <div class="skill-icon-container">
-                        <div class="dotween-icon-animated">
-                            <div class="dotween-logo">DOTween</div>
-                            <div class="tween-ball"></div>
-                        </div>
-                        <div class="skill-tooltip">
-                            <h4>DOTween</h4>
-                            <p>Animation Library</p>
-                            <div class="skill-level">Продвинутый • 85%</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- PHP Icon -->
-                <div class="animated-skill-item" data-skill="php">
-                    <div class="skill-icon-container">
-                        <div class="php-icon-animated">
-                            <div class="php-logo">
-                                <i class="fab fa-php"></i>
+                        <!-- DOTween -->
+                        <div class="skill-item" data-skill="dotween">
+                            <div class="skill-icon">
+                                <div class="dotween-animated">
+                                    <div class="dotween-text">DOTween</div>
+                                    <div class="tween-ball"></div>
+                                    <div class="animation-trail"></div>
+                                </div>
                             </div>
-                            <div class="code-wave"></div>
+                            <div class="skill-name">DOTween</div>
                         </div>
-                        <div class="skill-tooltip">
-                            <h4>PHP</h4>
-                            <p>Server Language</p>
-                            <div class="skill-level">Базовый • 60%</div>
+
+                        <!-- Blender -->
+                        <div class="skill-item" data-skill="blender">
+                            <div class="skill-icon">
+                                <div class="blender-animated">
+                                    <div class="blender-cube-assembly">
+                                        <div class="cube-part part1"></div>
+                                        <div class="cube-part part2"></div>
+                                        <div class="cube-part part3"></div>
+                                        <div class="cube-part part4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skill-name">Blender</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- After Effects Icon -->
-                <div class="animated-skill-item" data-skill="aftereffects">
-                    <div class="skill-icon-container">
-                        <div class="ae-icon-animated">
-                            <div class="ae-logo">Ae</div>
-                            <div class="flash-effect"></div>
-                            <div class="motion-wave"></div>
+                <!-- Databases -->
+                <div class="skills-category">
+                    <h3 class="category-title">Базы данных</h3>
+                    <div class="skills-row">
+                        <!-- PostgreSQL -->
+                        <div class="skill-item" data-skill="postgresql">
+                            <div class="skill-icon">
+                                <div class="postgresql-animated">
+                                    <i class="fas fa-database postgres-icon"></i>
+                                    <div class="data-stream stream1"></div>
+                                    <div class="data-stream stream2"></div>
+                                    <div class="data-stream stream3"></div>
+                                </div>
+                            </div>
+                            <div class="skill-name">PostgreSQL</div>
                         </div>
-                        <div class="skill-tooltip">
-                            <h4>After Effects</h4>
-                            <p>Motion Graphics</p>
-                            <div class="skill-level">Средний • 70%</div>
+
+                        <!-- MySQL -->
+                        <div class="skill-item" data-skill="mysql">
+                            <div class="skill-icon">
+                                <div class="mysql-animated">
+                                    <div class="mysql-text">MySQL</div>
+                                    <div class="data-pulse-ring"></div>
+                                </div>
+                            </div>
+                            <div class="skill-name">MySQL</div>
+                        </div>
+
+                        <!-- LINQ -->
+                        <div class="skill-item" data-skill="linq">
+                            <div class="skill-icon">
+                                <div class="linq-animated">
+                                    <div class="linq-text">LINQ</div>
+                                    <div class="query-lines"></div>
+                                </div>
+                            </div>
+                            <div class="skill-name">LINQ</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Premiere Pro Icon -->
-                <div class="animated-skill-item" data-skill="premiere">
-                    <div class="skill-icon-container">
-                        <div class="premiere-icon-animated">
-                            <div class="premiere-logo">Pr</div>
-                            <div class="timeline-frame frame1"></div>
-                            <div class="timeline-frame frame2"></div>
-                            <div class="timeline-frame frame3"></div>
+                <!-- Tools -->
+                <div class="skills-category">
+                    <h3 class="category-title">Инструменты</h3>
+                    <div class="skills-row">
+                        <!-- Git -->
+                        <div class="skill-item" data-skill="git">
+                            <div class="skill-icon">
+                                <div class="git-animated">
+                                    <i class="fab fa-git-alt git-icon"></i>
+                                    <div class="git-branch branch1"></div>
+                                    <div class="git-branch branch2"></div>
+                                    <div class="merge-point"></div>
+                                </div>
+                            </div>
+                            <div class="skill-name">Git</div>
                         </div>
-                        <div class="skill-tooltip">
-                            <h4>Premiere Pro</h4>
-                            <p>Video Editing</p>
-                            <div class="skill-level">Средний • 65%</div>
+
+                        <!-- Visual Studio -->
+                        <div class="skill-item" data-skill="visualstudio">
+                            <div class="skill-icon">
+                                <div class="vs-animated">
+                                    <i class="fas fa-code vs-icon"></i>
+                                    <div class="code-outline outline1"></div>
+                                    <div class="code-outline outline2"></div>
+                                    <div class="code-outline outline3"></div>
+                                </div>
+                            </div>
+                            <div class="skill-name">Visual Studio</div>
+                        </div>
+
+                        <!-- Figma -->
+                        <div class="skill-item" data-skill="figma">
+                            <div class="skill-icon">
+                                <div class="figma-animated">
+                                    <div class="figma-petals">
+                                        <div class="petal petal1"></div>
+                                        <div class="petal petal2"></div>
+                                        <div class="petal petal3"></div>
+                                        <div class="petal petal4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skill-name">Figma</div>
+                        </div>
+
+                        <!-- PHP -->
+                        <div class="skill-item" data-skill="php">
+                            <div class="skill-icon">
+                                <div class="php-animated">
+                                    <i class="fab fa-php php-icon"></i>
+                                    <div class="server-wave"></div>
+                                </div>
+                            </div>
+                            <div class="skill-name">PHP</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Creative Tools -->
+                <div class="skills-category">
+                    <h3 class="category-title">Креативные инструменты</h3>
+                    <div class="skills-row">
+                        <!-- After Effects -->
+                        <div class="skill-item" data-skill="aftereffects">
+                            <div class="skill-icon">
+                                <div class="ae-animated">
+                                    <div class="ae-text">Ae</div>
+                                    <div class="motion-flash"></div>
+                                    <div class="motion-ripple"></div>
+                                </div>
+                            </div>
+                            <div class="skill-name">After Effects</div>
+                        </div>
+
+                        <!-- Premiere Pro -->
+                        <div class="skill-item" data-skill="premiere">
+                            <div class="skill-icon">
+                                <div class="premiere-animated">
+                                    <div class="premiere-text">Pr</div>
+                                    <div class="timeline-frames">
+                                        <div class="frame frame1"></div>
+                                        <div class="frame frame2"></div>
+                                        <div class="frame frame3"></div>
+                                        <div class="frame frame4"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="skill-name">Premiere Pro</div>
                         </div>
                     </div>
                 </div>
@@ -1165,12 +1163,12 @@
                 <div class="github-chart">
                     <h3 data-translate="github-activity-title">📈 Активность коммитов</h3>
                     <img 
-                        src="https://github-readme-stats.vercel.app/api?username=Leks2000&show_icons=true&theme=tokyonight&hide_border=true&bg_color=0a0a0a&title_color=00d4ff&icon_color=4CAF50&text_color=ffffff"
+                        src="https://github-readme-stats.vercel.app/api?username=Leks2000&show_icons=true&theme=transparent&hide_border=true&bg_color=00000000&title_color=00d4ff&icon_color=4CAF50&text_color=ffffff"
                         alt="GitHub Stats"
                         class="github-stats-img"
                     />
                     <img 
-                        src="https://github-readme-streak-stats.herokuapp.com/?user=Leks2000&theme=tokyonight&hide_border=true&background=0a0a0a&stroke=00d4ff&ring=4CAF50&fire=ff6b35&currStreakNum=ffffff&sideNums=ffffff&currStreakLabel=00d4ff&sideLabels=b3b3b3&dates=b3b3b3"
+                        src="https://github-readme-streak-stats.herokuapp.com/?user=Leks2000&theme=dark&hide_border=true&background=00000000&stroke=00d4ff&ring=4CAF50&fire=ff6b35&currStreakNum=ffffff&sideNums=ffffff&currStreakLabel=00d4ff&sideLabels=b3b3b3&dates=b3b3b3"
                         alt="GitHub Streak"
                         class="github-streak-img"
                     />
