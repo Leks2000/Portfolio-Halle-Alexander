@@ -10,6 +10,8 @@
     <!-- GSAP for advanced animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Framer Motion for micro-interactions -->
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.umd.js"></script>
 </head>
 <body>
     <div class="stars-background">
@@ -140,7 +142,7 @@
                 <!-- Games -->
                 <div class="project-card" data-category="games" data-top="false">
                     <div class="project-preview">
-                        <img src="https://via.placeholder.com/400x250/0a0a0a/00d4ff?text=Dark+Memorial+Alpha" alt="Dark Memorial Alpha Preview" class="project-image">
+                        <img src="https://via.placeholder.com/400x250/0a0a0a/00d4ff?text=Dark+Memorial+Alpha" alt="Dark Memorial Alpha Preview" class="project-image" loading="lazy" width="400" height="250">
                         <div class="preview-overlay">
                             <i class="fas fa-play-circle"></i>
                         </div>
@@ -175,7 +177,7 @@
 
                 <div class="project-card" data-category="games" data-top="true">
                     <div class="project-preview">
-                        <img src="https://via.placeholder.com/400x250/0a0a0a/ff6b35?text=Deck%27s+%26+Dungeon" alt="Deck's & Dungeon Preview" class="project-image">
+                        <img src="https://via.placeholder.com/400x250/0a0a0a/ff6b35?text=Deck%27s+%26+Dungeon" alt="Deck's & Dungeon Preview" class="project-image" loading="lazy" width="400" height="250">
                         <div class="preview-overlay">
                             <i class="fas fa-play-circle"></i>
                         </div>
@@ -292,12 +294,12 @@
                         </div>
                     </div>
                     <div class="project-status">
-                        <div class="status-ring" data-status="released">
+                        <div class="status-ring" data-status="completed">
                             <svg class="progress-ring" width="60" height="60">
-                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
+                                <circle class="progress-ring__circle" stroke="var(--success-color)" stroke-width="3" 
                                         fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
                             </svg>
-                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                            <div class="status-text" data-translate="status-completed">✅ Завершён</div>
                         </div>
                     </div>
                     <div class="project-content">
@@ -401,12 +403,12 @@
                         </div>
                     </div>
                     <div class="project-status">
-                        <div class="status-ring" data-status="released">
+                        <div class="status-ring" data-status="concept">
                             <svg class="progress-ring" width="60" height="60">
-                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
-                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
+                                <circle class="progress-ring__circle" stroke="var(--text-color)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="135"/>
                             </svg>
-                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                            <div class="status-text" data-translate="status-concept">⚪ Концепт</div>
                         </div>
                     </div>
                     <div class="project-content">
@@ -431,12 +433,12 @@
 
                 <div class="project-card" data-category="mobile">
                     <div class="project-status">
-                        <div class="status-ring" data-status="released">
+                        <div class="status-ring" data-status="development">
                             <svg class="progress-ring" width="60" height="60">
-                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
-                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
+                                <circle class="progress-ring__circle" stroke="var(--warning-color)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="50"/>
                             </svg>
-                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                            <div class="status-text" data-translate="status-development">🟡 В разработке</div>
                         </div>
                     </div>
                     <div class="project-preview">
@@ -464,21 +466,21 @@
 
                 <div class="project-card" data-category="mobile">
                     <div class="project-status">
-                        <div class="status-ring" data-status="released">
+                        <div class="status-ring" data-status="completed">
                             <svg class="progress-ring" width="60" height="60">
-                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
+                                <circle class="progress-ring__circle" stroke="var(--success-color)" stroke-width="3" 
                                         fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
                             </svg>
-                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                            <div class="status-text" data-translate="status-completed">✅ Завершён</div>
                         </div>
                     </div>
                     <div class="project-preview">
                         <div class="project-image-placeholder" style="background: linear-gradient(135deg, #4CAF50, #00d4ff);">
-                            NotesMVVM Android
+                            NotesMVVM
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3>NotesMVVM Android</h3>
+                        <h3>NotesMVVM</h3>
                         <p data-translate="notes-desc">Приложение для заметок с локальным и удалённым входом.</p>
                         <div class="project-tags">
                             <span class="tag">Kotlin</span>
@@ -521,12 +523,12 @@
                 <!-- Websites -->
                 <div class="project-card" data-category="web" data-top="true">
                     <div class="project-status">
-                        <div class="status-ring" data-status="released">
+                        <div class="status-ring" data-status="completed">
                             <svg class="progress-ring" width="60" height="60">
-                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
+                                <circle class="progress-ring__circle" stroke="var(--success-color)" stroke-width="3" 
                                         fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
                             </svg>
-                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                            <div class="status-text" data-translate="status-completed">✅ Завершён</div>
                         </div>
                     </div>
                     <div class="project-content">
@@ -604,58 +606,6 @@
                 </div>
 
 
-
-                <div class="project-card" data-category="mobile">
-                    <div class="project-status">
-                        <div class="status-ring" data-status="released">
-                            <svg class="progress-ring" width="60" height="60">
-                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
-                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
-                            </svg>
-                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>ToDis</h3>
-                        <p data-translate="todis-desc">Приложение для управления задачами с современным интерфейсом.</p>
-                        <div class="project-tags">
-                            <span class="tag">Kotlin</span>
-                            <span class="tag">Android</span>
-                            <span class="tag">Material Design</span>
-                        </div>
-                        <div class="project-buttons">
-                            <a href="#" class="btn btn-code" target="_blank">
-                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card" data-category="mobile">
-                    <div class="project-status">
-                        <div class="status-ring" data-status="released">
-                            <svg class="progress-ring" width="60" height="60">
-                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
-                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
-                            </svg>
-                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <h3>NotesMVVM Desktop</h3>
-                        <p data-translate="notesmvvm-desc">Приложение для заметок с архитектурой MVVM.</p>
-                        <div class="project-tags">
-                            <span class="tag">C#</span>
-                            <span class="tag">WPF</span>
-                            <span class="tag">MVVM</span>
-                        </div>
-                        <div class="project-buttons">
-                            <a href="#" class="btn btn-code" target="_blank">
-                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
 
 
 

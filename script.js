@@ -35,6 +35,7 @@ class PortfolioManager {
                 'status-released': '🟢 Релиз',
                 'status-development': '🟡 В разработке',
                 'status-concept': '⚪ Концепт',
+                'status-completed': '✅ Завершён',
                 
                 // Project Descriptions
                 'dark-memorial-desc': 'Первый полноценный релиз игры на Unity. 2D проект с интересной механикой.',
@@ -147,6 +148,7 @@ class PortfolioManager {
                 'status-released': '🟢 Released',
                 'status-development': '🟡 In Development',
                 'status-concept': '⚪ Concept',
+                'status-completed': '✅ Completed',
                 
                 // Project Descriptions
                 'dark-memorial-desc': 'First full Unity game release. 2D project with interesting mechanics.',
@@ -416,13 +418,20 @@ class PortfolioManager {
     initProjectFilters() {
         const filterButtons = document.querySelectorAll('.filter-btn');
         const projectCards = document.querySelectorAll('.project-card');
+        const projectsGrid = document.querySelector('.projects-grid');
 
-        // Initialize projects on page load without animation
+        // Show skeleton loaders initially
+        this.showSkeletonLoaders(projectsGrid);
+
+        // Initialize projects on page load with loading simulation
         setTimeout(() => {
-            document.querySelector('.projects-grid').classList.add('projects-loaded');
+            this.hideSkeletonLoaders(projectsGrid);
+            projectsGrid.classList.add('projects-loaded');
             // Show top projects by default
             this.filterProjects('top', projectCards);
-        }, 100);
+            // Initialize lazy loading
+            this.initLazyLoading();
+        }, 1500);
 
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
@@ -466,6 +475,92 @@ class PortfolioManager {
                 }, 500); // Hide after animation completes
             }
         });
+    }
+
+    // Skeleton Loaders
+    showSkeletonLoaders(projectsGrid) {
+        projectsGrid.classList.add('loading');
+        
+        // Create 6-8 skeleton cards
+        for (let i = 0; i < 7; i++) {
+            const skeletonCard = this.createSkeletonCard();
+            projectsGrid.appendChild(skeletonCard);
+        }
+    }
+
+    hideSkeletonLoaders(projectsGrid) {
+        projectsGrid.classList.remove('loading');
+        // Remove all skeleton cards
+        const skeletonCards = projectsGrid.querySelectorAll('.skeleton-card');
+        skeletonCards.forEach(card => card.remove());
+    }
+
+    createSkeletonCard() {
+        const card = document.createElement('div');
+        card.className = 'skeleton-card';
+        card.innerHTML = `
+            <div class="skeleton skeleton-image"></div>
+            <div class="skeleton skeleton-status"></div>
+            <div class="skeleton skeleton-title"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text short"></div>
+            <div class="skeleton-tags">
+                <div class="skeleton skeleton-tag"></div>
+                <div class="skeleton skeleton-tag"></div>
+                <div class="skeleton skeleton-tag"></div>
+            </div>
+            <div class="skeleton-buttons">
+                <div class="skeleton skeleton-button"></div>
+                <div class="skeleton skeleton-button"></div>
+            </div>
+        `;
+        return card;
+    }
+
+    // Lazy Loading for Images
+    initLazyLoading() {
+        const images = document.querySelectorAll('.project-image');
+        
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        this.loadImage(img);
+                        observer.unobserve(img);
+                    }
+                });
+            }, {
+                rootMargin: '50px 0px',
+                threshold: 0.1
+            });
+
+            images.forEach(img => {
+                img.classList.add('loading');
+                imageObserver.observe(img);
+            });
+        } else {
+            // Fallback for browsers without IntersectionObserver
+            images.forEach(img => this.loadImage(img));
+        }
+    }
+
+    loadImage(img) {
+        if (img.src && !img.classList.contains('loaded')) {
+            img.onload = () => {
+                img.classList.remove('loading');
+                img.classList.add('loaded');
+            };
+            img.onerror = () => {
+                img.classList.remove('loading');
+                img.classList.add('error');
+            };
+            
+            // If image already cached, trigger load immediately
+            if (img.complete) {
+                img.onload();
+            }
+        }
     }
 
     // Progress Ring Animations
@@ -712,87 +807,276 @@ class PortfolioManager {
         setTimeout(typeWriter, 1500);
     }
 
-    // Enhanced Skills Grid Initialization with One-Time Hover Animations
+    // Enhanced Skills Grid Initialization with Framer Motion Play-to-End Animations
     initAnimatedSkills() {
         const skillItems = document.querySelectorAll('.skill-item');
+        const techSkillItems = document.querySelectorAll('.tech-skill-item');
         
+        // Initialize Framer Motion for main skill icons
         skillItems.forEach(item => {
-            let animationPlayed = false;
-            let isAnimating = false;
+            const skillIcon = item.querySelector('.skill-icon');
+            if (skillIcon && typeof Motion !== 'undefined') {
+                let isAnimating = false;
+                
+                const handleHoverStart = () => {
+                    if (!isAnimating) {
+                        isAnimating = true;
+                        this.triggerFramerMotionAnimation(item, skillIcon);
+                        
+                        setTimeout(() => {
+                            isAnimating = false;
+                        }, 1000);
+                    }
+                };
+                
+                item.addEventListener('mouseenter', handleHoverStart);
+                item.addEventListener('focus', handleHoverStart);
+            }
+        });
+
+        // Initialize Framer Motion for tech skills (progress bars section)
+        techSkillItems.forEach(item => {
+            const techIcon = item.querySelector('.tech-skill-icon');
+            const progressBar = item.querySelector('.tech-progress');
             
-            item.addEventListener('mouseenter', () => {
-                // Only trigger if not already animating and user wants to replay
-                if (!isAnimating) {
-                    isAnimating = true;
-                    const skillType = item.dataset.skill;
-                    this.triggerNewSkillAnimation(skillType, item);
-                    
-                    // Reset animation state after animation completes
-                    setTimeout(() => {
-                        isAnimating = false;
-                    }, 2000); // Maximum animation duration
-                }
-            });
+            if (techIcon && typeof Motion !== 'undefined') {
+                let isAnimating = false;
+                
+                const handleInteraction = () => {
+                    if (!isAnimating) {
+                        isAnimating = true;
+                        this.triggerTechSkillAnimation(techIcon, progressBar);
+                        
+                        setTimeout(() => {
+                            isAnimating = false;
+                        }, 800);
+                    }
+                };
+                
+                item.addEventListener('mouseenter', handleInteraction);
+                item.addEventListener('focus', handleInteraction);
+            }
         });
     }
 
-    triggerNewSkillAnimation(skillType, element) {
-        // Enhanced animations with improved timing and smoothness
+    triggerFramerMotionAnimation(item, skillIcon) {
+        const skillType = item.dataset.skill;
+        
+        // Container remains stable - only animate internal elements
         switch(skillType) {
             case 'csharp':
-                this.triggerCSharpAnimation(element);
+                this.animateCSharpIcon(skillIcon);
                 break;
             case 'kotlin':
-                this.triggerKotlinAnimation(element);
+                this.animateKotlinIcon(skillIcon);
                 break;
             case 'unity':
-                this.triggerUnityAnimation(element);
+                this.animateUnityIcon(skillIcon);
+                break;
+            case 'sql':
+                this.animateSQLIcon(skillIcon);
+                break;
+            case 'dotnet':
+                this.animateDotNetIcon(skillIcon);
+                break;
+            case 'git':
+                this.animateGitIcon(skillIcon);
                 break;
             default:
-                // Generic animation for other skills
-                this.triggerGenericSkillAnimation(element);
+                this.animateGenericIcon(skillIcon);
         }
     }
 
-    triggerCSharpAnimation(element) {
-        const sparks = element.querySelectorAll('.spark');
+    animateCSharpIcon(skillIcon) {
+        const sparks = skillIcon.querySelectorAll('.spark');
+        const energyCircle = skillIcon.querySelector('.energy-circle');
+        
+        // Animate sparks with stagger
         sparks.forEach((spark, index) => {
             setTimeout(() => {
-                spark.style.animation = 'none';
-                spark.offsetHeight; // Trigger reflow
-                spark.style.animation = 'sparkAppear 0.8s ease-out';
-            }, index * 150);
+                spark.style.transform = 'scale(0) rotate(0deg)';
+                spark.style.opacity = '0';
+                spark.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                
+                requestAnimationFrame(() => {
+                    spark.style.transform = 'scale(1.5) rotate(360deg)';
+                    spark.style.opacity = '1';
+                });
+                
+                setTimeout(() => {
+                    spark.style.transform = 'scale(1) rotate(360deg)';
+                }, 400);
+            }, index * 100);
+        });
+
+        // Animate energy circle
+        if (energyCircle) {
+            energyCircle.style.transform = 'scale(0.8)';
+            energyCircle.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            
+            requestAnimationFrame(() => {
+                energyCircle.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    energyCircle.style.transform = 'scale(1)';
+                }, 400);
+            });
+        }
+    }
+
+    animateKotlinIcon(skillIcon) {
+        const parts = skillIcon.querySelectorAll('.kotlin-part');
+        
+        parts.forEach((part, index) => {
+            setTimeout(() => {
+                part.style.transform = 'translateX(-20px) rotate(-15deg)';
+                part.style.transition = 'all 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+                
+                setTimeout(() => {
+                    part.style.transform = 'translateX(0) rotate(0deg)';
+                }, 50);
+            }, index * 80);
         });
     }
 
-    triggerKotlinAnimation(element) {
-        const parts = element.querySelectorAll('.kotlin-part');
-        parts.forEach((part, index) => {
+    animateUnityIcon(skillIcon) {
+        const cube = skillIcon.querySelector('.unity-cube');
+        
+        if (cube) {
+            cube.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+            cube.style.transition = 'transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            
+            requestAnimationFrame(() => {
+                cube.style.transform = 'rotateX(360deg) rotateY(360deg) scale(1.1)';
+                
+                setTimeout(() => {
+                    cube.style.transform = 'rotateX(360deg) rotateY(360deg) scale(1)';
+                }, 800);
+            });
+        }
+    }
+
+    animateSQLIcon(skillIcon) {
+        const digits = skillIcon.querySelectorAll('.data-digit');
+        const database = skillIcon.querySelector('.database-main');
+        
+        if (database) {
+            database.style.transform = 'scale(1) rotateY(0deg)';
+            database.style.transition = 'transform 0.6s ease-out';
+            
+            requestAnimationFrame(() => {
+                database.style.transform = 'scale(1.2) rotateY(180deg)';
+                setTimeout(() => {
+                    database.style.transform = 'scale(1) rotateY(360deg)';
+                }, 300);
+            });
+        }
+
+        digits.forEach((digit, index) => {
             setTimeout(() => {
-                part.style.animation = 'none';
-                part.offsetHeight; // Trigger reflow
-                part.style.animation = `kotlinSplit${index + 1} 1.0s ease-in-out`;
+                digit.style.transform = 'translateY(-10px)';
+                digit.style.opacity = '0.3';
+                digit.style.transition = 'all 0.4s ease-out';
+                
+                setTimeout(() => {
+                    digit.style.transform = 'translateY(0)';
+                    digit.style.opacity = '1';
+                }, 200);
             }, index * 100);
         });
     }
 
-    triggerUnityAnimation(element) {
-        const cube = element.querySelector('.unity-cube');
-        if (cube) {
-            cube.style.animation = 'none';
-            cube.offsetHeight; // Trigger reflow
-            cube.style.animation = 'unityRotate 1.5s ease-in-out';
+    animateDotNetIcon(skillIcon) {
+        const frameworkLines = skillIcon.querySelector('.framework-lines');
+        const dotnetText = skillIcon.querySelector('.dotnet-text');
+        
+        if (frameworkLines) {
+            frameworkLines.style.transform = 'scaleX(0.5) scaleY(0.5)';
+            frameworkLines.style.transition = 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            
+            requestAnimationFrame(() => {
+                frameworkLines.style.transform = 'scaleX(1.2) scaleY(1.2)';
+                setTimeout(() => {
+                    frameworkLines.style.transform = 'scaleX(1) scaleY(1)';
+                }, 500);
+            });
+        }
+
+        if (dotnetText) {
+            dotnetText.style.transform = 'scale(1)';
+            dotnetText.style.transition = 'transform 0.6s ease-out';
+            
+            setTimeout(() => {
+                dotnetText.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    dotnetText.style.transform = 'scale(1)';
+                }, 300);
+            }, 200);
         }
     }
 
-    triggerGenericSkillAnimation(element) {
-        // Generic pulse animation for skills without custom animations
-        element.style.transform = 'scale(1.05)';
-        element.style.transition = 'transform 0.3s ease-out';
+    animateGitIcon(skillIcon) {
+        const branches = skillIcon.querySelectorAll('.git-branch');
+        const gitIcon = skillIcon.querySelector('.git-icon');
         
-        setTimeout(() => {
-            element.style.transform = 'scale(1)';
-        }, 300);
+        if (gitIcon) {
+            gitIcon.style.transform = 'rotate(0deg) scale(1)';
+            gitIcon.style.transition = 'transform 0.8s ease-in-out';
+            
+            requestAnimationFrame(() => {
+                gitIcon.style.transform = 'rotate(360deg) scale(1.1)';
+                setTimeout(() => {
+                    gitIcon.style.transform = 'rotate(360deg) scale(1)';
+                }, 600);
+            });
+        }
+
+        branches.forEach((branch, index) => {
+            setTimeout(() => {
+                branch.style.strokeDashoffset = '100';
+                branch.style.transition = 'stroke-dashoffset 0.8s ease-out';
+                
+                requestAnimationFrame(() => {
+                    branch.style.strokeDashoffset = '0';
+                });
+            }, index * 200);
+        });
+    }
+
+    animateGenericIcon(skillIcon) {
+        // Generic bounce animation for skills without specific animations
+        skillIcon.style.transform = 'scale(1)';
+        skillIcon.style.transition = 'transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+        
+        requestAnimationFrame(() => {
+            skillIcon.style.transform = 'scale(1.15)';
+            setTimeout(() => {
+                skillIcon.style.transform = 'scale(1)';
+            }, 250);
+        });
+    }
+
+    triggerTechSkillAnimation(techIcon, progressBar) {
+        // Animate tech skill icon
+        techIcon.style.transform = 'scale(1) rotateZ(0deg)';
+        techIcon.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        
+        requestAnimationFrame(() => {
+            techIcon.style.transform = 'scale(1.2) rotateZ(10deg)';
+            setTimeout(() => {
+                techIcon.style.transform = 'scale(1) rotateZ(0deg)';
+            }, 300);
+        });
+
+        // Animate progress bar
+        if (progressBar) {
+            const currentWidth = progressBar.style.width;
+            progressBar.style.width = '0%';
+            progressBar.style.transition = 'width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            
+            setTimeout(() => {
+                progressBar.style.width = currentWidth;
+            }, 100);
+        }
     }
 
     // Add placeholders for projects without images
