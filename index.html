@@ -14,6 +14,11 @@
     <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.umd.js"></script>
 </head>
 <body>
+    <!-- Progress Bar -->
+    <div class="scroll-progress-bar">
+        <div class="scroll-progress-fill"></div>
+    </div>
+
     <div class="stars-background">
         <div class="star"></div>
         <div class="star"></div>
@@ -1528,6 +1533,67 @@
             </div>
         </div>
     </footer>
+
+    <!-- Modal Portal -->
+    <div id="modal-portal" class="modal-portal">
+        <div class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <div class="modal-container" tabindex="-1">
+                <button class="modal-close" aria-label="Close modal" type="button">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 id="modal-title" class="modal-title"></h2>
+                        <div class="modal-status">
+                            <span class="modal-status-badge"></span>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-demo-container">
+                            <div class="modal-skeleton">
+                                <div class="skeleton skeleton-demo"></div>
+                                <div class="modal-skeleton-text">
+                                    <div class="skeleton skeleton-text"></div>
+                                    <div class="skeleton skeleton-text short"></div>
+                                </div>
+                            </div>
+                            <iframe class="modal-demo-iframe" 
+                                    frameborder="0" 
+                                    allowfullscreen 
+                                    title="Project Demo">
+                            </iframe>
+                            <div class="modal-fallback hidden">
+                                <div class="fallback-content">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <p data-translate="modal-demo-error">Не удалось загрузить демо</p>
+                                    <button class="btn btn-retry" type="button">
+                                        <i class="fas fa-redo"></i>
+                                        <span data-translate="btn-retry">Попробовать снова</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-description">
+                            <p class="modal-project-description"></p>
+                            <div class="modal-tags"></div>
+                        </div>
+                        <div class="modal-actions">
+                            <a class="btn btn-code modal-github-link" 
+               target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i>
+                                <span data-translate="btn-code">Код</span>
+                            </a>
+                            <a class="btn btn-demo modal-demo-link" 
+               target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span data-translate="btn-demo">Демо</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

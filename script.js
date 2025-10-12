@@ -36,6 +36,8 @@ class PortfolioManager {
                 'status-development': '🟡 В разработке',
                 'status-concept': '⚪ Концепт',
                 'status-completed': '✅ Завершён',
+                'modal-demo-error': 'Не удалось загрузить демо',
+                'btn-retry': 'Попробовать снова',
                 
                 // Project Descriptions
                 'dark-memorial-desc': 'Первый полноценный релиз игры на Unity. 2D проект с интересной механикой.',
@@ -149,6 +151,8 @@ class PortfolioManager {
                 'status-development': '🟡 In Development',
                 'status-concept': '⚪ Concept',
                 'status-completed': '✅ Completed',
+                'modal-demo-error': 'Failed to load demo',
+                'btn-retry': 'Try again',
                 
                 // Project Descriptions
                 'dark-memorial-desc': 'First full Unity game release. 2D project with interesting mechanics.',
@@ -231,6 +235,15 @@ class PortfolioManager {
             }
         };
         this.init();
+        
+        // Media query listeners for parallax
+        if (window.matchMedia) {
+            const mediaQuery = window.matchMedia('(max-width: 768px)');
+            const pointerQuery = window.matchMedia('(pointer: coarse)');
+            
+            mediaQuery.addListener(() => this.handleParallaxMediaChange());
+            pointerQuery.addListener(() => this.handleParallaxMediaChange());
+        }
     }
 
     init() {
@@ -247,6 +260,9 @@ class PortfolioManager {
         this.initTypingAnimation();
         this.initAnimatedSkills();
         this.initProjectPlaceholders();
+        this.initProjectModals();
+        this.initScrollProgressBar();
+        this.initPerformantParallax();
         this.initGSAPAnimations();
         this.initGitHubActivity();
         this.applyTranslations();
@@ -337,14 +353,6 @@ class PortfolioManager {
                     }
                 }
             });
-            
-            // Add parallax effect to navbar
-            if (typeof gsap !== 'undefined') {
-                const scrollSpeed = window.scrollY * 0.5;
-                gsap.set('.navbar', {
-                    y: Math.min(scrollSpeed, 10)
-                });
-            }
         };
 
         // Throttle scroll event for better performance
@@ -1114,6 +1122,408 @@ class PortfolioManager {
             }
         });
     }
+
+    // Project Modal System
+    initProjectModals() {
+        this.modal = document.getElementById('modal-portal');
+        this.modalContainer = this.modal.querySelector('.modal-container');
+        this.modalCloseBtn = this.modal.querySelector('.modal-close');
+        this.modalOverlay = this.modal.querySelector('.modal-overlay');
+        
+        // Focus trap elements
+        this.focusableElements = [
+            this.modalCloseBtn,
+            ...this.modal.querySelectorAll('button:not([disabled]), a[href], input, textarea, select')
+        ];
+        
+        this.initModalEventListeners();
+        this.initProjectClickHandlers();
+    }
+
+    initModalEventListeners() {
+        // Close modal events
+        this.modalCloseBtn.addEventListener('click', () => this.closeModal());
+        this.modalOverlay.addEventListener('click', (e) => {
+            if (e.target === this.modalOverlay) {
+                this.closeModal();
+            }
+        });
+
+        // Keyboard events
+        document.addEventListener('keydown', (e) => {
+            if (this.modal.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    this.closeModal();
+                } else if (e.key === 'Tab') {
+                    this.handleTabKeyDown(e);
+                }
+            }
+        });
+
+        // Retry button for fallback
+        const retryBtn = this.modal.querySelector('.btn-retry');
+        retryBtn?.addEventListener('click', () => this.retryDemo());
+    }
+
+    initProjectClickHandlers() {
+        const projectCards = document.querySelectorAll('.project-card');
+        
+        projectCards.forEach(card => {
+            // Make card clickable for modal
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', (e) => {
+                // Don't open modal if clicking on links or buttons
+                if (e.target.closest('a, button')) {
+                    return;
+                }
+                
+                this.openProjectModal(card);
+            });
+
+            // Add keyboard support
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('role', 'button');
+            card.setAttribute('aria-label', 'Open project details');
+            
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.openProjectModal(card);
+                }
+            });
+        });
+    }
+
+    openProjectModal(projectCard) {
+        const projectData = this.extractProjectData(projectCard);
+        this.populateModal(projectData);
+        this.showModal();
+        this.loadProjectDemo(projectData);
+    }
+
+    extractProjectData(card) {
+        const titleEl = card.querySelector('h3');
+        const descEl = card.querySelector('p[data-translate], p:not([data-translate])');
+        const statusEl = card.querySelector('.status-ring');
+        const tagsElements = card.querySelectorAll('.tag');
+        const githubLink = card.querySelector('a[href*="github"]');
+        const demoLink = card.querySelector('a.btn-demo:not(.disabled)');
+
+        return {
+            title: titleEl?.textContent || 'Project',
+            description: descEl?.textContent || 'No description available',
+            status: statusEl?.dataset.status || 'unknown',
+            tags: Array.from(tagsElements).map(tag => tag.textContent),
+            githubUrl: githubLink?.href || null,
+            demoUrl: demoLink?.href || null,
+            hasDemo: Boolean(demoLink && !demoLink.classList.contains('disabled'))
+        };
+    }
+
+    populateModal(projectData) {
+        // Set title
+        this.modal.querySelector('.modal-title').textContent = projectData.title;
+
+        // Set status badge
+        const statusBadge = this.modal.querySelector('.modal-status-badge');
+        statusBadge.className = `modal-status-badge ${projectData.status}`;
+        statusBadge.textContent = this.getStatusText(projectData.status);
+
+        // Set description
+        this.modal.querySelector('.modal-project-description').textContent = projectData.description;
+
+        // Set tags
+        const tagsContainer = this.modal.querySelector('.modal-tags');
+        tagsContainer.innerHTML = projectData.tags
+            .map(tag => `<span class="tag">${tag}</span>`)
+            .join('');
+
+        // Set action buttons
+        const githubBtn = this.modal.querySelector('.modal-github-link');
+        const demoBtn = this.modal.querySelector('.modal-demo-link');
+
+        if (projectData.githubUrl) {
+            githubBtn.href = projectData.githubUrl;
+            githubBtn.style.display = 'flex';
+        } else {
+            githubBtn.style.display = 'none';
+        }
+
+        if (projectData.demoUrl && projectData.hasDemo) {
+            demoBtn.href = projectData.demoUrl;
+            demoBtn.style.display = 'flex';
+        } else {
+            demoBtn.style.display = 'none';
+        }
+    }
+
+    getStatusText(status) {
+        const statusMap = {
+            'released': '🟢 Released',
+            'development': '🟡 In Development', 
+            'concept': '⚪ Concept',
+            'completed': '✅ Completed'
+        };
+        return statusMap[status] || '❓ Unknown';
+    }
+
+    loadProjectDemo(projectData) {
+        const iframe = this.modal.querySelector('.modal-demo-iframe');
+        const skeleton = this.modal.querySelector('.modal-skeleton');
+        const fallback = this.modal.querySelector('.modal-fallback');
+
+        // Reset states
+        iframe.classList.remove('loaded');
+        skeleton.style.display = 'flex';
+        fallback.classList.add('hidden');
+
+        if (projectData.demoUrl && projectData.hasDemo) {
+            // Show skeleton during loading
+            setTimeout(() => {
+                iframe.src = projectData.demoUrl;
+                
+                iframe.onload = () => {
+                    skeleton.style.display = 'none';
+                    iframe.classList.add('loaded');
+                };
+
+                iframe.onerror = () => {
+                    this.showFallback();
+                };
+
+                // Timeout fallback
+                setTimeout(() => {
+                    if (!iframe.classList.contains('loaded')) {
+                        this.showFallback();
+                    }
+                }, 10000); // 10 second timeout
+
+            }, 1500); // Show skeleton for 1.5 seconds
+        } else {
+            // No demo available
+            setTimeout(() => {
+                skeleton.style.display = 'none';
+                fallback.classList.remove('hidden');
+                fallback.querySelector('p').textContent = 'Demo not available for this project';
+                fallback.querySelector('.btn-retry').style.display = 'none';
+            }, 1000);
+        }
+    }
+
+    showFallback() {
+        const skeleton = this.modal.querySelector('.modal-skeleton');
+        const fallback = this.modal.querySelector('.modal-fallback');
+        
+        skeleton.style.display = 'none';
+        fallback.classList.remove('hidden');
+        fallback.querySelector('.btn-retry').style.display = 'inline-flex';
+    }
+
+    retryDemo() {
+        const currentProjectData = {
+            demoUrl: this.modal.querySelector('.modal-demo-link').href,
+            hasDemo: true
+        };
+        this.loadProjectDemo(currentProjectData);
+    }
+
+    showModal() {
+        this.modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Set focus to modal container for screen readers
+        setTimeout(() => {
+            this.modalContainer.focus();
+        }, 100);
+    }
+
+    closeModal() {
+        this.modal.classList.remove('active');
+        document.body.style.overflow = '';
+        
+        // Clear iframe to stop any loading
+        const iframe = this.modal.querySelector('.modal-demo-iframe');
+        iframe.src = '';
+        iframe.classList.remove('loaded');
+        
+        // Reset skeleton state
+        const skeleton = this.modal.querySelector('.modal-skeleton');
+        skeleton.style.display = 'flex';
+        
+        // Hide fallback
+        const fallback = this.modal.querySelector('.modal-fallback');
+        fallback.classList.add('hidden');
+    }
+
+    handleTabKeyDown(e) {
+        const firstFocusable = this.focusableElements[0];
+        const lastFocusable = this.focusableElements[this.focusableElements.length - 1];
+
+        if (e.shiftKey) {
+            // Shift + Tab
+            if (document.activeElement === firstFocusable) {
+                e.preventDefault();
+                lastFocusable.focus();
+            }
+        } else {
+            // Tab
+            if (document.activeElement === lastFocusable) {
+                e.preventDefault();
+                firstFocusable.focus();
+            }
+        }
+    }
+
+    // Scroll Progress Bar with RAF
+    initScrollProgressBar() {
+        this.progressBar = document.querySelector('.scroll-progress-bar');
+        this.progressFill = document.querySelector('.scroll-progress-fill');
+        
+        if (!this.progressBar || !this.progressFill) return;
+
+        this.isProgressBarVisible = false;
+        this.lastScrollY = 0;
+        this.ticking = false;
+
+        // Use passive scroll listener for better performance
+        window.addEventListener('scroll', () => {
+            this.lastScrollY = window.scrollY;
+            if (!this.ticking) {
+                requestAnimationFrame(() => this.updateProgressBar());
+                this.ticking = true;
+            }
+        }, { passive: true });
+
+        // Initial call
+        this.updateProgressBar();
+    }
+
+    updateProgressBar() {
+        const scrollTop = this.lastScrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        
+        if (docHeight <= 0) {
+            this.ticking = false;
+            return;
+        }
+
+        // Calculate scroll percentage
+        const scrollPercent = Math.min(Math.max(scrollTop / docHeight, 0), 1);
+        
+        // Show/hide progress bar based on scroll position
+        const shouldShowBar = scrollTop > 100; // Show after 100px scroll
+        
+        if (shouldShowBar !== this.isProgressBarVisible) {
+            this.isProgressBarVisible = shouldShowBar;
+            this.progressBar.classList.toggle('visible', shouldShowBar);
+        }
+
+        // Update progress bar width with RAF
+        this.progressFill.style.width = `${scrollPercent * 100}%`;
+        
+        this.ticking = false;
+    }
+
+    // Performant Parallax with RAF and translate3d (disabled on mobile)
+    initPerformantParallax() {
+        // Check if device supports parallax and isn't touch-based
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        const hasCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+        
+        if (isMobile || hasCoarsePointer) {
+            // Disable parallax on mobile/touch devices
+            this.parallaxEnabled = false;
+            return;
+        }
+
+        this.parallaxEnabled = true;
+        this.parallaxElements = {
+            navbar: document.querySelector('.navbar'),
+            starsBackground: document.querySelector('.stars-background'),
+            stars: document.querySelectorAll('.star')
+        };
+
+        this.lastParallaxScrollY = 0;
+        this.parallaxTicking = false;
+
+        // Use passive scroll listener
+        window.addEventListener('scroll', () => {
+            this.lastParallaxScrollY = window.scrollY;
+            if (!this.parallaxTicking) {
+                requestAnimationFrame(() => this.updateParallaxElements());
+                this.parallaxTicking = true;
+            }
+        }, { passive: true });
+
+        // Initial call
+        this.updateParallaxElements();
+    }
+
+    updateParallaxElements() {
+        if (!this.parallaxEnabled) return;
+
+        const scrollY = this.lastParallaxScrollY;
+        const windowHeight = window.innerHeight;
+        
+        // Navbar parallax (subtle movement)
+        if (this.parallaxElements.navbar) {
+            const navbarOffset = Math.min(scrollY * 0.1, 5); // Very subtle
+            this.parallaxElements.navbar.style.transform = `translate3d(0, ${navbarOffset}px, 0)`;
+        }
+
+        // Stars background parallax
+        if (this.parallaxElements.starsBackground) {
+            const backgroundOffset = scrollY * -0.3; // Move opposite to scroll
+            const rotationOffset = scrollY * 0.01; // Subtle rotation
+            this.parallaxElements.starsBackground.style.transform = 
+                `translate3d(0, ${backgroundOffset}px, 0) rotate(${rotationOffset}deg)`;
+        }
+
+        // Individual stars parallax
+        this.parallaxElements.stars.forEach((star, index) => {
+            if (!star) return;
+            
+            const speed = 0.2 + (index * 0.05); // Varying speeds
+            const yOffset = scrollY * -speed;
+            const xOffset = Math.sin(scrollY * 0.001 + index) * 10; // Subtle horizontal movement
+            const rotation = scrollY * 0.02 * (index + 1); // Different rotation speeds
+            
+            star.style.transform = 
+                `translate3d(${xOffset}px, ${yOffset}px, 0) rotate(${rotation}deg)`;
+        });
+
+        this.parallaxTicking = false;
+    }
+
+    // Disable/Enable parallax based on media queries
+    handleParallaxMediaChange() {
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        const hasCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+        
+        const shouldDisable = isMobile || hasCoarsePointer;
+        
+        if (shouldDisable && this.parallaxEnabled) {
+            // Disable parallax
+            this.parallaxEnabled = false;
+            this.resetParallaxElements();
+        } else if (!shouldDisable && !this.parallaxEnabled) {
+            // Re-enable parallax
+            this.parallaxEnabled = true;
+        }
+    }
+
+    resetParallaxElements() {
+        // Reset all parallax transforms
+        if (this.parallaxElements.navbar) {
+            this.parallaxElements.navbar.style.transform = '';
+        }
+        if (this.parallaxElements.starsBackground) {
+            this.parallaxElements.starsBackground.style.transform = '';
+        }
+        this.parallaxElements.stars.forEach(star => {
+            if (star) star.style.transform = '';
+        });
+    }
     
     // GSAP Animations
     initGSAPAnimations() {
@@ -1215,35 +1625,7 @@ class PortfolioManager {
             ease: 'back.out(1.7)'
         });
 
-        // Enhanced Parallax background effect
-        gsap.to('.stars-background', {
-            scrollTrigger: {
-                trigger: 'body',
-                start: 'top top',
-                end: 'bottom bottom',
-                scrub: 1
-            },
-            y: -150,
-            rotation: 0.5,
-            ease: 'none'
-        });
-
-        // Individual star parallax effects
-        gsap.utils.toArray('.star').forEach((star, index) => {
-            gsap.to(star, {
-                scrollTrigger: {
-                    trigger: 'body',
-                    start: 'top top',
-                    end: 'bottom bottom',
-                    scrub: 1
-                },
-                y: -50 - (index * 10),
-                x: Math.sin(index) * 20,
-                rotation: index * 45,
-                ease: 'none'
-            });
-        });
-
+        // Parallax effects moved to RAF-based system for better performance
         // Section animations removed - they were causing poor UX performance
 
         // Navigation active section highlighting
