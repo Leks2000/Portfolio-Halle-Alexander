@@ -1,0 +1,44 @@
+{
+  "name": "portfolio-website",
+  "version": "2.0.0",
+  "description": "Modern Unity Developer Portfolio with Enhanced UI/UX",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 8000",
+    "build": "npm run lint && npm run format && npm run lighthouse",
+    "lint": "eslint script.js --fix",
+    "lint:check": "eslint script.js",
+    "format": "prettier --write *.html *.css *.js *.json",
+    "format:check": "prettier --check *.html *.css *.js *.json",
+    "lighthouse": "lhci autorun",
+    "lighthouse:local": "lighthouse http://localhost:8000 --output html --output-path lighthouse-report.html",
+    "validate": "html-validate index.html",
+    "serve": "python -m http.server 8000",
+    "test": "npm run lint:check && npm run format:check && npm run validate"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
+    "@lhci/cli": "^0.12.0",
+    "html-validate": "^8.9.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Leks2000/portfolio-website.git"
+  },
+  "keywords": [
+    "portfolio",
+    "unity",
+    "developer",
+    "frontend",
+    "responsive",
+    "performance"
+  ],
+  "author": "Alexander Halle",
+  "license": "MIT",
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
