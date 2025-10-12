@@ -416,8 +416,12 @@ class PortfolioManager {
         const filterButtons = document.querySelectorAll('.filter-btn');
         const projectCards = document.querySelectorAll('.project-card');
 
-        // Show top projects by default
-        this.filterProjects('top', projectCards);
+        // Initialize projects on page load without animation
+        setTimeout(() => {
+            document.querySelector('.projects-grid').classList.add('projects-loaded');
+            // Show top projects by default
+            this.filterProjects('top', projectCards);
+        }, 100);
 
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
@@ -447,12 +451,18 @@ class PortfolioManager {
             
             if (shouldShow) {
                 card.classList.remove('filtered-out', 'hidden');
+                card.style.display = 'block';
                 setTimeout(() => {
-                    card.classList.add('visible');
-                }, index * 100);
+                    card.classList.add('visible', 'fade-in-animate');
+                }, index * 50); // Faster stagger, smoother appearance
             } else {
-                card.classList.add('filtered-out', 'hidden');
-                card.classList.remove('visible');
+                card.classList.add('filtered-out');
+                card.classList.remove('visible', 'fade-in-animate');
+                setTimeout(() => {
+                    if (card.classList.contains('filtered-out')) {
+                        card.style.display = 'none';
+                    }
+                }, 500); // Hide after animation completes
             }
         });
     }
