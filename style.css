@@ -3916,6 +3916,7 @@ section::before {
 
 .projects-grid.loading .skeleton-card {
     display: flex;
+<<<<<<< HEAD
 }
 
 /* Modal Styles */
@@ -4291,4 +4292,6 @@ section::before {
     .scroll-progress-bar {
         height: 2px;
     }
+=======
+>>>>>>> 7847111 (feat: Major project refactor - updated statuses, added skeleton loaders, Framer Motion animations)
 }
