@@ -711,20 +711,32 @@ class PortfolioManager {
         setTimeout(typeWriter, 1500);
     }
 
-    // New Skills Grid Initialization
+    // Enhanced Skills Grid Initialization with One-Time Hover Animations
     initAnimatedSkills() {
         const skillItems = document.querySelectorAll('.skill-item');
         
         skillItems.forEach(item => {
+            let animationPlayed = false;
+            let isAnimating = false;
+            
             item.addEventListener('mouseenter', () => {
-                const skillType = item.dataset.skill;
-                this.triggerNewSkillAnimation(skillType, item);
+                // Only trigger if not already animating and user wants to replay
+                if (!isAnimating) {
+                    isAnimating = true;
+                    const skillType = item.dataset.skill;
+                    this.triggerNewSkillAnimation(skillType, item);
+                    
+                    // Reset animation state after animation completes
+                    setTimeout(() => {
+                        isAnimating = false;
+                    }, 2000); // Maximum animation duration
+                }
             });
         });
     }
 
     triggerNewSkillAnimation(skillType, element) {
-        // Enhanced animations with custom JavaScript triggers
+        // Enhanced animations with improved timing and smoothness
         switch(skillType) {
             case 'csharp':
                 this.triggerCSharpAnimation(element);
@@ -736,7 +748,8 @@ class PortfolioManager {
                 this.triggerUnityAnimation(element);
                 break;
             default:
-                console.log(`Animation triggered for ${skillType}`);
+                // Generic animation for other skills
+                this.triggerGenericSkillAnimation(element);
         }
     }
 
@@ -746,8 +759,8 @@ class PortfolioManager {
             setTimeout(() => {
                 spark.style.animation = 'none';
                 spark.offsetHeight; // Trigger reflow
-                spark.style.animation = 'sparkAppear 1.2s ease-out';
-            }, index * 200);
+                spark.style.animation = 'sparkAppear 0.8s ease-out';
+            }, index * 150);
         });
     }
 
@@ -757,7 +770,7 @@ class PortfolioManager {
             setTimeout(() => {
                 part.style.animation = 'none';
                 part.offsetHeight; // Trigger reflow
-                part.style.animation = `kotlinSplit${index + 1} 1.5s ease-in-out`;
+                part.style.animation = `kotlinSplit${index + 1} 1.0s ease-in-out`;
             }, index * 100);
         });
     }
@@ -767,8 +780,18 @@ class PortfolioManager {
         if (cube) {
             cube.style.animation = 'none';
             cube.offsetHeight; // Trigger reflow
-            cube.style.animation = 'unityRotate 2s ease-in-out';
+            cube.style.animation = 'unityRotate 1.5s ease-in-out';
         }
+    }
+
+    triggerGenericSkillAnimation(element) {
+        // Generic pulse animation for skills without custom animations
+        element.style.transform = 'scale(1.05)';
+        element.style.transition = 'transform 0.3s ease-out';
+        
+        setTimeout(() => {
+            element.style.transform = 'scale(1)';
+        }, 300);
     }
     
     // GSAP Animations
@@ -900,30 +923,7 @@ class PortfolioManager {
             });
         });
 
-        // Smooth section transitions with enhanced effects
-        gsap.utils.toArray('section').forEach((section, index) => {
-            gsap.fromTo(section, 
-                {
-                    opacity: 0.7,
-                    y: 80,
-                    scale: 0.95
-                },
-                {
-                    scrollTrigger: {
-                        trigger: section,
-                        start: 'top 90%',
-                        end: 'bottom 10%',
-                        scrub: 2,
-                        toggleActions: 'play none none reverse'
-                    },
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                    duration: 1.5,
-                    ease: 'power2.out'
-                }
-            );
-        });
+        // Section animations removed - they were causing poor UX performance
 
         // Navigation active section highlighting
         gsap.utils.toArray('section').forEach(section => {
