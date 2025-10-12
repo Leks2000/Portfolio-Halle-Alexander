@@ -244,6 +244,7 @@ class PortfolioManager {
         this.initCustomCursor();
         this.initTypingAnimation();
         this.initAnimatedSkills();
+        this.initProjectPlaceholders();
         this.initGSAPAnimations();
         this.initGitHubActivity();
         this.applyTranslations();
@@ -792,6 +793,42 @@ class PortfolioManager {
         setTimeout(() => {
             element.style.transform = 'scale(1)';
         }, 300);
+    }
+
+    // Add placeholders for projects without images
+    initProjectPlaceholders() {
+        const projectCards = document.querySelectorAll('.project-card');
+        const gradients = [
+            'linear-gradient(135deg, #4CAF50, #00d4ff)',
+            'linear-gradient(135deg, #ff6b35, #a855f7)',
+            'linear-gradient(135deg, #00d4ff, #4CAF50)',
+            'linear-gradient(135deg, #a855f7, #ff6b35)',
+            'linear-gradient(135deg, #ff6b35, #00d4ff)',
+            'linear-gradient(135deg, #4CAF50, #a855f7)'
+        ];
+        
+        projectCards.forEach((card, index) => {
+            const hasImage = card.querySelector('.project-image, .project-preview, .project-image-placeholder');
+            const projectContent = card.querySelector('.project-content');
+            const projectTitle = card.querySelector('h3')?.textContent;
+            
+            if (!hasImage && projectContent && projectTitle) {
+                // Create project preview container
+                const previewContainer = document.createElement('div');
+                previewContainer.className = 'project-preview';
+                
+                // Create placeholder
+                const placeholder = document.createElement('div');
+                placeholder.className = 'project-image-placeholder';
+                placeholder.style.background = gradients[index % gradients.length];
+                placeholder.textContent = projectTitle;
+                
+                previewContainer.appendChild(placeholder);
+                
+                // Insert before project content
+                card.insertBefore(previewContainer, projectContent);
+            }
+        });
     }
     
     // GSAP Animations
