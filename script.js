@@ -40,7 +40,7 @@ class PortfolioManager {
                 'status-released': '🟢 Релиз',
                 'status-development': '🟡 В разработке',
                 'status-concept': '⚪ Концепт',
-                'status-completed': '✅ Завершён',
+                'status-completed': '🟢 Завершён',
                 'modal-demo-error': 'Не удалось загрузить демо',
                 'btn-retry': 'Попробовать снова',
 
@@ -165,7 +165,7 @@ class PortfolioManager {
                 'status-released': '🟢 Released',
                 'status-development': '🟡 In Development',
                 'status-concept': '⚪ Concept',
-                'status-completed': '✅ Completed',
+                'status-completed': '🟢 Completed',
                 'modal-demo-error': 'Failed to load demo',
                 'btn-retry': 'Try again',
 
