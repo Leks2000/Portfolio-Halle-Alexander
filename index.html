@@ -62,6 +62,7 @@
                 <li class="nav-item"><a href="#home" class="nav-link" data-translate="nav-home">Главная</a></li>
                 <li class="nav-item"><a href="#projects" class="nav-link" data-translate="nav-projects">Проекты</a></li>
                 <li class="nav-item"><a href="#skills" class="nav-link" data-translate="nav-skills">Навыки</a></li>
+                <li class="nav-item"><a href="#tech-skills" class="nav-link" data-translate="nav-tech-skills">Технические навыки</a></li>
                 <li class="nav-item"><a href="#about" class="nav-link" data-translate="nav-about">О себе</a></li>
                 <li class="nav-item"><a href="#content" class="nav-link" data-translate="nav-content">Контент</a></li>
                 <li class="nav-item"><a href="#contact" class="nav-link" data-translate="nav-contact">Контакты</a></li>
@@ -193,7 +194,7 @@
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3>Deck's & Dungeon</h3>
+                        <h3><i class="fas fa-star favorite-star" title="Избранный проект"></i> Deck's & Dungeon</h3>
                         <p data-translate="decks-desc">Игра с карточными пошаговыми боями в подземельях. Unity, C#, 2.5D.</p>
                         <div class="project-tags">
                             <span class="tag">Unity</span>
@@ -398,7 +399,7 @@
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3>ChefPro</h3>
+                        <h3><i class="fas fa-star favorite-star" title="Избранный проект"></i> ChefPro</h3>
                         <p data-translate="chefpro-desc">Приложение-повар: вводишь продукты из холодильника — получаешь рецепт с пошаговой инструкцией от ИИ.</p>
                         <div class="project-tags">
                             <span class="tag">Kotlin</span>
@@ -510,7 +511,7 @@
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3>ProFinder</h3>
+                        <h3><i class="fas fa-star favorite-star" title="Избранный проект"></i> ProFinder</h3>
                         <p data-translate="profinder-desc">Сайт поиска работы.</p>
                         <div class="project-tags">
                             <span class="tag">ASP.NET</span>
@@ -549,6 +550,9 @@
                             <a href="https://leks2000.github.io/portfolio-terminal/" class="btn btn-demo" target="_blank" rel="noopener noreferrer">
                                 <i class="fas fa-external-link-alt"></i> <span data-translate="btn-demo">Сайт</span>
                             </a>
+                            <a href="https://github.com/Leks2000/portfolio-terminal" class="btn btn-code" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -565,7 +569,7 @@
                         </div>
                     </div>
                     <div class="project-content">
-                        <h3>Promtly</h3>
+                        <h3><i class="fas fa-star favorite-star" title="Избранный проект"></i> Promtly</h3>
                         <p data-translate="promtly-desc">Chrome Extension для улучшения промптов и анализа изображений (создание описаний по фото).</p>
                         <div class="project-tags">
                             <span class="tag">JavaScript</span>
@@ -589,44 +593,68 @@
                 </div>
 
                 <!-- Telegram Bots -->
-                <div class="project-card bot-card" data-category="bots">
-                    <div class="bot-header">
-                        <div class="bot-avatar">
+                <div class="project-card" data-category="bots" data-top="false">
+                    <div class="project-preview bot-preview">
+                        <div class="bot-avatar-large">
                             <i class="fab fa-telegram-plane"></i>
                         </div>
-                        <div class="bot-info">
-                            <h3>NewsTGBot</h3>
-                            <p>Telegram-бот, публикующий ИИ-новости с мемами и шутками.</p>
-                            <div class="bot-stats">
-                                <span class="bot-tag">Python</span>
-                                <span class="bot-tag">aiogram</span>
-                                <span class="bot-tag">OpenRouter API</span>
-                            </div>
+                        <div class="preview-overlay">
+                            <i class="fas fa-robot"></i>
                         </div>
-                        <div class="bot-actions">
-                            <a href="https://github.com/Leks2000/NewsTGBot" class="bot-btn" target="_blank" rel="noopener noreferrer">
-                                <i class="fab fa-github"></i> КОД
+                    </div>
+                    <div class="project-status">
+                        <div class="status-ring" data-status="released">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>NewsTGBot</h3>
+                        <p data-translate="newstgbot-desc">Telegram-бот, публикующий ИИ-новости с мемами и шутками.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">aiogram</span>
+                            <span class="tag">OpenRouter API</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/Leks2000/NewsTGBot" class="btn btn-code" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
                             </a>
                         </div>
                     </div>
                 </div>
 
-                <div class="project-card bot-card" data-category="bots">
-                    <div class="bot-header">
-                        <div class="bot-avatar">
+                <div class="project-card" data-category="bots" data-top="false">
+                    <div class="project-preview bot-preview">
+                        <div class="bot-avatar-large">
                             <i class="fab fa-telegram-plane"></i>
                         </div>
-                        <div class="bot-info">
-                            <h3>Telegram Bot</h3>
-                            <p>Присылает случайные мемы пользователю.</p>
-                            <div class="bot-stats">
-                                <span class="bot-tag">Python</span>
-                                <span class="bot-tag">aiogram</span>
-                            </div>
+                        <div class="preview-overlay">
+                            <i class="fas fa-robot"></i>
                         </div>
-                        <div class="bot-actions">
-                            <a href="https://github.com/Leks2000/TelegramBot" class="bot-btn" target="_blank" rel="noopener noreferrer">
-                                <i class="fab fa-github"></i> КОД
+                    </div>
+                    <div class="project-status">
+                        <div class="status-ring" data-status="released">
+                            <svg class="progress-ring" width="60" height="60">
+                                <circle class="progress-ring__circle" stroke="var(--unity-blue)" stroke-width="3" 
+                                        fill="transparent" r="27" cx="30" cy="30" stroke-dasharray="169.65" stroke-dashoffset="0"/>
+                            </svg>
+                            <div class="status-text" data-translate="status-released">🟢 Релиз</div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Telegram Bot</h3>
+                        <p data-translate="telegrambot-desc">Присылает случайные мемы пользователю.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">aiogram</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="https://github.com/Leks2000/TelegramBot" class="btn btn-code" target="_blank" rel="noopener noreferrer">
+                                <i class="fab fa-github"></i> <span data-translate="btn-code">Код</span>
                             </a>
                         </div>
                     </div>
@@ -691,48 +719,6 @@
                     </div>
                 </div>
 
-                <!-- .NET Technologies Category -->
-                <div class="skill-category-modern">
-                    <h3 class="skill-category-title">Технологии .NET</h3>
-                    <div class="skills-grid-modern">
-                        <div class="modern-skill-item" data-skill="dotnet">
-                            <div class="skill-icon-modern">
-                                <i class="fas fa-code"></i>
-                            </div>
-                            <div class="skill-details">
-                                <div class="skill-name-modern">.NET Core</div>
-                                <div class="skill-progress-modern">
-                                    <div class="progress-bar-modern" data-progress="85"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="modern-skill-item" data-skill="aspnet">
-                            <div class="skill-icon-modern">
-                                <i class="fas fa-globe"></i>
-                            </div>
-                            <div class="skill-details">
-                                <div class="skill-name-modern">ASP.NET</div>
-                                <div class="skill-progress-modern">
-                                    <div class="progress-bar-modern" data-progress="80"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="modern-skill-item" data-skill="wpf">
-                            <div class="skill-icon-modern">
-                                <i class="fas fa-desktop"></i>
-                            </div>
-                            <div class="skill-details">
-                                <div class="skill-name-modern">WPF</div>
-                                <div class="skill-progress-modern">
-                                    <div class="progress-bar-modern" data-progress="75"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Game Development Category -->
                 <div class="skill-category-modern">
                     <h3 class="skill-category-title">Разработка игр</h3>
@@ -769,6 +755,65 @@
                                 <div class="skill-name-modern">Blender</div>
                                 <div class="skill-progress-modern">
                                     <div class="progress-bar-modern" data-progress="60"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Separator -->
+    <div class="section-separator">
+        <div class="section-separator-icon">
+            <i class="fas fa-cogs"></i>
+        </div>
+    </div>
+
+    <!-- Technical Skills Section -->
+    <section id="tech-skills" class="skills tech-skills">
+        <div class="container">
+            <h2 class="section-title" data-translate="tech-skills-title">Технические навыки</h2>
+            
+            <!-- Technical Skills Grid with Categories -->
+            <div class="modern-skills-container">
+                <!-- .NET Technologies Category -->
+                <div class="skill-category-modern">
+                    <h3 class="skill-category-title">Технологии .NET</h3>
+                    <div class="skills-grid-modern">
+                        <div class="modern-skill-item" data-skill="dotnet">
+                            <div class="skill-icon-modern">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div class="skill-details">
+                                <div class="skill-name-modern">.NET Core</div>
+                                <div class="skill-progress-modern">
+                                    <div class="progress-bar-modern" data-progress="85"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modern-skill-item" data-skill="aspnet">
+                            <div class="skill-icon-modern">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="skill-details">
+                                <div class="skill-name-modern">ASP.NET</div>
+                                <div class="skill-progress-modern">
+                                    <div class="progress-bar-modern" data-progress="80"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modern-skill-item" data-skill="wpf">
+                            <div class="skill-icon-modern">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="skill-details">
+                                <div class="skill-name-modern">WPF</div>
+                                <div class="skill-progress-modern">
+                                    <div class="progress-bar-modern" data-progress="75"></div>
                                 </div>
                             </div>
                         </div>
@@ -1050,9 +1095,52 @@
     <!-- GitHub Activity Section -->
     <section id="github-activity" class="github-activity">
         <div class="container">
-            <h2 class="section-title">GitHub Activity</h2>
+            <h2 class="section-title" data-translate="github-title">GitHub Activity</h2>
+            
+            <!-- GitHub Stats -->
+            <div class="github-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="repo-count">-</span>
+                        <span class="stat-label" data-translate="github-repositories">Репозиториев</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="total-commits">-</span>
+                        <span class="stat-label" data-translate="github-commits">Коммитов</span>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-number" id="last-update">-</span>
+                        <span class="stat-label" data-translate="github-last-update">Последнее обновление</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- GitHub Widget -->
             <div id="github-widget" data-skeleton="github">
-                <!-- GitHub widget will be loaded here -->
+                <!-- Detailed GitHub widget will be loaded here -->
+            </div>
+            
+            <!-- GitHub Link -->
+            <div class="github-actions">
+                <a href="https://github.com/Leks2000" class="btn btn-github" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i>
+                    <span data-translate="github-open">Открыть мой GitHub</span>
+                </a>
             </div>
         </div>
     </section>
