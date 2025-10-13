@@ -36,8 +36,11 @@ class PortfolioManager {
                 'status-development': '🟡 В разработке',
                 'status-concept': '⚪ Концепт',
                 'status-completed': '✅ Завершён',
+<<<<<<< HEAD
                 'modal-demo-error': 'Не удалось загрузить демо',
                 'btn-retry': 'Попробовать снова',
+=======
+>>>>>>> 7847111 (feat: Major project refactor - updated statuses, added skeleton loaders, Framer Motion animations)
                 
                 // Project Descriptions
                 'dark-memorial-desc': 'Первый полноценный релиз игры на Unity. 2D проект с интересной механикой.',
@@ -151,8 +154,11 @@ class PortfolioManager {
                 'status-development': '🟡 In Development',
                 'status-concept': '⚪ Concept',
                 'status-completed': '✅ Completed',
+<<<<<<< HEAD
                 'modal-demo-error': 'Failed to load demo',
                 'btn-retry': 'Try again',
+=======
+>>>>>>> 7847111 (feat: Major project refactor - updated statuses, added skeleton loaders, Framer Motion animations)
                 
                 // Project Descriptions
                 'dark-memorial-desc': 'First full Unity game release. 2D project with interesting mechanics.',
