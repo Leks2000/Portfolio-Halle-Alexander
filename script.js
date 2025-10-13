@@ -35,6 +35,9 @@ class PortfolioManager {
                 'status-released': '🟢 Релиз',
                 'status-development': '🟡 В разработке',
                 'status-concept': '⚪ Концепт',
+                'status-completed': '✅ Завершён',
+                'modal-demo-error': 'Не удалось загрузить демо',
+                'btn-retry': 'Попробовать снова',
                 
                 // Project Descriptions
                 'dark-memorial-desc': 'Первый полноценный релиз игры на Unity. 2D проект с интересной механикой.',
@@ -147,6 +150,9 @@ class PortfolioManager {
                 'status-released': '🟢 Released',
                 'status-development': '🟡 In Development',
                 'status-concept': '⚪ Concept',
+                'status-completed': '✅ Completed',
+                'modal-demo-error': 'Failed to load demo',
+                'btn-retry': 'Try again',
                 
                 // Project Descriptions
                 'dark-memorial-desc': 'First full Unity game release. 2D project with interesting mechanics.',
@@ -229,6 +235,15 @@ class PortfolioManager {
             }
         };
         this.init();
+        
+        // Media query listeners for parallax
+        if (window.matchMedia) {
+            const mediaQuery = window.matchMedia('(max-width: 768px)');
+            const pointerQuery = window.matchMedia('(pointer: coarse)');
+            
+            mediaQuery.addListener(() => this.handleParallaxMediaChange());
+            pointerQuery.addListener(() => this.handleParallaxMediaChange());
+        }
     }
 
     init() {
@@ -245,6 +260,9 @@ class PortfolioManager {
         this.initTypingAnimation();
         this.initAnimatedSkills();
         this.initProjectPlaceholders();
+        this.initProjectModals();
+        this.initScrollProgressBar();
+        this.initPerformantParallax();
         this.initGSAPAnimations();
         this.initGitHubActivity();
         this.applyTranslations();
@@ -335,14 +353,6 @@ class PortfolioManager {
                     }
                 }
             });
-            
-            // Add parallax effect to navbar
-            if (typeof gsap !== 'undefined') {
-                const scrollSpeed = window.scrollY * 0.5;
-                gsap.set('.navbar', {
-                    y: Math.min(scrollSpeed, 10)
-                });
-            }
         };
 
         // Throttle scroll event for better performance
@@ -416,13 +426,20 @@ class PortfolioManager {
     initProjectFilters() {
         const filterButtons = document.querySelectorAll('.filter-btn');
         const projectCards = document.querySelectorAll('.project-card');
+        const projectsGrid = document.querySelector('.projects-grid');
 
-        // Initialize projects on page load without animation
+        // Show skeleton loaders initially
+        this.showSkeletonLoaders(projectsGrid);
+
+        // Initialize projects on page load with loading simulation
         setTimeout(() => {
-            document.querySelector('.projects-grid').classList.add('projects-loaded');
+            this.hideSkeletonLoaders(projectsGrid);
+            projectsGrid.classList.add('projects-loaded');
             // Show top projects by default
             this.filterProjects('top', projectCards);
-        }, 100);
+            // Initialize lazy loading
+            this.initLazyLoading();
+        }, 1500);
 
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
@@ -466,6 +483,92 @@ class PortfolioManager {
                 }, 500); // Hide after animation completes
             }
         });
+    }
+
+    // Skeleton Loaders
+    showSkeletonLoaders(projectsGrid) {
+        projectsGrid.classList.add('loading');
+        
+        // Create 6-8 skeleton cards
+        for (let i = 0; i < 7; i++) {
+            const skeletonCard = this.createSkeletonCard();
+            projectsGrid.appendChild(skeletonCard);
+        }
+    }
+
+    hideSkeletonLoaders(projectsGrid) {
+        projectsGrid.classList.remove('loading');
+        // Remove all skeleton cards
+        const skeletonCards = projectsGrid.querySelectorAll('.skeleton-card');
+        skeletonCards.forEach(card => card.remove());
+    }
+
+    createSkeletonCard() {
+        const card = document.createElement('div');
+        card.className = 'skeleton-card';
+        card.innerHTML = `
+            <div class="skeleton skeleton-image"></div>
+            <div class="skeleton skeleton-status"></div>
+            <div class="skeleton skeleton-title"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text short"></div>
+            <div class="skeleton-tags">
+                <div class="skeleton skeleton-tag"></div>
+                <div class="skeleton skeleton-tag"></div>
+                <div class="skeleton skeleton-tag"></div>
+            </div>
+            <div class="skeleton-buttons">
+                <div class="skeleton skeleton-button"></div>
+                <div class="skeleton skeleton-button"></div>
+            </div>
+        `;
+        return card;
+    }
+
+    // Lazy Loading for Images
+    initLazyLoading() {
+        const images = document.querySelectorAll('.project-image');
+        
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        this.loadImage(img);
+                        observer.unobserve(img);
+                    }
+                });
+            }, {
+                rootMargin: '50px 0px',
+                threshold: 0.1
+            });
+
+            images.forEach(img => {
+                img.classList.add('loading');
+                imageObserver.observe(img);
+            });
+        } else {
+            // Fallback for browsers without IntersectionObserver
+            images.forEach(img => this.loadImage(img));
+        }
+    }
+
+    loadImage(img) {
+        if (img.src && !img.classList.contains('loaded')) {
+            img.onload = () => {
+                img.classList.remove('loading');
+                img.classList.add('loaded');
+            };
+            img.onerror = () => {
+                img.classList.remove('loading');
+                img.classList.add('error');
+            };
+            
+            // If image already cached, trigger load immediately
+            if (img.complete) {
+                img.onload();
+            }
+        }
     }
 
     // Progress Ring Animations
@@ -712,87 +815,276 @@ class PortfolioManager {
         setTimeout(typeWriter, 1500);
     }
 
-    // Enhanced Skills Grid Initialization with One-Time Hover Animations
+    // Enhanced Skills Grid Initialization with Framer Motion Play-to-End Animations
     initAnimatedSkills() {
         const skillItems = document.querySelectorAll('.skill-item');
+        const techSkillItems = document.querySelectorAll('.tech-skill-item');
         
+        // Initialize Framer Motion for main skill icons
         skillItems.forEach(item => {
-            let animationPlayed = false;
-            let isAnimating = false;
+            const skillIcon = item.querySelector('.skill-icon');
+            if (skillIcon && typeof Motion !== 'undefined') {
+                let isAnimating = false;
+                
+                const handleHoverStart = () => {
+                    if (!isAnimating) {
+                        isAnimating = true;
+                        this.triggerFramerMotionAnimation(item, skillIcon);
+                        
+                        setTimeout(() => {
+                            isAnimating = false;
+                        }, 1000);
+                    }
+                };
+                
+                item.addEventListener('mouseenter', handleHoverStart);
+                item.addEventListener('focus', handleHoverStart);
+            }
+        });
+
+        // Initialize Framer Motion for tech skills (progress bars section)
+        techSkillItems.forEach(item => {
+            const techIcon = item.querySelector('.tech-skill-icon');
+            const progressBar = item.querySelector('.tech-progress');
             
-            item.addEventListener('mouseenter', () => {
-                // Only trigger if not already animating and user wants to replay
-                if (!isAnimating) {
-                    isAnimating = true;
-                    const skillType = item.dataset.skill;
-                    this.triggerNewSkillAnimation(skillType, item);
-                    
-                    // Reset animation state after animation completes
-                    setTimeout(() => {
-                        isAnimating = false;
-                    }, 2000); // Maximum animation duration
-                }
-            });
+            if (techIcon && typeof Motion !== 'undefined') {
+                let isAnimating = false;
+                
+                const handleInteraction = () => {
+                    if (!isAnimating) {
+                        isAnimating = true;
+                        this.triggerTechSkillAnimation(techIcon, progressBar);
+                        
+                        setTimeout(() => {
+                            isAnimating = false;
+                        }, 800);
+                    }
+                };
+                
+                item.addEventListener('mouseenter', handleInteraction);
+                item.addEventListener('focus', handleInteraction);
+            }
         });
     }
 
-    triggerNewSkillAnimation(skillType, element) {
-        // Enhanced animations with improved timing and smoothness
+    triggerFramerMotionAnimation(item, skillIcon) {
+        const skillType = item.dataset.skill;
+        
+        // Container remains stable - only animate internal elements
         switch(skillType) {
             case 'csharp':
-                this.triggerCSharpAnimation(element);
+                this.animateCSharpIcon(skillIcon);
                 break;
             case 'kotlin':
-                this.triggerKotlinAnimation(element);
+                this.animateKotlinIcon(skillIcon);
                 break;
             case 'unity':
-                this.triggerUnityAnimation(element);
+                this.animateUnityIcon(skillIcon);
+                break;
+            case 'sql':
+                this.animateSQLIcon(skillIcon);
+                break;
+            case 'dotnet':
+                this.animateDotNetIcon(skillIcon);
+                break;
+            case 'git':
+                this.animateGitIcon(skillIcon);
                 break;
             default:
-                // Generic animation for other skills
-                this.triggerGenericSkillAnimation(element);
+                this.animateGenericIcon(skillIcon);
         }
     }
 
-    triggerCSharpAnimation(element) {
-        const sparks = element.querySelectorAll('.spark');
+    animateCSharpIcon(skillIcon) {
+        const sparks = skillIcon.querySelectorAll('.spark');
+        const energyCircle = skillIcon.querySelector('.energy-circle');
+        
+        // Animate sparks with stagger
         sparks.forEach((spark, index) => {
             setTimeout(() => {
-                spark.style.animation = 'none';
-                spark.offsetHeight; // Trigger reflow
-                spark.style.animation = 'sparkAppear 0.8s ease-out';
-            }, index * 150);
+                spark.style.transform = 'scale(0) rotate(0deg)';
+                spark.style.opacity = '0';
+                spark.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                
+                requestAnimationFrame(() => {
+                    spark.style.transform = 'scale(1.5) rotate(360deg)';
+                    spark.style.opacity = '1';
+                });
+                
+                setTimeout(() => {
+                    spark.style.transform = 'scale(1) rotate(360deg)';
+                }, 400);
+            }, index * 100);
+        });
+
+        // Animate energy circle
+        if (energyCircle) {
+            energyCircle.style.transform = 'scale(0.8)';
+            energyCircle.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            
+            requestAnimationFrame(() => {
+                energyCircle.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    energyCircle.style.transform = 'scale(1)';
+                }, 400);
+            });
+        }
+    }
+
+    animateKotlinIcon(skillIcon) {
+        const parts = skillIcon.querySelectorAll('.kotlin-part');
+        
+        parts.forEach((part, index) => {
+            setTimeout(() => {
+                part.style.transform = 'translateX(-20px) rotate(-15deg)';
+                part.style.transition = 'all 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+                
+                setTimeout(() => {
+                    part.style.transform = 'translateX(0) rotate(0deg)';
+                }, 50);
+            }, index * 80);
         });
     }
 
-    triggerKotlinAnimation(element) {
-        const parts = element.querySelectorAll('.kotlin-part');
-        parts.forEach((part, index) => {
+    animateUnityIcon(skillIcon) {
+        const cube = skillIcon.querySelector('.unity-cube');
+        
+        if (cube) {
+            cube.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
+            cube.style.transition = 'transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            
+            requestAnimationFrame(() => {
+                cube.style.transform = 'rotateX(360deg) rotateY(360deg) scale(1.1)';
+                
+                setTimeout(() => {
+                    cube.style.transform = 'rotateX(360deg) rotateY(360deg) scale(1)';
+                }, 800);
+            });
+        }
+    }
+
+    animateSQLIcon(skillIcon) {
+        const digits = skillIcon.querySelectorAll('.data-digit');
+        const database = skillIcon.querySelector('.database-main');
+        
+        if (database) {
+            database.style.transform = 'scale(1) rotateY(0deg)';
+            database.style.transition = 'transform 0.6s ease-out';
+            
+            requestAnimationFrame(() => {
+                database.style.transform = 'scale(1.2) rotateY(180deg)';
+                setTimeout(() => {
+                    database.style.transform = 'scale(1) rotateY(360deg)';
+                }, 300);
+            });
+        }
+
+        digits.forEach((digit, index) => {
             setTimeout(() => {
-                part.style.animation = 'none';
-                part.offsetHeight; // Trigger reflow
-                part.style.animation = `kotlinSplit${index + 1} 1.0s ease-in-out`;
+                digit.style.transform = 'translateY(-10px)';
+                digit.style.opacity = '0.3';
+                digit.style.transition = 'all 0.4s ease-out';
+                
+                setTimeout(() => {
+                    digit.style.transform = 'translateY(0)';
+                    digit.style.opacity = '1';
+                }, 200);
             }, index * 100);
         });
     }
 
-    triggerUnityAnimation(element) {
-        const cube = element.querySelector('.unity-cube');
-        if (cube) {
-            cube.style.animation = 'none';
-            cube.offsetHeight; // Trigger reflow
-            cube.style.animation = 'unityRotate 1.5s ease-in-out';
+    animateDotNetIcon(skillIcon) {
+        const frameworkLines = skillIcon.querySelector('.framework-lines');
+        const dotnetText = skillIcon.querySelector('.dotnet-text');
+        
+        if (frameworkLines) {
+            frameworkLines.style.transform = 'scaleX(0.5) scaleY(0.5)';
+            frameworkLines.style.transition = 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            
+            requestAnimationFrame(() => {
+                frameworkLines.style.transform = 'scaleX(1.2) scaleY(1.2)';
+                setTimeout(() => {
+                    frameworkLines.style.transform = 'scaleX(1) scaleY(1)';
+                }, 500);
+            });
+        }
+
+        if (dotnetText) {
+            dotnetText.style.transform = 'scale(1)';
+            dotnetText.style.transition = 'transform 0.6s ease-out';
+            
+            setTimeout(() => {
+                dotnetText.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    dotnetText.style.transform = 'scale(1)';
+                }, 300);
+            }, 200);
         }
     }
 
-    triggerGenericSkillAnimation(element) {
-        // Generic pulse animation for skills without custom animations
-        element.style.transform = 'scale(1.05)';
-        element.style.transition = 'transform 0.3s ease-out';
+    animateGitIcon(skillIcon) {
+        const branches = skillIcon.querySelectorAll('.git-branch');
+        const gitIcon = skillIcon.querySelector('.git-icon');
         
-        setTimeout(() => {
-            element.style.transform = 'scale(1)';
-        }, 300);
+        if (gitIcon) {
+            gitIcon.style.transform = 'rotate(0deg) scale(1)';
+            gitIcon.style.transition = 'transform 0.8s ease-in-out';
+            
+            requestAnimationFrame(() => {
+                gitIcon.style.transform = 'rotate(360deg) scale(1.1)';
+                setTimeout(() => {
+                    gitIcon.style.transform = 'rotate(360deg) scale(1)';
+                }, 600);
+            });
+        }
+
+        branches.forEach((branch, index) => {
+            setTimeout(() => {
+                branch.style.strokeDashoffset = '100';
+                branch.style.transition = 'stroke-dashoffset 0.8s ease-out';
+                
+                requestAnimationFrame(() => {
+                    branch.style.strokeDashoffset = '0';
+                });
+            }, index * 200);
+        });
+    }
+
+    animateGenericIcon(skillIcon) {
+        // Generic bounce animation for skills without specific animations
+        skillIcon.style.transform = 'scale(1)';
+        skillIcon.style.transition = 'transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+        
+        requestAnimationFrame(() => {
+            skillIcon.style.transform = 'scale(1.15)';
+            setTimeout(() => {
+                skillIcon.style.transform = 'scale(1)';
+            }, 250);
+        });
+    }
+
+    triggerTechSkillAnimation(techIcon, progressBar) {
+        // Animate tech skill icon
+        techIcon.style.transform = 'scale(1) rotateZ(0deg)';
+        techIcon.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+        
+        requestAnimationFrame(() => {
+            techIcon.style.transform = 'scale(1.2) rotateZ(10deg)';
+            setTimeout(() => {
+                techIcon.style.transform = 'scale(1) rotateZ(0deg)';
+            }, 300);
+        });
+
+        // Animate progress bar
+        if (progressBar) {
+            const currentWidth = progressBar.style.width;
+            progressBar.style.width = '0%';
+            progressBar.style.transition = 'width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            
+            setTimeout(() => {
+                progressBar.style.width = currentWidth;
+            }, 100);
+        }
     }
 
     // Add placeholders for projects without images
@@ -828,6 +1120,408 @@ class PortfolioManager {
                 // Insert before project content
                 card.insertBefore(previewContainer, projectContent);
             }
+        });
+    }
+
+    // Project Modal System
+    initProjectModals() {
+        this.modal = document.getElementById('modal-portal');
+        this.modalContainer = this.modal.querySelector('.modal-container');
+        this.modalCloseBtn = this.modal.querySelector('.modal-close');
+        this.modalOverlay = this.modal.querySelector('.modal-overlay');
+        
+        // Focus trap elements
+        this.focusableElements = [
+            this.modalCloseBtn,
+            ...this.modal.querySelectorAll('button:not([disabled]), a[href], input, textarea, select')
+        ];
+        
+        this.initModalEventListeners();
+        this.initProjectClickHandlers();
+    }
+
+    initModalEventListeners() {
+        // Close modal events
+        this.modalCloseBtn.addEventListener('click', () => this.closeModal());
+        this.modalOverlay.addEventListener('click', (e) => {
+            if (e.target === this.modalOverlay) {
+                this.closeModal();
+            }
+        });
+
+        // Keyboard events
+        document.addEventListener('keydown', (e) => {
+            if (this.modal.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    this.closeModal();
+                } else if (e.key === 'Tab') {
+                    this.handleTabKeyDown(e);
+                }
+            }
+        });
+
+        // Retry button for fallback
+        const retryBtn = this.modal.querySelector('.btn-retry');
+        retryBtn?.addEventListener('click', () => this.retryDemo());
+    }
+
+    initProjectClickHandlers() {
+        const projectCards = document.querySelectorAll('.project-card');
+        
+        projectCards.forEach(card => {
+            // Make card clickable for modal
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', (e) => {
+                // Don't open modal if clicking on links or buttons
+                if (e.target.closest('a, button')) {
+                    return;
+                }
+                
+                this.openProjectModal(card);
+            });
+
+            // Add keyboard support
+            card.setAttribute('tabindex', '0');
+            card.setAttribute('role', 'button');
+            card.setAttribute('aria-label', 'Open project details');
+            
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.openProjectModal(card);
+                }
+            });
+        });
+    }
+
+    openProjectModal(projectCard) {
+        const projectData = this.extractProjectData(projectCard);
+        this.populateModal(projectData);
+        this.showModal();
+        this.loadProjectDemo(projectData);
+    }
+
+    extractProjectData(card) {
+        const titleEl = card.querySelector('h3');
+        const descEl = card.querySelector('p[data-translate], p:not([data-translate])');
+        const statusEl = card.querySelector('.status-ring');
+        const tagsElements = card.querySelectorAll('.tag');
+        const githubLink = card.querySelector('a[href*="github"]');
+        const demoLink = card.querySelector('a.btn-demo:not(.disabled)');
+
+        return {
+            title: titleEl?.textContent || 'Project',
+            description: descEl?.textContent || 'No description available',
+            status: statusEl?.dataset.status || 'unknown',
+            tags: Array.from(tagsElements).map(tag => tag.textContent),
+            githubUrl: githubLink?.href || null,
+            demoUrl: demoLink?.href || null,
+            hasDemo: Boolean(demoLink && !demoLink.classList.contains('disabled'))
+        };
+    }
+
+    populateModal(projectData) {
+        // Set title
+        this.modal.querySelector('.modal-title').textContent = projectData.title;
+
+        // Set status badge
+        const statusBadge = this.modal.querySelector('.modal-status-badge');
+        statusBadge.className = `modal-status-badge ${projectData.status}`;
+        statusBadge.textContent = this.getStatusText(projectData.status);
+
+        // Set description
+        this.modal.querySelector('.modal-project-description').textContent = projectData.description;
+
+        // Set tags
+        const tagsContainer = this.modal.querySelector('.modal-tags');
+        tagsContainer.innerHTML = projectData.tags
+            .map(tag => `<span class="tag">${tag}</span>`)
+            .join('');
+
+        // Set action buttons
+        const githubBtn = this.modal.querySelector('.modal-github-link');
+        const demoBtn = this.modal.querySelector('.modal-demo-link');
+
+        if (projectData.githubUrl) {
+            githubBtn.href = projectData.githubUrl;
+            githubBtn.style.display = 'flex';
+        } else {
+            githubBtn.style.display = 'none';
+        }
+
+        if (projectData.demoUrl && projectData.hasDemo) {
+            demoBtn.href = projectData.demoUrl;
+            demoBtn.style.display = 'flex';
+        } else {
+            demoBtn.style.display = 'none';
+        }
+    }
+
+    getStatusText(status) {
+        const statusMap = {
+            'released': '🟢 Released',
+            'development': '🟡 In Development', 
+            'concept': '⚪ Concept',
+            'completed': '✅ Completed'
+        };
+        return statusMap[status] || '❓ Unknown';
+    }
+
+    loadProjectDemo(projectData) {
+        const iframe = this.modal.querySelector('.modal-demo-iframe');
+        const skeleton = this.modal.querySelector('.modal-skeleton');
+        const fallback = this.modal.querySelector('.modal-fallback');
+
+        // Reset states
+        iframe.classList.remove('loaded');
+        skeleton.style.display = 'flex';
+        fallback.classList.add('hidden');
+
+        if (projectData.demoUrl && projectData.hasDemo) {
+            // Show skeleton during loading
+            setTimeout(() => {
+                iframe.src = projectData.demoUrl;
+                
+                iframe.onload = () => {
+                    skeleton.style.display = 'none';
+                    iframe.classList.add('loaded');
+                };
+
+                iframe.onerror = () => {
+                    this.showFallback();
+                };
+
+                // Timeout fallback
+                setTimeout(() => {
+                    if (!iframe.classList.contains('loaded')) {
+                        this.showFallback();
+                    }
+                }, 10000); // 10 second timeout
+
+            }, 1500); // Show skeleton for 1.5 seconds
+        } else {
+            // No demo available
+            setTimeout(() => {
+                skeleton.style.display = 'none';
+                fallback.classList.remove('hidden');
+                fallback.querySelector('p').textContent = 'Demo not available for this project';
+                fallback.querySelector('.btn-retry').style.display = 'none';
+            }, 1000);
+        }
+    }
+
+    showFallback() {
+        const skeleton = this.modal.querySelector('.modal-skeleton');
+        const fallback = this.modal.querySelector('.modal-fallback');
+        
+        skeleton.style.display = 'none';
+        fallback.classList.remove('hidden');
+        fallback.querySelector('.btn-retry').style.display = 'inline-flex';
+    }
+
+    retryDemo() {
+        const currentProjectData = {
+            demoUrl: this.modal.querySelector('.modal-demo-link').href,
+            hasDemo: true
+        };
+        this.loadProjectDemo(currentProjectData);
+    }
+
+    showModal() {
+        this.modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        
+        // Set focus to modal container for screen readers
+        setTimeout(() => {
+            this.modalContainer.focus();
+        }, 100);
+    }
+
+    closeModal() {
+        this.modal.classList.remove('active');
+        document.body.style.overflow = '';
+        
+        // Clear iframe to stop any loading
+        const iframe = this.modal.querySelector('.modal-demo-iframe');
+        iframe.src = '';
+        iframe.classList.remove('loaded');
+        
+        // Reset skeleton state
+        const skeleton = this.modal.querySelector('.modal-skeleton');
+        skeleton.style.display = 'flex';
+        
+        // Hide fallback
+        const fallback = this.modal.querySelector('.modal-fallback');
+        fallback.classList.add('hidden');
+    }
+
+    handleTabKeyDown(e) {
+        const firstFocusable = this.focusableElements[0];
+        const lastFocusable = this.focusableElements[this.focusableElements.length - 1];
+
+        if (e.shiftKey) {
+            // Shift + Tab
+            if (document.activeElement === firstFocusable) {
+                e.preventDefault();
+                lastFocusable.focus();
+            }
+        } else {
+            // Tab
+            if (document.activeElement === lastFocusable) {
+                e.preventDefault();
+                firstFocusable.focus();
+            }
+        }
+    }
+
+    // Scroll Progress Bar with RAF
+    initScrollProgressBar() {
+        this.progressBar = document.querySelector('.scroll-progress-bar');
+        this.progressFill = document.querySelector('.scroll-progress-fill');
+        
+        if (!this.progressBar || !this.progressFill) return;
+
+        this.isProgressBarVisible = false;
+        this.lastScrollY = 0;
+        this.ticking = false;
+
+        // Use passive scroll listener for better performance
+        window.addEventListener('scroll', () => {
+            this.lastScrollY = window.scrollY;
+            if (!this.ticking) {
+                requestAnimationFrame(() => this.updateProgressBar());
+                this.ticking = true;
+            }
+        }, { passive: true });
+
+        // Initial call
+        this.updateProgressBar();
+    }
+
+    updateProgressBar() {
+        const scrollTop = this.lastScrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        
+        if (docHeight <= 0) {
+            this.ticking = false;
+            return;
+        }
+
+        // Calculate scroll percentage
+        const scrollPercent = Math.min(Math.max(scrollTop / docHeight, 0), 1);
+        
+        // Show/hide progress bar based on scroll position
+        const shouldShowBar = scrollTop > 100; // Show after 100px scroll
+        
+        if (shouldShowBar !== this.isProgressBarVisible) {
+            this.isProgressBarVisible = shouldShowBar;
+            this.progressBar.classList.toggle('visible', shouldShowBar);
+        }
+
+        // Update progress bar width with RAF
+        this.progressFill.style.width = `${scrollPercent * 100}%`;
+        
+        this.ticking = false;
+    }
+
+    // Performant Parallax with RAF and translate3d (disabled on mobile)
+    initPerformantParallax() {
+        // Check if device supports parallax and isn't touch-based
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        const hasCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+        
+        if (isMobile || hasCoarsePointer) {
+            // Disable parallax on mobile/touch devices
+            this.parallaxEnabled = false;
+            return;
+        }
+
+        this.parallaxEnabled = true;
+        this.parallaxElements = {
+            navbar: document.querySelector('.navbar'),
+            starsBackground: document.querySelector('.stars-background'),
+            stars: document.querySelectorAll('.star')
+        };
+
+        this.lastParallaxScrollY = 0;
+        this.parallaxTicking = false;
+
+        // Use passive scroll listener
+        window.addEventListener('scroll', () => {
+            this.lastParallaxScrollY = window.scrollY;
+            if (!this.parallaxTicking) {
+                requestAnimationFrame(() => this.updateParallaxElements());
+                this.parallaxTicking = true;
+            }
+        }, { passive: true });
+
+        // Initial call
+        this.updateParallaxElements();
+    }
+
+    updateParallaxElements() {
+        if (!this.parallaxEnabled) return;
+
+        const scrollY = this.lastParallaxScrollY;
+        const windowHeight = window.innerHeight;
+        
+        // Navbar parallax (subtle movement)
+        if (this.parallaxElements.navbar) {
+            const navbarOffset = Math.min(scrollY * 0.1, 5); // Very subtle
+            this.parallaxElements.navbar.style.transform = `translate3d(0, ${navbarOffset}px, 0)`;
+        }
+
+        // Stars background parallax
+        if (this.parallaxElements.starsBackground) {
+            const backgroundOffset = scrollY * -0.3; // Move opposite to scroll
+            const rotationOffset = scrollY * 0.01; // Subtle rotation
+            this.parallaxElements.starsBackground.style.transform = 
+                `translate3d(0, ${backgroundOffset}px, 0) rotate(${rotationOffset}deg)`;
+        }
+
+        // Individual stars parallax
+        this.parallaxElements.stars.forEach((star, index) => {
+            if (!star) return;
+            
+            const speed = 0.2 + (index * 0.05); // Varying speeds
+            const yOffset = scrollY * -speed;
+            const xOffset = Math.sin(scrollY * 0.001 + index) * 10; // Subtle horizontal movement
+            const rotation = scrollY * 0.02 * (index + 1); // Different rotation speeds
+            
+            star.style.transform = 
+                `translate3d(${xOffset}px, ${yOffset}px, 0) rotate(${rotation}deg)`;
+        });
+
+        this.parallaxTicking = false;
+    }
+
+    // Disable/Enable parallax based on media queries
+    handleParallaxMediaChange() {
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        const hasCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+        
+        const shouldDisable = isMobile || hasCoarsePointer;
+        
+        if (shouldDisable && this.parallaxEnabled) {
+            // Disable parallax
+            this.parallaxEnabled = false;
+            this.resetParallaxElements();
+        } else if (!shouldDisable && !this.parallaxEnabled) {
+            // Re-enable parallax
+            this.parallaxEnabled = true;
+        }
+    }
+
+    resetParallaxElements() {
+        // Reset all parallax transforms
+        if (this.parallaxElements.navbar) {
+            this.parallaxElements.navbar.style.transform = '';
+        }
+        if (this.parallaxElements.starsBackground) {
+            this.parallaxElements.starsBackground.style.transform = '';
+        }
+        this.parallaxElements.stars.forEach(star => {
+            if (star) star.style.transform = '';
         });
     }
     
@@ -931,35 +1625,7 @@ class PortfolioManager {
             ease: 'back.out(1.7)'
         });
 
-        // Enhanced Parallax background effect
-        gsap.to('.stars-background', {
-            scrollTrigger: {
-                trigger: 'body',
-                start: 'top top',
-                end: 'bottom bottom',
-                scrub: 1
-            },
-            y: -150,
-            rotation: 0.5,
-            ease: 'none'
-        });
-
-        // Individual star parallax effects
-        gsap.utils.toArray('.star').forEach((star, index) => {
-            gsap.to(star, {
-                scrollTrigger: {
-                    trigger: 'body',
-                    start: 'top top',
-                    end: 'bottom bottom',
-                    scrub: 1
-                },
-                y: -50 - (index * 10),
-                x: Math.sin(index) * 20,
-                rotation: index * 45,
-                ease: 'none'
-            });
-        });
-
+        // Parallax effects moved to RAF-based system for better performance
         // Section animations removed - they were causing poor UX performance
 
         // Navigation active section highlighting
@@ -1256,3 +1922,1104 @@ if (!('scrollBehavior' in document.documentElement.style)) {
     script.src = 'https://cdn.jsdelivr.net/gh/iamdustan/smoothscroll@master/src/smoothscroll.js';
     document.head.appendChild(script);
 }
+
+/* ============================
+   FRAMER MOTION INTEGRATION - Play-to-End Animations
+   ============================ */
+
+class FramerMotionController {
+    constructor() {
+        this.motion = window.Motion || window.FramerMotion;
+        this.animationQueue = [];
+        this.isPlaying = false;
+        this.init();
+    }
+
+    init() {
+        if (this.motion) {
+            this.initScrollAnimations();
+            this.initHoverAnimations();
+            this.initProjectCardAnimations();
+            this.initSkillsAnimations();
+            this.initBotCardAnimations();
+        } else {
+            console.warn('Framer Motion not loaded, using fallback animations');
+            this.initFallbackAnimations();
+        }
+    }
+
+    // Play-to-end animation system
+    playToEndAnimation(element, animation, options = {}) {
+        return new Promise((resolve) => {
+            const { duration = 0.6, ease = "easeOut" } = options;
+            
+            if (this.motion) {
+                this.motion.animate(element, animation, {
+                    duration,
+                    ease,
+                    onComplete: resolve
+                });
+            } else {
+                // Fallback CSS animation
+                element.style.transition = `all ${duration}s ${ease}`;
+                Object.assign(element.style, animation);
+                setTimeout(resolve, duration * 1000);
+            }
+        });
+    }
+
+    initScrollAnimations() {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '-50px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    this.animateOnScroll(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe project cards, skill items, and other animated elements
+        document.querySelectorAll('.project-card, .modern-skill-item, .skill-category-modern').forEach(el => {
+            observer.observe(el);
+        });
+    }
+
+    animateOnScroll(element) {
+        const animations = {
+            '.project-card': {
+                y: [50, 0],
+                opacity: [0, 1],
+                scale: [0.9, 1]
+            },
+            '.modern-skill-item': {
+                x: [-30, 0],
+                opacity: [0, 1]
+            },
+            '.skill-category-modern': {
+                y: [30, 0],
+                opacity: [0, 1]
+            }
+        };
+
+        const selector = Object.keys(animations).find(sel => element.matches(sel));
+        if (selector) {
+            this.playToEndAnimation(element, animations[selector], {
+                duration: 0.8,
+                ease: "easeOut"
+            });
+        }
+    }
+
+    initHoverAnimations() {
+        // Enhanced hover animations for project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                this.playToEndAnimation(card, {
+                    y: -8,
+                    scale: 1.02
+                }, { duration: 0.3 });
+            });
+
+            card.addEventListener('mouseleave', () => {
+                this.playToEndAnimation(card, {
+                    y: 0,
+                    scale: 1
+                }, { duration: 0.3 });
+            });
+        });
+
+        // Bot card animations
+        document.querySelectorAll('.bot-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                this.playToEndAnimation(card, {
+                    y: -8,
+                    rotateX: 5
+                }, { duration: 0.4 });
+            });
+
+            card.addEventListener('mouseleave', () => {
+                this.playToEndAnimation(card, {
+                    y: 0,
+                    rotateX: 0
+                }, { duration: 0.4 });
+            });
+        });
+    }
+
+    initProjectCardAnimations() {
+        // Stagger animation for project grid
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach((card, index) => {
+            setTimeout(() => {
+                this.playToEndAnimation(card, {
+                    opacity: [0, 1],
+                    y: [30, 0]
+                }, {
+                    duration: 0.6,
+                    ease: "easeOut"
+                });
+            }, index * 100);
+        });
+    }
+
+    initSkillsAnimations() {
+        // Progressive skill bar animations
+        const skillBars = document.querySelectorAll('.progress-bar-modern');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bar = entry.target;
+                    const progress = bar.getAttribute('data-progress');
+                    
+                    this.playToEndAnimation(bar, {
+                        width: `${progress}%`
+                    }, {
+                        duration: 1.5,
+                        ease: "easeOut"
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        skillBars.forEach(bar => observer.observe(bar));
+    }
+
+    initBotCardAnimations() {
+        // Special animations for bot cards
+        document.querySelectorAll('.bot-avatar').forEach(avatar => {
+            avatar.addEventListener('click', () => {
+                this.playToEndAnimation(avatar, {
+                    rotate: 360,
+                    scale: [1, 1.2, 1]
+                }, { duration: 0.8 });
+            });
+        });
+    }
+
+    initFallbackAnimations() {
+        // CSS-based fallback animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInUp {
+                from { transform: translateY(30px); opacity: 0; }
+                to { transform: translateY(0); opacity: 1; }
+            }
+            
+            @keyframes slideInLeft {
+                from { transform: translateX(-30px); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            
+            .animate-slide-up { animation: slideInUp 0.6s ease-out forwards; }
+            .animate-slide-left { animation: slideInLeft 0.6s ease-out forwards; }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+/* ============================
+   SKELETON LOADERS SYSTEM
+   ============================ */
+
+class SkeletonLoader {
+    constructor() {
+        this.skeletons = {};
+        this.init();
+    }
+
+    init() {
+        this.createSkeletonComponents();
+        this.setupIntersectionObserver();
+    }
+
+    createSkeletonComponents() {
+        // 1. Project Card Skeleton
+        this.skeletons.projectCard = this.createProjectCardSkeleton();
+        
+        // 2. Skill Item Skeleton
+        this.skeletons.skillItem = this.createSkillItemSkeleton();
+        
+        // 3. Bot Card Skeleton
+        this.skeletons.botCard = this.createBotCardSkeleton();
+        
+        // 4. Navigation Skeleton
+        this.skeletons.navigation = this.createNavigationSkeleton();
+        
+        // 5. Hero Section Skeleton
+        this.skeletons.hero = this.createHeroSkeleton();
+        
+        // 6. Profile Card Skeleton
+        this.skeletons.profile = this.createProfileSkeleton();
+        
+        // 7. Video Card Skeleton
+        this.skeletons.video = this.createVideoSkeleton();
+        
+        // 8. GitHub API Widget Skeleton
+        this.skeletons.github = this.createGitHubSkeleton();
+    }
+
+    createProjectCardSkeleton() {
+        return `
+            <div class="skeleton-project-card">
+                <div class="skeleton skeleton-image"></div>
+                <div class="skeleton-content">
+                    <div class="skeleton skeleton-title"></div>
+                    <div class="skeleton skeleton-text"></div>
+                    <div class="skeleton skeleton-text short"></div>
+                    <div class="skeleton-tags">
+                        <div class="skeleton skeleton-tag"></div>
+                        <div class="skeleton skeleton-tag"></div>
+                        <div class="skeleton skeleton-tag"></div>
+                    </div>
+                    <div class="skeleton skeleton-button"></div>
+                </div>
+            </div>
+        `;
+    }
+
+    createSkillItemSkeleton() {
+        return `
+            <div class="skeleton-skill-item">
+                <div class="skeleton skeleton-icon"></div>
+                <div class="skeleton-skill-content">
+                    <div class="skeleton skeleton-skill-name"></div>
+                    <div class="skeleton skeleton-progress-bar"></div>
+                </div>
+            </div>
+        `;
+    }
+
+    createBotCardSkeleton() {
+        return `
+            <div class="skeleton-bot-card">
+                <div class="skeleton-bot-header">
+                    <div class="skeleton skeleton-avatar"></div>
+                    <div class="skeleton-bot-info">
+                        <div class="skeleton skeleton-bot-title"></div>
+                        <div class="skeleton skeleton-bot-desc"></div>
+                        <div class="skeleton-bot-tags">
+                            <div class="skeleton skeleton-tag"></div>
+                            <div class="skeleton skeleton-tag"></div>
+                        </div>
+                    </div>
+                    <div class="skeleton skeleton-button"></div>
+                </div>
+            </div>
+        `;
+    }
+
+    createNavigationSkeleton() {
+        return `
+            <div class="skeleton-nav">
+                <div class="skeleton skeleton-logo"></div>
+                <div class="skeleton-nav-items">
+                    <div class="skeleton skeleton-nav-item"></div>
+                    <div class="skeleton skeleton-nav-item"></div>
+                    <div class="skeleton skeleton-nav-item"></div>
+                    <div class="skeleton skeleton-nav-item"></div>
+                </div>
+            </div>
+        `;
+    }
+
+    createHeroSkeleton() {
+        return `
+            <div class="skeleton-hero">
+                <div class="skeleton skeleton-hero-title"></div>
+                <div class="skeleton skeleton-hero-subtitle"></div>
+                <div class="skeleton skeleton-hero-desc"></div>
+                <div class="skeleton-hero-stats">
+                    <div class="skeleton skeleton-stat"></div>
+                    <div class="skeleton skeleton-stat"></div>
+                    <div class="skeleton skeleton-stat"></div>
+                </div>
+            </div>
+        `;
+    }
+
+    createProfileSkeleton() {
+        return `
+            <div class="skeleton-profile">
+                <div class="skeleton skeleton-profile-photo"></div>
+                <div class="skeleton skeleton-profile-name"></div>
+                <div class="skeleton skeleton-profile-title"></div>
+                <div class="skeleton-profile-links">
+                    <div class="skeleton skeleton-profile-link"></div>
+                    <div class="skeleton skeleton-profile-link"></div>
+                    <div class="skeleton skeleton-profile-link"></div>
+                </div>
+            </div>
+        `;
+    }
+
+    createVideoSkeleton() {
+        return `
+            <div class="skeleton-video">
+                <div class="skeleton skeleton-video-thumb"></div>
+                <div class="skeleton-video-info">
+                    <div class="skeleton skeleton-video-title"></div>
+                    <div class="skeleton skeleton-video-desc"></div>
+                </div>
+            </div>
+        `;
+    }
+
+    createGitHubSkeleton() {
+        return `
+            <div class="skeleton-github">
+                <div class="skeleton skeleton-github-header"></div>
+                <div class="skeleton-github-repos">
+                    <div class="skeleton skeleton-repo"></div>
+                    <div class="skeleton skeleton-repo"></div>
+                    <div class="skeleton skeleton-repo"></div>
+                </div>
+            </div>
+        `;
+    }
+
+    showSkeleton(container, type) {
+        if (this.skeletons[type]) {
+            container.innerHTML = this.skeletons[type];
+            container.classList.add('skeleton-container');
+        }
+    }
+
+    hideSkeleton(container, content) {
+        container.classList.remove('skeleton-container');
+        container.innerHTML = content;
+    }
+
+    setupIntersectionObserver() {
+        // Lazy loading with skeleton loaders
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const element = entry.target;
+                    const skeletonType = element.dataset.skeleton;
+                    
+                    if (skeletonType) {
+                        this.loadContentWithSkeleton(element, skeletonType);
+                        observer.unobserve(element);
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('[data-skeleton]').forEach(el => {
+            observer.observe(el);
+        });
+    }
+
+    loadContentWithSkeleton(element, type) {
+        // Show skeleton
+        this.showSkeleton(element, type);
+        
+        // Simulate loading time
+        setTimeout(() => {
+            // Hide skeleton and show content
+            this.hideSkeleton(element, element.dataset.originalContent || '');
+        }, 800 + Math.random() * 400);
+    }
+}
+
+/* ============================
+   ENHANCED MODAL SYSTEM WITH PORTALS
+   ============================ */
+
+class ModalManager {
+    constructor() {
+        this.activeModal = null;
+        this.focusTrap = null;
+        this.portalContainer = document.getElementById('modal-portal');
+        this.init();
+    }
+
+    init() {
+        this.setupPortal();
+        this.setupEventListeners();
+        this.setupKeyboardNavigation();
+    }
+
+    setupPortal() {
+        if (!this.portalContainer) {
+            this.portalContainer = document.createElement('div');
+            this.portalContainer.id = 'modal-portal';
+            this.portalContainer.className = 'modal-portal';
+            document.body.appendChild(this.portalContainer);
+        }
+    }
+
+    setupEventListeners() {
+        // Close modal on overlay click
+        this.portalContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-overlay')) {
+                this.closeModal();
+            }
+        });
+
+        // Close modal button
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal-close') || 
+                e.target.closest('.modal-close')) {
+                this.closeModal();
+            }
+        });
+
+        // Project card click handlers
+        document.addEventListener('click', (e) => {
+            const projectCard = e.target.closest('.project-card');
+            if (projectCard && !e.target.closest('a, button')) {
+                e.preventDefault();
+                this.openProjectModal(projectCard);
+            }
+        });
+    }
+
+    setupKeyboardNavigation() {
+        document.addEventListener('keydown', (e) => {
+            if (this.activeModal) {
+                switch (e.key) {
+                    case 'Escape':
+                        this.closeModal();
+                        break;
+                    case 'Tab':
+                        this.handleTabNavigation(e);
+                        break;
+                }
+            }
+        });
+    }
+
+    handleTabNavigation(e) {
+        if (!this.activeModal) return;
+
+        const focusableElements = this.activeModal.querySelectorAll(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        
+        const firstFocusable = focusableElements[0];
+        const lastFocusable = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey) {
+            if (document.activeElement === firstFocusable) {
+                lastFocusable.focus();
+                e.preventDefault();
+            }
+        } else {
+            if (document.activeElement === lastFocusable) {
+                firstFocusable.focus();
+                e.preventDefault();
+            }
+        }
+    }
+
+    openProjectModal(projectCard) {
+        const projectData = this.extractProjectData(projectCard);
+        const modalHTML = this.generateModalHTML(projectData);
+        
+        this.portalContainer.innerHTML = modalHTML;
+        this.activeModal = this.portalContainer.querySelector('.modal-overlay');
+        
+        // Setup focus trap
+        this.setupFocusTrap();
+        
+        // Show modal with animation
+        requestAnimationFrame(() => {
+            this.portalContainer.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Load demo iframe if available
+        this.loadDemoContent(projectData);
+    }
+
+    extractProjectData(card) {
+        return {
+            title: card.querySelector('h3')?.textContent || 'Project',
+            description: card.querySelector('p')?.textContent || '',
+            tags: Array.from(card.querySelectorAll('.tag')).map(tag => tag.textContent),
+            githubUrl: card.querySelector('.btn-code')?.href || '',
+            demoUrl: card.querySelector('.btn-demo')?.href || '',
+            imageUrl: card.querySelector('.project-image')?.src || '',
+            status: this.extractStatus(card)
+        };
+    }
+
+    extractStatus(card) {
+        const statusElement = card.querySelector('.status-text');
+        return statusElement ? statusElement.textContent : 'Unknown';
+    }
+
+    generateModalHTML(data) {
+        return `
+            <div class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+                <div class="modal-container" tabindex="-1">
+                    <button class="modal-close" aria-label="Close modal" type="button">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 id="modal-title" class="modal-title">${data.title}</h2>
+                            <div class="modal-status">
+                                <span class="modal-status-badge">${data.status}</span>
+                            </div>
+                        </div>
+                        <div class="modal-body">
+                            <div class="modal-demo-container">
+                                <div class="modal-skeleton">
+                                    <div class="skeleton skeleton-demo"></div>
+                                    <div class="modal-skeleton-text">
+                                        <div class="skeleton skeleton-text"></div>
+                                        <div class="skeleton skeleton-text short"></div>
+                                    </div>
+                                </div>
+                                <iframe class="modal-demo-iframe" 
+                                        frameborder="0" 
+                                        allowfullscreen 
+                                        title="Project Demo"
+                                        src="${data.demoUrl}">
+                                </iframe>
+                                <div class="modal-fallback hidden">
+                                    <div class="fallback-content">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                        <p>Не удалось загрузить демо</p>
+                                        <button class="btn btn-retry" type="button">
+                                            <i class="fas fa-redo"></i>
+                                            <span>Попробовать снова</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-description">
+                                <p class="modal-project-description">${data.description}</p>
+                                <div class="modal-tags">
+                                    ${data.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                                </div>
+                            </div>
+                            <div class="modal-actions">
+                                ${data.githubUrl ? `
+                                    <a class="btn btn-code modal-github-link" 
+                                       href="${data.githubUrl}" 
+                                       target="_blank" rel="noopener noreferrer">
+                                        <i class="fab fa-github"></i>
+                                        <span>Код</span>
+                                    </a>
+                                ` : ''}
+                                ${data.demoUrl ? `
+                                    <a class="btn btn-demo modal-demo-link" 
+                                       href="${data.demoUrl}" 
+                                       target="_blank" rel="noopener noreferrer">
+                                        <i class="fas fa-external-link-alt"></i>
+                                        <span>Демо</span>
+                                    </a>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    loadDemoContent(data) {
+        const iframe = this.portalContainer.querySelector('.modal-demo-iframe');
+        const skeleton = this.portalContainer.querySelector('.modal-skeleton');
+        const fallback = this.portalContainer.querySelector('.modal-fallback');
+
+        if (!data.demoUrl || !iframe) {
+            skeleton.style.display = 'none';
+            fallback.classList.remove('hidden');
+            return;
+        }
+
+        const timeoutId = setTimeout(() => {
+            skeleton.style.display = 'none';
+            fallback.classList.remove('hidden');
+        }, 10000);
+
+        iframe.onload = () => {
+            clearTimeout(timeoutId);
+            skeleton.style.display = 'none';
+            iframe.style.display = 'block';
+        };
+
+        iframe.onerror = () => {
+            clearTimeout(timeoutId);
+            skeleton.style.display = 'none';
+            fallback.classList.remove('hidden');
+        };
+    }
+
+    setupFocusTrap() {
+        const firstFocusable = this.activeModal.querySelector('button, [href], input');
+        if (firstFocusable) {
+            firstFocusable.focus();
+        }
+    }
+
+    closeModal() {
+        if (this.activeModal) {
+            this.portalContainer.classList.remove('active');
+            document.body.style.overflow = '';
+            
+            setTimeout(() => {
+                this.portalContainer.innerHTML = '';
+                this.activeModal = null;
+            }, 300);
+        }
+    }
+}
+
+/* ============================
+   LAZY LOADING WITH SRCSET
+   ============================ */
+
+class LazyLoader {
+    constructor() {
+        this.imageObserver = null;
+        this.init();
+    }
+
+    init() {
+        this.setupImageObserver();
+        this.setupSrcsetSupport();
+    }
+
+    setupImageObserver() {
+        const options = {
+            root: null,
+            rootMargin: '50px',
+            threshold: 0.1
+        };
+
+        this.imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    this.loadImage(entry.target);
+                    this.imageObserver.unobserve(entry.target);
+                }
+            });
+        }, options);
+
+        // Observe all images with data-src
+        document.querySelectorAll('img[data-src], img[data-srcset]').forEach(img => {
+            this.imageObserver.observe(img);
+        });
+    }
+
+    setupSrcsetSupport() {
+        // Convert regular images to responsive ones
+        document.querySelectorAll('.project-image').forEach(img => {
+            if (!img.hasAttribute('data-src') && img.src) {
+                const originalSrc = img.src;
+                
+                // Create responsive srcset
+                const srcset = this.generateSrcset(originalSrc);
+                img.setAttribute('data-srcset', srcset);
+                img.setAttribute('data-src', originalSrc);
+                img.setAttribute('data-sizes', '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px');
+                
+                // Replace with placeholder
+                img.src = this.generatePlaceholder(400, 250);
+                
+                this.imageObserver.observe(img);
+            }
+        });
+    }
+
+    generateSrcset(originalSrc) {
+        // Generate different sizes for responsive loading
+        const baseUrl = originalSrc.split('?')[0];
+        return `
+            ${baseUrl}?w=400 400w,
+            ${baseUrl}?w=800 800w,
+            ${baseUrl}?w=1200 1200w
+        `.trim();
+    }
+
+    generatePlaceholder(width, height) {
+        // Generate SVG placeholder
+        return `data:image/svg+xml;base64,${btoa(`
+            <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#1a1a28;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#2a2a3a;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#gradient)"/>
+                <text x="50%" y="50%" font-family="Arial" font-size="14" fill="#7575a0" 
+                      text-anchor="middle" dy=".3em">Загрузка...</text>
+            </svg>
+        `)}`;
+    }
+
+    loadImage(img) {
+        // Add skeleton loading effect
+        img.classList.add('loading');
+        
+        const tempImg = new Image();
+        
+        tempImg.onload = () => {
+            // Update src and srcset
+            if (img.hasAttribute('data-srcset')) {
+                img.srcset = img.getAttribute('data-srcset');
+                img.sizes = img.getAttribute('data-sizes') || '100vw';
+            }
+            
+            if (img.hasAttribute('data-src')) {
+                img.src = img.getAttribute('data-src');
+            }
+            
+            // Remove loading class with animation
+            img.classList.remove('loading');
+            img.classList.add('loaded');
+        };
+
+        tempImg.onerror = () => {
+            img.classList.remove('loading');
+            img.classList.add('error');
+        };
+
+        // Start loading
+        tempImg.src = img.getAttribute('data-src');
+    }
+}
+
+/* ============================
+   GITHUB API INTEGRATION WITH CACHING
+   ============================ */
+
+class GitHubIntegration {
+    constructor() {
+        this.username = 'Leks2000';
+        this.cacheDuration = 10 * 60 * 1000; // 10 minutes
+        this.apiUrl = `https://api.github.com/users/${this.username}`;
+        this.init();
+    }
+
+    init() {
+        this.loadGitHubData();
+        this.setupRefreshButton();
+    }
+
+    async loadGitHubData() {
+        const cachedData = this.getCachedData();
+        
+        if (cachedData && !this.isCacheExpired(cachedData.timestamp)) {
+            this.renderGitHubWidget(cachedData.data);
+            return;
+        }
+
+        try {
+            const [userData, reposData] = await Promise.all([
+                this.fetchWithRetry(`${this.apiUrl}`),
+                this.fetchWithRetry(`${this.apiUrl}/repos?sort=updated&per_page=6`)
+            ]);
+
+            const data = {
+                user: userData,
+                repos: reposData
+            };
+
+            this.cacheData(data);
+            this.renderGitHubWidget(data);
+        } catch (error) {
+            console.error('Failed to load GitHub data:', error);
+            this.renderErrorWidget();
+        }
+    }
+
+    async fetchWithRetry(url, maxRetries = 3) {
+        for (let i = 0; i < maxRetries; i++) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                return await response.json();
+            } catch (error) {
+                if (i === maxRetries - 1) throw error;
+                await this.delay(1000 * Math.pow(2, i)); // Exponential backoff
+            }
+        }
+    }
+
+    delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    getCachedData() {
+        try {
+            const cached = localStorage.getItem('github_data');
+            return cached ? JSON.parse(cached) : null;
+        } catch (error) {
+            return null;
+        }
+    }
+
+    cacheData(data) {
+        try {
+            localStorage.setItem('github_data', JSON.stringify({
+                data,
+                timestamp: Date.now()
+            }));
+        } catch (error) {
+            console.warn('Failed to cache GitHub data:', error);
+        }
+    }
+
+    isCacheExpired(timestamp) {
+        return Date.now() - timestamp > this.cacheDuration;
+    }
+
+    renderGitHubWidget(data) {
+        const container = document.getElementById('github-widget');
+        if (!container) return;
+
+        container.innerHTML = `
+            <div class="github-widget">
+                <div class="github-header">
+                    <div class="github-avatar">
+                        <img src="${data.user.avatar_url}" alt="${data.user.name}" loading="lazy">
+                    </div>
+                    <div class="github-info">
+                        <h3>${data.user.name || data.user.login}</h3>
+                        <p>@${data.user.login}</p>
+                        <div class="github-stats">
+                            <span><i class="fas fa-code-branch"></i> ${data.user.public_repos} repos</span>
+                            <span><i class="fas fa-users"></i> ${data.user.followers} followers</span>
+                        </div>
+                    </div>
+                    <button class="github-refresh" onclick="gitHubIntegration.loadGitHubData()">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                </div>
+                <div class="github-repos">
+                    ${data.repos.map(repo => `
+                        <div class="github-repo">
+                            <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">
+                                <h4>${repo.name}</h4>
+                                <p>${repo.description || 'No description'}</p>
+                                <div class="repo-stats">
+                                    <span><i class="fas fa-star"></i> ${repo.stargazers_count}</span>
+                                    <span><i class="fas fa-code-branch"></i> ${repo.forks_count}</span>
+                                    ${repo.language ? `<span class="repo-language">${repo.language}</span>` : ''}
+                                </div>
+                            </a>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    }
+
+    renderErrorWidget() {
+        const container = document.getElementById('github-widget');
+        if (!container) return;
+
+        container.innerHTML = `
+            <div class="github-widget error">
+                <div class="github-error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <p>Failed to load GitHub data</p>
+                    <button class="btn btn-retry" onclick="gitHubIntegration.loadGitHubData()">
+                        <i class="fas fa-redo"></i> Retry
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    setupRefreshButton() {
+        // Auto-refresh every 5 minutes when page is active
+        setInterval(() => {
+            if (document.visibilityState === 'visible') {
+                this.loadGitHubData();
+            }
+        }, 5 * 60 * 1000);
+    }
+}
+
+/* ============================
+   PERFORMANCE OPTIMIZED FILTERS
+   ============================ */
+
+class OptimizedFilters {
+    constructor() {
+        this.projectsData = [];
+        this.activeFilter = 'top';
+        this.isAnimating = false;
+        this.init();
+    }
+
+    init() {
+        this.cacheProjectsData();
+        this.setupFilterButtons();
+        this.setupSearchFeature();
+        this.optimizeInitialRender();
+    }
+
+    cacheProjectsData() {
+        // Cache all project data for instant filtering
+        const projects = document.querySelectorAll('.project-card');
+        this.projectsData = Array.from(projects).map(card => ({
+            element: card,
+            category: card.getAttribute('data-category'),
+            isTop: card.getAttribute('data-top') === 'true',
+            title: card.querySelector('h3')?.textContent.toLowerCase() || '',
+            tags: Array.from(card.querySelectorAll('.tag')).map(tag => 
+                tag.textContent.toLowerCase()
+            )
+        }));
+    }
+
+    setupFilterButtons() {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const filter = btn.getAttribute('data-filter');
+                this.applyFilter(filter);
+                this.updateActiveButton(btn);
+            });
+        });
+    }
+
+    setupSearchFeature() {
+        // Add search functionality
+        const searchInput = document.createElement('input');
+        searchInput.type = 'text';
+        searchInput.placeholder = 'Поиск проектов...';
+        searchInput.className = 'project-search';
+        
+        const filtersContainer = document.querySelector('.project-filters');
+        filtersContainer.appendChild(searchInput);
+
+        // Debounced search
+        let searchTimeout;
+        searchInput.addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                this.applySearch(e.target.value);
+            }, 300);
+        });
+    }
+
+    applyFilter(filter) {
+        if (this.isAnimating || filter === this.activeFilter) return;
+        
+        this.isAnimating = true;
+        this.activeFilter = filter;
+
+        // Use RequestAnimationFrame for smooth animations
+        requestAnimationFrame(() => {
+            const visibleProjects = this.projectsData.filter(project => {
+                switch (filter) {
+                    case 'all':
+                        return true;
+                    case 'top':
+                        return project.isTop;
+                    default:
+                        return project.category === filter;
+                }
+            });
+
+            this.animateFilterTransition(visibleProjects);
+        });
+    }
+
+    applySearch(searchTerm) {
+        const term = searchTerm.toLowerCase().trim();
+        
+        if (!term) {
+            this.applyFilter(this.activeFilter);
+            return;
+        }
+
+        const matchingProjects = this.projectsData.filter(project => {
+            return project.title.includes(term) || 
+                   project.tags.some(tag => tag.includes(term));
+        });
+
+        this.animateFilterTransition(matchingProjects);
+    }
+
+    animateFilterTransition(visibleProjects) {
+        const allProjects = this.projectsData.map(p => p.element);
+        const visibleElements = visibleProjects.map(p => p.element);
+
+        // Hide non-matching projects
+        allProjects.forEach((element, index) => {
+            const isVisible = visibleElements.includes(element);
+            
+            if (isVisible) {
+                element.style.display = 'block';
+                element.style.animation = `slideInUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${index * 0.05}s forwards`;
+            } else {
+                element.style.animation = 'slideOutDown 0.3s ease-in forwards';
+                setTimeout(() => {
+                    element.style.display = 'none';
+                }, 300);
+            }
+        });
+
+        // Reset animation flag
+        setTimeout(() => {
+            this.isAnimating = false;
+        }, 600);
+    }
+
+    updateActiveButton(activeBtn) {
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        activeBtn.classList.add('active');
+    }
+
+    optimizeInitialRender() {
+        // Apply initial filter without animation
+        this.applyFilter('top');
+        
+        // Preload filter animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideOutDown {
+                from { transform: translateY(0); opacity: 1; }
+                to { transform: translateY(30px); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+/* ============================
+   INITIALIZE ALL SYSTEMS
+   ============================ */
+
+// Initialize all new systems when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize Framer Motion Controller
+    window.framerMotionController = new FramerMotionController();
+    
+    // Initialize Skeleton Loader System
+    window.skeletonLoader = new SkeletonLoader();
+    
+    // Initialize Enhanced Modal System
+    window.modalManager = new ModalManager();
+    
+    // Initialize Lazy Loading
+    window.lazyLoader = new LazyLoader();
+    
+    // Initialize GitHub Integration
+    window.gitHubIntegration = new GitHubIntegration();
+    
+    // Initialize Optimized Filters
+    window.optimizedFilters = new OptimizedFilters();
+    
+    console.log('🚀 Enhanced Portfolio Systems Initialized');
+});

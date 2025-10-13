@@ -1,0 +1,46 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {
+    "indent": ["error", 4],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "no-unused-vars": ["warn"],
+    "no-console": ["warn", { "allow": ["warn", "error", "log"] }],
+    "prefer-const": "error",
+    "no-var": "error",
+    "eqeqeq": ["error", "always"],
+    "curly": ["error", "all"],
+    "no-duplicate-imports": "error",
+    "no-magic-numbers": ["warn", { "ignore": [0, 1, -1, 100] }],
+    "prefer-arrow-callback": "error",
+    "arrow-spacing": ["error", { "before": true, "after": true }],
+    "object-curly-spacing": ["error", "always"],
+    "array-bracket-spacing": ["error", "never"],
+    "comma-dangle": ["error", "never"],
+    "no-trailing-spaces": "error",
+    "space-before-blocks": "error",
+    "keyword-spacing": ["error", { "before": true, "after": true }],
+    "space-infix-ops": "error",
+    "no-multi-spaces": "error",
+    "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 1 }],
+    "eol-last": ["error", "always"]
+  },
+  "globals": {
+    "gsap": "readonly",
+    "ScrollTrigger": "readonly",
+    "Motion": "readonly",
+    "FramerMotion": "readonly"
+  }
+}
