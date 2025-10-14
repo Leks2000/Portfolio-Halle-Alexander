@@ -26,6 +26,11 @@ class PortfolioManager {
                 'btn-projects': 'Мои проекты',
                 'btn-contact': 'Связаться',
 
+                // Misc buttons/labels
+                'btn-play': 'Play Market',
+                'hero-name': 'Александр Халле',
+                'nav-github-activity': 'GitHub-Activity',
+
                 // Projects Section
                 'projects-title': 'Мои проекты',
                 'filter-top': '⭐ Топ',
@@ -150,6 +155,11 @@ class PortfolioManager {
                 'stat-platforms': 'Platforms',
                 'btn-projects': 'My Projects',
                 'btn-contact': 'Contact Me',
+
+                // Misc buttons/labels
+                'btn-play': 'Play Market',
+                'hero-name': 'Alexander Halle',
+                'nav-github-activity': 'GitHub-Activity',
 
                 // Projects Section
                 'projects-title': 'My Projects',
@@ -283,7 +293,9 @@ class PortfolioManager {
         this.initScrollProgressBar();
         this.initPerformantParallax();
         this.initGSAPAnimations();
-        // GitHub activity is handled by GitHubIntegration class
+        // GitHub activity and skill bars
+        this.initGitHubActivity();
+        this.initSkillBars();
         this.applyTranslations();
     }
 
@@ -859,6 +871,30 @@ class PortfolioManager {
 
         // Start typing animation after initial delay
         setTimeout(typeWriter, 1500);
+    }
+
+    // Animate progress bars in Skills on view
+    initSkillBars() {
+        const bars = document.querySelectorAll('.skill-bar');
+        if (!('IntersectionObserver' in window)) {
+            bars.forEach(bar => (bar.style.width = (bar.dataset.level || 0) + '%'));
+            return;
+        }
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    const bar = e.target;
+                    requestAnimationFrame(() => {
+                        bar.style.width = (bar.dataset.level || 0) + '%';
+                    });
+                    io.unobserve(bar);
+                }
+            });
+        }, { threshold: 0.4 });
+        bars.forEach(bar => {
+            bar.style.width = '0%';
+            io.observe(bar);
+        });
     }
 
     // Enhanced Skills Grid Initialization with Framer Motion Play-to-End Animations
