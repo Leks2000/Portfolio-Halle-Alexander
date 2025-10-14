@@ -26,6 +26,11 @@ class PortfolioManager {
                 'btn-projects': 'Мои проекты',
                 'btn-contact': 'Связаться',
 
+                // Misc buttons/labels
+                'btn-play': 'Play Market',
+                'hero-name': 'Александр Халле',
+                'nav-github-activity': 'GitHub-Activity',
+
                 // Projects Section
                 'projects-title': 'Мои проекты',
                 'filter-top': '⭐ Топ',
@@ -150,6 +155,11 @@ class PortfolioManager {
                 'stat-platforms': 'Platforms',
                 'btn-projects': 'My Projects',
                 'btn-contact': 'Contact Me',
+
+                // Misc buttons/labels
+                'btn-play': 'Play Market',
+                'hero-name': 'Alexander Halle',
+                'nav-github-activity': 'GitHub-Activity',
 
                 // Projects Section
                 'projects-title': 'My Projects',
@@ -283,7 +293,9 @@ class PortfolioManager {
         this.initScrollProgressBar();
         this.initPerformantParallax();
         this.initGSAPAnimations();
-        // GitHub activity is handled by GitHubIntegration class
+        // GitHub activity and skill bars
+        this.initGitHubActivity();
+        this.initSkillBars();
         this.applyTranslations();
     }
 
@@ -859,6 +871,30 @@ class PortfolioManager {
 
         // Start typing animation after initial delay
         setTimeout(typeWriter, 1500);
+    }
+
+    // Animate progress bars in Skills on view
+    initSkillBars() {
+        const bars = document.querySelectorAll('.skill-bar');
+        if (!('IntersectionObserver' in window)) {
+            bars.forEach(bar => (bar.style.width = (bar.dataset.level || 0) + '%'));
+            return;
+        }
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    const bar = e.target;
+                    requestAnimationFrame(() => {
+                        bar.style.width = (bar.dataset.level || 0) + '%';
+                    });
+                    io.unobserve(bar);
+                }
+            });
+        }, { threshold: 0.4 });
+        bars.forEach(bar => {
+            bar.style.width = '0%';
+            io.observe(bar);
+        });
     }
 
     // Enhanced Skills Grid Initialization with Framer Motion Play-to-End Animations
@@ -2919,22 +2955,26 @@ class GitHubIntegration {
     renderGitHubWidget(data) {
         // Update stat cards
         const repoCount = document.getElementById('repo-count');
-        const totalCommits = document.getElementById('total-commits'); 
+        const totalCommits = document.getElementById('total-commits');
         const lastUpdate = document.getElementById('last-update');
-        
-        if (repoCount) repoCount.textContent = data.user.public_repos || '-';
-        
+
+        if (repoCount) {
+            repoCount.textContent = data.user.public_repos || '-';
+        }
+
         // Calculate estimated commits from repos
         const estimatedCommits = Math.floor(data.user.public_repos * 25); // Rough estimate
-        if (totalCommits) totalCommits.textContent = estimatedCommits + '+';
-        
+        if (totalCommits) {
+            totalCommits.textContent = estimatedCommits + '+';
+        }
+
         // Format last update
         if (lastUpdate && data.repos.length > 0) {
             const lastRepo = data.repos[0]; // Most recently updated
             const updateDate = new Date(lastRepo.updated_at);
             const now = new Date();
             const diffDays = Math.floor((now - updateDate) / (1000 * 60 * 60 * 24));
-            
+
             let updateText;
             if (diffDays === 0) {
                 updateText = 'Сегодня';
@@ -2945,10 +2985,10 @@ class GitHubIntegration {
             } else {
                 updateText = 'Недавно';
             }
-            
+
             lastUpdate.textContent = updateText;
         }
-        
+
         // Render detailed widget
         const container = document.getElementById('github-widget');
         if (!container) {
@@ -3001,11 +3041,17 @@ class GitHubIntegration {
         const repoCount = document.getElementById('repo-count');
         const totalCommits = document.getElementById('total-commits');
         const lastUpdate = document.getElementById('last-update');
-        
-        if (repoCount) repoCount.textContent = '20+';
-        if (totalCommits) totalCommits.textContent = '500+';
-        if (lastUpdate) lastUpdate.textContent = 'Недавно';
-        
+
+        if (repoCount) {
+            repoCount.textContent = '20+';
+        }
+        if (totalCommits) {
+            totalCommits.textContent = '500+';
+        }
+        if (lastUpdate) {
+            lastUpdate.textContent = 'Недавно';
+        }
+
         const container = document.getElementById('github-widget');
         if (!container) {
             return;
