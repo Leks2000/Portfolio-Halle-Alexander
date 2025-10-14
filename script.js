@@ -11,16 +11,21 @@ class PortfolioManager {
                 'nav-about': 'О себе',
                 'nav-content': 'Контент',
                 'nav-contact': 'Контакты',
-                
+
                 // Hero Section
-                'typing-jobs': ['Unity Developer & C# Programmer', 'Backend & Game Developer', 'Specialist Creative Solver'],
-                'hero-description': 'Создаю увлекательные игры и приложения с акцентом на backend разработку. Специализируюсь на Unity, C# и работе с базами данных.',
+                'typing-jobs': [
+                    'Unity Developer & C# Programmer',
+                    'Backend & Game Developer',
+                    'Specialist Creative Solver'
+                ],
+                'hero-description':
+                    'Создаю увлекательные игры и приложения с акцентом на backend разработку. Специализируюсь на Unity, C# и работе с базами данных.',
                 'stat-experience': 'Года опыта',
                 'stat-projects': 'Проектов',
                 'stat-platforms': 'Платформ',
                 'btn-projects': 'Мои проекты',
                 'btn-contact': 'Связаться',
-                
+
                 // Projects Section
                 'projects-title': 'Мои проекты',
                 'filter-top': '⭐ Топ',
@@ -35,28 +40,31 @@ class PortfolioManager {
                 'status-released': '🟢 Релиз',
                 'status-development': '🟡 В разработке',
                 'status-concept': '⚪ Концепт',
-                'status-completed': '✅ Завершён',
+                'status-completed': '🟢 Завершён',
                 'modal-demo-error': 'Не удалось загрузить демо',
                 'btn-retry': 'Попробовать снова',
-                
+
                 // Project Descriptions
-                'dark-memorial-desc': 'Первый полноценный релиз игры на Unity. 2D проект с интересной механикой.',
+                'dark-memorial-desc':
+                    'Первый полноценный релиз игры на Unity. 2D проект с интересной механикой.',
                 'decks-desc': 'Игра с карточными пошаговыми боями в подземельях. Unity, C#, 2.5D.',
                 'blockmerge-desc': '2048 в майнкрафт-стиле. Unity, C#, 2D.',
                 'wolf-runner-desc': 'Раннер в майнкрафт-стиле. Unity, C#, 3D.',
                 'galactic-desc': 'Приключение про бананчика. Unity, C#, 2D.',
                 'witcher-desc': 'Генерация гексагональной карты (вода, земля, лес). Unity, C#, 2D.',
                 'flappy-desc': 'Мобильная аркада про сбор монеток. Unity, C#, Android.',
-                'chefpro-desc': 'Приложение-повар: вводишь продукты из холодильника — получаешь рецепт с пошаговой инструкцией от ИИ.',
+                'chefpro-desc':
+                    'Приложение-повар: вводишь продукты из холодильника — получаешь рецепт с пошаговой инструкцией от ИИ.',
                 'todis-desc': 'Приложение, показывающее, какой сегодня день.',
                 'notes-desc': 'Приложение для заметок с локальным и удалённым входом.',
                 'klepet-desc': 'Мобильный чат, аналог Telegram.',
                 'profinder-desc': 'Сайт поиска работы.',
                 'terminal-desc': 'Альтернативная версия сайта-портфолио в виде терминала.',
-                'promtly-desc': 'Chrome Extension для улучшения промптов и анализа изображений (создание описаний по фото).',
+                'promtly-desc':
+                    'Chrome Extension для улучшения промптов и анализа изображений (создание описаний по фото).',
                 'newsbot-desc': 'Telegram-бот, публикующий ИИ-новости с мемами и шутками.',
                 'meme-bot-desc': 'Присылает случайные мемы пользователю.',
-                
+
                 // Skills Section
                 'skills-title': 'Навыки',
                 'technical-skills-title': 'Технические навыки',
@@ -65,7 +73,7 @@ class PortfolioManager {
                 'tech-gamedev': 'Разработка игр',
                 'tech-databases': 'Базы данных',
                 'tech-tools': 'Инструменты',
-                
+
                 // About Section
                 'about-title': 'О себе',
                 'about-role': 'Разработчик игр на Unity',
@@ -75,13 +83,15 @@ class PortfolioManager {
                 'about-location-value': 'Санкт-Петербург, Россия',
                 'about-status-label': 'Статус:',
                 'about-status-value': 'Готов к переезду',
-                'about-description': 'Разработчик с акцентом на backend разработку на C#. Специализируюсь на создании приложений и игр на Unity, работе с базами данных и API. Имею опыт публикации игр на платформах Яндекс.Игры и Google Play Market.',
+                'about-description':
+                    'Разработчик с акцентом на backend разработку на C#. Специализируюсь на создании приложений и игр на Unity, работе с базами данных и API. Имею опыт публикации игр на платформах Яндекс.Игры и Google Play Market.',
                 'about-timeline-title': 'Опыт работы',
                 'timeline-current': '2023 - настоящее время',
                 'timeline-unity-title': 'Unity Developer (Фриланс)',
                 'timeline-unity-1': 'Разработка и запуск игр на Unity с использованием C#',
                 'timeline-unity-2': 'Публикация на платформах Яндекс.Игры, Google Play Market',
-                'timeline-unity-3': 'Использование анимаций, 2D/3D-графики, оптимизация производительности',
+                'timeline-unity-3':
+                    'Использование анимаций, 2D/3D-графики, оптимизация производительности',
                 'timeline-unity-4': 'Монетизация через внутриигровую рекламу и покупки',
                 'timeline-unity-5': 'Поддержка и обновление проектов',
                 'timeline-intern-date': 'Май - Август 2023',
@@ -90,7 +100,7 @@ class PortfolioManager {
                 'timeline-intern-1': 'Настройка баз данных PostgreSQL и MySQL',
                 'timeline-intern-2': 'Оптимизация SQL-запросов',
                 'timeline-intern-3': 'Разработка внутренних веб-приложений на .NET Core',
-                
+
                 // GitHub Section
                 'nav-github': 'GitHub',
                 'github-title': 'GitHub Activity',
@@ -99,22 +109,22 @@ class PortfolioManager {
                 'github-commits': 'Коммитов',
                 'github-activity-title': '📈 Активность коммитов',
                 'github-open': 'Открыть мой GitHub',
-                
+
                 // Content Section
                 'content-title': 'Контент',
                 'content-video-title': '🎵 Видео-проекты',
                 'content-music-title': '🎧 Music (Spotify)',
-                'views': 'просмотров',
+                views: 'просмотров',
                 'ai-photo-title': 'AI оживление фотографий',
                 'daggerstyle-title': 'Daggerstyle game video',
-                
+
                 // Contact Section
                 'contact-title': 'Связаться со мной',
                 'contact-info-title': 'Контактная информация',
                 'contact-phone': 'Телефон',
                 'contact-location': 'Местоположение',
                 'contact-location-value': 'Санкт-Петербург, Россия',
-                
+
                 // Footer
                 'footer-copyright': '© 2025 Александр Халле. Все права защищены.'
             },
@@ -126,16 +136,21 @@ class PortfolioManager {
                 'nav-about': 'About',
                 'nav-content': 'Content',
                 'nav-contact': 'Contact',
-                
+
                 // Hero Section
-                'typing-jobs': ['Unity Developer & C# Programmer', 'Backend & Game Developer', 'Specialist Creative Solver'],
-                'hero-description': 'I create engaging games and applications with a focus on backend development. Specializing in Unity, C#, and database work.',
+                'typing-jobs': [
+                    'Unity Developer & C# Programmer',
+                    'Backend & Game Developer',
+                    'Specialist Creative Solver'
+                ],
+                'hero-description':
+                    'I create engaging games and applications with a focus on backend development. Specializing in Unity, C#, and database work.',
                 'stat-experience': 'Years Experience',
                 'stat-projects': 'Projects',
                 'stat-platforms': 'Platforms',
                 'btn-projects': 'My Projects',
                 'btn-contact': 'Contact Me',
-                
+
                 // Projects Section
                 'projects-title': 'My Projects',
                 'filter-top': '⭐ Top',
@@ -150,28 +165,31 @@ class PortfolioManager {
                 'status-released': '🟢 Released',
                 'status-development': '🟡 In Development',
                 'status-concept': '⚪ Concept',
-                'status-completed': '✅ Completed',
+                'status-completed': '🟢 Completed',
                 'modal-demo-error': 'Failed to load demo',
                 'btn-retry': 'Try again',
-                
+
                 // Project Descriptions
-                'dark-memorial-desc': 'First full Unity game release. 2D project with interesting mechanics.',
+                'dark-memorial-desc':
+                    'First full Unity game release. 2D project with interesting mechanics.',
                 'decks-desc': 'Card-based turn combat game in dungeons. Unity, C#, 2.5D.',
                 'blockmerge-desc': '2048 in Minecraft style. Unity, C#, 2D.',
                 'wolf-runner-desc': 'Runner in Minecraft style. Unity, C#, 3D.',
                 'galactic-desc': 'Adventure about a little banana. Unity, C#, 2D.',
                 'witcher-desc': 'Hexagonal map generation (water, land, forest). Unity, C#, 2D.',
                 'flappy-desc': 'Mobile arcade about collecting coins. Unity, C#, Android.',
-                'chefpro-desc': 'Chef app: enter fridge ingredients — get recipe with step-by-step AI instructions.',
+                'chefpro-desc':
+                    'Chef app: enter fridge ingredients — get recipe with step-by-step AI instructions.',
                 'todis-desc': 'App that shows what day it is today.',
                 'notes-desc': 'Notes app with local and remote login.',
                 'klepet-desc': 'Mobile chat, Telegram analogue.',
                 'profinder-desc': 'Job search website.',
                 'terminal-desc': 'Alternative portfolio website in terminal style.',
-                'promtly-desc': 'Chrome Extension for prompt enhancement and image analysis (photo description generation).',
+                'promtly-desc':
+                    'Chrome Extension for prompt enhancement and image analysis (photo description generation).',
                 'newsbot-desc': 'Telegram bot publishing AI news with memes and jokes.',
                 'meme-bot-desc': 'Sends random memes to users.',
-                
+
                 // Skills Section
                 'skills-title': 'Skills',
                 'technical-skills-title': 'Technical Skills',
@@ -180,7 +198,7 @@ class PortfolioManager {
                 'tech-gamedev': 'Game Development',
                 'tech-databases': 'Databases',
                 'tech-tools': 'Tools',
-                
+
                 // About Section
                 'about-title': 'About Me',
                 'about-role': 'Unity Game Developer',
@@ -190,7 +208,8 @@ class PortfolioManager {
                 'about-location-value': 'Saint Petersburg, Russia',
                 'about-status-label': 'Status:',
                 'about-status-value': 'Ready to relocate',
-                'about-description': 'Developer with focus on C# backend development. Specialize in creating Unity apps and games, database and API work. Have experience publishing games on Yandex.Games and Google Play Market platforms.',
+                'about-description':
+                    'Developer with focus on C# backend development. Specialize in creating Unity apps and games, database and API work. Have experience publishing games on Yandex.Games and Google Play Market platforms.',
                 'about-timeline-title': 'Work Experience',
                 'timeline-current': '2023 - present',
                 'timeline-unity-title': 'Unity Developer (Freelance)',
@@ -205,7 +224,7 @@ class PortfolioManager {
                 'timeline-intern-1': 'PostgreSQL and MySQL database configuration',
                 'timeline-intern-2': 'SQL query optimization',
                 'timeline-intern-3': 'Internal web application development on .NET Core',
-                
+
                 // GitHub Section
                 'nav-github': 'GitHub',
                 'github-title': 'GitHub Activity',
@@ -214,33 +233,33 @@ class PortfolioManager {
                 'github-commits': 'Commits',
                 'github-activity-title': '📈 Commit Activity',
                 'github-open': 'Open my GitHub',
-                
+
                 // Content Section
                 'content-title': 'Content',
                 'content-video-title': '🎵 Video Projects',
                 'content-music-title': '🎧 Music (Spotify)',
-                'views': 'views',
+                views: 'views',
                 'ai-photo-title': 'AI photo animation',
                 'daggerstyle-title': 'Daggerstyle game video',
-                
+
                 // Contact Section
                 'contact-title': 'Contact Me',
                 'contact-info-title': 'Contact Information',
                 'contact-phone': 'Phone',
                 'contact-location': 'Location',
                 'contact-location-value': 'Saint Petersburg, Russia',
-                
+
                 // Footer
                 'footer-copyright': '© 2025 Alexander Halle. All rights reserved.'
             }
         };
         this.init();
-        
+
         // Media query listeners for parallax
         if (window.matchMedia) {
             const mediaQuery = window.matchMedia('(max-width: 768px)');
             const pointerQuery = window.matchMedia('(pointer: coarse)');
-            
+
             mediaQuery.addListener(() => this.handleParallaxMediaChange());
             pointerQuery.addListener(() => this.handleParallaxMediaChange());
         }
@@ -264,7 +283,7 @@ class PortfolioManager {
         this.initScrollProgressBar();
         this.initPerformantParallax();
         this.initGSAPAnimations();
-        this.initGitHubActivity();
+        // GitHub activity is handled by GitHubIntegration class
         this.applyTranslations();
     }
 
@@ -282,7 +301,7 @@ class PortfolioManager {
 
     initLanguageSwitcher() {
         const langButtons = document.querySelectorAll('.lang-btn');
-        
+
         langButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 const newLang = btn.dataset.lang;
@@ -292,8 +311,6 @@ class PortfolioManager {
             });
         });
     }
-
-
 
     applyTranslations() {
         const elements = document.querySelectorAll('[data-translate]');
@@ -309,7 +326,7 @@ class PortfolioManager {
     initNavbar() {
         const navbar = document.querySelector('.navbar');
         const navLinks = document.querySelectorAll('.nav-link');
-        
+
         // Navbar scroll effect
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
@@ -323,18 +340,19 @@ class PortfolioManager {
         const updateActiveLink = () => {
             const scrollPos = window.scrollY + 100;
             let activeFound = false;
-            
+
             navLinks.forEach(link => {
                 const section = document.querySelector(link.getAttribute('href'));
-                if (section && 
-                    section.offsetTop <= scrollPos && 
-                    section.offsetTop + section.offsetHeight > scrollPos) {
-                    
+                if (
+                    section &&
+                    section.offsetTop <= scrollPos &&
+                    section.offsetTop + section.offsetHeight > scrollPos
+                ) {
                     if (!activeFound) {
                         navLinks.forEach(l => l.classList.remove('active'));
                         link.classList.add('active');
                         activeFound = true;
-                        
+
                         // Add smooth animation to active link
                         if (typeof gsap !== 'undefined') {
                             gsap.to(link, {
@@ -342,7 +360,7 @@ class PortfolioManager {
                                 duration: 0.2,
                                 ease: 'power2.out'
                             });
-                            
+
                             gsap.to(link, {
                                 scale: 1,
                                 duration: 0.2,
@@ -407,7 +425,7 @@ class PortfolioManager {
             rootMargin: '0px 0px -50px 0px'
         };
 
-        const observer = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
@@ -416,10 +434,12 @@ class PortfolioManager {
         }, observerOptions);
 
         // Add fade-in class to all major sections
-        document.querySelectorAll('section, .project-card, .skill-icon-item, .video-card').forEach(el => {
-            el.classList.add('fade-in');
-            observer.observe(el);
-        });
+        document
+            .querySelectorAll('section, .project-card, .skill-icon-item, .video-card')
+            .forEach(el => {
+                el.classList.add('fade-in');
+                observer.observe(el);
+            });
     }
 
     // Project Filtering System
@@ -458,7 +478,7 @@ class PortfolioManager {
             const category = card.dataset.category;
             const isTop = card.dataset.top === 'true';
             let shouldShow = false;
-            
+
             if (filter === 'all') {
                 shouldShow = true;
             } else if (filter === 'top') {
@@ -466,7 +486,7 @@ class PortfolioManager {
             } else {
                 shouldShow = category === filter;
             }
-            
+
             if (shouldShow) {
                 card.classList.remove('filtered-out', 'hidden');
                 card.style.display = 'block';
@@ -488,7 +508,7 @@ class PortfolioManager {
     // Skeleton Loaders
     showSkeletonLoaders(projectsGrid) {
         projectsGrid.classList.add('loading');
-        
+
         // Create 6-8 skeleton cards
         for (let i = 0; i < 7; i++) {
             const skeletonCard = this.createSkeletonCard();
@@ -528,20 +548,23 @@ class PortfolioManager {
     // Lazy Loading for Images
     initLazyLoading() {
         const images = document.querySelectorAll('.project-image');
-        
+
         if ('IntersectionObserver' in window) {
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        this.loadImage(img);
-                        observer.unobserve(img);
-                    }
-                });
-            }, {
-                rootMargin: '50px 0px',
-                threshold: 0.1
-            });
+            const imageObserver = new IntersectionObserver(
+                (entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            this.loadImage(img);
+                            observer.unobserve(img);
+                        }
+                    });
+                },
+                {
+                    rootMargin: '50px 0px',
+                    threshold: 0.1
+                }
+            );
 
             images.forEach(img => {
                 img.classList.add('loading');
@@ -563,7 +586,7 @@ class PortfolioManager {
                 img.classList.remove('loading');
                 img.classList.add('error');
             };
-            
+
             // If image already cached, trigger load immediately
             if (img.complete) {
                 img.onload();
@@ -574,12 +597,12 @@ class PortfolioManager {
     // Progress Ring Animations
     initProgressRings() {
         const rings = document.querySelectorAll('.progress-ring__circle');
-        
+
         rings.forEach(ring => {
             const status = ring.closest('.status-ring').dataset.status;
             let progress;
-            
-            switch(status) {
+
+            switch (status) {
                 case 'released':
                     progress = 100;
                     break;
@@ -592,40 +615,49 @@ class PortfolioManager {
                 default:
                     progress = 0;
             }
-            
+
             const circumference = 2 * Math.PI * 27; // radius = 27
-            const offset = circumference - (progress / 100 * circumference);
-            
+            const offset = circumference - (progress / 100) * circumference;
+
             ring.style.strokeDashoffset = offset;
         });
 
         // Add tooltips with better event handling
         document.querySelectorAll('.status-ring').forEach(ring => {
             let tooltip = null;
-            
+
             const showTooltip = () => {
                 // Remove existing tooltip to prevent duplicates
                 if (tooltip) {
                     tooltip.remove();
                 }
-                
+
                 tooltip = document.createElement('div');
                 tooltip.className = 'status-tooltip';
                 const status = ring.dataset.status;
-                
+
                 let text;
-                switch(status) {
+                switch (status) {
                     case 'released':
-                        text = this.currentLang === 'ru' ? 'Проект завершен и выпущен' : 'Project completed and released';
+                        text =
+                            this.currentLang === 'ru'
+                                ? 'Проект завершен и выпущен'
+                                : 'Project completed and released';
                         break;
                     case 'development':
-                        text = this.currentLang === 'ru' ? 'Проект в активной разработке' : 'Project in active development';
+                        text =
+                            this.currentLang === 'ru'
+                                ? 'Проект в активной разработке'
+                                : 'Project in active development';
                         break;
                     case 'concept':
-                        text = this.currentLang === 'ru' ? 'Концепт или прототип' : 'Concept or prototype';
+                        text =
+                            this.currentLang === 'ru'
+                                ? 'Концепт или прототип'
+                                : 'Concept or prototype';
                         break;
                 }
-                
+
                 tooltip.textContent = text;
                 tooltip.style.cssText = `
                     position: absolute;
@@ -645,15 +677,15 @@ class PortfolioManager {
                     opacity: 0;
                     transition: opacity 0.2s ease;
                 `;
-                
+
                 ring.appendChild(tooltip);
-                
+
                 // Animate in
                 requestAnimationFrame(() => {
                     tooltip.style.opacity = '1';
                 });
             };
-            
+
             const hideTooltip = () => {
                 if (tooltip) {
                     tooltip.style.opacity = '0';
@@ -665,7 +697,7 @@ class PortfolioManager {
                     }, 200);
                 }
             };
-            
+
             ring.addEventListener('mouseenter', showTooltip);
             ring.addEventListener('mouseleave', hideTooltip);
         });
@@ -675,73 +707,83 @@ class PortfolioManager {
     initContactForm() {
         const form = document.querySelector('.message-form');
         if (form) {
-            form.addEventListener('submit', (e) => {
+            form.addEventListener('submit', e => {
                 e.preventDefault();
                 // Add your form submission logic here
-                alert(this.currentLang === 'ru' ? 
-                    'Форма отправки пока не настроена' : 
-                    'Form submission not yet configured');
+                alert(
+                    this.currentLang === 'ru'
+                        ? 'Форма отправки пока не настроена'
+                        : 'Form submission not yet configured'
+                );
             });
         }
     }
 
     // Enhanced Custom Cursor Implementation
     initCustomCursor() {
-        if (window.innerWidth <= 768) return; // Skip on mobile
-        
+        if (window.innerWidth <= 768) {
+            return;
+        } // Skip on mobile
+
         const cursor = document.querySelector('.custom-cursor');
         const follower = document.querySelector('.cursor-follower');
-        
-        if (!cursor || !follower) return;
-        
-        let mouseX = 0, mouseY = 0;
-        let followerX = 0, followerY = 0;
-        
+
+        if (!cursor || !follower) {
+            return;
+        }
+
+        let mouseX = 0,
+            mouseY = 0;
+        let followerX = 0,
+            followerY = 0;
+
         // Hide default cursor on body
         document.body.style.cursor = 'none';
-        
-        document.addEventListener('mousemove', (e) => {
+
+        document.addEventListener('mousemove', e => {
             mouseX = e.clientX;
             mouseY = e.clientY;
-            
+
             cursor.style.left = mouseX + 'px';
             cursor.style.top = mouseY + 'px';
         });
-        
+
         // Smooth follower animation
         function updateFollower() {
             followerX += (mouseX - followerX) * 0.15;
             followerY += (mouseY - followerY) * 0.15;
-            
+
             follower.style.left = followerX + 'px';
             follower.style.top = followerY + 'px';
-            
+
             requestAnimationFrame(updateFollower);
         }
         updateFollower();
-        
+
         // Enhanced click animation with light circle expansion
         document.addEventListener('mousedown', () => {
             cursor.classList.add('clicked');
             follower.classList.add('clicked');
-            
+
             // Create expanding circle effect
             this.createClickEffect(mouseX, mouseY);
         });
-        
+
         document.addEventListener('mouseup', () => {
             cursor.classList.remove('clicked');
             follower.classList.remove('clicked');
         });
-        
+
         // Hover effects for interactive elements
-        const interactiveElements = document.querySelectorAll('a, button, .skill-item, .project-card, .filter-btn');
+        const interactiveElements = document.querySelectorAll(
+            'a, button, .skill-item, .project-card, .filter-btn'
+        );
         interactiveElements.forEach(element => {
             element.addEventListener('mouseenter', () => {
                 cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
                 follower.style.transform = 'translate(-50%, -50%) scale(1.2)';
             });
-            
+
             element.addEventListener('mouseleave', () => {
                 cursor.style.transform = 'translate(-50%, -50%) scale(1)';
                 follower.style.transform = 'translate(-50%, -50%) scale(1)';
@@ -755,9 +797,9 @@ class PortfolioManager {
         clickEffect.className = 'click-effect';
         clickEffect.style.left = x + 'px';
         clickEffect.style.top = y + 'px';
-        
+
         document.body.appendChild(clickEffect);
-        
+
         // Remove the effect after animation completes
         setTimeout(() => {
             if (clickEffect.parentNode) {
@@ -765,32 +807,36 @@ class PortfolioManager {
             }
         }, 600);
     }
-    
+
     // Typing Animation for Hero Section
     initTypingAnimation() {
         const typingElement = document.getElementById('typewriter-text');
-        if (!typingElement) return;
-        
+        if (!typingElement) {
+            return;
+        }
+
         const jobs = [
             'Unity Developer & C# Programmer',
             'Backend & Game Developer',
             'Specialist Creative Solver'
         ];
-        
+
         let currentJobIndex = 0;
         let currentCharIndex = 0;
         let isDeleting = false;
-        let isPaused = false;
-        
+        const isPaused = false;
+
         function typeWriter() {
-            if (isPaused) return;
-            
+            if (isPaused) {
+                return;
+            }
+
             const currentJob = jobs[currentJobIndex];
-            
+
             if (isDeleting) {
                 typingElement.textContent = currentJob.substring(0, currentCharIndex - 1);
                 currentCharIndex--;
-                
+
                 if (currentCharIndex === 0) {
                     isDeleting = false;
                     currentJobIndex = (currentJobIndex + 1) % jobs.length;
@@ -801,7 +847,7 @@ class PortfolioManager {
             } else {
                 typingElement.textContent = currentJob.substring(0, currentCharIndex + 1);
                 currentCharIndex++;
-                
+
                 if (currentCharIndex === currentJob.length) {
                     isDeleting = true;
                     setTimeout(typeWriter, 2500); // Longer pause to read the complete phrase
@@ -810,7 +856,7 @@ class PortfolioManager {
                 setTimeout(typeWriter, 100); // Consistent typing speed
             }
         }
-        
+
         // Start typing animation after initial delay
         setTimeout(typeWriter, 1500);
     }
@@ -819,24 +865,24 @@ class PortfolioManager {
     initAnimatedSkills() {
         const skillItems = document.querySelectorAll('.skill-item');
         const techSkillItems = document.querySelectorAll('.tech-skill-item');
-        
+
         // Initialize Framer Motion for main skill icons
         skillItems.forEach(item => {
             const skillIcon = item.querySelector('.skill-icon');
             if (skillIcon && typeof Motion !== 'undefined') {
                 let isAnimating = false;
-                
+
                 const handleHoverStart = () => {
                     if (!isAnimating) {
                         isAnimating = true;
                         this.triggerFramerMotionAnimation(item, skillIcon);
-                        
+
                         setTimeout(() => {
                             isAnimating = false;
                         }, 1000);
                     }
                 };
-                
+
                 item.addEventListener('mouseenter', handleHoverStart);
                 item.addEventListener('focus', handleHoverStart);
             }
@@ -846,21 +892,21 @@ class PortfolioManager {
         techSkillItems.forEach(item => {
             const techIcon = item.querySelector('.tech-skill-icon');
             const progressBar = item.querySelector('.tech-progress');
-            
+
             if (techIcon && typeof Motion !== 'undefined') {
                 let isAnimating = false;
-                
+
                 const handleInteraction = () => {
                     if (!isAnimating) {
                         isAnimating = true;
                         this.triggerTechSkillAnimation(techIcon, progressBar);
-                        
+
                         setTimeout(() => {
                             isAnimating = false;
                         }, 800);
                     }
                 };
-                
+
                 item.addEventListener('mouseenter', handleInteraction);
                 item.addEventListener('focus', handleInteraction);
             }
@@ -869,9 +915,9 @@ class PortfolioManager {
 
     triggerFramerMotionAnimation(item, skillIcon) {
         const skillType = item.dataset.skill;
-        
+
         // Container remains stable - only animate internal elements
-        switch(skillType) {
+        switch (skillType) {
             case 'csharp':
                 this.animateCSharpIcon(skillIcon);
                 break;
@@ -898,19 +944,19 @@ class PortfolioManager {
     animateCSharpIcon(skillIcon) {
         const sparks = skillIcon.querySelectorAll('.spark');
         const energyCircle = skillIcon.querySelector('.energy-circle');
-        
+
         // Animate sparks with stagger
         sparks.forEach((spark, index) => {
             setTimeout(() => {
                 spark.style.transform = 'scale(0) rotate(0deg)';
                 spark.style.opacity = '0';
                 spark.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-                
+
                 requestAnimationFrame(() => {
                     spark.style.transform = 'scale(1.5) rotate(360deg)';
                     spark.style.opacity = '1';
                 });
-                
+
                 setTimeout(() => {
                     spark.style.transform = 'scale(1) rotate(360deg)';
                 }, 400);
@@ -921,7 +967,7 @@ class PortfolioManager {
         if (energyCircle) {
             energyCircle.style.transform = 'scale(0.8)';
             energyCircle.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-            
+
             requestAnimationFrame(() => {
                 energyCircle.style.transform = 'scale(1.2)';
                 setTimeout(() => {
@@ -933,12 +979,12 @@ class PortfolioManager {
 
     animateKotlinIcon(skillIcon) {
         const parts = skillIcon.querySelectorAll('.kotlin-part');
-        
+
         parts.forEach((part, index) => {
             setTimeout(() => {
                 part.style.transform = 'translateX(-20px) rotate(-15deg)';
                 part.style.transition = 'all 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-                
+
                 setTimeout(() => {
                     part.style.transform = 'translateX(0) rotate(0deg)';
                 }, 50);
@@ -948,14 +994,14 @@ class PortfolioManager {
 
     animateUnityIcon(skillIcon) {
         const cube = skillIcon.querySelector('.unity-cube');
-        
+
         if (cube) {
             cube.style.transform = 'rotateX(0deg) rotateY(0deg) scale(1)';
             cube.style.transition = 'transform 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-            
+
             requestAnimationFrame(() => {
                 cube.style.transform = 'rotateX(360deg) rotateY(360deg) scale(1.1)';
-                
+
                 setTimeout(() => {
                     cube.style.transform = 'rotateX(360deg) rotateY(360deg) scale(1)';
                 }, 800);
@@ -966,11 +1012,11 @@ class PortfolioManager {
     animateSQLIcon(skillIcon) {
         const digits = skillIcon.querySelectorAll('.data-digit');
         const database = skillIcon.querySelector('.database-main');
-        
+
         if (database) {
             database.style.transform = 'scale(1) rotateY(0deg)';
             database.style.transition = 'transform 0.6s ease-out';
-            
+
             requestAnimationFrame(() => {
                 database.style.transform = 'scale(1.2) rotateY(180deg)';
                 setTimeout(() => {
@@ -984,7 +1030,7 @@ class PortfolioManager {
                 digit.style.transform = 'translateY(-10px)';
                 digit.style.opacity = '0.3';
                 digit.style.transition = 'all 0.4s ease-out';
-                
+
                 setTimeout(() => {
                     digit.style.transform = 'translateY(0)';
                     digit.style.opacity = '1';
@@ -996,11 +1042,11 @@ class PortfolioManager {
     animateDotNetIcon(skillIcon) {
         const frameworkLines = skillIcon.querySelector('.framework-lines');
         const dotnetText = skillIcon.querySelector('.dotnet-text');
-        
+
         if (frameworkLines) {
             frameworkLines.style.transform = 'scaleX(0.5) scaleY(0.5)';
             frameworkLines.style.transition = 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
-            
+
             requestAnimationFrame(() => {
                 frameworkLines.style.transform = 'scaleX(1.2) scaleY(1.2)';
                 setTimeout(() => {
@@ -1012,7 +1058,7 @@ class PortfolioManager {
         if (dotnetText) {
             dotnetText.style.transform = 'scale(1)';
             dotnetText.style.transition = 'transform 0.6s ease-out';
-            
+
             setTimeout(() => {
                 dotnetText.style.transform = 'scale(1.1)';
                 setTimeout(() => {
@@ -1025,11 +1071,11 @@ class PortfolioManager {
     animateGitIcon(skillIcon) {
         const branches = skillIcon.querySelectorAll('.git-branch');
         const gitIcon = skillIcon.querySelector('.git-icon');
-        
+
         if (gitIcon) {
             gitIcon.style.transform = 'rotate(0deg) scale(1)';
             gitIcon.style.transition = 'transform 0.8s ease-in-out';
-            
+
             requestAnimationFrame(() => {
                 gitIcon.style.transform = 'rotate(360deg) scale(1.1)';
                 setTimeout(() => {
@@ -1042,7 +1088,7 @@ class PortfolioManager {
             setTimeout(() => {
                 branch.style.strokeDashoffset = '100';
                 branch.style.transition = 'stroke-dashoffset 0.8s ease-out';
-                
+
                 requestAnimationFrame(() => {
                     branch.style.strokeDashoffset = '0';
                 });
@@ -1054,7 +1100,7 @@ class PortfolioManager {
         // Generic bounce animation for skills without specific animations
         skillIcon.style.transform = 'scale(1)';
         skillIcon.style.transition = 'transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-        
+
         requestAnimationFrame(() => {
             skillIcon.style.transform = 'scale(1.15)';
             setTimeout(() => {
@@ -1067,7 +1113,7 @@ class PortfolioManager {
         // Animate tech skill icon
         techIcon.style.transform = 'scale(1) rotateZ(0deg)';
         techIcon.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-        
+
         requestAnimationFrame(() => {
             techIcon.style.transform = 'scale(1.2) rotateZ(10deg)';
             setTimeout(() => {
@@ -1080,7 +1126,7 @@ class PortfolioManager {
             const currentWidth = progressBar.style.width;
             progressBar.style.width = '0%';
             progressBar.style.transition = 'width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-            
+
             setTimeout(() => {
                 progressBar.style.width = currentWidth;
             }, 100);
@@ -1098,25 +1144,27 @@ class PortfolioManager {
             'linear-gradient(135deg, #ff6b35, #00d4ff)',
             'linear-gradient(135deg, #4CAF50, #a855f7)'
         ];
-        
+
         projectCards.forEach((card, index) => {
-            const hasImage = card.querySelector('.project-image, .project-preview, .project-image-placeholder');
+            const hasImage = card.querySelector(
+                '.project-image, .project-preview, .project-image-placeholder'
+            );
             const projectContent = card.querySelector('.project-content');
             const projectTitle = card.querySelector('h3')?.textContent;
-            
+
             if (!hasImage && projectContent && projectTitle) {
                 // Create project preview container
                 const previewContainer = document.createElement('div');
                 previewContainer.className = 'project-preview';
-                
+
                 // Create placeholder
                 const placeholder = document.createElement('div');
                 placeholder.className = 'project-image-placeholder';
                 placeholder.style.background = gradients[index % gradients.length];
                 placeholder.textContent = projectTitle;
-                
+
                 previewContainer.appendChild(placeholder);
-                
+
                 // Insert before project content
                 card.insertBefore(previewContainer, projectContent);
             }
@@ -1129,13 +1177,15 @@ class PortfolioManager {
         this.modalContainer = this.modal.querySelector('.modal-container');
         this.modalCloseBtn = this.modal.querySelector('.modal-close');
         this.modalOverlay = this.modal.querySelector('.modal-overlay');
-        
+
         // Focus trap elements
         this.focusableElements = [
             this.modalCloseBtn,
-            ...this.modal.querySelectorAll('button:not([disabled]), a[href], input, textarea, select')
+            ...this.modal.querySelectorAll(
+                'button:not([disabled]), a[href], input, textarea, select'
+            )
         ];
-        
+
         this.initModalEventListeners();
         this.initProjectClickHandlers();
     }
@@ -1143,14 +1193,14 @@ class PortfolioManager {
     initModalEventListeners() {
         // Close modal events
         this.modalCloseBtn.addEventListener('click', () => this.closeModal());
-        this.modalOverlay.addEventListener('click', (e) => {
+        this.modalOverlay.addEventListener('click', e => {
             if (e.target === this.modalOverlay) {
                 this.closeModal();
             }
         });
 
         // Keyboard events
-        document.addEventListener('keydown', (e) => {
+        document.addEventListener('keydown', e => {
             if (this.modal.classList.contains('active')) {
                 if (e.key === 'Escape') {
                     this.closeModal();
@@ -1167,16 +1217,16 @@ class PortfolioManager {
 
     initProjectClickHandlers() {
         const projectCards = document.querySelectorAll('.project-card');
-        
+
         projectCards.forEach(card => {
             // Make card clickable for modal
             card.style.cursor = 'pointer';
-            card.addEventListener('click', (e) => {
+            card.addEventListener('click', e => {
                 // Don't open modal if clicking on links or buttons
                 if (e.target.closest('a, button')) {
                     return;
                 }
-                
+
                 this.openProjectModal(card);
             });
 
@@ -1184,8 +1234,8 @@ class PortfolioManager {
             card.setAttribute('tabindex', '0');
             card.setAttribute('role', 'button');
             card.setAttribute('aria-label', 'Open project details');
-            
-            card.addEventListener('keydown', (e) => {
+
+            card.addEventListener('keydown', e => {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
                     this.openProjectModal(card);
@@ -1230,7 +1280,8 @@ class PortfolioManager {
         statusBadge.textContent = this.getStatusText(projectData.status);
 
         // Set description
-        this.modal.querySelector('.modal-project-description').textContent = projectData.description;
+        this.modal.querySelector('.modal-project-description').textContent =
+            projectData.description;
 
         // Set tags
         const tagsContainer = this.modal.querySelector('.modal-tags');
@@ -1259,10 +1310,10 @@ class PortfolioManager {
 
     getStatusText(status) {
         const statusMap = {
-            'released': '🟢 Released',
-            'development': '🟡 In Development', 
-            'concept': '⚪ Concept',
-            'completed': '✅ Completed'
+            released: '🟢 Released',
+            development: '🟡 In Development',
+            concept: '⚪ Concept',
+            completed: '✅ Completed'
         };
         return statusMap[status] || '❓ Unknown';
     }
@@ -1281,7 +1332,7 @@ class PortfolioManager {
             // Show skeleton during loading
             setTimeout(() => {
                 iframe.src = projectData.demoUrl;
-                
+
                 iframe.onload = () => {
                     skeleton.style.display = 'none';
                     iframe.classList.add('loaded');
@@ -1297,7 +1348,6 @@ class PortfolioManager {
                         this.showFallback();
                     }
                 }, 10000); // 10 second timeout
-
             }, 1500); // Show skeleton for 1.5 seconds
         } else {
             // No demo available
@@ -1313,7 +1363,7 @@ class PortfolioManager {
     showFallback() {
         const skeleton = this.modal.querySelector('.modal-skeleton');
         const fallback = this.modal.querySelector('.modal-fallback');
-        
+
         skeleton.style.display = 'none';
         fallback.classList.remove('hidden');
         fallback.querySelector('.btn-retry').style.display = 'inline-flex';
@@ -1330,7 +1380,7 @@ class PortfolioManager {
     showModal() {
         this.modal.classList.add('active');
         document.body.style.overflow = 'hidden';
-        
+
         // Set focus to modal container for screen readers
         setTimeout(() => {
             this.modalContainer.focus();
@@ -1340,16 +1390,16 @@ class PortfolioManager {
     closeModal() {
         this.modal.classList.remove('active');
         document.body.style.overflow = '';
-        
+
         // Clear iframe to stop any loading
         const iframe = this.modal.querySelector('.modal-demo-iframe');
         iframe.src = '';
         iframe.classList.remove('loaded');
-        
+
         // Reset skeleton state
         const skeleton = this.modal.querySelector('.modal-skeleton');
         skeleton.style.display = 'flex';
-        
+
         // Hide fallback
         const fallback = this.modal.querySelector('.modal-fallback');
         fallback.classList.add('hidden');
@@ -1378,21 +1428,27 @@ class PortfolioManager {
     initScrollProgressBar() {
         this.progressBar = document.querySelector('.scroll-progress-bar');
         this.progressFill = document.querySelector('.scroll-progress-fill');
-        
-        if (!this.progressBar || !this.progressFill) return;
+
+        if (!this.progressBar || !this.progressFill) {
+            return;
+        }
 
         this.isProgressBarVisible = false;
         this.lastScrollY = 0;
         this.ticking = false;
 
         // Use passive scroll listener for better performance
-        window.addEventListener('scroll', () => {
-            this.lastScrollY = window.scrollY;
-            if (!this.ticking) {
-                requestAnimationFrame(() => this.updateProgressBar());
-                this.ticking = true;
-            }
-        }, { passive: true });
+        window.addEventListener(
+            'scroll',
+            () => {
+                this.lastScrollY = window.scrollY;
+                if (!this.ticking) {
+                    requestAnimationFrame(() => this.updateProgressBar());
+                    this.ticking = true;
+                }
+            },
+            { passive: true }
+        );
 
         // Initial call
         this.updateProgressBar();
@@ -1401,7 +1457,7 @@ class PortfolioManager {
     updateProgressBar() {
         const scrollTop = this.lastScrollY;
         const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        
+
         if (docHeight <= 0) {
             this.ticking = false;
             return;
@@ -1409,10 +1465,10 @@ class PortfolioManager {
 
         // Calculate scroll percentage
         const scrollPercent = Math.min(Math.max(scrollTop / docHeight, 0), 1);
-        
+
         // Show/hide progress bar based on scroll position
         const shouldShowBar = scrollTop > 100; // Show after 100px scroll
-        
+
         if (shouldShowBar !== this.isProgressBarVisible) {
             this.isProgressBarVisible = shouldShowBar;
             this.progressBar.classList.toggle('visible', shouldShowBar);
@@ -1420,7 +1476,7 @@ class PortfolioManager {
 
         // Update progress bar width with RAF
         this.progressFill.style.width = `${scrollPercent * 100}%`;
-        
+
         this.ticking = false;
     }
 
@@ -1429,7 +1485,7 @@ class PortfolioManager {
         // Check if device supports parallax and isn't touch-based
         const isMobile = window.matchMedia('(max-width: 768px)').matches;
         const hasCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
-        
+
         if (isMobile || hasCoarsePointer) {
             // Disable parallax on mobile/touch devices
             this.parallaxEnabled = false;
@@ -1447,24 +1503,30 @@ class PortfolioManager {
         this.parallaxTicking = false;
 
         // Use passive scroll listener
-        window.addEventListener('scroll', () => {
-            this.lastParallaxScrollY = window.scrollY;
-            if (!this.parallaxTicking) {
-                requestAnimationFrame(() => this.updateParallaxElements());
-                this.parallaxTicking = true;
-            }
-        }, { passive: true });
+        window.addEventListener(
+            'scroll',
+            () => {
+                this.lastParallaxScrollY = window.scrollY;
+                if (!this.parallaxTicking) {
+                    requestAnimationFrame(() => this.updateParallaxElements());
+                    this.parallaxTicking = true;
+                }
+            },
+            { passive: true }
+        );
 
         // Initial call
         this.updateParallaxElements();
     }
 
     updateParallaxElements() {
-        if (!this.parallaxEnabled) return;
+        if (!this.parallaxEnabled) {
+            return;
+        }
 
         const scrollY = this.lastParallaxScrollY;
         const windowHeight = window.innerHeight;
-        
+
         // Navbar parallax (subtle movement)
         if (this.parallaxElements.navbar) {
             const navbarOffset = Math.min(scrollY * 0.1, 5); // Very subtle
@@ -1475,21 +1537,21 @@ class PortfolioManager {
         if (this.parallaxElements.starsBackground) {
             const backgroundOffset = scrollY * -0.3; // Move opposite to scroll
             const rotationOffset = scrollY * 0.01; // Subtle rotation
-            this.parallaxElements.starsBackground.style.transform = 
-                `translate3d(0, ${backgroundOffset}px, 0) rotate(${rotationOffset}deg)`;
+            this.parallaxElements.starsBackground.style.transform = `translate3d(0, ${backgroundOffset}px, 0) rotate(${rotationOffset}deg)`;
         }
 
         // Individual stars parallax
         this.parallaxElements.stars.forEach((star, index) => {
-            if (!star) return;
-            
-            const speed = 0.2 + (index * 0.05); // Varying speeds
+            if (!star) {
+                return;
+            }
+
+            const speed = 0.2 + index * 0.05; // Varying speeds
             const yOffset = scrollY * -speed;
             const xOffset = Math.sin(scrollY * 0.001 + index) * 10; // Subtle horizontal movement
             const rotation = scrollY * 0.02 * (index + 1); // Different rotation speeds
-            
-            star.style.transform = 
-                `translate3d(${xOffset}px, ${yOffset}px, 0) rotate(${rotation}deg)`;
+
+            star.style.transform = `translate3d(${xOffset}px, ${yOffset}px, 0) rotate(${rotation}deg)`;
         });
 
         this.parallaxTicking = false;
@@ -1499,9 +1561,9 @@ class PortfolioManager {
     handleParallaxMediaChange() {
         const isMobile = window.matchMedia('(max-width: 768px)').matches;
         const hasCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
-        
+
         const shouldDisable = isMobile || hasCoarsePointer;
-        
+
         if (shouldDisable && this.parallaxEnabled) {
             // Disable parallax
             this.parallaxEnabled = false;
@@ -1521,16 +1583,20 @@ class PortfolioManager {
             this.parallaxElements.starsBackground.style.transform = '';
         }
         this.parallaxElements.stars.forEach(star => {
-            if (star) star.style.transform = '';
+            if (star) {
+                star.style.transform = '';
+            }
         });
     }
-    
+
     // GSAP Animations
     initGSAPAnimations() {
-        if (typeof gsap === 'undefined') return;
-        
+        if (typeof gsap === 'undefined') {
+            return;
+        }
+
         gsap.registerPlugin(ScrollTrigger);
-        
+
         // Hero section animation
         gsap.from('.hero-title', {
             duration: 1,
@@ -1538,7 +1604,7 @@ class PortfolioManager {
             opacity: 0,
             ease: 'power3.out'
         });
-        
+
         gsap.from('.hero-subtitle-container', {
             duration: 1,
             y: 30,
@@ -1546,7 +1612,7 @@ class PortfolioManager {
             delay: 0.3,
             ease: 'power3.out'
         });
-        
+
         gsap.from('.hero-description', {
             duration: 1,
             y: 30,
@@ -1554,9 +1620,9 @@ class PortfolioManager {
             delay: 0.6,
             ease: 'power3.out'
         });
-        
+
         // Section animations
-        gsap.utils.toArray('section').forEach((section) => {
+        gsap.utils.toArray('section').forEach(section => {
             gsap.from(section.querySelectorAll('h2, h3'), {
                 scrollTrigger: {
                     trigger: section,
@@ -1571,7 +1637,7 @@ class PortfolioManager {
                 ease: 'power3.out'
             });
         });
-        
+
         // New Skills grid animations
         gsap.from('.skills-category', {
             scrollTrigger: {
@@ -1597,7 +1663,7 @@ class PortfolioManager {
             stagger: 0.08,
             ease: 'back.out(1.4)'
         });
-        
+
         // Technical skills animation
         gsap.from('.tech-category', {
             scrollTrigger: {
@@ -1610,7 +1676,7 @@ class PortfolioManager {
             stagger: 0.2,
             ease: 'power3.out'
         });
-        
+
         // Projects animation
         gsap.from('.project-card', {
             scrollTrigger: {
@@ -1641,7 +1707,8 @@ class PortfolioManager {
 
         // Enhanced project cards entrance
         gsap.utils.toArray('.project-card').forEach((card, index) => {
-            gsap.fromTo(card, 
+            gsap.fromTo(
+                card,
                 {
                     opacity: 0,
                     y: 60,
@@ -1704,45 +1771,50 @@ class PortfolioManager {
             }
         });
     }
-    
+
     // GitHub Activity Integration
     async initGitHubActivity() {
         try {
             // Fetch GitHub user data
             const userResponse = await fetch('https://api.github.com/users/Leks2000');
             const userData = await userResponse.json();
-            
+
             // Update repository count
             document.getElementById('repo-count').textContent = userData.public_repos || '-';
-            
+
             // Fetch recent events for commit count
-            const eventsResponse = await fetch('https://api.github.com/users/Leks2000/events?per_page=100');
+            const eventsResponse = await fetch(
+                'https://api.github.com/users/Leks2000/events?per_page=100'
+            );
             const events = await eventsResponse.json();
-            
+
             // Count push events (commits)
             const pushEvents = events.filter(event => event.type === 'PushEvent');
             const totalCommits = pushEvents.reduce((sum, event) => {
                 return sum + (event.payload.commits ? event.payload.commits.length : 0);
             }, 0);
-            
+
             document.getElementById('total-commits').textContent = totalCommits || '-';
-            
+
             // Update last activity
             if (events.length > 0) {
                 const lastUpdate = new Date(events[0].created_at);
                 const now = new Date();
                 const diffTime = Math.abs(now - lastUpdate);
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                
+
                 let updateText = '';
                 if (diffDays === 1) {
                     updateText = this.currentLang === 'ru' ? '1 день назад' : '1 day ago';
                 } else if (diffDays < 7) {
-                    updateText = this.currentLang === 'ru' ? `${diffDays} дней назад` : `${diffDays} days ago`;
+                    updateText =
+                        this.currentLang === 'ru'
+                            ? `${diffDays} дней назад`
+                            : `${diffDays} days ago`;
                 } else {
                     updateText = this.currentLang === 'ru' ? 'Неделю назад' : 'A week ago';
                 }
-                
+
                 document.getElementById('last-update').textContent = updateText;
             }
         } catch (error) {
@@ -1750,19 +1822,20 @@ class PortfolioManager {
             // Fallback values
             document.getElementById('repo-count').textContent = '20+';
             document.getElementById('total-commits').textContent = '500+';
-            document.getElementById('last-update').textContent = this.currentLang === 'ru' ? 'Недавно' : 'Recently';
+            document.getElementById('last-update').textContent =
+                this.currentLang === 'ru' ? 'Недавно' : 'Recently';
         }
     }
 
     // Enhanced Language Switcher
     switchLanguage(lang) {
         this.currentLang = lang;
-        
+
         // Update active button
         document.querySelectorAll('.lang-btn').forEach(btn => {
             btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
         });
-        
+
         // Update all translatable elements
         document.querySelectorAll('[data-translate]').forEach(element => {
             const key = element.getAttribute('data-translate');
@@ -1770,20 +1843,21 @@ class PortfolioManager {
                 element.textContent = this.translations[lang][key];
             }
         });
-        
+
         // Restart typing animation with new language
         if (document.getElementById('typing-animation')) {
             this.initTypingAnimation();
         }
-        
+
         // Update GitHub activity with new language
         this.initGitHubActivity();
-        
+
         // Update document title
-        document.title = lang === 'ru' 
-            ? 'Александр Халле - Unity Developer Portfolio'
-            : 'Alexander Halle - Unity Developer Portfolio';
-            
+        document.title =
+            lang === 'ru'
+                ? 'Александр Халле - Unity Developer Portfolio'
+                : 'Alexander Halle - Unity Developer Portfolio';
+
         // Save language preference
         localStorage.setItem('portfolio-lang', lang);
     }
@@ -1815,7 +1889,7 @@ class ParticleSystem {
         this.resize();
         this.createParticles();
         this.animate();
-        
+
         window.addEventListener('resize', () => this.resize());
     }
 
@@ -1839,20 +1913,24 @@ class ParticleSystem {
 
     animate() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        
+
         this.particles.forEach(particle => {
             particle.x += particle.vx;
             particle.y += particle.vy;
-            
-            if (particle.x < 0 || particle.x > this.canvas.width) particle.vx *= -1;
-            if (particle.y < 0 || particle.y > this.canvas.height) particle.vy *= -1;
-            
+
+            if (particle.x < 0 || particle.x > this.canvas.width) {
+                particle.vx *= -1;
+            }
+            if (particle.y < 0 || particle.y > this.canvas.height) {
+                particle.vy *= -1;
+            }
+
             this.ctx.beginPath();
             this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
             this.ctx.fillStyle = `rgba(0, 212, 255, ${particle.opacity})`;
             this.ctx.fill();
         });
-        
+
         requestAnimationFrame(() => this.animate());
     }
 }
@@ -1866,15 +1944,17 @@ class EasterEgg {
     }
 
     init() {
-        document.addEventListener('keydown', (e) => {
+        document.addEventListener('keydown', e => {
             this.userInput.push(e.keyCode);
-            
+
             if (this.userInput.length > this.konamiCode.length) {
                 this.userInput.shift();
             }
-            
-            if (this.userInput.length === this.konamiCode.length && 
-                this.userInput.every((code, index) => code === this.konamiCode[index])) {
+
+            if (
+                this.userInput.length === this.konamiCode.length &&
+                this.userInput.every((code, index) => code === this.konamiCode[index])
+            ) {
                 this.activateEasterEgg();
             }
         });
@@ -1883,7 +1963,7 @@ class EasterEgg {
     activateEasterEgg() {
         // Add special effects
         document.body.style.filter = 'hue-rotate(180deg)';
-        
+
         setTimeout(() => {
             document.body.style.filter = '';
             alert('🎮 Unity Developer Mode Activated! 🎮');
@@ -1894,23 +1974,25 @@ class EasterEgg {
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new PortfolioManager();
-    
+
     // Optional enhancements
-    if (window.innerWidth > 768) { // Only on desktop
+    if (window.innerWidth > 768) {
+        // Only on desktop
         new ParticleSystem();
     }
-    
+
     new EasterEgg();
 });
 
 // Performance optimization for mobile
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-            .then((registration) => {
+        navigator.serviceWorker
+            .register('/sw.js')
+            .then(registration => {
                 console.log('SW registered: ', registration);
             })
-            .catch((registrationError) => {
+            .catch(registrationError => {
                 console.log('SW registration failed: ', registrationError);
             });
     });
@@ -1950,9 +2032,9 @@ class FramerMotionController {
 
     // Play-to-end animation system
     playToEndAnimation(element, animation, options = {}) {
-        return new Promise((resolve) => {
-            const { duration = 0.6, ease = "easeOut" } = options;
-            
+        return new Promise(resolve => {
+            const { duration = 0.6, ease = 'easeOut' } = options;
+
             if (this.motion) {
                 this.motion.animate(element, animation, {
                     duration,
@@ -1974,7 +2056,7 @@ class FramerMotionController {
             rootMargin: '-50px 0px -50px 0px'
         };
 
-        const observer = new IntersectionObserver((entries) => {
+        const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     this.animateOnScroll(entry.target);
@@ -1983,9 +2065,11 @@ class FramerMotionController {
         }, observerOptions);
 
         // Observe project cards, skill items, and other animated elements
-        document.querySelectorAll('.project-card, .modern-skill-item, .skill-category-modern').forEach(el => {
-            observer.observe(el);
-        });
+        document
+            .querySelectorAll('.project-card, .modern-skill-item, .skill-category-modern')
+            .forEach(el => {
+                observer.observe(el);
+            });
     }
 
     animateOnScroll(element) {
@@ -2009,7 +2093,7 @@ class FramerMotionController {
         if (selector) {
             this.playToEndAnimation(element, animations[selector], {
                 duration: 0.8,
-                ease: "easeOut"
+                ease: 'easeOut'
             });
         }
     }
@@ -2018,34 +2102,50 @@ class FramerMotionController {
         // Enhanced hover animations for project cards
         document.querySelectorAll('.project-card').forEach(card => {
             card.addEventListener('mouseenter', () => {
-                this.playToEndAnimation(card, {
-                    y: -8,
-                    scale: 1.02
-                }, { duration: 0.3 });
+                this.playToEndAnimation(
+                    card,
+                    {
+                        y: -8,
+                        scale: 1.02
+                    },
+                    { duration: 0.3 }
+                );
             });
 
             card.addEventListener('mouseleave', () => {
-                this.playToEndAnimation(card, {
-                    y: 0,
-                    scale: 1
-                }, { duration: 0.3 });
+                this.playToEndAnimation(
+                    card,
+                    {
+                        y: 0,
+                        scale: 1
+                    },
+                    { duration: 0.3 }
+                );
             });
         });
 
         // Bot card animations
         document.querySelectorAll('.bot-card').forEach(card => {
             card.addEventListener('mouseenter', () => {
-                this.playToEndAnimation(card, {
-                    y: -8,
-                    rotateX: 5
-                }, { duration: 0.4 });
+                this.playToEndAnimation(
+                    card,
+                    {
+                        y: -8,
+                        rotateX: 5
+                    },
+                    { duration: 0.4 }
+                );
             });
 
             card.addEventListener('mouseleave', () => {
-                this.playToEndAnimation(card, {
-                    y: 0,
-                    rotateX: 0
-                }, { duration: 0.4 });
+                this.playToEndAnimation(
+                    card,
+                    {
+                        y: 0,
+                        rotateX: 0
+                    },
+                    { duration: 0.4 }
+                );
             });
         });
     }
@@ -2055,13 +2155,17 @@ class FramerMotionController {
         const projectCards = document.querySelectorAll('.project-card');
         projectCards.forEach((card, index) => {
             setTimeout(() => {
-                this.playToEndAnimation(card, {
-                    opacity: [0, 1],
-                    y: [30, 0]
-                }, {
-                    duration: 0.6,
-                    ease: "easeOut"
-                });
+                this.playToEndAnimation(
+                    card,
+                    {
+                        opacity: [0, 1],
+                        y: [30, 0]
+                    },
+                    {
+                        duration: 0.6,
+                        ease: 'easeOut'
+                    }
+                );
             }, index * 100);
         });
     }
@@ -2069,22 +2173,29 @@ class FramerMotionController {
     initSkillsAnimations() {
         // Progressive skill bar animations
         const skillBars = document.querySelectorAll('.progress-bar-modern');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const bar = entry.target;
-                    const progress = bar.getAttribute('data-progress');
-                    
-                    this.playToEndAnimation(bar, {
-                        width: `${progress}%`
-                    }, {
-                        duration: 1.5,
-                        ease: "easeOut"
-                    });
-                }
-            });
-        }, { threshold: 0.5 });
+
+        const observer = new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bar = entry.target;
+                        const progress = bar.getAttribute('data-progress');
+
+                        this.playToEndAnimation(
+                            bar,
+                            {
+                                width: `${progress}%`
+                            },
+                            {
+                                duration: 1.5,
+                                ease: 'easeOut'
+                            }
+                        );
+                    }
+                });
+            },
+            { threshold: 0.5 }
+        );
 
         skillBars.forEach(bar => observer.observe(bar));
     }
@@ -2093,10 +2204,14 @@ class FramerMotionController {
         // Special animations for bot cards
         document.querySelectorAll('.bot-avatar').forEach(avatar => {
             avatar.addEventListener('click', () => {
-                this.playToEndAnimation(avatar, {
-                    rotate: 360,
-                    scale: [1, 1.2, 1]
-                }, { duration: 0.8 });
+                this.playToEndAnimation(
+                    avatar,
+                    {
+                        rotate: 360,
+                        scale: [1, 1.2, 1]
+                    },
+                    { duration: 0.8 }
+                );
             });
         });
     }
@@ -2140,25 +2255,25 @@ class SkeletonLoader {
     createSkeletonComponents() {
         // 1. Project Card Skeleton
         this.skeletons.projectCard = this.createProjectCardSkeleton();
-        
+
         // 2. Skill Item Skeleton
         this.skeletons.skillItem = this.createSkillItemSkeleton();
-        
+
         // 3. Bot Card Skeleton
         this.skeletons.botCard = this.createBotCardSkeleton();
-        
+
         // 4. Navigation Skeleton
         this.skeletons.navigation = this.createNavigationSkeleton();
-        
+
         // 5. Hero Section Skeleton
         this.skeletons.hero = this.createHeroSkeleton();
-        
+
         // 6. Profile Card Skeleton
         this.skeletons.profile = this.createProfileSkeleton();
-        
+
         // 7. Video Card Skeleton
         this.skeletons.video = this.createVideoSkeleton();
-        
+
         // 8. GitHub API Widget Skeleton
         this.skeletons.github = this.createGitHubSkeleton();
     }
@@ -2296,19 +2411,22 @@ class SkeletonLoader {
 
     setupIntersectionObserver() {
         // Lazy loading with skeleton loaders
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const element = entry.target;
-                    const skeletonType = element.dataset.skeleton;
-                    
-                    if (skeletonType) {
-                        this.loadContentWithSkeleton(element, skeletonType);
-                        observer.unobserve(element);
+        const observer = new IntersectionObserver(
+            entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        const skeletonType = element.dataset.skeleton;
+
+                        if (skeletonType) {
+                            this.loadContentWithSkeleton(element, skeletonType);
+                            observer.unobserve(element);
+                        }
                     }
-                }
-            });
-        }, { threshold: 0.1 });
+                });
+            },
+            { threshold: 0.1 }
+        );
 
         document.querySelectorAll('[data-skeleton]').forEach(el => {
             observer.observe(el);
@@ -2318,12 +2436,15 @@ class SkeletonLoader {
     loadContentWithSkeleton(element, type) {
         // Show skeleton
         this.showSkeleton(element, type);
-        
+
         // Simulate loading time
-        setTimeout(() => {
-            // Hide skeleton and show content
-            this.hideSkeleton(element, element.dataset.originalContent || '');
-        }, 800 + Math.random() * 400);
+        setTimeout(
+            () => {
+                // Hide skeleton and show content
+                this.hideSkeleton(element, element.dataset.originalContent || '');
+            },
+            800 + Math.random() * 400
+        );
     }
 }
 
@@ -2356,22 +2477,21 @@ class ModalManager {
 
     setupEventListeners() {
         // Close modal on overlay click
-        this.portalContainer.addEventListener('click', (e) => {
+        this.portalContainer.addEventListener('click', e => {
             if (e.target.classList.contains('modal-overlay')) {
                 this.closeModal();
             }
         });
 
         // Close modal button
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal-close') || 
-                e.target.closest('.modal-close')) {
+        document.addEventListener('click', e => {
+            if (e.target.classList.contains('modal-close') || e.target.closest('.modal-close')) {
                 this.closeModal();
             }
         });
 
         // Project card click handlers
-        document.addEventListener('click', (e) => {
+        document.addEventListener('click', e => {
             const projectCard = e.target.closest('.project-card');
             if (projectCard && !e.target.closest('a, button')) {
                 e.preventDefault();
@@ -2381,7 +2501,7 @@ class ModalManager {
     }
 
     setupKeyboardNavigation() {
-        document.addEventListener('keydown', (e) => {
+        document.addEventListener('keydown', e => {
             if (this.activeModal) {
                 switch (e.key) {
                     case 'Escape':
@@ -2396,12 +2516,14 @@ class ModalManager {
     }
 
     handleTabNavigation(e) {
-        if (!this.activeModal) return;
+        if (!this.activeModal) {
+            return;
+        }
 
         const focusableElements = this.activeModal.querySelectorAll(
             'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
         );
-        
+
         const firstFocusable = focusableElements[0];
         const lastFocusable = focusableElements[focusableElements.length - 1];
 
@@ -2421,13 +2543,13 @@ class ModalManager {
     openProjectModal(projectCard) {
         const projectData = this.extractProjectData(projectCard);
         const modalHTML = this.generateModalHTML(projectData);
-        
+
         this.portalContainer.innerHTML = modalHTML;
         this.activeModal = this.portalContainer.querySelector('.modal-overlay');
-        
+
         // Setup focus trap
         this.setupFocusTrap();
-        
+
         // Show modal with animation
         requestAnimationFrame(() => {
             this.portalContainer.classList.add('active');
@@ -2502,22 +2624,30 @@ class ModalManager {
                                 </div>
                             </div>
                             <div class="modal-actions">
-                                ${data.githubUrl ? `
+                                ${
+                                    data.githubUrl
+                                        ? `
                                     <a class="btn btn-code modal-github-link" 
                                        href="${data.githubUrl}" 
                                        target="_blank" rel="noopener noreferrer">
                                         <i class="fab fa-github"></i>
                                         <span>Код</span>
                                     </a>
-                                ` : ''}
-                                ${data.demoUrl ? `
+                                `
+                                        : ''
+                                }
+                                ${
+                                    data.demoUrl
+                                        ? `
                                     <a class="btn btn-demo modal-demo-link" 
                                        href="${data.demoUrl}" 
                                        target="_blank" rel="noopener noreferrer">
                                         <i class="fas fa-external-link-alt"></i>
                                         <span>Демо</span>
                                     </a>
-                                ` : ''}
+                                `
+                                        : ''
+                                }
                             </div>
                         </div>
                     </div>
@@ -2566,7 +2696,7 @@ class ModalManager {
         if (this.activeModal) {
             this.portalContainer.classList.remove('active');
             document.body.style.overflow = '';
-            
+
             setTimeout(() => {
                 this.portalContainer.innerHTML = '';
                 this.activeModal = null;
@@ -2597,7 +2727,7 @@ class LazyLoader {
             threshold: 0.1
         };
 
-        this.imageObserver = new IntersectionObserver((entries) => {
+        this.imageObserver = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     this.loadImage(entry.target);
@@ -2617,16 +2747,19 @@ class LazyLoader {
         document.querySelectorAll('.project-image').forEach(img => {
             if (!img.hasAttribute('data-src') && img.src) {
                 const originalSrc = img.src;
-                
+
                 // Create responsive srcset
                 const srcset = this.generateSrcset(originalSrc);
                 img.setAttribute('data-srcset', srcset);
                 img.setAttribute('data-src', originalSrc);
-                img.setAttribute('data-sizes', '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px');
-                
+                img.setAttribute(
+                    'data-sizes',
+                    '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px'
+                );
+
                 // Replace with placeholder
                 img.src = this.generatePlaceholder(400, 250);
-                
+
                 this.imageObserver.observe(img);
             }
         });
@@ -2662,20 +2795,20 @@ class LazyLoader {
     loadImage(img) {
         // Add skeleton loading effect
         img.classList.add('loading');
-        
+
         const tempImg = new Image();
-        
+
         tempImg.onload = () => {
             // Update src and srcset
             if (img.hasAttribute('data-srcset')) {
                 img.srcset = img.getAttribute('data-srcset');
                 img.sizes = img.getAttribute('data-sizes') || '100vw';
             }
-            
+
             if (img.hasAttribute('data-src')) {
                 img.src = img.getAttribute('data-src');
             }
-            
+
             // Remove loading class with animation
             img.classList.remove('loading');
             img.classList.add('loaded');
@@ -2710,7 +2843,7 @@ class GitHubIntegration {
 
     async loadGitHubData() {
         const cachedData = this.getCachedData();
-        
+
         if (cachedData && !this.isCacheExpired(cachedData.timestamp)) {
             this.renderGitHubWidget(cachedData.data);
             return;
@@ -2739,10 +2872,14 @@ class GitHubIntegration {
         for (let i = 0; i < maxRetries; i++) {
             try {
                 const response = await fetch(url);
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
                 return await response.json();
             } catch (error) {
-                if (i === maxRetries - 1) throw error;
+                if (i === maxRetries - 1) {
+                    throw error;
+                }
                 await this.delay(1000 * Math.pow(2, i)); // Exponential backoff
             }
         }
@@ -2763,10 +2900,13 @@ class GitHubIntegration {
 
     cacheData(data) {
         try {
-            localStorage.setItem('github_data', JSON.stringify({
-                data,
-                timestamp: Date.now()
-            }));
+            localStorage.setItem(
+                'github_data',
+                JSON.stringify({
+                    data,
+                    timestamp: Date.now()
+                })
+            );
         } catch (error) {
             console.warn('Failed to cache GitHub data:', error);
         }
@@ -2777,8 +2917,43 @@ class GitHubIntegration {
     }
 
     renderGitHubWidget(data) {
+        // Update stat cards
+        const repoCount = document.getElementById('repo-count');
+        const totalCommits = document.getElementById('total-commits'); 
+        const lastUpdate = document.getElementById('last-update');
+        
+        if (repoCount) repoCount.textContent = data.user.public_repos || '-';
+        
+        // Calculate estimated commits from repos
+        const estimatedCommits = Math.floor(data.user.public_repos * 25); // Rough estimate
+        if (totalCommits) totalCommits.textContent = estimatedCommits + '+';
+        
+        // Format last update
+        if (lastUpdate && data.repos.length > 0) {
+            const lastRepo = data.repos[0]; // Most recently updated
+            const updateDate = new Date(lastRepo.updated_at);
+            const now = new Date();
+            const diffDays = Math.floor((now - updateDate) / (1000 * 60 * 60 * 24));
+            
+            let updateText;
+            if (diffDays === 0) {
+                updateText = 'Сегодня';
+            } else if (diffDays === 1) {
+                updateText = 'Вчера';
+            } else if (diffDays < 7) {
+                updateText = `${diffDays} дн. назад`;
+            } else {
+                updateText = 'Недавно';
+            }
+            
+            lastUpdate.textContent = updateText;
+        }
+        
+        // Render detailed widget
         const container = document.getElementById('github-widget');
-        if (!container) return;
+        if (!container) {
+            return;
+        }
 
         container.innerHTML = `
             <div class="github-widget">
@@ -2799,7 +2974,9 @@ class GitHubIntegration {
                     </button>
                 </div>
                 <div class="github-repos">
-                    ${data.repos.map(repo => `
+                    ${data.repos
+                        .map(
+                            repo => `
                         <div class="github-repo">
                             <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">
                                 <h4>${repo.name}</h4>
@@ -2811,15 +2988,28 @@ class GitHubIntegration {
                                 </div>
                             </a>
                         </div>
-                    `).join('')}
+                    `
+                        )
+                        .join('')}
                 </div>
             </div>
         `;
     }
 
     renderErrorWidget() {
+        // Set fallback values for stat cards
+        const repoCount = document.getElementById('repo-count');
+        const totalCommits = document.getElementById('total-commits');
+        const lastUpdate = document.getElementById('last-update');
+        
+        if (repoCount) repoCount.textContent = '20+';
+        if (totalCommits) totalCommits.textContent = '500+';
+        if (lastUpdate) lastUpdate.textContent = 'Недавно';
+        
         const container = document.getElementById('github-widget');
-        if (!container) return;
+        if (!container) {
+            return;
+        }
 
         container.innerHTML = `
             <div class="github-widget error">
@@ -2836,11 +3026,14 @@ class GitHubIntegration {
 
     setupRefreshButton() {
         // Auto-refresh every 5 minutes when page is active
-        setInterval(() => {
-            if (document.visibilityState === 'visible') {
-                this.loadGitHubData();
-            }
-        }, 5 * 60 * 1000);
+        setInterval(
+            () => {
+                if (document.visibilityState === 'visible') {
+                    this.loadGitHubData();
+                }
+            },
+            5 * 60 * 1000
+        );
     }
 }
 
@@ -2871,7 +3064,7 @@ class OptimizedFilters {
             category: card.getAttribute('data-category'),
             isTop: card.getAttribute('data-top') === 'true',
             title: card.querySelector('h3')?.textContent.toLowerCase() || '',
-            tags: Array.from(card.querySelectorAll('.tag')).map(tag => 
+            tags: Array.from(card.querySelectorAll('.tag')).map(tag =>
                 tag.textContent.toLowerCase()
             )
         }));
@@ -2879,9 +3072,9 @@ class OptimizedFilters {
 
     setupFilterButtons() {
         const filterButtons = document.querySelectorAll('.filter-btn');
-        
+
         filterButtons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
+            btn.addEventListener('click', e => {
                 e.preventDefault();
                 const filter = btn.getAttribute('data-filter');
                 this.applyFilter(filter);
@@ -2896,13 +3089,13 @@ class OptimizedFilters {
         searchInput.type = 'text';
         searchInput.placeholder = 'Поиск проектов...';
         searchInput.className = 'project-search';
-        
+
         const filtersContainer = document.querySelector('.project-filters');
         filtersContainer.appendChild(searchInput);
 
         // Debounced search
         let searchTimeout;
-        searchInput.addEventListener('input', (e) => {
+        searchInput.addEventListener('input', e => {
             clearTimeout(searchTimeout);
             searchTimeout = setTimeout(() => {
                 this.applySearch(e.target.value);
@@ -2911,8 +3104,10 @@ class OptimizedFilters {
     }
 
     applyFilter(filter) {
-        if (this.isAnimating || filter === this.activeFilter) return;
-        
+        if (this.isAnimating || filter === this.activeFilter) {
+            return;
+        }
+
         this.isAnimating = true;
         this.activeFilter = filter;
 
@@ -2935,15 +3130,14 @@ class OptimizedFilters {
 
     applySearch(searchTerm) {
         const term = searchTerm.toLowerCase().trim();
-        
+
         if (!term) {
             this.applyFilter(this.activeFilter);
             return;
         }
 
         const matchingProjects = this.projectsData.filter(project => {
-            return project.title.includes(term) || 
-                   project.tags.some(tag => tag.includes(term));
+            return project.title.includes(term) || project.tags.some(tag => tag.includes(term));
         });
 
         this.animateFilterTransition(matchingProjects);
@@ -2956,7 +3150,7 @@ class OptimizedFilters {
         // Hide non-matching projects
         allProjects.forEach((element, index) => {
             const isVisible = visibleElements.includes(element);
-            
+
             if (isVisible) {
                 element.style.display = 'block';
                 element.style.animation = `slideInUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${index * 0.05}s forwards`;
@@ -2984,7 +3178,7 @@ class OptimizedFilters {
     optimizeInitialRender() {
         // Apply initial filter without animation
         this.applyFilter('top');
-        
+
         // Preload filter animations
         const style = document.createElement('style');
         style.textContent = `
@@ -3005,21 +3199,21 @@ class OptimizedFilters {
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize Framer Motion Controller
     window.framerMotionController = new FramerMotionController();
-    
+
     // Initialize Skeleton Loader System
     window.skeletonLoader = new SkeletonLoader();
-    
+
     // Initialize Enhanced Modal System
     window.modalManager = new ModalManager();
-    
+
     // Initialize Lazy Loading
     window.lazyLoader = new LazyLoader();
-    
+
     // Initialize GitHub Integration
     window.gitHubIntegration = new GitHubIntegration();
-    
+
     // Initialize Optimized Filters
     window.optimizedFilters = new OptimizedFilters();
-    
+
     console.log('🚀 Enhanced Portfolio Systems Initialized');
 });
