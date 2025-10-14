@@ -486,7 +486,8 @@ class PortfolioManager {
     }
 
     filterProjects(filter, cards) {
-        cards.forEach((card, index) => {
+        let visibleIndex = 0;
+        cards.forEach((card) => {
             const category = card.dataset.category;
             const isTop = card.dataset.top === 'true';
             let shouldShow = false;
@@ -501,18 +502,25 @@ class PortfolioManager {
 
             if (shouldShow) {
                 card.classList.remove('filtered-out', 'hidden');
-                card.style.display = 'block';
+                card.style.display = 'flex';
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px) scale(0.95)';
                 setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0) scale(1)';
                     card.classList.add('visible', 'fade-in-animate');
-                }, index * 50); // Faster stagger, smoother appearance
+                }, visibleIndex * 50);
+                visibleIndex++;
             } else {
                 card.classList.add('filtered-out');
                 card.classList.remove('visible', 'fade-in-animate');
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(-20px) scale(0.9)';
                 setTimeout(() => {
                     if (card.classList.contains('filtered-out')) {
                         card.style.display = 'none';
                     }
-                }, 500); // Hide after animation completes
+                }, 300);
             }
         });
     }
@@ -880,17 +888,20 @@ class PortfolioManager {
             bars.forEach(bar => (bar.style.width = (bar.dataset.level || 0) + '%'));
             return;
         }
-        const io = new IntersectionObserver(entries => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    const bar = e.target;
-                    requestAnimationFrame(() => {
-                        bar.style.width = (bar.dataset.level || 0) + '%';
-                    });
-                    io.unobserve(bar);
-                }
-            });
-        }, { threshold: 0.4 });
+        const io = new IntersectionObserver(
+            entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        const bar = e.target;
+                        requestAnimationFrame(() => {
+                            bar.style.width = (bar.dataset.level || 0) + '%';
+                        });
+                        io.unobserve(bar);
+                    }
+                });
+            },
+            { threshold: 0.4 }
+        );
         bars.forEach(bar => {
             bar.style.width = '0%';
             io.observe(bar);
@@ -1015,17 +1026,38 @@ class PortfolioManager {
 
     animateKotlinIcon(skillIcon) {
         const parts = skillIcon.querySelectorAll('.kotlin-part');
+        const icon = skillIcon.querySelector('.kotlin-icon');
 
+        if (!parts.length || !icon) return;
+
+        // Phase 1: Separate parts
         parts.forEach((part, index) => {
-            setTimeout(() => {
-                part.style.transform = 'translateX(-20px) rotate(-15deg)';
-                part.style.transition = 'all 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-
-                setTimeout(() => {
-                    part.style.transform = 'translateX(0) rotate(0deg)';
-                }, 50);
-            }, index * 80);
+            const directions = [
+                { x: -30, y: -30, rotate: -15 },
+                { x: -30, y: 30, rotate: 15 },
+                { x: 30, y: 0, rotate: -10 }
+            ];
+            const dir = directions[index] || { x: 0, y: 0, rotate: 0 };
+            
+            part.style.transform = `translate(${dir.x}px, ${dir.y}px) rotate(${dir.rotate}deg)`;
+            part.style.opacity = '0.7';
+            part.style.transition = 'all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
         });
+
+        // Phase 2: Reunite parts
+        setTimeout(() => {
+            parts.forEach((part) => {
+                part.style.transform = 'translate(0, 0) rotate(0deg)';
+                part.style.opacity = '1';
+            });
+        }, 450);
+
+        // Phase 3: Complete animation
+        setTimeout(() => {
+            parts.forEach((part) => {
+                part.style.transition = '';
+            });
+        }, 900);
     }
 
     animateUnityIcon(skillIcon) {
@@ -2010,6 +2042,11 @@ class EasterEgg {
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new PortfolioManager();
+
+    // Initialize Lucide icons
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
 
     // Optional enhancements
     if (window.innerWidth > 768) {

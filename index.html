@@ -15,6 +15,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
         <!-- Framer Motion for micro-interactions -->
         <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.umd.js"></script>
+        <!-- Lucide Icons for modern minimalist icons -->
+        <script src="https://unpkg.com/lucide@latest"></script>
     </head>
     <body>
         <!-- Progress Bar -->
@@ -72,7 +74,9 @@
                         <a href="#content" class="nav-link" data-translate="nav-content">Контент</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#github-activity" class="nav-link" data-translate="nav-github-activity">GitHub-Activity</a>
+                        <a href="#github-activity" class="nav-link" data-translate="nav-github-activity">
+                            GitHub-Activity
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a href="#contact" class="nav-link" data-translate="nav-contact">Контакты</a>
@@ -92,7 +96,9 @@
                 <div class="hero-content">
                     <div class="hero-text">
                         <h1 class="hero-title">
-                            <span id="hero-name" class="glitch" data-text="Александр Халле" data-translate="hero-name">Александр Халле</span>
+                            <span id="hero-name" class="glitch" data-text="Александр Халле" data-translate="hero-name">
+                                Александр Халле
+                            </span>
                         </h1>
                         <p class="hero-subtitle">
                             <span class="typewriter" id="typewriter-text"></span>
@@ -1093,30 +1099,31 @@
                     <div class="skill-category">
                         <h3>Языки программирования</h3>
                         <div class="skills-list">
-                            <div class="skill-item">
+                            <div class="skill-item" data-skill="csharp">
                                 <div class="skill-icon">
-                                    <i class="fab fa-microsoft"></i>
+                                    <i data-lucide="code-2"></i>
                                 </div>
                                 <span>C#</span>
                                 <div class="skill-level">
                                     <div class="skill-bar" data-level="90"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-skill="kotlin">
                                 <div class="skill-icon">
-                                    <img
-                                        src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTcuNjggMTJMMTIgOC4zMkwxNi4zMiAxMkwxMiAxNS42OEw3LjY4IDEyWiIgZmlsbD0iIzAwN0FDQyIvPgo8L3N2Zz4K"
-                                        alt="Kotlin"
-                                    />
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="kotlin-icon">
+                                        <path class="kotlin-part" d="M24 24L12 12L24 0" fill="#7F52FF" />
+                                        <path class="kotlin-part" d="M12 12L0 24V0" fill="#7F52FF" />
+                                        <path class="kotlin-part" d="M12 12L24 24H0" fill="#F88909" />
+                                    </svg>
                                 </div>
                                 <span>Kotlin</span>
                                 <div class="skill-level">
                                     <div class="skill-bar" data-level="75"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-skill="sql">
                                 <div class="skill-icon">
-                                    <i class="fas fa-database"></i>
+                                    <i data-lucide="database"></i>
                                 </div>
                                 <span>SQL</span>
                                 <div class="skill-level">
@@ -1129,27 +1136,27 @@
                     <div class="skill-category">
                         <h3>Технологии .NET</h3>
                         <div class="skills-list">
-                            <div class="skill-item">
+                            <div class="skill-item" data-skill="dotnet">
                                 <div class="skill-icon">
-                                    <i class="fab fa-microsoft"></i>
+                                    <i data-lucide="box"></i>
                                 </div>
                                 <span>.NET Core</span>
                                 <div class="skill-level">
                                     <div class="skill-bar" data-level="85"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-skill="aspnet">
                                 <div class="skill-icon">
-                                    <i class="fas fa-globe"></i>
+                                    <i data-lucide="globe"></i>
                                 </div>
                                 <span>ASP.NET</span>
                                 <div class="skill-level">
                                     <div class="skill-bar" data-level="80"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-skill="wpf">
                                 <div class="skill-icon">
-                                    <i class="fas fa-desktop"></i>
+                                    <i data-lucide="monitor"></i>
                                 </div>
                                 <span>WPF</span>
                                 <div class="skill-level">
@@ -1162,27 +1169,27 @@
                     <div class="skill-category">
                         <h3>Разработка игр</h3>
                         <div class="skills-list">
-                            <div class="skill-item">
+                            <div class="skill-item" data-skill="unity">
                                 <div class="skill-icon">
-                                    <i class="fab fa-unity"></i>
+                                    <i data-lucide="box-select"></i>
                                 </div>
                                 <span>Unity</span>
                                 <div class="skill-level">
                                     <div class="skill-bar" data-level="90"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-skill="dotween">
                                 <div class="skill-icon">
-                                    <i class="fas fa-magic"></i>
+                                    <i data-lucide="sparkles"></i>
                                 </div>
                                 <span>DOTween</span>
                                 <div class="skill-level">
                                     <div class="skill-bar" data-level="85"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-skill="blender">
                                 <div class="skill-icon">
-                                    <i class="fas fa-cube"></i>
+                                    <i data-lucide="box"></i>
                                 </div>
                                 <span>Blender</span>
                                 <div class="skill-level">
@@ -1195,9 +1202,9 @@
                     <div class="skill-category">
                         <h3>Базы данных</h3>
                         <div class="skills-list">
-                            <div class="skill-item">
+                            <div class="skill-item" data-skill="postgresql">
                                 <div class="skill-icon">
-                                    <i class="fas fa-elephant"></i>
+                                    <i data-lucide="database"></i>
                                 </div>
                                 <span>PostgreSQL</span>
                                 <div class="skill-level">
@@ -1213,9 +1220,9 @@
                                     <div class="skill-bar" data-level="75"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-skill="linq">
                                 <div class="skill-icon">
-                                    <i class="fas fa-search"></i>
+                                    <i data-lucide="search"></i>
                                 </div>
                                 <span>LINQ</span>
                                 <div class="skill-level">
@@ -1228,27 +1235,27 @@
                     <div class="skill-category">
                         <h3>Инструменты</h3>
                         <div class="skills-list">
-                            <div class="skill-item">
+                            <div class="skill-item" data-skill="git">
                                 <div class="skill-icon">
-                                    <i class="fab fa-git-alt"></i>
+                                    <i data-lucide="git-branch"></i>
                                 </div>
                                 <span>Git</span>
                                 <div class="skill-level">
                                     <div class="skill-bar" data-level="85"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-skill="vscode">
                                 <div class="skill-icon">
-                                    <i class="fab fa-microsoft"></i>
+                                    <i data-lucide="code"></i>
                                 </div>
                                 <span>Visual Studio</span>
                                 <div class="skill-level">
                                     <div class="skill-bar" data-level="90"></div>
                                 </div>
                             </div>
-                            <div class="skill-item">
+                            <div class="skill-item" data-skill="figma">
                                 <div class="skill-icon">
-                                    <i class="fab fa-figma"></i>
+                                    <i data-lucide="figma"></i>
                                 </div>
                                 <span>Figma</span>
                                 <div class="skill-level">
