@@ -691,6 +691,7 @@ body {
 .project-card {
     background: rgba(26, 26, 40, 0.8);
     border-radius: 15px;
+    padding: 15px;
     overflow: hidden;
     border: 1px solid rgba(168, 85, 247, 0.3);
     min-height: 420px;
@@ -816,8 +817,8 @@ body {
 /* Progress Ring Status */
 .project-status {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 1.25rem;
+    right: 1.15rem;
     z-index: 10;
 }
 
@@ -900,18 +901,15 @@ body {
 /* Favorite badge pinned on card */
 .favorite-badge {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 20px;
+    left: 20px;
     width: 28px;
     height: 28px;
     border-radius: 6px;
-    background: rgba(255, 215, 0, 0.1);
-    border: 1px solid rgba(255, 215, 0, 0.6);
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 12;
-    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.15);
 }
 .favorite-badge i {
     color: #ffd700;
@@ -6186,6 +6184,7 @@ img.error {
     margin-bottom: 15px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 0;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
