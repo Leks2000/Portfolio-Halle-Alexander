@@ -1747,7 +1747,7 @@ class PortfolioManager {
                 }
             );
         });
-        
+
 
         // Technical skills animation
         gsap.from('.tech-category', {
@@ -3323,5 +3323,170 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize Optimized Filters
     window.optimizedFilters = new OptimizedFilters();
 
+    // Initialize Flip Card Manager
+    window.flipCardManager = new FlipCardManager();
+
     console.log('🚀 Enhanced Portfolio Systems Initialized');
 });
+
+/* ================================
+   FLIP CARD MANAGER
+   Manages tech skill flip card interactions
+   ================================ */
+
+class FlipCardManager {
+    constructor() {
+        this.cards = document.querySelectorAll('.tech-flip-card');
+        this.isTouch = 'ontouchstart' in window;
+        this.init();
+    }
+
+    init() {
+        if (!this.cards.length) return;
+
+        this.cards.forEach((card) => {
+            // Add touch support for mobile
+            if (this.isTouch) {
+                this.setupTouchInteraction(card);
+            }
+
+            // Add keyboard accessibility
+            this.setupKeyboardAccess(card);
+
+            // Add entrance animation
+            this.addEntranceAnimation(card);
+
+            // Add click to flip on mobile
+            card.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768) {
+                    card.classList.toggle('flipped');
+                }
+            });
+        });
+
+        // Initialize Intersection Observer for scroll animations
+        this.observeCards();
+    }
+
+    setupTouchInteraction(card) {
+        let touchStartTime;
+
+        card.addEventListener('touchstart', () => {
+            touchStartTime = Date.now();
+        });
+
+        card.addEventListener('touchend', (e) => {
+            const touchDuration = Date.now() - touchStartTime;
+
+            // If it's a quick tap (not a scroll)
+            if (touchDuration < 200) {
+                e.preventDefault();
+                card.classList.toggle('flipped');
+            }
+        });
+    }
+
+    setupKeyboardAccess(card) {
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('role', 'button');
+
+        const techName = card.querySelector('.tech-name')?.textContent || 'Technology';
+        card.setAttribute('aria-label', `Learn more about ${techName}`);
+
+        card.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                card.classList.toggle('flipped');
+            }
+        });
+    }
+
+    addEntranceAnimation(card) {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+    }
+
+    observeCards() {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 100);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px',
+            },
+        );
+
+        this.cards.forEach((card) => observer.observe(card));
+    }
+}
+
+/* ================================
+   BRUTAL MODE TOGGLE
+   Toggle between modern and brutal styles
+   ================================ */
+
+class BrutalModeToggle {
+    constructor() {
+        this.projectCards = document.querySelectorAll('.project-card');
+        this.createToggleButton();
+    }
+
+    createToggleButton() {
+        const toggle = document.createElement('button');
+        toggle.className = 'brutal-toggle';
+        toggle.innerHTML = '⚡ Brutal Mode';
+        toggle.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            padding: 12px 20px;
+            background: #000;
+            color: #fff;
+            border: 3px solid #fff;
+            font-weight: 900;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 4px 4px 0 #fff;
+            transition: all 0.3s;
+        `;
+
+        toggle.addEventListener('click', () => {
+            this.toggleBrutalMode();
+        });
+
+        toggle.addEventListener('mouseenter', () => {
+            toggle.style.transform = 'translate(-2px, -2px)';
+            toggle.style.boxShadow = '6px 6px 0 #fff';
+        });
+
+        toggle.addEventListener('mouseleave', () => {
+            toggle.style.transform = 'translate(0, 0)';
+            toggle.style.boxShadow = '4px 4px 0 #fff';
+        });
+
+        document.body.appendChild(toggle);
+    }
+
+    toggleBrutalMode() {
+        this.projectCards.forEach((card) => {
+            card.classList.toggle('brutal-mode');
+        });
+
+        // Toggle flip cards border style
+        const flipCards = document.querySelectorAll('.tech-flip-card');
+        flipCards.forEach((card) => {
+            card.classList.toggle('brutal-mode');
+        });
+    }
+}
