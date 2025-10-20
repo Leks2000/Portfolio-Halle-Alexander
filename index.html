@@ -211,7 +211,7 @@
                             <div class="project-buttons">
                                 <a
                                     href="https://leks2000.itch.io/dark-memorial-alpha"
-                                    class="btn btn-itch"
+                                    class="btn btn-spring"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
@@ -220,7 +220,7 @@
                                 </a>
                                 <a
                                     href="https://github.com/Leks2000/MyFirstGameFiles"
-                                    class="btn btn-code"
+                                    class="btn btn-spring-blue"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
@@ -277,7 +277,7 @@
                             <div class="project-buttons">
                                 <a
                                     href="https://leks2000.itch.io/decks-and-dungeon"
-                                    class="btn btn-itch"
+                                    class="btn btn-spring-green"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
@@ -286,7 +286,7 @@
                                 </a>
                                 <a
                                     href="https://github.com/Leks2000/CardMobile-build"
-                                    class="btn btn-code"
+                                    class="btn btn-spring-blue"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
@@ -1095,167 +1095,256 @@
         <section id="skills" class="skills">
             <div class="container">
                 <h2 class="section-title">Технические навыки</h2>
-                <div class="skills-grid">
-                    <div class="skill-category">
-                        <h3>Языки программирования</h3>
-                        <div class="skills-list">
-                            <div class="skill-item" data-skill="csharp">
-                                <div class="skill-icon">
-                                    <img src="https://page.gensparksite.com/v1/base64_upload/7095ee7fc584944cc23b9a40f89d7644" alt="C#" class="skill-icon-image" />
+                
+                <!-- Flip Card Grid -->
+                <div class="tech-flip-grid">
+                    <!-- Unity -->
+                    <div class="tech-flip-card" data-tech="unity">
+                        <div class="tech-flip-inner">
+                            <div class="tech-flip-front">
+                                <div class="tech-icon-wrapper">
+                                    <img src="https://cdn.worldvectorlogo.com/logos/unity-69.svg" alt="Unity" class="tech-icon">
                                 </div>
-                                <span>C#</span>
-                                <div class="skill-level">
-                                    <div class="skill-bar" data-level="90"></div>
-                                </div>
+                                <h3 class="tech-name">Unity</h3>
+                                <div class="tech-level-badge">Expert</div>
                             </div>
-                            <div class="skill-item" data-skill="kotlin">
-                                <div class="skill-icon">
-                                    <img src="https://page.gensparksite.com/v1/base64_upload/e94e79306be28528335577627ee0239b" alt="Kotlin" class="skill-icon-image" />
-                                </div>
-                                <span>Kotlin</span>
-                                <div class="skill-level">
-                                    <div class="skill-bar" data-level="75"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item" data-skill="sql">
-                                <div class="skill-icon">
-                                    <i data-lucide="database"></i>
-                                </div>
-                                <span>SQL</span>
-                                <div class="skill-level">
-                                    <div class="skill-bar" data-level="80"></div>
+                            <div class="tech-flip-back">
+                                <h3>Unity Engine</h3>
+                                <p>Кроссплатформенный игровой движок для разработки 2D/3D игр</p>
+                                <div class="tech-stats">
+                                    <span class="tech-exp">3+ года</span>
+                                    <span class="tech-projects">10+ проектов</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="skill-category">
-                        <h3>Технологии .NET</h3>
-                        <div class="skills-list">
-                            <div class="skill-item" data-skill="dotnet">
-                                <div class="skill-icon">
-                                    <i data-lucide="box"></i>
+                    <!-- C# -->
+                    <div class="tech-flip-card" data-tech="csharp">
+                        <div class="tech-flip-inner">
+                            <div class="tech-flip-front">
+                                <div class="tech-icon-wrapper">
+                                    <img src="https://cdn.worldvectorlogo.com/logos/c--4.svg" alt="C#" class="tech-icon">
                                 </div>
-                                <span>.NET Core</span>
-                                <div class="skill-level">
-                                    <div class="skill-bar" data-level="85"></div>
-                                </div>
+                                <h3 class="tech-name">C#</h3>
+                                <div class="tech-level-badge">Expert</div>
                             </div>
-                            <div class="skill-item" data-skill="aspnet">
-                                <div class="skill-icon">
-                                    <i data-lucide="globe"></i>
-                                </div>
-                                <span>ASP.NET</span>
-                                <div class="skill-level">
-                                    <div class="skill-bar" data-level="80"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item" data-skill="wpf">
-                                <div class="skill-icon">
-                                    <i data-lucide="monitor"></i>
-                                </div>
-                                <span>WPF</span>
-                                <div class="skill-level">
-                                    <div class="skill-bar" data-level="75"></div>
+                            <div class="tech-flip-back">
+                                <h3>C# Programming</h3>
+                                <p>Объектно-ориентированный язык для Unity и .NET разработки</p>
+                                <div class="tech-stats">
+                                    <span class="tech-exp">3+ года</span>
+                                    <span class="tech-projects">15+ проектов</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="skill-category">
-                        <h3>Разработка игр</h3>
-                        <div class="skills-list">
-                            <div class="skill-item" data-skill="unity">
-                                <div class="skill-icon">
-                                    <i data-lucide="box-select"></i>
+                    <!-- .NET -->
+                    <div class="tech-flip-card" data-tech="dotnet">
+                        <div class="tech-flip-inner">
+                            <div class="tech-flip-front">
+                                <div class="tech-icon-wrapper">
+                                    <img src="https://cdn.worldvectorlogo.com/logos/dot-net-core-7.svg" alt=".NET" class="tech-icon">
                                 </div>
-                                <span>Unity</span>
-                                <div class="skill-level">
-                                    <div class="skill-bar" data-level="90"></div>
-                                </div>
+                                <h3 class="tech-name">.NET</h3>
+                                <div class="tech-level-badge">Advanced</div>
                             </div>
-                            <div class="skill-item" data-skill="dotween">
-                                <div class="skill-icon">
-                                    <i data-lucide="sparkles"></i>
-                                </div>
-                                <span>DOTween</span>
-                                <div class="skill-level">
-                                    <div class="skill-bar" data-level="85"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item" data-skill="blender">
-                                <div class="skill-icon">
-                                    <i data-lucide="box"></i>
-                                </div>
-                                <span>Blender</span>
-                                <div class="skill-level">
-                                    <div class="skill-bar" data-level="60"></div>
+                            <div class="tech-flip-back">
+                                <h3>.NET Core</h3>
+                                <p>Платформа для создания современных облачных приложений</p>
+                                <div class="tech-stats">
+                                    <span class="tech-exp">2+ года</span>
+                                    <span class="tech-projects">8+ проектов</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="skill-category">
-                        <h3>Базы данных</h3>
-                        <div class="skills-list">
-                            <div class="skill-item" data-skill="postgresql">
-                                <div class="skill-icon">
-                                    <i data-lucide="database"></i>
+                    <!-- Kotlin -->
+                    <div class="tech-flip-card" data-tech="kotlin">
+                        <div class="tech-flip-inner">
+                            <div class="tech-flip-front">
+                                <div class="tech-icon-wrapper">
+                                    <img src="https://cdn.worldvectorlogo.com/logos/kotlin-1.svg" alt="Kotlin" class="tech-icon">
                                 </div>
-                                <span>PostgreSQL</span>
-                                <div class="skill-level">
-                                    <div class="skill-bar" data-level="80"></div>
-                                </div>
+                                <h3 class="tech-name">Kotlin</h3>
+                                <div class="tech-level-badge">Advanced</div>
                             </div>
-                            <div class="skill-item">
-                                <div class="skill-icon">
-                                    <i class="fas fa-database"></i>
-                                </div>
-                                <span>MySQL</span>
-                                <div class="skill-level">
-                                    <div class="skill-bar" data-level="75"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item" data-skill="linq">
-                                <div class="skill-icon">
-                                    <i data-lucide="search"></i>
-                                </div>
-                                <span>LINQ</span>
-                                <div class="skill-level">
-                                    <div class="skill-bar" data-level="85"></div>
+                            <div class="tech-flip-back">
+                                <h3>Kotlin</h3>
+                                <p>Современный язык для Android разработки и бэкенда</p>
+                                <div class="tech-stats">
+                                    <span class="tech-exp">1.5+ года</span>
+                                    <span class="tech-projects">5+ проектов</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="skill-category">
-                        <h3>Инструменты</h3>
-                        <div class="skills-list">
-                            <div class="skill-item" data-skill="git">
-                                <div class="skill-icon">
-                                    <i data-lucide="git-branch"></i>
+                    <!-- HTML -->
+                    <div class="tech-flip-card" data-tech="html">
+                        <div class="tech-flip-inner">
+                            <div class="tech-flip-front">
+                                <div class="tech-icon-wrapper">
+                                    <img src="https://cdn.worldvectorlogo.com/logos/html-1.svg" alt="HTML5" class="tech-icon">
                                 </div>
-                                <span>Git</span>
-                                <div class="skill-level">
-                                    <div class="skill-bar" data-level="85"></div>
+                                <h3 class="tech-name">HTML5</h3>
+                                <div class="tech-level-badge">Expert</div>
+                            </div>
+                            <div class="tech-flip-back">
+                                <h3>HTML5</h3>
+                                <p>Язык разметки для создания веб-страниц и приложений</p>
+                                <div class="tech-stats">
+                                    <span class="tech-exp">3+ года</span>
+                                    <span class="tech-projects">20+ проектов</span>
                                 </div>
                             </div>
-                            <div class="skill-item" data-skill="vscode">
-                                <div class="skill-icon">
-                                    <img src="https://page.gensparksite.com/v1/base64_upload/ea6e17e42b27617648b53cce7abb846b" alt="Visual Studio" class="skill-icon-image" />
+                        </div>
+                    </div>
+
+                    <!-- CSS -->
+                    <div class="tech-flip-card" data-tech="css">
+                        <div class="tech-flip-inner">
+                            <div class="tech-flip-front">
+                                <div class="tech-icon-wrapper">
+                                    <img src="https://cdn.worldvectorlogo.com/logos/css-3.svg" alt="CSS3" class="tech-icon">
                                 </div>
-                                <span>Visual Studio</span>
-                                <div class="skill-level">
-                                    <div class="skill-bar" data-level="90"></div>
+                                <h3 class="tech-name">CSS3</h3>
+                                <div class="tech-level-badge">Expert</div>
+                            </div>
+                            <div class="tech-flip-back">
+                                <h3>CSS3</h3>
+                                <p>Каскадные таблицы стилей для оформления веб-страниц</p>
+                                <div class="tech-stats">
+                                    <span class="tech-exp">3+ года</span>
+                                    <span class="tech-projects">20+ проектов</span>
                                 </div>
                             </div>
-                            <div class="skill-item" data-skill="figma">
-                                <div class="skill-icon">
-                                    <img src="https://page.gensparksite.com/v1/base64_upload/87f6658fe5544f6984d9ac67bf7cf707" alt="Figma" class="skill-icon-image" />
+                        </div>
+                    </div>
+
+                    <!-- JavaScript -->
+                    <div class="tech-flip-card" data-tech="javascript">
+                        <div class="tech-flip-inner">
+                            <div class="tech-flip-front">
+                                <div class="tech-icon-wrapper">
+                                    <img src="https://cdn.worldvectorlogo.com/logos/logo-javascript.svg" alt="JavaScript" class="tech-icon">
                                 </div>
-                                <span>Figma</span>
-                                <div class="skill-level">
-                                    <div class="skill-bar" data-level="70"></div>
+                                <h3 class="tech-name">JavaScript</h3>
+                                <div class="tech-level-badge">Advanced</div>
+                            </div>
+                            <div class="tech-flip-back">
+                                <h3>JavaScript</h3>
+                                <p>Язык программирования для создания интерактивных веб-страниц</p>
+                                <div class="tech-stats">
+                                    <span class="tech-exp">2+ года</span>
+                                    <span class="tech-projects">15+ проектов</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- React -->
+                    <div class="tech-flip-card" data-tech="react">
+                        <div class="tech-flip-inner">
+                            <div class="tech-flip-front">
+                                <div class="tech-icon-wrapper">
+                                    <img src="https://cdn.worldvectorlogo.com/logos/react-2.svg" alt="React" class="tech-icon">
+                                </div>
+                                <h3 class="tech-name">React</h3>
+                                <div class="tech-level-badge">Intermediate</div>
+                            </div>
+                            <div class="tech-flip-back">
+                                <h3>React</h3>
+                                <p>JavaScript библиотека для создания пользовательских интерфейсов</p>
+                                <div class="tech-stats">
+                                    <span class="tech-exp">1+ год</span>
+                                    <span class="tech-projects">5+ проектов</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SQL -->
+                    <div class="tech-flip-card" data-tech="sql">
+                        <div class="tech-flip-inner">
+                            <div class="tech-flip-front">
+                                <div class="tech-icon-wrapper">
+                                    <img src="https://cdn.worldvectorlogo.com/logos/postgresql.svg" alt="SQL" class="tech-icon">
+                                </div>
+                                <h3 class="tech-name">SQL</h3>
+                                <div class="tech-level-badge">Advanced</div>
+                            </div>
+                            <div class="tech-flip-back">
+                                <h3>SQL</h3>
+                                <p>Язык запросов для работы с реляционными базами данных</p>
+                                <div class="tech-stats">
+                                    <span class="tech-exp">2+ года</span>
+                                    <span class="tech-projects">10+ проектов</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Git -->
+                    <div class="tech-flip-card" data-tech="git">
+                        <div class="tech-flip-inner">
+                            <div class="tech-flip-front">
+                                <div class="tech-icon-wrapper">
+                                    <img src="https://cdn.worldvectorlogo.com/logos/git-icon.svg" alt="Git" class="tech-icon">
+                                </div>
+                                <h3 class="tech-name">Git</h3>
+                                <div class="tech-level-badge">Advanced</div>
+                            </div>
+                            <div class="tech-flip-back">
+                                <h3>Git</h3>
+                                <p>Система контроля версий для отслеживания изменений в коде</p>
+                                <div class="tech-stats">
+                                    <span class="tech-exp">3+ года</span>
+                                    <span class="tech-projects">Все проекты</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blender -->
+                    <div class="tech-flip-card" data-tech="blender">
+                        <div class="tech-flip-inner">
+                            <div class="tech-flip-front">
+                                <div class="tech-icon-wrapper">
+                                    <img src="https://cdn.worldvectorlogo.com/logos/blender-2.svg" alt="Blender" class="tech-icon">
+                                </div>
+                                <h3 class="tech-name">Blender</h3>
+                                <div class="tech-level-badge">Intermediate</div>
+                            </div>
+                            <div class="tech-flip-back">
+                                <h3>Blender</h3>
+                                <p>3D-моделирование и создание ассетов для игр</p>
+                                <div class="tech-stats">
+                                    <span class="tech-exp">1+ год</span>
+                                    <span class="tech-projects">3+ проекта</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Figma -->
+                    <div class="tech-flip-card" data-tech="figma">
+                        <div class="tech-flip-inner">
+                            <div class="tech-flip-front">
+                                <div class="tech-icon-wrapper">
+                                    <img src="https://cdn.worldvectorlogo.com/logos/figma-5.svg" alt="Figma" class="tech-icon">
+                                </div>
+                                <h3 class="tech-name">Figma</h3>
+                                <div class="tech-level-badge">Intermediate</div>
+                            </div>
+                            <div class="tech-flip-back">
+                                <h3>Figma</h3>
+                                <p>Инструмент для дизайна интерфейсов и прототипирования</p>
+                                <div class="tech-stats">
+                                    <span class="tech-exp">1+ год</span>
+                                    <span class="tech-projects">8+ проектов</span>
                                 </div>
                             </div>
                         </div>
