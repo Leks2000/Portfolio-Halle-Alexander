@@ -293,13 +293,15 @@ body {
     position: absolute;
     bottom: -10px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) scaleX(0);
     width: 100px;
     height: 3px;
-    background: var(--gradient-unity);
-    border-radius: 2px;
+    background: linear-gradient(90deg, var(--unity-blue), var(--unity-orange));
+    border-radius: 3px;
     box-shadow: var(--glow-primary);
-}
+    animation: underlineAppear 1s ease-out forwards;
+    animation-delay: 0.2s;
+  }
 
 /* Container */
 .container {
@@ -887,9 +889,15 @@ body {
 .project-content p {
     flex: 1;
     margin-bottom: 0.75rem;
-    font-size: 0.9rem;
-    line-height: 1.5;
+    font-size: 0.95rem;
+    line-height: 1.6;
     overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 0;
+    -webkit-box-orient: vertical;
+    color: var(--text-secondary);
 }
 
 .project-content h3 {
@@ -910,13 +918,16 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 12;
+    transition: none;
 }
 .favorite-badge i {
     color: #ffd700;
     text-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
+    font-size: 1.2rem;
 }
+/* Keep favorite badge in place on card hover */
 .project-card:not(.filtered-out):hover .favorite-badge {
-    transform: translateY(-2px);
+    transform: translateY(0);
 }
 
 /* Bot Preview Styles */
@@ -1079,9 +1090,11 @@ body {
 .project-buttons .btn {
     flex: 1;
     min-width: 100px;
+    max-width: 150px;
     justify-content: center;
-    padding: 0.5rem 0.8rem;
-    font-size: 0.85rem;
+    padding: 0.65rem 1rem;
+    font-size: 0.875rem;
+    white-space: nowrap;
 }
 
 /* Skills Section */
@@ -1129,6 +1142,27 @@ body {
 .skill-icon-item:hover i {
     color: var(--unity-orange);
     transform: rotate(10deg);
+}
+
+/* Skill Icon Images */
+.skill-icon-image {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+.skill-item:hover .skill-icon-image {
+    transform: scale(1.1) rotate(5deg);
+    filter: brightness(1.2) drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
+}
+
+.skill-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+    min-height: 48px;
 }
 
 .custom-icon {
@@ -4244,19 +4278,6 @@ section::before {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-}
-
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 3px;
-    background: linear-gradient(90deg, var(--unity-blue), var(--unity-orange));
-    border-radius: 3px;
-    animation: titleUnderline 2s ease-out;
 }
 
 @keyframes titleUnderline {

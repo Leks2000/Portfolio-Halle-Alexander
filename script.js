@@ -332,6 +332,14 @@ class PortfolioManager {
                 element.textContent = this.translations[this.currentLang][key];
             }
         });
+
+        // Update hero name with correct language and glitch effect
+        const heroNameElement = document.getElementById('hero-name');
+        if (heroNameElement) {
+            const name = this.currentLang === 'ru' ? 'Александр Халле' : 'Alexander Halle';
+            heroNameElement.textContent = name;
+            heroNameElement.setAttribute('data-text', name);
+        }
     }
 
     // Navigation functionality
@@ -623,17 +631,17 @@ class PortfolioManager {
             let progress;
 
             switch (status) {
-                case 'released':
-                    progress = 100;
-                    break;
-                case 'development':
-                    progress = 50;
-                    break;
-                case 'concept':
-                    progress = 20;
-                    break;
-                default:
-                    progress = 0;
+            case 'released':
+                progress = 100;
+                break;
+            case 'development':
+                progress = 50;
+                break;
+            case 'concept':
+                progress = 20;
+                break;
+            default:
+                progress = 0;
             }
 
             const circumference = 2 * Math.PI * 27; // radius = 27
@@ -658,24 +666,24 @@ class PortfolioManager {
 
                 let text;
                 switch (status) {
-                    case 'released':
-                        text =
+                case 'released':
+                    text =
                             this.currentLang === 'ru'
                                 ? 'Проект завершен и выпущен'
                                 : 'Project completed and released';
-                        break;
-                    case 'development':
-                        text =
+                    break;
+                case 'development':
+                    text =
                             this.currentLang === 'ru'
                                 ? 'Проект в активной разработке'
                                 : 'Project in active development';
-                        break;
-                    case 'concept':
-                        text =
+                    break;
+                case 'concept':
+                    text =
                             this.currentLang === 'ru'
                                 ? 'Концепт или прототип'
                                 : 'Concept or prototype';
-                        break;
+                    break;
                 }
 
                 tooltip.textContent = text;
@@ -965,26 +973,26 @@ class PortfolioManager {
 
         // Container remains stable - only animate internal elements
         switch (skillType) {
-            case 'csharp':
-                this.animateCSharpIcon(skillIcon);
-                break;
-            case 'kotlin':
-                this.animateKotlinIcon(skillIcon);
-                break;
-            case 'unity':
-                this.animateUnityIcon(skillIcon);
-                break;
-            case 'sql':
-                this.animateSQLIcon(skillIcon);
-                break;
-            case 'dotnet':
-                this.animateDotNetIcon(skillIcon);
-                break;
-            case 'git':
-                this.animateGitIcon(skillIcon);
-                break;
-            default:
-                this.animateGenericIcon(skillIcon);
+        case 'csharp':
+            this.animateCSharpIcon(skillIcon);
+            break;
+        case 'kotlin':
+            this.animateKotlinIcon(skillIcon);
+            break;
+        case 'unity':
+            this.animateUnityIcon(skillIcon);
+            break;
+        case 'sql':
+            this.animateSQLIcon(skillIcon);
+            break;
+        case 'dotnet':
+            this.animateDotNetIcon(skillIcon);
+            break;
+        case 'git':
+            this.animateGitIcon(skillIcon);
+            break;
+        default:
+            this.animateGenericIcon(skillIcon);
         }
     }
 
@@ -1028,7 +1036,7 @@ class PortfolioManager {
         const parts = skillIcon.querySelectorAll('.kotlin-part');
         const icon = skillIcon.querySelector('.kotlin-icon');
 
-        if (!parts.length || !icon) return;
+        if (!parts.length || !icon) {return;}
 
         // Phase 1: Separate parts
         parts.forEach((part, index) => {
@@ -1038,7 +1046,7 @@ class PortfolioManager {
                 { x: 30, y: 0, rotate: -10 }
             ];
             const dir = directions[index] || { x: 0, y: 0, rotate: 0 };
-            
+
             part.style.transform = `translate(${dir.x}px, ${dir.y}px) rotate(${dir.rotate}deg)`;
             part.style.opacity = '0.7';
             part.style.transition = 'all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
@@ -1719,18 +1727,27 @@ class PortfolioManager {
             ease: 'power3.out'
         });
 
-        gsap.from('.skill-item', {
-            scrollTrigger: {
-                trigger: '.new-skills-grid',
-                start: 'top 80%'
-            },
-            duration: 0.8,
-            y: 40,
-            opacity: 0,
-            scale: 0.9,
-            stagger: 0.08,
-            ease: 'back.out(1.4)'
+        gsap.utils.toArray('.skill-item').forEach((item, i) => {
+            gsap.fromTo(item,
+                { y: 30, opacity: 0, scale: 0.9 },
+                {
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top 95%',
+                        toggleActions: 'play none none none',
+                        once: true,
+                        invalidateOnRefresh: true
+                    },
+                    duration: 0.7,
+                    y: 0,
+                    opacity: 1,
+                    scale: 1,
+                    ease: 'power3.out',
+                    delay: i * 0.03
+                }
+            );
         });
+        
 
         // Technical skills animation
         gsap.from('.tech-category', {
@@ -1911,6 +1928,14 @@ class PortfolioManager {
                 element.textContent = this.translations[lang][key];
             }
         });
+
+        // Update hero name with glitch effect for English
+        const heroNameElement = document.getElementById('hero-name');
+        if (heroNameElement) {
+            const newName = lang === 'ru' ? 'Александр Халле' : 'Alexander Halle';
+            heroNameElement.textContent = newName;
+            heroNameElement.setAttribute('data-text', newName);
+        }
 
         // Restart typing animation with new language
         if (document.getElementById('typing-animation')) {
@@ -2577,12 +2602,12 @@ class ModalManager {
         document.addEventListener('keydown', e => {
             if (this.activeModal) {
                 switch (e.key) {
-                    case 'Escape':
-                        this.closeModal();
-                        break;
-                    case 'Tab':
-                        this.handleTabNavigation(e);
-                        break;
+                case 'Escape':
+                    this.closeModal();
+                    break;
+                case 'Tab':
+                    this.handleTabNavigation(e);
+                    break;
                 }
             }
         });
@@ -2698,8 +2723,8 @@ class ModalManager {
                             </div>
                             <div class="modal-actions">
                                 ${
-                                    data.githubUrl
-                                        ? `
+    data.githubUrl
+        ? `
                                     <a class="btn btn-code modal-github-link" 
                                        href="${data.githubUrl}" 
                                        target="_blank" rel="noopener noreferrer">
@@ -2707,11 +2732,11 @@ class ModalManager {
                                         <span>Код</span>
                                     </a>
                                 `
-                                        : ''
-                                }
+        : ''
+}
                                 ${
-                                    data.demoUrl
-                                        ? `
+    data.demoUrl
+        ? `
                                     <a class="btn btn-demo modal-demo-link" 
                                        href="${data.demoUrl}" 
                                        target="_blank" rel="noopener noreferrer">
@@ -2719,8 +2744,8 @@ class ModalManager {
                                         <span>Демо</span>
                                     </a>
                                 `
-                                        : ''
-                                }
+        : ''
+}
                             </div>
                         </div>
                     </div>
@@ -3052,8 +3077,8 @@ class GitHubIntegration {
                 </div>
                 <div class="github-repos">
                     ${data.repos
-                        .map(
-                            repo => `
+        .map(
+            repo => `
                         <div class="github-repo">
                             <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">
                                 <h4>${repo.name}</h4>
@@ -3066,8 +3091,8 @@ class GitHubIntegration {
                             </a>
                         </div>
                     `
-                        )
-                        .join('')}
+        )
+        .join('')}
                 </div>
             </div>
         `;
@@ -3198,12 +3223,12 @@ class OptimizedFilters {
         requestAnimationFrame(() => {
             const visibleProjects = this.projectsData.filter(project => {
                 switch (filter) {
-                    case 'all':
-                        return true;
-                    case 'top':
-                        return project.isTop;
-                    default:
-                        return project.category === filter;
+                case 'all':
+                    return true;
+                case 'top':
+                    return project.isTop;
+                default:
+                    return project.category === filter;
                 }
             });
 
