@@ -1727,18 +1727,27 @@ class PortfolioManager {
             ease: 'power3.out'
         });
 
-        gsap.from('.skill-item', {
-            scrollTrigger: {
-                trigger: '.new-skills-grid',
-                start: 'top 80%'
-            },
-            duration: 0.8,
-            y: 40,
-            opacity: 0,
-            scale: 0.9,
-            stagger: 0.08,
-            ease: 'back.out(1.4)'
+        gsap.utils.toArray('.skill-item').forEach((item, i) => {
+            gsap.fromTo(item,
+                { y: 30, opacity: 0, scale: 0.9 },
+                {
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top 95%',
+                        toggleActions: 'play none none none',
+                        once: true,
+                        invalidateOnRefresh: true
+                    },
+                    duration: 0.7,
+                    y: 0,
+                    opacity: 1,
+                    scale: 1,
+                    ease: 'power3.out',
+                    delay: i * 0.03
+                }
+            );
         });
+        
 
         // Technical skills animation
         gsap.from('.tech-category', {
