@@ -68,7 +68,9 @@ class PortfolioManager {
                 'promtly-desc':
                     'Chrome Extension для улучшения промптов и анализа изображений (создание описаний по фото).',
                 'newsbot-desc': 'Telegram-бот, публикующий ИИ-новости с мемами и шутками.',
+                'newstgbot-desc': 'Telegram-бот, публикующий ИИ-новости с мемами и шутками.',
                 'meme-bot-desc': 'Присылает случайные мемы пользователю.',
+                'telegrambot-desc': 'Присылает случайные мемы пользователю.',
 
                 // Skills Section
                 'skills-title': 'Навыки',
@@ -198,7 +200,9 @@ class PortfolioManager {
                 'promtly-desc':
                     'Chrome Extension for prompt enhancement and image analysis (photo description generation).',
                 'newsbot-desc': 'Telegram bot publishing AI news with memes and jokes.',
+                'newstgbot-desc': 'Telegram bot publishing AI news with memes and jokes.',
                 'meme-bot-desc': 'Sends random memes to users.',
+                'telegrambot-desc': 'Sends random memes to users.',
 
                 // Skills Section
                 'skills-title': 'Skills',
@@ -1881,35 +1885,73 @@ class PortfolioManager {
 
             document.getElementById('total-commits').textContent = totalCommits || '-';
 
-            // Update last activity
+            // Update last activity with improved time formatting
             if (events.length > 0) {
-                const lastUpdate = new Date(events[0].created_at);
-                const now = new Date();
-                const diffTime = Math.abs(now - lastUpdate);
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-                let updateText = '';
-                if (diffDays === 1) {
-                    updateText = this.currentLang === 'ru' ? '1 день назад' : '1 day ago';
-                } else if (diffDays < 7) {
-                    updateText =
-                        this.currentLang === 'ru'
-                            ? `${diffDays} дней назад`
-                            : `${diffDays} days ago`;
-                } else {
-                    updateText = this.currentLang === 'ru' ? 'Неделю назад' : 'A week ago';
-                }
-
+                const updateText = this.getTimeAgo(events[0].created_at);
                 document.getElementById('last-update').textContent = updateText;
             }
         } catch (error) {
             console.log('GitHub API error:', error);
             // Fallback values
-            document.getElementById('repo-count').textContent = '20+';
+            document.getElementById('repo-count').textContent = '48';
             document.getElementById('total-commits').textContent = '500+';
             document.getElementById('last-update').textContent =
                 this.currentLang === 'ru' ? 'Недавно' : 'Recently';
         }
+    }
+
+    // Format time ago with proper Russian pluralization
+    getTimeAgo(dateString) {
+        const now = new Date();
+        const past = new Date(dateString);
+        const diffMs = now - past;
+        
+        const minutes = Math.floor(diffMs / (1000 * 60));
+        const hours = Math.floor(diffMs / (1000 * 60 * 60));
+        const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+        const weeks = Math.floor(days / 7);
+        const months = Math.floor(days / 30);
+        
+        if (minutes < 1) {
+            return this.currentLang === 'ru' ? 'только что' : 'just now';
+        } else if (minutes < 60) {
+            return this.currentLang === 'ru' 
+                ? `${minutes} ${this.getPluralForm(minutes, ['минуту', 'минуты', 'минут'])} назад`
+                : `${minutes} ${minutes === 1 ? 'minute' : 'minutes'} ago`;
+        } else if (hours < 24) {
+            return this.currentLang === 'ru'
+                ? `${hours} ${this.getPluralForm(hours, ['час', 'часа', 'часов'])} назад`
+                : `${hours} ${hours === 1 ? 'hour' : 'hours'} ago`;
+        } else if (days < 7) {
+            return this.currentLang === 'ru'
+                ? `${days} ${this.getPluralForm(days, ['день', 'дня', 'дней'])} назад`
+                : `${days} ${days === 1 ? 'day' : 'days'} ago`;
+        } else if (weeks < 4) {
+            return this.currentLang === 'ru'
+                ? `${weeks} ${this.getPluralForm(weeks, ['неделю', 'недели', 'недель'])} назад`
+                : `${weeks} ${weeks === 1 ? 'week' : 'weeks'} ago`;
+        } else {
+            return this.currentLang === 'ru'
+                ? `${months} ${this.getPluralForm(months, ['месяц', 'месяца', 'месяцев'])} назад`
+                : `${months} ${months === 1 ? 'month' : 'months'} ago`;
+        }
+    }
+
+    // Russian plural forms helper
+    getPluralForm(number, forms) {
+        const mod10 = number % 10;
+        const mod100 = number % 100;
+        
+        if (mod100 >= 11 && mod100 <= 14) {
+            return forms[2];
+        }
+        if (mod10 === 1) {
+            return forms[0];
+        }
+        if (mod10 >= 2 && mod10 <= 4) {
+            return forms[1];
+        }
+        return forms[2];
     }
 
     // Enhanced Language Switcher
