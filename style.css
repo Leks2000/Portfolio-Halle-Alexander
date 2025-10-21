@@ -1048,29 +1048,6 @@ body {
     box-shadow: var(--glow-primary);
 }
 
-.btn-code {
-    background: var(--bg-tertiary);
-    color: var(--text-primary);
-    border: 1px solid var(--unity-blue);
-}
-
-.btn-code:hover {
-    background: var(--unity-blue);
-    color: var(--bg-primary);
-    box-shadow: var(--glow-primary);
-}
-
-.btn-itch {
-    background: var(--unity-orange);
-    color: white;
-}
-
-.btn-itch:hover {
-    background: #e55a30;
-    transform: translateY(-2px);
-    box-shadow: var(--glow-secondary);
-}
-
 .btn-demo {
     background: var(--unity-green);
     color: white;
@@ -1308,6 +1285,13 @@ body {
     margin: 0 auto 1rem;
     font-size: 3rem;
     color: white;
+    overflow: hidden;
+}
+
+.photo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .profile-links {
@@ -3895,27 +3879,6 @@ body {
     text-align: center;
 }
 
-.btn-github {
-    background: var(--bg-tertiary);
-    color: var(--text-primary);
-    border: 2px solid var(--unity-blue);
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    border-radius: 10px;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-}
-
-.btn-github:hover {
-    background: var(--unity-blue);
-    color: var(--bg-primary);
-    box-shadow: var(--glow-primary);
-    transform: translateY(-2px);
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .github-stats-grid {
@@ -4345,15 +4308,6 @@ section::before {
 .btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
-}
-
-.btn-code {
-    background: linear-gradient(135deg, #2d3748, #4a5568);
-    box-shadow: 0 4px 15px rgba(45, 55, 72, 0.3);
-}
-
-.btn-code:hover {
-    box-shadow: 0 6px 20px rgba(45, 55, 72, 0.4);
 }
 
 .btn-demo {
@@ -6014,12 +5968,12 @@ img.error {
 .stat-icon {
     width: 60px;
     height: 60px;
-    border-radius: 50%;
+    border-radius: 25%;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto 1rem auto;
-    font-size: 1.5rem;
+    font-size: 1rem;
     background: linear-gradient(135deg, var(--unity-blue), var(--unity-purple));
     color: white;
     box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
@@ -6506,7 +6460,7 @@ img.error {
 }
 
 .tech-flip-front {
-    background: #fff;
+    background: radial-gradient(circle at 30% 30%, #1a1f3c, #0c0f1a);
     border: 6px solid #000;
     box-shadow: 12px 12px 0 #000;
     transition: transform 0.3s, box-shadow 0.3s;
@@ -6514,15 +6468,45 @@ img.error {
 
 .tech-flip-card:hover .tech-flip-front {
     transform: translate(-3px, -3px);
-    box-shadow: 15px 15px 0 #000;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+    border-color: rgba(0, 255, 255, 0.5);
+}
+
+.tech-flip-back.frontend { 
+    --glow-color: #00e0ff; 
+    --glow-inner: rgba(0, 224, 255, 0.25);
+}
+  
+.tech-flip-back.backend { 
+    --glow-color: #9d4edd; 
+    --glow-inner: rgba(157, 78, 221, 0.25);
+}
+  
+.tech-flip-back.design { 
+    --glow-color: #43cea2; 
+    --glow-inner: rgba(67, 206, 162, 0.25);
 }
 
 .tech-flip-back {
-    background: linear-gradient(135deg, var(--unity-blue), var(--unity-purple));
-    color: white;
+    background: radial-gradient(circle at 20% 20%, #1b1f3a, #0a0c1a 80%);
+    border: 1px solid rgba(0, 255, 255, 0.15);
+    color: #e0f2ff;
     transform: rotateY(180deg);
+    border-radius: 16px;
     padding: 1.5rem;
+    box-shadow:
+        0 10px 20px rgba(0, 0, 0, 0.5), /* внешняя тень для глубины */
+        inset 0 0 30px rgba(0, 255, 255, 0.15); /* внутреннее свечение */
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
+
+.tech-flip-card:hover .tech-flip-back {
+    box-shadow:
+        0 15px 30px rgba(0, 0, 0, 0.6),
+        inset 0 0 40px rgba(0, 255, 255, 0.25);
+    border-color: rgba(0, 255, 255, 0.4);
+}
+
 
 .tech-icon-wrapper {
     width: 100px;
@@ -6549,15 +6533,15 @@ img.error {
 .tech-name {
     font-size: 1.5rem;
     font-weight: 900;
-    color: #000;
+    color: #e0f2ff;
     text-transform: uppercase;
     margin-bottom: 0.5rem;
     font-family: 'Orbitron', sans-serif;
 }
 
 .tech-level-badge {
-    background: #000;
-    color: #fff;
+    background: #e0f2ff;
+    color: #1a2332;
     padding: 0.4rem 1rem;
     border-radius: 20px;
     font-size: 0.8rem;
@@ -6591,6 +6575,7 @@ img.error {
     background: rgba(255, 255, 255, 0.2);
     padding: 0.4rem 0.8rem;
     border-radius: 12px;
+    text-shadow: 0 0 10px rgba(0,255,255,0.3);
 }
 
 /* Tech Skill Bars */
@@ -6974,7 +6959,7 @@ img.error {
     bottom: 0;
     background: #ffb088;
     border-radius: inherit;
-    box-shadow: 0 0 0 2px var(--unity-orange), 0 0.625em 0 0 #ffd4bd;
+    box-shadow: 0 0 0 2px var(--unity-orange);
     transform: translate3d(0, 0.75em, -1em);
     transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
 }
@@ -6985,7 +6970,7 @@ img.error {
 }
 
 .btn-spring-orange:hover::before {
-    box-shadow: 0 0 0 2px var(--unity-orange), 0 0.5em 0 0 #ffd4bd;
+    box-shadow: 0 0 0 2px var(--unity-orange);
     transform: translate3d(0, 0.5em, -1em);
 }
 
@@ -6995,7 +6980,7 @@ img.error {
 }
 
 .btn-spring-orange:active::before {
-    box-shadow: 0 0 0 2px var(--unity-orange), 0 0 #ffd4bd;
+    box-shadow: 0 0 0 2px var(--unity-orange);
     transform: translate3d(0, 0, -1em);
 }
 
