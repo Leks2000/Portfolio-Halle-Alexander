@@ -920,6 +920,7 @@ class PortfolioManager {
     initAnimatedSkills() {
         const skillItems = document.querySelectorAll('.skill-item');
         const techSkillItems = document.querySelectorAll('.tech-skill-item');
+        const flipCards = document.querySelectorAll('.tech-flip-card');
 
         // Initialize Framer Motion for main skill icons
         skillItems.forEach(item => {
@@ -965,6 +966,26 @@ class PortfolioManager {
                 item.addEventListener('mouseenter', handleInteraction);
                 item.addEventListener('focus', handleInteraction);
             }
+        });
+
+        // Animate skill bars in flip cards
+        flipCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const skillBar = card.querySelector('.skill-bar-fill');
+                if (skillBar) {
+                    const level = skillBar.getAttribute('data-level');
+                    setTimeout(() => {
+                        skillBar.style.width = level + '%';
+                    }, 300);
+                }
+            });
+
+            card.addEventListener('mouseleave', () => {
+                const skillBar = card.querySelector('.skill-bar-fill');
+                if (skillBar) {
+                    skillBar.style.width = '0';
+                }
+            });
         });
     }
 
@@ -1881,23 +1902,47 @@ class PortfolioManager {
 
             document.getElementById('total-commits').textContent = totalCommits || '-';
 
-            // Update last activity
+            // Update last activity with more precise time
             if (events.length > 0) {
                 const lastUpdate = new Date(events[0].created_at);
                 const now = new Date();
                 const diffTime = Math.abs(now - lastUpdate);
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                const diffMinutes = Math.floor(diffTime / (1000 * 60));
+                const diffHours = Math.floor(diffTime / (1000 * 60 * 60));
+                const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
                 let updateText = '';
-                if (diffDays === 1) {
+                if (diffMinutes < 1) {
+                    updateText = this.currentLang === 'ru' ? 'только что' : 'just now';
+                } else if (diffMinutes < 60) {
+                    updateText =
+                        this.currentLang === 'ru'
+                            ? `${diffMinutes} мин. назад`
+                            : `${diffMinutes} min. ago`;
+                } else if (diffHours < 24) {
+                    updateText =
+                        this.currentLang === 'ru'
+                            ? `${diffHours} ч. назад`
+                            : `${diffHours} hr. ago`;
+                } else if (diffDays === 1) {
                     updateText = this.currentLang === 'ru' ? '1 день назад' : '1 day ago';
                 } else if (diffDays < 7) {
                     updateText =
                         this.currentLang === 'ru'
-                            ? `${diffDays} дней назад`
+                            ? `${diffDays} дн. назад`
                             : `${diffDays} days ago`;
+                } else if (diffDays < 30) {
+                    const weeks = Math.floor(diffDays / 7);
+                    updateText =
+                        this.currentLang === 'ru'
+                            ? `${weeks} нед. назад`
+                            : `${weeks} wk. ago`;
                 } else {
-                    updateText = this.currentLang === 'ru' ? 'Неделю назад' : 'A week ago';
+                    const months = Math.floor(diffDays / 30);
+                    updateText =
+                        this.currentLang === 'ru'
+                            ? `${months} мес. назад`
+                            : `${months} mo. ago`;
                 }
 
                 document.getElementById('last-update').textContent = updateText;
@@ -3326,7 +3371,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize Flip Card Manager
     window.flipCardManager = new FlipCardManager();
 
-    console.log('🚀 Enhanced Portfolio Systems Initialized');
+    // Portfolio initialized successfully
 });
 
 /* ================================
@@ -3342,7 +3387,7 @@ class FlipCardManager {
     }
 
     init() {
-        if (!this.cards.length) return;
+        if (!this.cards.length) {return;}
 
         this.cards.forEach((card) => {
             // Add touch support for mobile
@@ -3422,8 +3467,8 @@ class FlipCardManager {
             },
             {
                 threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px',
-            },
+                rootMargin: '0px 0px -50px 0px'
+            }
         );
 
         this.cards.forEach((card) => observer.observe(card));
