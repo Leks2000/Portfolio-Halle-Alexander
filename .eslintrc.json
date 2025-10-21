@@ -41,6 +41,7 @@
     "gsap": "readonly",
     "ScrollTrigger": "readonly",
     "Motion": "readonly",
-    "FramerMotion": "readonly"
+    "FramerMotion": "readonly",
+    "lucide": "readonly"
   }
 }

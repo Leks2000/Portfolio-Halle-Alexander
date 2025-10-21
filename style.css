@@ -301,7 +301,7 @@ body {
     box-shadow: var(--glow-primary);
     animation: underlineAppear 1s ease-out forwards;
     animation-delay: 0.2s;
-  }
+}
 
 /* Container */
 .container {
@@ -851,19 +851,29 @@ body {
     font-weight: 600;
     text-align: center;
     color: var(--text-primary);
-    pointer-events: none; /* Disable any interactions that could cause tooltips */
 }
 
-/* Prevent tooltips on status elements */
-.project-status,
-.status-ring,
-.progress-ring,
-.status-text {
+.status-ring .status-tooltip {
+    position: absolute;
+    top: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--unity-blue);
     pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
 }
 
-.project-status * {
-    pointer-events: none;
+.status-ring .status-tooltip.visible {
+    opacity: 1;
 }
 
 .status-ring[data-status='released'] .progress-ring__circle {
@@ -1561,21 +1571,30 @@ body {
 
 /* Animations */
 @keyframes glitch {
-    0%, 100% {
+    0%,
+    100% {
         transform: translate(0);
         text-shadow: none;
     }
-    2%, 64% {
+    2%,
+    64% {
         transform: translate(2px, -2px) skewX(0.5deg);
-        text-shadow: -2px 2px 0 #ff00ff, 2px -2px 0 #00ffff;
+        text-shadow:
+            -2px 2px 0 #ff00ff,
+            2px -2px 0 #00ffff;
     }
-    4%, 60% {
+    4%,
+    60% {
         transform: translate(-2px, 2px) skewX(-0.5deg);
-        text-shadow: 2px -2px 0 #ff00ff, -2px 2px 0 #00ffff;
+        text-shadow:
+            2px -2px 0 #ff00ff,
+            -2px 2px 0 #00ffff;
     }
     62% {
         transform: translate(1px, -1px) skewX(0deg);
-        text-shadow: -1px 1px 0 #ff00ff, 1px -1px 0 #00ffff;
+        text-shadow:
+            -1px 1px 0 #ff00ff,
+            1px -1px 0 #00ffff;
     }
 }
 
@@ -6317,12 +6336,13 @@ img.error {
     transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.skill-item[data-skill="kotlin"]:hover .kotlin-part {
+.skill-item[data-skill='kotlin']:hover .kotlin-part {
     animation: kotlinPulse 0.9s ease-in-out;
 }
 
 @keyframes kotlinPulse {
-    0%, 100% {
+    0%,
+    100% {
         transform: translate(0, 0) rotate(0deg);
         opacity: 1;
     }
@@ -6463,7 +6483,9 @@ img.error {
     background: radial-gradient(circle at 30% 30%, #1a1f3c, #0c0f1a);
     border: 6px solid #000;
     box-shadow: 12px 12px 0 #000;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition:
+        transform 0.3s,
+        box-shadow 0.3s;
 }
 
 .tech-flip-card:hover .tech-flip-front {
@@ -6472,18 +6494,18 @@ img.error {
     border-color: rgba(0, 255, 255, 0.5);
 }
 
-.tech-flip-back.frontend { 
-    --glow-color: #00e0ff; 
+.tech-flip-back.frontend {
+    --glow-color: #00e0ff;
     --glow-inner: rgba(0, 224, 255, 0.25);
 }
-  
-.tech-flip-back.backend { 
-    --glow-color: #9d4edd; 
+
+.tech-flip-back.backend {
+    --glow-color: #9d4edd;
     --glow-inner: rgba(157, 78, 221, 0.25);
 }
-  
-.tech-flip-back.design { 
-    --glow-color: #43cea2; 
+
+.tech-flip-back.design {
+    --glow-color: #43cea2;
     --glow-inner: rgba(67, 206, 162, 0.25);
 }
 
@@ -6495,9 +6517,11 @@ img.error {
     border-radius: 16px;
     padding: 1.5rem;
     box-shadow:
-        0 10px 20px rgba(0, 0, 0, 0.5), /* внешняя тень для глубины */
-        inset 0 0 30px rgba(0, 255, 255, 0.15); /* внутреннее свечение */
-    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        0 10px 20px rgba(0, 0, 0, 0.5),
+        /* внешняя тень для глубины */ inset 0 0 30px rgba(0, 255, 255, 0.15); /* внутреннее свечение */
+    transition:
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
 }
 
 .tech-flip-card:hover .tech-flip-back {
@@ -6506,7 +6530,6 @@ img.error {
         inset 0 0 40px rgba(0, 255, 255, 0.25);
     border-color: rgba(0, 255, 255, 0.4);
 }
-
 
 .tech-icon-wrapper {
     width: 100px;
@@ -6575,7 +6598,7 @@ img.error {
     background: rgba(255, 255, 255, 0.2);
     padding: 0.4rem 0.8rem;
     border-radius: 12px;
-    text-shadow: 0 0 10px rgba(0,255,255,0.3);
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
 }
 
 /* Tech Skill Bars */
@@ -6625,13 +6648,14 @@ img.error {
     }
 }
 
-.tech-flip-card[data-tech="unity"]:hover .tech-icon {
+.tech-flip-card[data-tech='unity']:hover .tech-icon {
     animation: unity-cube-rotate 2s ease-in-out infinite;
 }
 
 /* C# - Pulse Glow */
 @keyframes csharp-pulse {
-    0%, 100% {
+    0%,
+    100% {
         filter: drop-shadow(0 0 8px rgba(128, 0, 128, 0.4));
         transform: scale(1);
     }
@@ -6641,7 +6665,7 @@ img.error {
     }
 }
 
-.tech-flip-card[data-tech="csharp"]:hover .tech-icon {
+.tech-flip-card[data-tech='csharp']:hover .tech-icon {
     animation: csharp-pulse 1.5s ease-in-out infinite;
 }
 
@@ -6664,7 +6688,7 @@ img.error {
     }
 }
 
-.tech-flip-card[data-tech="kotlin"]:hover .tech-icon {
+.tech-flip-card[data-tech='kotlin']:hover .tech-icon {
     animation: kotlin-triangles 1.2s ease-in-out infinite;
 }
 
@@ -6681,13 +6705,14 @@ img.error {
     }
 }
 
-.tech-flip-card[data-tech="dotnet"]:hover .tech-icon {
+.tech-flip-card[data-tech='dotnet']:hover .tech-icon {
     animation: dotnet-spin 2s linear infinite;
 }
 
 /* HTML - Bounce */
 @keyframes html-bounce {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(0);
     }
     25% {
@@ -6701,13 +6726,14 @@ img.error {
     }
 }
 
-.tech-flip-card[data-tech="html"]:hover .tech-icon {
+.tech-flip-card[data-tech='html']:hover .tech-icon {
     animation: html-bounce 1s ease-in-out infinite;
 }
 
 /* CSS - Wave */
 @keyframes css-wave {
-    0%, 100% {
+    0%,
+    100% {
         transform: rotate(0deg) translateX(0);
     }
     25% {
@@ -6718,24 +6744,32 @@ img.error {
     }
 }
 
-.tech-flip-card[data-tech="css"]:hover .tech-icon {
+.tech-flip-card[data-tech='css']:hover .tech-icon {
     animation: css-wave 0.8s ease-in-out infinite;
 }
 
 /* JavaScript - Jiggle */
 @keyframes js-jiggle {
-    0%, 100% {
+    0%,
+    100% {
         transform: rotate(0deg);
     }
-    10%, 30%, 50%, 70%, 90% {
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
         transform: rotate(-3deg);
     }
-    20%, 40%, 60%, 80% {
+    20%,
+    40%,
+    60%,
+    80% {
         transform: rotate(3deg);
     }
 }
 
-.tech-flip-card[data-tech="javascript"]:hover .tech-icon {
+.tech-flip-card[data-tech='javascript']:hover .tech-icon {
     animation: js-jiggle 0.6s ease-in-out infinite;
 }
 
@@ -6749,13 +6783,14 @@ img.error {
     }
 }
 
-.tech-flip-card[data-tech="react"]:hover .tech-icon {
+.tech-flip-card[data-tech='react']:hover .tech-icon {
     animation: react-orbit 3s linear infinite;
 }
 
 /* SQL - Database Pulse */
 @keyframes sql-pulse {
-    0%, 100% {
+    0%,
+    100% {
         transform: scale(1);
         filter: drop-shadow(0 0 5px rgba(0, 100, 200, 0.3));
     }
@@ -6765,13 +6800,14 @@ img.error {
     }
 }
 
-.tech-flip-card[data-tech="sql"]:hover .tech-icon {
+.tech-flip-card[data-tech='sql']:hover .tech-icon {
     animation: sql-pulse 1.3s ease-in-out infinite;
 }
 
 /* Git - Branch Shake */
 @keyframes git-shake {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateX(0) rotate(0deg);
     }
     25% {
@@ -6782,7 +6818,7 @@ img.error {
     }
 }
 
-.tech-flip-card[data-tech="git"]:hover .tech-icon {
+.tech-flip-card[data-tech='git']:hover .tech-icon {
     animation: git-shake 0.5s ease-in-out infinite;
 }
 
@@ -6799,13 +6835,14 @@ img.error {
     }
 }
 
-.tech-flip-card[data-tech="blender"]:hover .tech-icon {
+.tech-flip-card[data-tech='blender']:hover .tech-icon {
     animation: blender-3d 2.5s ease-in-out infinite;
 }
 
 /* Figma - Float */
 @keyframes figma-float {
-    0%, 100% {
+    0%,
+    100% {
         transform: translateY(0px);
     }
     50% {
@@ -6813,7 +6850,7 @@ img.error {
     }
 }
 
-.tech-flip-card[data-tech="figma"]:hover .tech-icon {
+.tech-flip-card[data-tech='figma']:hover .tech-icon {
     animation: figma-float 2s ease-in-out infinite;
 }
 
@@ -6839,7 +6876,9 @@ img.error {
     border: 2px solid #b18597;
     border-radius: 0.75em;
     transform-style: preserve-3d;
-    transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1);
+    transition:
+        transform 150ms cubic-bezier(0, 0, 0.58, 1),
+        background 150ms cubic-bezier(0, 0, 0.58, 1);
 }
 
 .btn-spring::before {
@@ -6853,9 +6892,13 @@ img.error {
     bottom: 0;
     background: #f9c4d2;
     border-radius: inherit;
-    box-shadow: 0 0 0 2px #b18597, 0 0.625em 0 0 #ffe3e2;
+    box-shadow:
+        0 0 0 2px #b18597,
+        0 0.625em 0 0 #ffe3e2;
     transform: translate3d(0, 0.75em, -1em);
-    transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+    transition:
+        transform 150ms cubic-bezier(0, 0, 0.58, 1),
+        box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
 }
 
 .btn-spring:hover {
@@ -6864,7 +6907,9 @@ img.error {
 }
 
 .btn-spring:hover::before {
-    box-shadow: 0 0 0 2px #b18597, 0 0.5em 0 0 #ffe3e2;
+    box-shadow:
+        0 0 0 2px #b18597,
+        0 0.5em 0 0 #ffe3e2;
     transform: translate3d(0, 0.5em, -1em);
 }
 
@@ -6874,7 +6919,9 @@ img.error {
 }
 
 .btn-spring:active::before {
-    box-shadow: 0 0 0 2px #b18597, 0 0 #ffe3e2;
+    box-shadow:
+        0 0 0 2px #b18597,
+        0 0 #ffe3e2;
     transform: translate3d(0, 0, -1em);
 }
 
@@ -6887,7 +6934,9 @@ img.error {
 
 .btn-spring-blue::before {
     background: #60a5fa;
-    box-shadow: 0 0 0 2px #3b82f6, 0 0.625em 0 0 #dbeafe;
+    box-shadow:
+        0 0 0 2px #3b82f6,
+        0 0.625em 0 0 #dbeafe;
 }
 
 .btn-spring-blue:hover {
@@ -6895,11 +6944,15 @@ img.error {
 }
 
 .btn-spring-blue:hover::before {
-    box-shadow: 0 0 0 2px #3b82f6, 0 0.5em 0 0 #dbeafe;
+    box-shadow:
+        0 0 0 2px #3b82f6,
+        0 0.5em 0 0 #dbeafe;
 }
 
 .btn-spring-blue:active::before {
-    box-shadow: 0 0 0 2px #3b82f6, 0 0 #dbeafe;
+    box-shadow:
+        0 0 0 2px #3b82f6,
+        0 0 #dbeafe;
 }
 
 /* Alternative Spring Button - Green */
@@ -6911,7 +6964,9 @@ img.error {
 
 .btn-spring-green::before {
     background: #4ade80;
-    box-shadow: 0 0 0 2px #22c55e, 0 0.625em 0 0 #bbf7d0;
+    box-shadow:
+        0 0 0 2px #22c55e,
+        0 0.625em 0 0 #bbf7d0;
 }
 
 .btn-spring-green:hover {
@@ -6919,11 +6974,15 @@ img.error {
 }
 
 .btn-spring-green:hover::before {
-    box-shadow: 0 0 0 2px #22c55e, 0 0.5em 0 0 #bbf7d0;
+    box-shadow:
+        0 0 0 2px #22c55e,
+        0 0.5em 0 0 #bbf7d0;
 }
 
 .btn-spring-green:active::before {
-    box-shadow: 0 0 0 2px #22c55e, 0 0 #bbf7d0;
+    box-shadow:
+        0 0 0 2px #22c55e,
+        0 0 #bbf7d0;
 }
 
 /* Alternative Spring Button - Orange (for itch.io) */
@@ -6945,7 +7004,9 @@ img.error {
     border: 2px solid var(--unity-orange);
     border-radius: 0.75em;
     transform-style: preserve-3d;
-    transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1);
+    transition:
+        transform 150ms cubic-bezier(0, 0, 0.58, 1),
+        background 150ms cubic-bezier(0, 0, 0.58, 1);
 }
 
 .btn-spring-orange::before {
@@ -6961,7 +7022,9 @@ img.error {
     border-radius: inherit;
     box-shadow: 0 0 0 2px var(--unity-orange);
     transform: translate3d(0, 0.75em, -1em);
-    transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+    transition:
+        transform 150ms cubic-bezier(0, 0, 0.58, 1),
+        box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
 }
 
 .btn-spring-orange:hover {
@@ -6994,7 +7057,9 @@ img.error {
     background: #fff;
     border: 6px solid #000;
     box-shadow: 12px 12px 0 #000;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition:
+        transform 0.3s,
+        box-shadow 0.3s;
 }
 
 .project-card-brutal:hover {
@@ -7014,7 +7079,7 @@ img.error {
 }
 
 .project-card-brutal__title::after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 0;
     left: 0;
@@ -7076,7 +7141,7 @@ img.error {
 }
 
 .project-card-brutal__button::before {
-    content: "Sure?";
+    content: 'Sure?';
     position: absolute;
     top: 0;
     left: 0;
