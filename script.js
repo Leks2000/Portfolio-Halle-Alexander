@@ -465,6 +465,11 @@ class PortfolioManager {
 
     // Project Filtering System
     initProjectFilters() {
+        // If optimized filter system is present, defer to it to avoid double-binding
+        if (typeof window.OptimizedFilters === 'function') {
+            return;
+        }
+
         const filterButtons = document.querySelectorAll('.filter-btn');
         const projectCards = document.querySelectorAll('.project-card');
         const projectsGrid = document.querySelector('.projects-grid');
@@ -496,7 +501,7 @@ class PortfolioManager {
 
     filterProjects(filter, cards) {
         let visibleIndex = 0;
-        cards.forEach((card) => {
+        cards.forEach(card => {
             const category = card.dataset.category;
             const isTop = card.dataset.top === 'true';
             let shouldShow = false;
@@ -511,25 +516,15 @@ class PortfolioManager {
 
             if (shouldShow) {
                 card.classList.remove('filtered-out', 'hidden');
-                card.style.display = 'flex';
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(30px) scale(0.95)';
+                // Staggered appearance using class only
+                card.classList.add('fade-in-animate');
                 setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0) scale(1)';
-                    card.classList.add('visible', 'fade-in-animate');
+                    card.classList.add('visible');
                 }, visibleIndex * 50);
                 visibleIndex++;
             } else {
                 card.classList.add('filtered-out');
                 card.classList.remove('visible', 'fade-in-animate');
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(-20px) scale(0.9)';
-                setTimeout(() => {
-                    if (card.classList.contains('filtered-out')) {
-                        card.style.display = 'none';
-                    }
-                }, 300);
             }
         });
     }
@@ -545,7 +540,9 @@ class PortfolioManager {
             const imgPath = card.getAttribute('data-image');
             if (imgPath && imgPath.trim() !== '') {
                 const preview = card.querySelector('.project-preview');
-                if (!preview) {return;}
+                if (!preview) {
+                    return;
+                }
                 // Remove existing placeholder blocks
                 const placeholder = preview.querySelector('.project-image-placeholder');
                 if (placeholder) {
@@ -611,6 +608,11 @@ class PortfolioManager {
 
     // Lazy Loading for Images
     initLazyLoading() {
+        // Prefer global LazyLoader if available to avoid duplicate observers
+        if (window.lazyLoader) {
+            return;
+        }
+
         const images = document.querySelectorAll('.project-image');
 
         if ('IntersectionObserver' in window) {
@@ -723,36 +725,17 @@ class PortfolioManager {
                 }
 
                 tooltip.textContent = text;
-                tooltip.style.cssText = `
-                    position: absolute;
-                    top: -45px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    background: rgba(0, 0, 0, 0.9);
-                    color: var(--text-primary);
-                    padding: 0.5rem 1rem;
-                    border-radius: 8px;
-                    font-size: 0.8rem;
-                    white-space: nowrap;
-                    z-index: 1000;
-                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-                    border: 1px solid var(--unity-blue);
-                    pointer-events: none;
-                    opacity: 0;
-                    transition: opacity 0.2s ease;
-                `;
-
                 ring.appendChild(tooltip);
 
-                // Animate in
+                // Animate in via CSS
                 requestAnimationFrame(() => {
-                    tooltip.style.opacity = '1';
+                    tooltip.classList.add('visible');
                 });
             };
 
             const hideTooltip = () => {
                 if (tooltip) {
-                    tooltip.style.opacity = '0';
+                    tooltip.classList.remove('visible');
                     setTimeout(() => {
                         if (tooltip && tooltip.parentNode) {
                             tooltip.remove();
@@ -1093,7 +1076,9 @@ class PortfolioManager {
         const parts = skillIcon.querySelectorAll('.kotlin-part');
         const icon = skillIcon.querySelector('.kotlin-icon');
 
-        if (!parts.length || !icon) {return;}
+        if (!parts.length || !icon) {
+            return;
+        }
 
         // Phase 1: Separate parts
         parts.forEach((part, index) => {
@@ -1111,7 +1096,7 @@ class PortfolioManager {
 
         // Phase 2: Reunite parts
         setTimeout(() => {
-            parts.forEach((part) => {
+            parts.forEach(part => {
                 part.style.transform = 'translate(0, 0) rotate(0deg)';
                 part.style.opacity = '1';
             });
@@ -1119,7 +1104,7 @@ class PortfolioManager {
 
         // Phase 3: Complete animation
         setTimeout(() => {
-            parts.forEach((part) => {
+            parts.forEach(part => {
                 part.style.transition = '';
             });
         }, 900);
@@ -1542,7 +1527,8 @@ class PortfolioManager {
         });
 
         gsap.utils.toArray('.skill-item').forEach((item, i) => {
-            gsap.fromTo(item,
+            gsap.fromTo(
+                item,
                 { y: 30, opacity: 0, scale: 0.9 },
                 {
                     scrollTrigger: {
@@ -1561,7 +1547,6 @@ class PortfolioManager {
                 }
             );
         });
-
 
         // Technical skills animation
         gsap.from('.tech-category', {
@@ -1727,15 +1712,11 @@ class PortfolioManager {
                 } else if (diffDays < 30) {
                     const weeks = Math.floor(diffDays / 7);
                     updateText =
-                        this.currentLang === 'ru'
-                            ? `${weeks} нед. назад`
-                            : `${weeks} wk. ago`;
+                        this.currentLang === 'ru' ? `${weeks} нед. назад` : `${weeks} wk. ago`;
                 } else {
                     const months = Math.floor(diffDays / 30);
                     updateText =
-                        this.currentLang === 'ru'
-                            ? `${months} мес. назад`
-                            : `${months} mo. ago`;
+                        this.currentLang === 'ru' ? `${months} мес. назад` : `${months} mo. ago`;
                 }
 
                 document.getElementById('last-update').textContent = updateText;
@@ -1920,19 +1901,7 @@ document.addEventListener('DOMContentLoaded', () => {
     new EasterEgg();
 });
 
-// Performance optimization for mobile
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker
-            .register('/sw.js')
-            .then(registration => {
-                console.log('SW registered: ', registration);
-            })
-            .catch(registrationError => {
-                console.log('SW registration failed: ', registrationError);
-            });
-    });
-}
+// Service worker registration removed to avoid 404 and unnecessary overhead in this static demo
 
 // Smooth scroll polyfill for older browsers
 if (!('scrollBehavior' in document.documentElement.style)) {
@@ -2925,9 +2894,11 @@ class FlipCardManager {
     }
 
     init() {
-        if (!this.cards.length) {return;}
+        if (!this.cards.length) {
+            return;
+        }
 
-        this.cards.forEach((card) => {
+        this.cards.forEach(card => {
             // Add touch support for mobile
             if (this.isTouch) {
                 this.setupTouchInteraction(card);
@@ -2958,7 +2929,7 @@ class FlipCardManager {
             touchStartTime = Date.now();
         });
 
-        card.addEventListener('touchend', (e) => {
+        card.addEventListener('touchend', e => {
             const touchDuration = Date.now() - touchStartTime;
 
             // If it's a quick tap (not a scroll)
@@ -2976,7 +2947,7 @@ class FlipCardManager {
         const techName = card.querySelector('.tech-name')?.textContent || 'Technology';
         card.setAttribute('aria-label', `Learn more about ${techName}`);
 
-        card.addEventListener('keydown', (e) => {
+        card.addEventListener('keydown', e => {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 card.classList.toggle('flipped');
@@ -2991,11 +2962,12 @@ class FlipCardManager {
 
     observeCards() {
         const observer = new IntersectionObserver(
-            (entries) => {
+            entries => {
                 entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
                         setTimeout(() => {
-                            entry.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                            entry.target.style.transition =
+                                'opacity 0.6s ease, transform 0.6s ease';
                             entry.target.style.opacity = '1';
                             entry.target.style.transform = 'translateY(0)';
                         }, index * 100);
@@ -3009,7 +2981,7 @@ class FlipCardManager {
             }
         );
 
-        this.cards.forEach((card) => observer.observe(card));
+        this.cards.forEach(card => observer.observe(card));
     }
 }
 
@@ -3062,13 +3034,13 @@ class BrutalModeToggle {
     }
 
     toggleBrutalMode() {
-        this.projectCards.forEach((card) => {
+        this.projectCards.forEach(card => {
             card.classList.toggle('brutal-mode');
         });
 
         // Toggle flip cards border style
         const flipCards = document.querySelectorAll('.tech-flip-card');
-        flipCards.forEach((card) => {
+        flipCards.forEach(card => {
             card.classList.toggle('brutal-mode');
         });
     }
