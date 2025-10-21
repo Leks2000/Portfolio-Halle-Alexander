@@ -73,6 +73,38 @@ class PortfolioManager {
                 // Skills Section
                 'skills-title': 'Навыки',
                 'technical-skills-title': 'Технические навыки',
+                    // Skills (details)
+                    'unity-back-desc': 'Кроссплатформенный игровой движок для разработки 2D/3D игр',
+                    'unity-exp': '3+ года',
+                    'unity-projects': '6 проектов',
+                    'csharp-back-desc': 'Объектно-ориентированный язык для Unity и .NET разработки',
+                    'csharp-exp': '3+ года',
+                    'csharp-projects': '31 проект',
+                    'kotlin-back-desc': 'Современный язык для Android разработки и бэкенда',
+                    'kotlin-exp': '1.5+ года',
+                    'kotlin-projects': '13 проектов',
+                    'html-back-desc': 'Язык разметки для создания веб-страниц и приложений',
+                    'html-exp': '2 года',
+                    'html-projects': '4 проекта',
+                    'css-back-desc': 'Каскадные таблицы стилей для оформления веб-страниц',
+                    'css-exp': '2 года',
+                    'css-projects': '4 проекта',
+                    'js-back-desc': 'Язык программирования для создания интерактивных веб-страниц',
+                    'js-exp': '2 месяца',
+                    'js-projects': '2 проекта',
+                    'react-back-desc': 'JavaScript библиотека для создания пользовательских интерфейсов',
+                    'react-exp': '2 месяца',
+                    'react-projects': '1 проект',
+                    'sql-back-desc': 'Язык запросов для работы с реляционными базами данных',
+                    'vs-back-desc': 'Интегрированная среда разработки для C# и .NET',
+                    'vs-exp': '3+ года',
+                    'vs-projects': '31 проект',
+                    'php-back-desc': 'Серверный язык программирования для веб-разработки',
+                    'php-exp': '6+ месяцев',
+                    'php-projects': '3 проекта',
+                    'ae-back-desc': 'Программа для создания видеоэффектов и анимации',
+                    'ae-exp': '1 месяц',
+                    'ae-projects': '2 проекта',
                 'tech-programming': 'Языки программирования',
                 'tech-dotnet': 'Технологии .NET',
                 'tech-gamedev': 'Разработка игр',
@@ -203,6 +235,38 @@ class PortfolioManager {
                 // Skills Section
                 'skills-title': 'Skills',
                 'technical-skills-title': 'Technical Skills',
+                    // Skills (details)
+                    'unity-back-desc': 'Cross-platform game engine for 2D/3D development',
+                    'unity-exp': '3+ years',
+                    'unity-projects': '6 projects',
+                    'csharp-back-desc': 'Object-oriented language for Unity and .NET development',
+                    'csharp-exp': '3+ years',
+                    'csharp-projects': '31 projects',
+                    'kotlin-back-desc': 'Modern language for Android and backend development',
+                    'kotlin-exp': '1.5+ years',
+                    'kotlin-projects': '13 projects',
+                    'html-back-desc': 'Markup language for building web pages and apps',
+                    'html-exp': '2 years',
+                    'html-projects': '4 projects',
+                    'css-back-desc': 'Stylesheet language for designing web pages',
+                    'css-exp': '2 years',
+                    'css-projects': '4 projects',
+                    'js-back-desc': 'Programming language for interactive web pages',
+                    'js-exp': '2 months',
+                    'js-projects': '2 projects',
+                    'react-back-desc': 'JavaScript library for building UIs',
+                    'react-exp': '2 months',
+                    'react-projects': '1 project',
+                    'sql-back-desc': 'Query language for relational databases',
+                    'vs-back-desc': 'IDE for C# and .NET',
+                    'vs-exp': '3+ years',
+                    'vs-projects': '31 projects',
+                    'php-back-desc': 'Server-side programming language for web',
+                    'php-exp': '6+ months',
+                    'php-projects': '3 projects',
+                    'ae-back-desc': 'Software for visual effects and animation',
+                    'ae-exp': '1 month',
+                    'ae-projects': '2 projects',
                 'tech-programming': 'Programming Languages',
                 'tech-dotnet': '.NET Technologies',
                 'tech-gamedev': 'Game Development',
@@ -449,7 +513,11 @@ class PortfolioManager {
         const observer = new IntersectionObserver(entries => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                    // play only once per element
+                    if (!entry.target.dataset.shown) {
+                        entry.target.classList.add('visible');
+                        entry.target.dataset.shown = '1';
+                    }
                 }
             });
         }, observerOptions);
@@ -461,6 +529,9 @@ class PortfolioManager {
                 el.classList.add('fade-in');
                 observer.observe(el);
             });
+
+        // stop observing after first show to avoid re-animations
+        observer.takeRecords();
     }
 
     // Project Filtering System
@@ -481,11 +552,11 @@ class PortfolioManager {
         setTimeout(() => {
             this.hideSkeletonLoaders(projectsGrid);
             projectsGrid.classList.add('projects-loaded');
-            // Show top projects by default
+            // Show top projects by default (strict favorites only)
             this.filterProjects('top', projectCards);
             // Initialize lazy loading
             this.initLazyLoading();
-        }, 1500);
+        }, 600);
 
         filterButtons.forEach(button => {
             button.addEventListener('click', () => {
@@ -497,10 +568,23 @@ class PortfolioManager {
                 this.filterProjects(filter, projectCards);
             });
         });
+
+        // default filter: show top favorites only when top is active
+        const topBtn = document.querySelector('.filter-btn[data-filter="top"]');
+        if (topBtn && !topBtn.classList.contains('active')) {
+            // ensure state reflects active top initially
+            topBtn.classList.add('active');
+        }
     }
 
     filterProjects(filter, cards) {
-        let visibleIndex = 0;
+        const HIDE_CLASS = 'filtered-out';
+        const VISIBLE_CLASS = 'visible';
+
+        // Phase 1: fade-out current visible that won't belong
+        const phaseOut = [];
+        const phaseIn = [];
+
         cards.forEach(card => {
             const category = card.dataset.category;
             const isTop = card.dataset.top === 'true';
@@ -509,24 +593,62 @@ class PortfolioManager {
             if (filter === 'all') {
                 shouldShow = true;
             } else if (filter === 'top') {
-                shouldShow = isTop;
+                shouldShow = isTop; // strictly favorites only
             } else {
                 shouldShow = category === filter;
             }
 
             if (shouldShow) {
-                card.classList.remove('filtered-out', 'hidden');
-                // Staggered appearance using class only
-                card.classList.add('fade-in-animate');
-                setTimeout(() => {
-                    card.classList.add('visible');
-                }, visibleIndex * 50);
-                visibleIndex++;
+                phaseIn.push(card);
             } else {
-                card.classList.add('filtered-out');
-                card.classList.remove('visible', 'fade-in-animate');
+                phaseOut.push(card);
             }
         });
+
+        // Apply fade-out + translate for outgoing cards
+        phaseOut.forEach(card => {
+            card.classList.remove(VISIBLE_CLASS);
+            card.style.transition = 'opacity 250ms ease, transform 250ms ease, height 250ms ease, margin 250ms ease, padding 250ms ease';
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(-10px) scale(0.96)';
+        });
+
+        // After fade-out, collapse them using the CSS class that removes height/margins
+        setTimeout(() => {
+            phaseOut.forEach(card => {
+                card.classList.add(HIDE_CLASS);
+                // reset inline styles
+                card.style.transition = '';
+                card.style.opacity = '';
+                card.style.transform = '';
+            });
+
+            // Phase 2: reveal incoming cards with fade-in + translateY(0)
+            let index = 0;
+            phaseIn.forEach(card => {
+                card.classList.remove(HIDE_CLASS);
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(10px) scale(0.98)';
+            });
+
+            requestAnimationFrame(() => {
+                phaseIn.forEach(card => {
+                    setTimeout(() => {
+                        card.classList.add(VISIBLE_CLASS);
+                        card.style.transition = 'opacity 300ms ease, transform 300ms ease';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0) scale(1)';
+                        // cleanup inline styles after animation
+                        setTimeout(() => {
+                            card.style.transition = '';
+                            card.style.opacity = '';
+                            card.style.transform = '';
+                        }, 320);
+                    }, index * 50);
+                    index++;
+                });
+            });
+        }, 260);
     }
 
     initProjectModals() {
@@ -669,17 +791,17 @@ class PortfolioManager {
             let progress;
 
             switch (status) {
-            case 'released':
-                progress = 100;
-                break;
-            case 'development':
-                progress = 50;
-                break;
-            case 'concept':
-                progress = 20;
-                break;
-            default:
-                progress = 0;
+                case 'released':
+                    progress = 100;
+                    break;
+                case 'development':
+                    progress = 50;
+                    break;
+                case 'concept':
+                    progress = 20;
+                    break;
+                default:
+                    progress = 0;
             }
 
             const circumference = 2 * Math.PI * 27; // radius = 27
@@ -704,24 +826,24 @@ class PortfolioManager {
 
                 let text;
                 switch (status) {
-                case 'released':
-                    text =
+                    case 'released':
+                        text =
                             this.currentLang === 'ru'
                                 ? 'Проект завершен и выпущен'
                                 : 'Project completed and released';
-                    break;
-                case 'development':
-                    text =
+                        break;
+                    case 'development':
+                        text =
                             this.currentLang === 'ru'
                                 ? 'Проект в активной разработке'
                                 : 'Project in active development';
-                    break;
-                case 'concept':
-                    text =
+                        break;
+                    case 'concept':
+                        text =
                             this.currentLang === 'ru'
                                 ? 'Концепт или прототип'
                                 : 'Concept or prototype';
-                    break;
+                        break;
                 }
 
                 tooltip.textContent = text;
@@ -1013,26 +1135,26 @@ class PortfolioManager {
 
         // Container remains stable - only animate internal elements
         switch (skillType) {
-        case 'csharp':
-            this.animateCSharpIcon(skillIcon);
-            break;
-        case 'kotlin':
-            this.animateKotlinIcon(skillIcon);
-            break;
-        case 'unity':
-            this.animateUnityIcon(skillIcon);
-            break;
-        case 'sql':
-            this.animateSQLIcon(skillIcon);
-            break;
-        case 'dotnet':
-            this.animateDotNetIcon(skillIcon);
-            break;
-        case 'git':
-            this.animateGitIcon(skillIcon);
-            break;
-        default:
-            this.animateGenericIcon(skillIcon);
+            case 'csharp':
+                this.animateCSharpIcon(skillIcon);
+                break;
+            case 'kotlin':
+                this.animateKotlinIcon(skillIcon);
+                break;
+            case 'unity':
+                this.animateUnityIcon(skillIcon);
+                break;
+            case 'sql':
+                this.animateSQLIcon(skillIcon);
+                break;
+            case 'dotnet':
+                this.animateDotNetIcon(skillIcon);
+                break;
+            case 'git':
+                this.animateGitIcon(skillIcon);
+                break;
+            default:
+                this.animateGenericIcon(skillIcon);
         }
     }
 
@@ -2627,8 +2749,8 @@ class GitHubIntegration {
                 </div>
                 <div class="github-repos">
                     ${data.repos
-        .map(
-            repo => `
+                        .map(
+                            repo => `
                         <div class="github-repo">
                             <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">
                                 <h4>${repo.name}</h4>
@@ -2641,8 +2763,8 @@ class GitHubIntegration {
                             </a>
                         </div>
                     `
-        )
-        .join('')}
+                        )
+                        .join('')}
                 </div>
             </div>
         `;
@@ -2773,12 +2895,12 @@ class OptimizedFilters {
         requestAnimationFrame(() => {
             const visibleProjects = this.projectsData.filter(project => {
                 switch (filter) {
-                case 'all':
-                    return true;
-                case 'top':
-                    return project.isTop;
-                default:
-                    return project.category === filter;
+                    case 'all':
+                        return true;
+                    case 'top':
+                        return project.isTop;
+                    default:
+                        return project.category === filter;
                 }
             });
 
