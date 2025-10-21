@@ -669,17 +669,17 @@ class PortfolioManager {
             let progress;
 
             switch (status) {
-            case 'released':
-                progress = 100;
-                break;
-            case 'development':
-                progress = 50;
-                break;
-            case 'concept':
-                progress = 20;
-                break;
-            default:
-                progress = 0;
+                case 'released':
+                    progress = 100;
+                    break;
+                case 'development':
+                    progress = 50;
+                    break;
+                case 'concept':
+                    progress = 20;
+                    break;
+                default:
+                    progress = 0;
             }
 
             const circumference = 2 * Math.PI * 27; // radius = 27
@@ -704,24 +704,24 @@ class PortfolioManager {
 
                 let text;
                 switch (status) {
-                case 'released':
-                    text =
+                    case 'released':
+                        text =
                             this.currentLang === 'ru'
                                 ? 'Проект завершен и выпущен'
                                 : 'Project completed and released';
-                    break;
-                case 'development':
-                    text =
+                        break;
+                    case 'development':
+                        text =
                             this.currentLang === 'ru'
                                 ? 'Проект в активной разработке'
                                 : 'Project in active development';
-                    break;
-                case 'concept':
-                    text =
+                        break;
+                    case 'concept':
+                        text =
                             this.currentLang === 'ru'
                                 ? 'Концепт или прототип'
                                 : 'Concept or prototype';
-                    break;
+                        break;
                 }
 
                 tooltip.textContent = text;
@@ -1013,26 +1013,26 @@ class PortfolioManager {
 
         // Container remains stable - only animate internal elements
         switch (skillType) {
-        case 'csharp':
-            this.animateCSharpIcon(skillIcon);
-            break;
-        case 'kotlin':
-            this.animateKotlinIcon(skillIcon);
-            break;
-        case 'unity':
-            this.animateUnityIcon(skillIcon);
-            break;
-        case 'sql':
-            this.animateSQLIcon(skillIcon);
-            break;
-        case 'dotnet':
-            this.animateDotNetIcon(skillIcon);
-            break;
-        case 'git':
-            this.animateGitIcon(skillIcon);
-            break;
-        default:
-            this.animateGenericIcon(skillIcon);
+            case 'csharp':
+                this.animateCSharpIcon(skillIcon);
+                break;
+            case 'kotlin':
+                this.animateKotlinIcon(skillIcon);
+                break;
+            case 'unity':
+                this.animateUnityIcon(skillIcon);
+                break;
+            case 'sql':
+                this.animateSQLIcon(skillIcon);
+                break;
+            case 'dotnet':
+                this.animateDotNetIcon(skillIcon);
+                break;
+            case 'git':
+                this.animateGitIcon(skillIcon);
+                break;
+            default:
+                this.animateGenericIcon(skillIcon);
         }
     }
 
@@ -2627,8 +2627,8 @@ class GitHubIntegration {
                 </div>
                 <div class="github-repos">
                     ${data.repos
-        .map(
-            repo => `
+                        .map(
+                            repo => `
                         <div class="github-repo">
                             <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">
                                 <h4>${repo.name}</h4>
@@ -2641,8 +2641,8 @@ class GitHubIntegration {
                             </a>
                         </div>
                     `
-        )
-        .join('')}
+                        )
+                        .join('')}
                 </div>
             </div>
         `;
@@ -2773,12 +2773,12 @@ class OptimizedFilters {
         requestAnimationFrame(() => {
             const visibleProjects = this.projectsData.filter(project => {
                 switch (filter) {
-                case 'all':
-                    return true;
-                case 'top':
-                    return project.isTop;
-                default:
-                    return project.category === filter;
+                    case 'all':
+                        return true;
+                    case 'top':
+                        return project.isTop;
+                    default:
+                        return project.category === filter;
                 }
             });
 
