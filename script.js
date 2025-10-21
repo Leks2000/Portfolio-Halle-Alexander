@@ -289,6 +289,7 @@ class PortfolioManager {
         this.initTypingAnimation();
         this.initAnimatedSkills();
         this.initProjectPlaceholders();
+        this.initProjectImages();
         this.initProjectModals();
         this.initScrollProgressBar();
         this.initPerformantParallax();
@@ -529,6 +530,41 @@ class PortfolioManager {
                         card.style.display = 'none';
                     }
                 }, 300);
+            }
+        });
+    }
+
+    initProjectModals() {
+        // Placeholder for modal system; safe no-op to avoid runtime errors
+    }
+
+    // Project images: replace placeholders with existing files
+    initProjectImages() {
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach(card => {
+            const imgPath = card.getAttribute('data-image');
+            if (imgPath && imgPath.trim() !== '') {
+                const preview = card.querySelector('.project-preview');
+                if (!preview) {return;}
+                // Remove existing placeholder blocks
+                const placeholder = preview.querySelector('.project-image-placeholder');
+                if (placeholder) {
+                    placeholder.remove();
+                }
+                // Remove existing img if any to avoid duplicates
+                const existingImg = preview.querySelector('img.project-image');
+                if (existingImg) {
+                    existingImg.remove();
+                }
+                const img = document.createElement('img');
+                img.className = 'project-image';
+                img.loading = 'lazy';
+                img.alt = (card.querySelector('h3')?.textContent || 'Project') + ' preview';
+                img.src = imgPath;
+                img.width = 400;
+                img.height = 250;
+                // Insert as first child in preview
+                preview.insertBefore(img, preview.firstChild);
             }
         });
     }
@@ -2856,17 +2892,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize Skeleton Loader System
     window.skeletonLoader = new SkeletonLoader();
 
-    // Initialize Enhanced Modal System
-    window.modalManager = new ModalManager();
-
-    // Initialize Lazy Loading
-    window.lazyLoader = new LazyLoader();
-
-    // Initialize GitHub Integration
-    window.gitHubIntegration = new GitHubIntegration();
-
-    // Initialize Optimized Filters
-    window.optimizedFilters = new OptimizedFilters();
+    // Optional modules (guarded to avoid reference errors)
+    if (typeof window.ModalManager === 'function') {
+        window.modalManager = new window.ModalManager();
+    }
+    if (typeof window.LazyLoader === 'function') {
+        window.lazyLoader = new window.LazyLoader();
+    }
+    if (typeof window.GitHubIntegration === 'function') {
+        window.gitHubIntegration = new window.GitHubIntegration();
+    }
+    if (typeof window.OptimizedFilters === 'function') {
+        window.optimizedFilters = new window.OptimizedFilters();
+    }
 
     // Initialize Flip Card Manager
     window.flipCardManager = new FlipCardManager();
@@ -2902,7 +2940,7 @@ class FlipCardManager {
             this.addEntranceAnimation(card);
 
             // Add click to flip on mobile
-            card.addEventListener('click', (e) => {
+            card.addEventListener('click', () => {
                 if (window.innerWidth <= 768) {
                     card.classList.toggle('flipped');
                 }
