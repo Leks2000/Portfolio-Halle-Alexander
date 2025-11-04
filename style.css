@@ -781,10 +781,27 @@ body {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.project-card:hover .project-image,
-.project-card:hover .project-image-placeholder {
-    transform: scale(1.05);
+.project-preview {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: var(--bg-secondary);
 }
+
+.project-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.project-card:hover .project-preview img {
+    transform: scale(1.06);
+    transition: transform 0.3s ease-in-out;
+  }
+  
 
 .preview-overlay {
     position: relative;
@@ -962,7 +979,7 @@ body {
     transition: all 0.3s ease;
 }
 
-.bot-preview:hover .bot-avatar-large {
+.project-card:hover .bot-avatar-large {
     transform: scale(1.1);
     box-shadow: 0 15px 40px rgba(0, 212, 255, 0.5);
 }
@@ -3930,13 +3947,20 @@ body {
 
 /* Enhanced project card animations */
 .project-card {
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.project-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 50px rgba(0, 212, 255, 0.3);
-}
+    transition: transform 0.4s ease-in-out, border-color 0.4s ease, box-shadow 0.4s ease;
+    transform: translateY(0) scale(1);
+  }
+  
+  .project-card:hover {
+    transform: translateY(-5px) scale(1.02);
+  }
+  
+  /* чтобы кнопки не блокировали hover на всю карту */
+  .project-card a,
+  .project-card button {
+    pointer-events: auto;
+    z-index: 2;
+  }
 
 .project-card:hover .project-content h3 {
     color: var(--unity-orange);
@@ -6229,7 +6253,7 @@ img.error {
     width: 100%;
     height: 100%;
     text-align: center;
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     transform-style: preserve-3d;
 }
 
@@ -6290,7 +6314,7 @@ img.error {
     padding: 1.5rem;
     box-shadow:
         0 10px 20px rgba(0, 0, 0, 0.5),
-        /* внешняя тень для глубины */ inset 0 0 30px rgba(0, 255, 255, 0.15); /* внутреннее свечение */
+        inset 0 0 30px rgba(0, 255, 255, 0.15);
     transition:
         box-shadow 0.3s ease,
         border-color 0.3s ease;
