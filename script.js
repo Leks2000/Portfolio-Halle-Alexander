@@ -105,6 +105,21 @@ class PortfolioManager {
                     'ae-back-desc': 'Программа для создания видеоэффектов и анимации',
                     'ae-exp': '1 месяц',
                     'ae-projects': '2 проекта',
+                    'figma-back-desc': 'Инструмент для дизайна интерфейсов и прототипирования',
+                    'figma-exp': '6+ месяцев',
+                    'figma-projects': '5 проектов',
+                    'blender-back-desc': '3D-моделирование и создание ассетов для игр',
+                    'blender-exp': '6+ месяцев',
+                    'blender-projects': '3+ проекта',
+                    'git-back-desc': 'Система контроля версий для отслеживания изменений в коде',
+                    'git-exp': '3+ года',
+                    'git-projects': 'Все проекты', 
+                    'dotnetcore-back-desc': 'Платформа для создания современных облачных приложений',
+                    'dotnetcore-exp': '2+ года',
+                    'dotnetcore-projects': '8+ проектов',
+                    'premiere-back-desc': 'Профессиональное программное обеспечение для монтажа видео',
+                    'premiere-exp': '1+ год',
+                    'premiere-projects': '15+ проектов',
                 'tech-programming': 'Языки программирования',
                 'tech-dotnet': 'Технологии .NET',
                 'tech-gamedev': 'Разработка игр',
@@ -123,6 +138,7 @@ class PortfolioManager {
                 'about-description':
                     'Разработчик с акцентом на backend разработку на C#. Специализируюсь на создании приложений и игр на Unity, работе с базами данных и API. Имею опыт публикации игр на платформах Яндекс.Игры и Google Play Market.',
                 'about-timeline-title': 'Опыт работы',
+                'hero-name': 'Александр Халле',
                 'timeline-current': '2023 - настоящее время',
                 'timeline-unity-title': 'Unity Developer (Фриланс)',
                 'timeline-unity-1': 'Разработка и запуск игр на Unity с использованием C#',
@@ -267,6 +283,21 @@ class PortfolioManager {
                     'ae-back-desc': 'Software for visual effects and animation',
                     'ae-exp': '1 month',
                     'ae-projects': '2 projects',
+                    'figma-back-desc': 'Interface design and prototyping tool',
+                    'figma-exp': '6+ months',
+                    'figma-projects': '5 projects',
+                    'blender-back-desc': '3D modeling and game asset creation',
+                    'blender-exp': '6+ months',
+                    'blender-projects': '3+ projects',
+                    'git-back-desc': 'Version control system for tracking code changes',
+                    'git-exp': '3+ years',
+                    'git-projects': 'All projects',
+                    'dotnetcore-back-desc': 'Platform for building modern cloud applications',
+                    'dotnetcore-exp': '2+ years',
+                    'dotnetcore-projects': '8+ projects',
+                    'premiere-back-desc': 'Professional video editing software',
+                    'premiere-exp': '1+ year',
+                    'premiere-projects': '15+ projects',
                 'tech-programming': 'Programming Languages',
                 'tech-dotnet': '.NET Technologies',
                 'tech-gamedev': 'Game Development',
@@ -285,6 +316,7 @@ class PortfolioManager {
                 'about-description':
                     'Developer with focus on C# backend development. Specialize in creating Unity apps and games, database and API work. Have experience publishing games on Yandex.Games and Google Play Market platforms.',
                 'about-timeline-title': 'Work Experience',
+                'hero-name': 'Alexander Halle',
                 'timeline-current': '2023 - present',
                 'timeline-unity-title': 'Unity Developer (Freelance)',
                 'timeline-unity-1': 'Development and launch of Unity games using C#',
@@ -808,67 +840,6 @@ class PortfolioManager {
             const offset = circumference - (progress / 100) * circumference;
 
             ring.style.strokeDashoffset = offset;
-        });
-
-        // Add tooltips with better event handling
-        document.querySelectorAll('.status-ring').forEach(ring => {
-            let tooltip = null;
-
-            const showTooltip = () => {
-                // Remove existing tooltip to prevent duplicates
-                if (tooltip) {
-                    tooltip.remove();
-                }
-
-                tooltip = document.createElement('div');
-                tooltip.className = 'status-tooltip';
-                const status = ring.dataset.status;
-
-                let text;
-                switch (status) {
-                    case 'released':
-                        text =
-                            this.currentLang === 'ru'
-                                ? 'Проект завершен и выпущен'
-                                : 'Project completed and released';
-                        break;
-                    case 'development':
-                        text =
-                            this.currentLang === 'ru'
-                                ? 'Проект в активной разработке'
-                                : 'Project in active development';
-                        break;
-                    case 'concept':
-                        text =
-                            this.currentLang === 'ru'
-                                ? 'Концепт или прототип'
-                                : 'Concept or prototype';
-                        break;
-                }
-
-                tooltip.textContent = text;
-                ring.appendChild(tooltip);
-
-                // Animate in via CSS
-                requestAnimationFrame(() => {
-                    tooltip.classList.add('visible');
-                });
-            };
-
-            const hideTooltip = () => {
-                if (tooltip) {
-                    tooltip.classList.remove('visible');
-                    setTimeout(() => {
-                        if (tooltip && tooltip.parentNode) {
-                            tooltip.remove();
-                        }
-                        tooltip = null;
-                    }, 200);
-                }
-            };
-
-            ring.addEventListener('mouseenter', showTooltip);
-            ring.addEventListener('mouseleave', hideTooltip);
         });
     }
 
